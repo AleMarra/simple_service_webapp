@@ -79,10 +79,80 @@ Para hacer el deploy a heroku:
  		http://www.bymichaellancaster.com/blog/basic-overview-of-client-side-templating/
  
  La idea del templating es hacer GET/POST al server, recibiendo y enviando JSON únicamente o xml si es necesario.
- 
+
  
 
 
  - Ejemplo online:
  
 		http://simple-service-webapp.herokuapp.com/
+
+
+
+# Sobre las anotaciones Java
+
+@GET, @POST tipo de método permitido
+
+@Path appendea la string al path del contexto.
+Ejemplo, donde el path resultante es userController/testJSON:
+
+	@Path("/")
+	public class UserController {
+	    @Path("testJSON")  //
+	    public User getUserJSON(@QueryParam("userkey")String userkey) {
+	        return users.get(userkey);
+	    }
+	}
+
+
+Sería interesante poder poner en cada clase un nombre al path y en una clase abstracta controller poner
+@Path("/" + Controller.path), siendo Controller.path definida como public static String.
+Si no se pone @Path a la clase, los métodos de UserController no son accesibles a través de ws, o al menos
+no sé cómo es el path.
+
+El primer elemento de la URL de los request (userController) sale de acá: src/main/webapp/WEB-INF/web.xml.
+No hay una magia detrás que tome el nombre de la clase y lo transforme en path :/
+
+Si a un método no se le pone @Path (siendo que a la clase sí), ese método se va a llamar cuando se hagan un
+request al path vacío (con /userController, claro)
+Si a dos métodos no se les pone @Path (siendo que a la clase sí), rompe todo, 500 - Internal server error
+
+Que una clase herede de otra no afecta el path, es decir, sigue siendo la base /userController.
+Ejemplo:
+Para llamar al siguiente método, el path es /userController/tuHermana/lalala
+
+	@Path("/tuHermana")
+	public class UserControllerSeba extends UserController {
+
+	    @GET
+	    @Produces(MediaType.TEXT_PLAIN)
+	    @Path("lalala")
+	    public String lalala() {
+	        return "Got it from inherited class!";
+	    }
+	}
+
+De la misma manera que antes, si no se pone el @Path en la clase, no es accesible. Y si dejamos métodos sin path,
+como heredó el método pathless de la clase padre, rompe todo con HTTP 500.
+
+@PathParam usado para parámetros obligatorios, hace referencia a una parte de la URL que te sirve como variable.
+Ejemplo tomando la última parte del path como la variable userkey:
+
+	@Path("testXML/{userkey}")
+	public User getUserXML(@PathParam("userkey") String userkey) {
+	   	return users.get(userkey);
+	}
+
+
+@QueryParam toma un parámetro de la query string
+
+
+@Produces informa el tipo de respuesta que manda (JSON, XML, binario...).
+Poniendo @Produces(MediaType.APPLICATION_JSON) a nivel clase abstracta controller quedaría definido que
+ devolvemos siempre JSON.
+Un mismo método puede tener @Produces de varios tipos, (por ejemplo xml y json) y que decida que retornar
+dependiendo qué venga en el header del request
+
+@Consumes me gustaría investigarlo para ver si podemos interfacear con los servicios ajenos a través de esto,
+que siempre nos van a dar XML. Pero sólo sirve para definir qué tipo de datos se aceptan, no tiene que ver con consumir
+o no un ws
