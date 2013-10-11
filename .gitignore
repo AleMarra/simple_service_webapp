@@ -2,7 +2,7 @@
 .project
 .settings/
 *.class
-target/
+target
 
 # Idea stuff
 .idea

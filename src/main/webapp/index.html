@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script>
+
+    function getDespegar() {
+        $.ajax({
+            url:     'userController/testRedirect',
+            error: function () {
+                $('#despegar').innerHTML('<h4>Se rompió todo</h4>')
+            },
+            success: function (data) {
+                var arr = data.data;
+                $despegar = $('#despegar');
+                for (var i = 0; i < arr.length; ++i )
+                    $despegar.append('<a href="https://maps.google.com.au/maps?ll=' + arr[i].geoLocation.latitude + ',' + arr[i].geoLocation.longitude + '&z=10">' + arr[i].name + '</a><br/>')
+            }
+        })
+    }
 	
 	function loadXMLDoc(url) {
 		var xmlhttp;
@@ -105,15 +121,20 @@
 	<p>	<b>ID: </b><span id="IDJson"></span>
 	</p>
 	<button onclick="loadJSON('userController/testJSON?userkey=common','IDJson','NameJson','UserJson')">Get JSON data</button>
-	
-	<h2>SEND data with Json Object {id:5, user:"pepe", fullName:"elPepeMujica"} => Returns modified object</h2>
-	<p>	<b>User: </b><span id="UserPosted"></span>
-	</p>
-	<p>	<b>Name: </b><span id="NamePosted"></span>
-	</p>
-	<p>	<b>ID: </b><span id="IDPosted"></span>
-	</p>
-	<button onclick="postJSON('userController/testJSON/upload')">POST JSON data</button>
+
+    <h2>SEND data with Json Object {id:5, user:"pepe", fullName:"elPepeMujica"} => Returns modified object</h2>
+    <p>	<b>User: </b><span id="UserPosted"></span>
+    </p>
+    <p>	<b>Name: </b><span id="NamePosted"></span>
+    </p>
+    <p>	<b>ID: </b><span id="IDPosted"></span>
+    </p>
+    <button onclick="postJSON('userController/testJSON/upload')">POST JSON data</button>
+
+
+    <h2>Get Despegar.com available cities for their Trip Planning service</h2>
+    <button onclick="getDespegar()">GET through redirection <br/> to another service</button>
+    <div id="despegar"></div>
 
 </body>
 </html>

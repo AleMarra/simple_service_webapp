@@ -1,9 +1,16 @@
 package com.example;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -48,12 +55,36 @@ public class UserController {
     
     @POST
     @Path("testJSON/upload")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public User setUser(User newUser) {
     	newUser.setId(10);
     	
     	return newUser;
     }
-    
+
+    @GET
+    @Path("testRedirect")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String callWs() {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpGet httpGet = null;
+        httpGet = new HttpGet("http://api.despegar.com/cities/tripplanning?includecity=true");
+        HttpResponse response = null;
+        try {
+            response = httpclient.execute(httpGet);
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        HttpEntity entity = response.getEntity();
+        try {
+            return entity != null ? EntityUtils.toString(entity) : null;
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        return "laaaaaaallaaa";
+    }
+
+
 }
