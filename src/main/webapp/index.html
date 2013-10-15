@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
         $.ajax({
             url:     'userController/testRedirect',
             error: function () {
-                $('#despegar').innerHTML('<h4>Se rompió todo</h4>')
+                $('#despegar').html('<h4 style="color: red;">Se rompió todo :D</h4>')
             },
             success: function (data) {
                 var arr = data.data;
@@ -160,7 +161,7 @@
             type: type,
             data: data,
             error: function () {
-                $el.append('<h4 style="color: red;">Se rompió todo</h4>')
+                $el.append('<h4 style="color: red;">Se rompió todo :D</h4>')
             },
             success: function (data) {
                 console.log(data);
