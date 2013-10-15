@@ -33,6 +33,8 @@ Agregar usuarios en el conf file "tomcat-users.xml", ie:
 		https://jersey.java.net/
 		https://jersey.java.net/documentation/latest/index.html
 		http://www.w3schools.com/xml/xml_http.asp
+		http://www.w3fools.com
+		http://hc.apache.org/httpcomponents-client-ga/
 	
 
 
@@ -133,7 +135,7 @@ Para llamar al siguiente método, el path es /userController/tuHermana/lalala
 	}
 
 De la misma manera que antes, si no se pone el @Path en la clase, no es accesible. Y si dejamos métodos sin path,
-como heredó el método pathless de la clase padre, rompe todo con HTTP 500.
+como heredó el método pathless de la clase padre, rompe todo con [HTTP 500](http://httpcats.herokuapp.com/500).
 
 @PathParam usado para parámetros obligatorios, hace referencia a una parte de la URL que te sirve como variable.
 Ejemplo tomando la última parte del path como la variable userkey:
@@ -153,6 +155,5 @@ Poniendo @Produces(MediaType.APPLICATION_JSON) a nivel clase abstracta controlle
 Un mismo método puede tener @Produces de varios tipos, (por ejemplo xml y json) y que decida que retornar
 dependiendo qué venga en el header del request
 
-@Consumes me gustaría investigarlo para ver si podemos interfacear con los servicios ajenos a través de esto,
-que siempre nos van a dar XML. Pero sólo sirve para definir qué tipo de datos se aceptan, no tiene que ver con consumir
+@Consumes sirve para definir qué tipo de datos se aceptan, no tiene que ver con consumir
 o no un ws
