@@ -66,21 +66,20 @@ public class UserController {
     @Path("testRedirect")
     @Produces(MediaType.APPLICATION_JSON)
     public String callWs() {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = null;
-        httpGet = new HttpGet("http://api.despegar.com/cities/tripplanning?includecity=true");
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet httpGet = new HttpGet("http://api.despegar.com/cities/tripplanning?includecity=true");
         HttpResponse response = null;
         try {
-            response = httpclient.execute(httpGet);
+            response = httpClient.execute(httpGet);
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
         HttpEntity entity = response.getEntity();
         try {
             return entity != null ? EntityUtils.toString(entity) : null;
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
         return "laaaaaaallaaa";
