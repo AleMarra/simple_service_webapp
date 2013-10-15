@@ -97,6 +97,76 @@
 		xmlhttp.setRequestHeader("Content-Type", "application/json");
 		xmlhttp.send(JSON.stringify({id:5, user:"pepe", fullName:"elPepeMujica"}));
 	}
+
+    /*
+    Usage: receives the id of the DOM element whose inner elements defines the request through
+    a class name convention:
+    url: the URL for the request. Appended to 'userController/'
+    type: HTTP verb. Defaults to 'GET'
+    url-param: mandatory parameters of the request, such us user id when using getUser. Appended to the URL
+    query-string: optional parameters of the request. Also, a 'query-string-name' attribute at the element is needed
+
+    url-param and query-string elements should be inputs or have a val attribute.
+
+    Although this is our sandbox and nothing here is to be delivered, improvements and suggestions are appreciated.
+     */
+    function testGrailsTemplates(idType) {
+        var $el = $("#" + idType),
+            url = 'userController/',
+            type = 'GET',
+            data = {};
+        // DOM $elements
+        var $url = $el.find('.url'),
+            $type = $el.find('.type'),
+            $urlParams = $el.find('.url-params'),
+            $queryString = $el.find('.query-string');
+
+        function getVal ($el) {
+            if ($el.prop("tagName") === 'INPUT')
+                return $el.val();
+            else if ($el.attr('val'))
+                return $el.attr('val');
+            else
+                return '';
+        }
+
+        // Scrapping begins
+        if ($url[0])
+            url += getVal($url);
+
+        if ($type[0])
+            type = getVal($type);
+
+        $urlParams.each( function (idx) {
+            var $el = $urlParams.eq(idx),
+                value = getVal($el);
+
+            if (value !== '')
+                url += '/' + value;
+        });
+
+        $queryString.each( function (idx) {
+            var $el = $queryString.eq(idx),
+                key = $el.attr('param-name'),
+                val = getVal($el);
+
+            if (key !== '' && val !== '')
+                data[key] = val;
+        });
+
+        // AJAX request!
+        $.ajax({
+            url: url,
+            type: type,
+            data: data,
+            error: function () {
+                $el.append('<h4 style="color: red;">Se rompió todo</h4>')
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    }
 	
 </script>
 </head>
@@ -135,6 +205,14 @@
     <h2>Get Despegar.com available cities for their Trip Planning service</h2>
     <button onclick="getDespegar()">GET through redirection <br/> to another service</button>
     <div id="despegar"></div>
+
+    <h2>Test Grails' controller template implemented in Java -- check console</h2>
+    <div id="list">
+        <h3>List</h3>
+        <div   class="url" val="list" style="display: hidden;"></div>
+        <input class="query-string" param-name="max" placeholder="list size"/>
+        <button onclick="testGrailsTemplates('list')">GET!</button>
+    </div>
 
 </body>
 </html>
