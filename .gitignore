@@ -7,3 +7,6 @@ target
 # Idea stuff
 .idea
 *.iml
+
+# Build script feo
+build.sh
