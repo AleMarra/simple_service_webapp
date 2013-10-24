@@ -1,6 +1,5 @@
 package com.example;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,8 +10,7 @@ public class User {
 	private String username;
 	private String fullname;
 
-	public User() {
-	}
+	public User() {}
 
 	public User(int id, String username, String fullname) {
 		super();
@@ -47,7 +45,6 @@ public class User {
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
-
 
 	@Override
 	public String toString() {

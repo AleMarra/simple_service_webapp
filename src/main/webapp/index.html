@@ -1,38 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html>
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script>
 
-    function getDespegar() {
-        $.ajax({
-            url: 'userController/testRedirect',
-            error: function () {
-                $('#despegar').html('<h4 style="color: red;">Se rompió todo :D</h4>')
-            },
-            success: function (data) {
-                var arr = data.data;
-                $despegar = $('#despegar');
-                for (var i = 0; i < arr.length; ++i )
-                    $despegar.append('<a href="https://maps.google.com/maps?ll=' + arr[i].geoLocation.latitude + ',' + arr[i].geoLocation.longitude + '&z=10">' + arr[i].name + '</a><br/>')
-            }
-        })
-    }
-	
-	function loadXMLDoc(url) {
-		var xmlhttp;
+	function getXMLDoc(url) {
+		var httpRequest;
 		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
+			httpRequest = new XMLHttpRequest();
 		} else {// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			httpRequest = new ActiveXObject("Microsoft.httpRequest");
 		}
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		httpRequest.onreadystatechange = function() {
+			if (httpRequest.readyState == 4 && httpRequest.status == 200) {
 
-				console.log(xmlhttp.responseText);
+				console.log(httpRequest.responseText);
 				
-				xmlDoc = xmlhttp.responseXML;
+				xmlDoc = httpRequest.responseXML;
 
 				document.getElementById('User').innerHTML = xmlDoc
 						.getElementsByTagName("user")[0].childNodes[0].nodeValue;
@@ -42,33 +26,44 @@
 						.getElementsByTagName("id")[0].childNodes[0].nodeValue;
 			}
 		}
-		xmlhttp.open("GET", url, true);
-		xmlhttp.send();
+		httpRequest.open("GET", url, true);
+		httpRequest.send();
 	}
 
-	function loadJSON(url,fieldID,fieldName,fieldUser) {
-		var xmlhttp;
+	function getJSON(url,fieldID,fieldName,fieldUser) {
+		var httpRequest;
 		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
+			httpRequest = new XMLHttpRequest();
 		} else {// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
 		}
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		httpRequest.onreadystatechange = function() {
+			
+			if (httpRequest.readyState == 4) {
 
-				console.log(xmlhttp.responseText);
-				// Javascript function JSON.parse to parse JSON data
-				var jsonObj = JSON.parse(xmlhttp.responseText);
-
-				// jsonObj variable now contains the data structure and can
-				// be accessed as jsonObj.name and jsonObj.country.
-				document.getElementById(fieldUser).innerHTML = jsonObj.user;
-				document.getElementById(fieldName).innerHTML = jsonObj.fullName;
-				document.getElementById(fieldID).innerHTML = jsonObj.id;
+				 if (httpRequest.status != 200){
+					document.getElementById('statusError').innerHTML = httpRequest.status;
+					document.getElementById('messageError').innerHTML = httpRequest.responseText;
+						
+				}else{
+					 
+					console.log(httpRequest.responseText);
+					// Javascript function JSON.parse to parse JSON data
+					var jsonObj = JSON.parse(httpRequest.responseText);
+	
+					// jsonObj variable now contains the data structure and can
+					// be accessed as jsonObj.name and jsonObj.country.
+					document.getElementById(fieldUser).innerHTML = jsonObj.user;
+					document.getElementById(fieldName).innerHTML = jsonObj.fullName;
+					document.getElementById(fieldID).innerHTML = jsonObj.id;
+					
+					document.getElementById('status').innerHTML = httpRequest.status;
+				}
 			}
 		}
-		xmlhttp.open("GET", url, true);
-		xmlhttp.send();
+		
+		httpRequest.open("GET", url, true);
+		httpRequest.send();
 	}
 	
 	function postJSON(url) {
@@ -96,124 +91,62 @@
 
 		xmlhttp.open("POST", url);
 		xmlhttp.setRequestHeader("Content-Type", "application/json");
-		xmlhttp.send(JSON.stringify({id:5, user:"pepe", fullName:"elPepeMujica"}));
+		xmlhttp.send(JSON.stringify({id:5, user:"myUser", fullName:"myFullName"}));
 	}
 
-    /*
-    Usage: receives the id of the DOM element whose inner elements defines the request through
-    a class name convention:
-    url: the URL for the request. Appended to 'userController/'
-    type: HTTP verb. Defaults to 'GET'
-    url-param: mandatory parameters of the request, such us user id when using getUser. Appended to the URL
-    query-string: optional parameters of the request. Also, a 'query-string-name' attribute at the element is needed
-
-    url-param and query-string elements should be inputs or have a val attribute.
-
-    Although this is our sandbox and nothing here is to be delivered, improvements and suggestions are appreciated.
-     */
-    function testGrailsTemplates(idType) {
-        var $el = $("#" + idType),
-            url = 'userController/',
-            type = 'GET',
-            data = {};
-        // DOM $elements
-        var $url = $el.find('.url'),
-            $type = $el.find('.type'),
-            $urlParams = $el.find('.url-params'),
-            $queryString = $el.find('.query-string');
-
-        function getVal ($el) {
-            if ($el.prop("tagName") === 'INPUT')
-                return $el.val();
-            else if ($el.attr('val'))
-                return $el.attr('val');
-            else
-                return '';
-        }
-
-        // Scrapping begins
-        if ($url[0])
-            url += getVal($url);
-
-        if ($type[0])
-            type = getVal($type);
-
-        $urlParams.each( function (idx) {
-            var $el = $urlParams.eq(idx),
-                value = getVal($el);
-
-            if (value !== '')
-                url += '/' + value;
-        });
-
-        $queryString.each( function (idx) {
-            var $el = $queryString.eq(idx),
-                key = $el.attr('param-name'),
-                val = getVal($el);
-
-            if (key !== '' && val !== '')
-                data[key] = val;
-        });
-
-        // AJAX request!
+    function getDespegar() {
         $.ajax({
-            url: url,
-            type: type,
-            data: data,
-            error: function () {
-                $el.append('<h4 style="color: red;">Se rompió todo :D</h4>')
+            url: 'userController/testRedirect',
+            error: function (data) {
+            	$('#despegar').html('<h4 style="color: red;">Error: '+ data.status + ' ' + data.statusText + '</h4>'+'<p>'+ data.responseText +'</p>');
+                
             },
             success: function (data) {
-                console.log(data);
+                var arr = data.data;
+                $despegar = $('#despegar');
+                for (var i = 0; i < arr.length; ++i )
+                    $despegar.append('<a href="https://maps.google.com/maps?ll=' + arr[i].geoLocation.latitude + ',' + arr[i].geoLocation.longitude + '&z=10">' + arr[i].name + '</a><br/>');
             }
         })
     }
-	
-</script>
+    
+	</script>
 </head>
 <body>
 
 	<h2>Jersey RESTful Web Application with simple html+AJAX in client-side</h2>
 
 	<h2>Retrieve data from XML object => 'Admin' user</h2>
-	<p>	<b>User: </b><span id="User"></span>
-	</p>
-	<p>	<b>Name: </b><span id="Name"></span>
-	</p>
-	<p>	<b>ID: </b><span id="ID"></span>
-	</p>
-	<button onclick="loadXMLDoc('userController/testXML/admin')">Get XML data</button>
+	<p>	<b>User: </b><span id="User"></span></p>
+	<p>	<b>Name: </b><span id="Name"></span></p>
+	<p>	<b>ID: </b><span id="ID"></span></p>
+	<button onclick="getXMLDoc('userController/testXML/admin')">Get XML data</button>
 
 	<h2>Retrieve data from Json object => 'Common' User</h2>
-	<p>	<b>User: </b><span id="UserJson"></span>
-	</p>
-	<p>	<b>Name: </b><span id="NameJson"></span>
-	</p>
-	<p>	<b>ID: </b><span id="IDJson"></span>
-	</p>
-	<button onclick="loadJSON('userController/testJSON?userkey=common','IDJson','NameJson','UserJson')">Get JSON data</button>
+	<p>	<b>User: </b><span id="UserJson"></span></p>
+	<p>	<b>Name: </b><span id="NameJson"></span></p>
+	<p>	<b>ID: </b><span id="IDJson"></span></p>
+	<p>	<b>Status: </b><span id="status"></span></p>
+	
+	<button onclick="getJSON('userController/testJSON?userkey=common1','IDJson','NameJson','UserJson')">Get JSON data</button>
 
-    <h2>SEND data with Json Object {id:5, user:"pepe", fullName:"elPepeMujica"} => Returns modified object</h2>
-    <p>	<b>User: </b><span id="UserPosted"></span>
-    </p>
-    <p>	<b>Name: </b><span id="NamePosted"></span>
-    </p>
-    <p>	<b>ID: </b><span id="IDPosted"></span>
-    </p>
+	<h2>Ask for invalid user => Error status</h2>
+	<p>	<b>Status: </b><span id="statusError"></span></p>
+	<p>	<b>Message: </b><span id="messageError"></span></p>
+	
+	<button onclick="getJSON('userController/testJSON?userkey=invalid')">Get Error</button>
+
+
+    <h2>SEND data with Json Object {id:5, user:"myUser", fullName:"myFullName"} => Returns modified object</h2>
+    <p>	<b>User: </b><span id="UserPosted"></span></p>
+    <p>	<b>Name: </b><span id="NamePosted"></span></p>
+    <p>	<b>ID: </b><span id="IDPosted"></span></p>
     <button onclick="postJSON('userController/testJSON/upload')">POST JSON data</button>
 
 
     <h2>Get Despegar.com available cities for their Trip Planning service</h2>
     <button onclick="getDespegar()">GET through redirection <br/> to another service</button>
     <div id="despegar"></div>
-
-    <h2>Test Grails' controller template implemented in Java -- check console</h2>
-    <div id="list">
-        <h3>List</h3>
-        <div   class="url" val="list" style="display: hidden;"></div>
-        <input class="query-string" param-name="max" placeholder="list size"/>
-        <button onclick="testGrailsTemplates('list')">GET!</button>
-    </div>
-
+    
 </body>
 </html>
