@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script>
 
@@ -114,39 +115,86 @@
 </head>
 <body>
 
-	<h2>Jersey RESTful Web Application with simple html+AJAX in client-side</h2>
+<section id="registeruser">
+    <h2>registeruser test</h2>
+    <form class="registeruser" action="api/registeruser" method="post">
+        Usuario: <input type="text" name="username"><br>
+        Contraseña: <input type="password" name="password"> <br>
+        <input type="submit" value="Register">
+    </form>
+</section>
 
-	<h2>Retrieve data from XML object => 'Admin' user</h2>
-	<p>	<b>User: </b><span id="User"></span></p>
-	<p>	<b>Name: </b><span id="Name"></span></p>
-	<p>	<b>ID: </b><span id="ID"></span></p>
-	<button onclick="getXMLDoc('userController/testXML/admin')">Get XML data</button>
+<section id="login">
+    <h2>login test</h2>
+    <form class="login" action="api/login" method="post">
+        Usuario: <input type="text" name="username"><br>
+        Contraseña: <input type="password" name="password"> <br>
+        <input type="submit" value="Login">
+    </form>
+</section>
 
-	<h2>Retrieve data from Json object => 'Common' User</h2>
-	<p>	<b>User: </b><span id="UserJson"></span></p>
-	<p>	<b>Name: </b><span id="NameJson"></span></p>
-	<p>	<b>ID: </b><span id="IDJson"></span></p>
-	<p>	<b>Status: </b><span id="status"></span></p>
-	
-	<button onclick="getJSON('userController/testJSON?userkey=common1','IDJson','NameJson','UserJson')">Get JSON data</button>
+<section id="logout">
+    <h2>logout test</h2>
+    <form class="logout" action="api/logout" method="post">
+        Usuario: <input type="text" name="username"><br>
+        Contraseña: <input type="password" name="password"> <br>
+        <input type="submit" value="Logout">
+    </form>
+</section>
 
-	<h2>Ask for invalid user => Error status</h2>
-	<p>	<b>Status: </b><span id="statusError"></span></p>
-	<p>	<b>Message: </b><span id="messageError"></span></p>
-	
-	<button onclick="getJSON('userController/testJSON?userkey=invalid')">Get Error</button>
+<section id="activateUser">
+    <h2>activateUser test</h2>
+    <form class="activateUser" action="api/activateUser" method="post">
+        Usuario: <input type="text" name="username"><br>
+        Contraseña: <input type="password" name="password"> <br>
+        <input type="submit" value="Activate">
+    </form>
+</section>
 
+<section id="changePassword">
+    <h2>changePassword test</h2>
+    <form class="changePassword" action="api/changePassword" method="post">
+        Usuario: <input type="text" name="username"><br>
+        Contraseña: <input type="password" name="password"> <br>
+        <input type="submit" value="Change">
+    </form>
+</section>
 
-    <h2>SEND data with Json Object {id:5, user:"myUser", fullName:"myFullName"} => Returns modified object</h2>
-    <p>	<b>User: </b><span id="UserPosted"></span></p>
-    <p>	<b>Name: </b><span id="NamePosted"></span></p>
-    <p>	<b>ID: </b><span id="IDPosted"></span></p>
-    <button onclick="postJSON('userController/testJSON/upload')">POST JSON data</button>
+<section id="resetPassword">
+    <h2>resetPassword test</h2>
+    <form class="resetPassword" action="api/resetPassword" method="post">
+        Usuario: <input type="text" name="username"><br>
+        Contraseña: <input type="password" name="password"> <br>
+        <input type="submit" value="Reset">
+    </form>
+</section>
 
+<section id="disableAccount">
+    <h2>disableAccount test</h2>
+    <form class="disableAccount" action="api/disableAccount" method="post">
+        Usuario: <input type="text" name="username"><br>
+        Contraseña: <input type="password" name="password"> <br>
+        <input type="submit" value="Disable">
+    </form>
+</section>
 
-    <h2>Get Despegar.com available cities for their Trip Planning service</h2>
-    <button onclick="getDespegar()">GET through redirection <br/> to another service</button>
-    <div id="despegar"></div>
+<section id="enableAccount">
+    <h2>enableAccount test</h2>
+    <form class="enableAccount" action="api/enableAccount" method="post">
+        Usuario: <input type="text" name="username"><br>
+        Contraseña: <input type="password" name="password"> <br>
+        <input type="submit" value="Enable">
+    </form>
+</section>
+
+<section id="enableAccountFromEmaill">
+    <h2>enableAccount test</h2>
+    <form class="enableAccountFromEmaill" action="api/enableAccountFromEmaill" method="post">
+        Usuario: <input type="text" name="username"><br>
+        Contraseña: <input type="password" name="password"> <br>
+        <input type="submit" value="Enable">
+    </form>
+</section>
     
 </body>
 </html>

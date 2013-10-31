@@ -1,0 +1,66 @@
+package com.fiuba.taller.mock;
+
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/")
+@Produces(MediaType.APPLICATION_XML)
+public class SecurityMock {
+
+    @POST
+    @Path("registeruser")
+    public String registerUser() {
+        return "[Mock] registerUser working";
+    }
+
+    @POST
+    @Path("login")
+    public String login() {
+        return "[Mock] login working";
+    }
+
+    @POST
+    @Path("logout")
+    public String logout() {
+        return "[Mock] logout working";
+    }
+
+    @POST
+    @Path("activateuser")
+    public String activateUser() {
+        return "[Mock] activateUser working";
+    }
+
+    @POST
+    @Path("changepassword")
+    public String changePassword() {
+        return "[Mock] changePassword working";
+    }
+
+    @POST
+    @Path("resetpassword")
+    public String resetPassword() {
+        return "[Mock] resetPassword working";
+    }
+
+    @POST
+    @Path("disableaccount")
+    public String disableAccount() {
+        return "[Mock] disableAccount working";
+    }
+
+    @POST
+    @Path("enableaccount")
+    public String enableAccount() {
+        return "[Mock] enableAccount working";
+    }
+
+    @POST
+    @Path("enableaccountfromemaill")
+    public String enableAccountFromEmaill() {
+        return "[Mock] enableAccountFromEmaill working";
+    }
+
+}
