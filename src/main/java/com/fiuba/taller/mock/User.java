@@ -1,4 +1,4 @@
-package com.example;
+package com.fiuba.taller.mock;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

@@ -3,6 +3,12 @@
 <head>
     <meta charset="utf-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <style>
+        label {
+            display: inline-block;
+            width: 80px;
+        }
+    </style>
 <script>
 
 	function getXMLDoc(url) {
@@ -94,19 +100,101 @@
 		xmlhttp.setRequestHeader("Content-Type", "application/json");
 		xmlhttp.send(JSON.stringify({id:5, user:"myUser", fullName:"myFullName"}));
 	}
+    /*
+     Usage: receives the id of the DOM element whose inner elements defines the request through
+     a class name convention:
+     url: the URL for the request. Appended to 'api/'
+     type: HTTP verb. Defaults to 'GET'
+     url-param: mandatory parameters of the request, such us user id when using getUser. Appended to the URL
+     query-string: optional parameters of the request. Also, a 'param-name' attribute at the element is needed
+     data: body of the request. 'param-name' attribute at the element is needed
 
-    function getDespegar() {
+     url-param, query-string and data elements should be inputs or have a val attribute.
+
+     Although this is our sandbox and nothing here is to be delivered, improvements and suggestions are appreciated.
+     */
+    function sendRequest(idType) {
+        var $el = $("#" + idType),
+            url = 'api/',
+            type = 'GET',
+            data = {};
+        // DOM $elements
+        var $url = $el.find('.url'),
+            $type = $el.find('.type'),
+            $urlParams = $el.find('.url-params'),
+            $queryString = $el.find('.query-string'),
+            $data = $el.find('.data');
+
+        function getVal ($el) {
+            if ($el.prop("tagName") === 'INPUT')
+                return $el.val();
+            else if ($el.attr('val'))
+                return $el.attr('val');
+            else
+                return '';
+        }
+
+        function appendAutodeletableMsg(msg, color) {
+            var id = Math.random().toString(36).substring(2, 12);
+            $el.append('<h4 id="'     +
+                    id                +
+                    '"style="color: ' +
+                    color             +
+                    ';">'             +
+                    msg               +
+                    '</h4>');
+            setTimeout( function () {
+                $('#' + id).remove();
+            }, 5000);
+        }
+
+        function parseData($el) {
+            var key = $el.attr('param-name'),
+                val = getVal($el);
+
+            if (key !== '' && val !== '')
+                data[key] = val;
+        }
+
+        // Scrapping begins
+        if ($url[0])
+            url += getVal($url);
+
+        if ($type[0])
+            type = getVal($type);
+
+        $urlParams.each( function (idx) {
+            var $el = $urlParams.eq(idx),
+                    value = getVal($el);
+
+            if (value !== '')
+                url += '/' + value;
+        });
+
+        $queryString.each( function (idx) {
+            parseData($queryString.eq(idx));
+        });
+
+        $data.each( function (idx) {
+            parseData($data.eq(idx));
+        });
+
+        // AJAX request!
         $.ajax({
-            url: 'userController/testRedirect',
-            error: function (data) {
-            	$('#despegar').html('<h4 style="color: red;">Error: '+ data.status + ' ' + data.statusText + '</h4>'+'<p>'+ data.responseText +'</p>');
-                
+            url: url,
+            type: type,
+            data: data,
+            error: function (jqXHR, textStatus, errorThrown ) {
+                appendAutodeletableMsg('Se rompió todo :D', 'red');
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
             },
-            success: function (data) {
-                var arr = data.data;
-                $despegar = $('#despegar');
-                for (var i = 0; i < arr.length; ++i )
-                    $despegar.append('<a href="https://maps.google.com/maps?ll=' + arr[i].geoLocation.latitude + ',' + arr[i].geoLocation.longitude + '&z=10">' + arr[i].name + '</a><br/>');
+            success: function (data, textStatus, jqXHR) {
+                appendAutodeletableMsg('Salió bien :D', 'blue');
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
             }
         })
     }
@@ -117,83 +205,94 @@
 
 <section id="registeruser">
     <h2>registeruser test</h2>
-    <form class="registeruser" action="api/registeruser" method="post">
-        Usuario: <input type="text" name="username"><br>
-        Contraseña: <input type="password" name="password"> <br>
-        <input type="submit" value="Register">
-    </form>
+    <div class="registeruser">
+        <div   class="url" val="registeruser" style="display: hidden;"/>
+        <div   class="type" val="POST" style="display: hidden;"/>
+        <label>Usuario:</label>    <input class="data" param-name="username" type="text" /><br>
+        <label>Contraseña:</label> <input class="data" param-name="password" type="password" ><br>
+        <label>Nombre:</label>     <input class="data" param-name="nombre" type="text" /><br>
+        <label>Apellido:</label>   <input class="data" param-name="apellido" type="text" /><br>
+        <label>Padrón:</label>     <input class="data" param-name="padron" type="text" /><br>
+        <label>FechaNac:</label>   <input class="data" param-name="fechaNac" type="date" /><br>
+        <label>Email:</label>      <input class="data" param-name="email" type="text" /><br>
+        <label>Rol:</label>        <input class="data" param-name="rol" type="number" /><br>
+
+        <button onclick="sendRequest('registeruser')">Register</button>
+    </div>
 </section>
 
 <section id="login">
     <h2>login test</h2>
-    <form class="login" action="api/login" method="post">
-        Usuario: <input type="text" name="username"><br>
-        Contraseña: <input type="password" name="password"> <br>
-        <input type="submit" value="Login">
-    </form>
+    <div class="login">
+        <div   class="url" val="registeruser" style="display: hidden;"/>
+        <div   class="type" val="POST" style="display: hidden;"/>
+        <label>Usuario:</label>    <input class="data" param-name="username" type="text" /><br>
+        <label>Contraseña:</label> <input class="data" param-name="password" type="password" ><br>
+        <button onclick="sendRequest('login')">Login</button>
+    </div>
 </section>
 
 <section id="logout">
     <h2>logout test</h2>
-    <form class="logout" action="api/logout" method="post">
-        Usuario: <input type="text" name="username"><br>
-        Contraseña: <input type="password" name="password"> <br>
-        <input type="submit" value="Logout">
-    </form>
+    <div class="logout">
+        <div   class="url" val="logout" style="display: hidden;"/>
+        <div   class="type" val="POST" style="display: hidden;"/>
+        <button onclick="sendRequest('logout')">Logout</button>
+    </div>
 </section>
 
 <section id="activateUser">
-    <h2>activateUser test</h2>
-    <form class="activateUser" action="api/activateUser" method="post">
-        Usuario: <input type="text" name="username"><br>
-        Contraseña: <input type="password" name="password"> <br>
-        <input type="submit" value="Activate">
-    </form>
+    <h2>activateUser test (@todo)</h2>
+    <div class="activateUser">
+        <div   class="url" val="activateUser" style="display: hidden;"/>
+        <div   class="type" val="POST" style="display: hidden;"/>
+        <button onclick="sendRequest('activateUser')">Activate</button>
+    </div>
 </section>
 
 <section id="changePassword">
-    <h2>changePassword test</h2>
-    <form class="changePassword" action="api/changePassword" method="post">
-        Usuario: <input type="text" name="username"><br>
-        Contraseña: <input type="password" name="password"> <br>
-        <input type="submit" value="Change">
-    </form>
+    <h2>changePassword test (@todo)</h2>
+    <div class="changePassword">
+        <div   class="url" val="changePassword" style="display: hidden;"/>
+        <div   class="type" val="POST" style="display: hidden;"/>
+        <button onclick="sendRequest('changePassword')">Change</button>
+    </div>
 </section>
 
 <section id="resetPassword">
-    <h2>resetPassword test</h2>
-    <form class="resetPassword" action="api/resetPassword" method="post">
-        Usuario: <input type="text" name="username"><br>
-        Contraseña: <input type="password" name="password"> <br>
-        <input type="submit" value="Reset">
-    </form>
+    <h2>resetPassword test (@todo)</h2>
+    <div class="resetPassword">
+        <div   class="url" val="resetPassword" style="display: hidden;"/>
+        <div   class="type" val="POST" style="display: hidden;"/>
+        <button onclick="sendRequest('resetPassword')">Reset</button>
+    </div>
 </section>
 
 <section id="disableAccount">
-    <h2>disableAccount test</h2>
-    <form class="disableAccount" action="api/disableAccount" method="post">
-        Usuario: <input type="text" name="username"><br>
-        Contraseña: <input type="password" name="password"> <br>
-        <input type="submit" value="Disable">
-    </form>
+    <h2>disableAccount test (@todo)</h2>
+    <div class="disableAccount">
+        <div   class="url" val="disableAccount" style="display: hidden;"/>
+        <div   class="type" val="POST" style="display: hidden;"/>
+        <button onclick="sendRequest('disableAccount')">Disable</button>
+    </div>
 </section>
 
 <section id="enableAccount">
-    <h2>enableAccount test</h2>
-    <form class="enableAccount" action="api/enableAccount" method="post">
-        Usuario: <input type="text" name="username"><br>
-        Contraseña: <input type="password" name="password"> <br>
-        <input type="submit" value="Enable">
-    </form>
+    <h2>enableAccount test (@todo)</h2>
+    <div class="enableAccount">
+        <div   class="url" val="enableAccount" style="display: hidden;"/>
+        <div   class="type" val="POST" style="display: hidden;"/>
+        <button onclick="sendRequest('enableAccount')">Enable</button>
+    </div>
 </section>
 
 <section id="enableAccountFromEmaill">
-    <h2>enableAccount test</h2>
-    <form class="enableAccountFromEmaill" action="api/enableAccountFromEmaill" method="post">
-        Usuario: <input type="text" name="username"><br>
-        Contraseña: <input type="password" name="password"> <br>
-        <input type="submit" value="Enable">
-    </form>
+    <h2>enableAccountFromEmail test (@todo)</h2>
+    <div class="enableAccountFromEmaill">
+        <div   class="url" val="enableAccountFromEmaill" style="display: hidden;"/>
+        <div   class="type" val="POST" style="display: hidden;"/>
+        <button onclick="sendRequest('enableAccountFromEmaill')">Enable</button>
+    </div>
 </section>
     
 </body>

@@ -27,55 +27,55 @@ public class SecurityService {
     @POST
     @Path("registeruser")
     public String registerUser() {
-        return "[API] registerUser working";
+        return "{\"API\": \"registerUser working\"}";
     }
 
     @POST
     @Path("login")
     public String login() {
-        return "[API] login working";
+        return "{\"API\": \"login working\"}";
     }
 
     @POST
     @Path("logout")
     public String logout() {
-        return "[API] logout working";
+        return "{\"API\": \"logout working\"}";
     }
 
     @POST
     @Path("activateuser")
     public String activateUser() {
-        return "[API] activateUser working";
+        return "{\"API\": \"activateUser working\"}";
     }
 
     @POST
     @Path("changepassword")
     public String changePassword() {
-        return "[API] changePassword working";
+        return "{\"API\": \"changePassword working\"}";
     }
 
     @POST
     @Path("resetpassword")
     public String resetPassword() {
-        return "[API] resetpassword working";
+        return "{\"API\": \"resetpassword working\"}";
     }
 
     @POST
     @Path("disableaccount")
     public String disableAccount() {
-        return "[API] disableAccount working";
+        return "{\"API\": \"disableAccount working\"}";
     }
 
     @POST
     @Path("enableaccount")
     public String enableAccount() {
-        return "[API] enableAccount working";
+        return "{\"API\": \"enableAccount working\"}";
     }
 
     @POST
     @Path("enableaccountfromemaill")
     public String enableAccountFromEmaill() {
-        return "[API] enableAccountFromEmaill working";
+        return "{\"API\": \"enableAccountFromEmaill working\"}";
     }
 
 

@@ -9,6 +9,12 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_XML)
 public class SecurityMock {
 
+    static private String [] authTokens = new String[]{
+            "bad18eba1ff45jk7858b8ae88a77fa30",
+            "bad18eba1ff45jk7858b8ae88a77fa31",
+            "bad18eba1ff45jk7858b8ae88a77fa32"
+    };
+
     @POST
     @Path("registeruser")
     public String registerUser() {
