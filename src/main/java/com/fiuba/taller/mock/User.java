@@ -2,22 +2,44 @@ package com.fiuba.taller.mock;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
+import java.util.Map;
 
 @XmlRootElement(name = "user-details")
 public class User {
 
 	private int id;
 	private String username;
-	private String fullname;
+    private String password;
+    private String nombre;
+    private String apellido;
+    private String padron;
+    private Date fechaNac;
+    private String email;
+    private int rol;
 
 	public User() {}
 
-	public User(int id, String username, String fullname) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.fullname = fullname;
-	}
+    public User(int id, String username, String password) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
+
+    public User(int id, Map<String, String> userData) {
+        super();
+        this.id = id;
+        this.username = userData.get("username");
+        this.password = userData.get("password");
+        this.nombre = userData.get("nombre");
+        this.apellido = userData.get("apellido");
+        this.padron = userData.get("padron");
+//        this.fechaNac = new Date(userData.get("fechaNac"));
+        this.email = userData.get("email");
+        this.rol = Integer.parseInt(userData.get("rol"));
+    }
 
 	@XmlElement(name = "id")
 	public int getId() {
@@ -33,23 +55,5 @@ public class User {
 		return username;
 	}
 	
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	@XmlElement(name = "fullName")
-	public String getFullname() {
-		return fullname;
-	}
-	
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Details " + "[id=%s, user=%s, fullName=%s]",
-				id, username, fullname);
-	}
 
 }
