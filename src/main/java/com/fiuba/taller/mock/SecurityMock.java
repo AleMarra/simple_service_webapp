@@ -15,30 +15,12 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_XML)
 public class SecurityMock {
 
-    private Map<String, User> users;
-    private int userUuid;
+    static private UserDB users = new UserDB();
     static private String [] authTokens = new String[]{
             "bad18eba1ff45jk7858b8ae88a77fa30",
             "bad18eba1ff45jk7858b8ae88a77fa31",
             "bad18eba1ff45jk7858b8ae88a77fa32"
     };
-
-    public SecurityMock(){
-        userUuid = 0;
-        Map<String, String> hardcodedUserData = new HashMap<String, String>();
-        String hardcodedUserUsername = "juan";
-        hardcodedUserData.put("username", hardcodedUserUsername);
-        hardcodedUserData.put("password", "qwerty");
-        hardcodedUserData.put("nombre", "Juan Carlos");
-        hardcodedUserData.put("apellido", "García");
-        hardcodedUserData.put("padron", "90000");
-        hardcodedUserData.put("fechaNac", "1989-11-30");
-        hardcodedUserData.put("email", "juan@gmail.com");
-        hardcodedUserData.put("rol", "2");
-        User hardcodedUser = new User(userUuid++, hardcodedUserData);
-        users = new HashMap<String, User>();
-        users.put(hardcodedUserUsername, hardcodedUser);
-    }
 
     @POST
     @Path("registeruser")
@@ -52,9 +34,7 @@ public class SecurityMock {
             List<String> value = (List<String>) pair.getValue();
             userData.put(key, value.get(0));
         }
-        User newUser = new User(userUuid++, userData);
-        users.put(userData.get("username"), newUser);
-        System.out.println(users);
+        users.createUser(userData);
         return "[Mock] registerUser working";
     }
 
