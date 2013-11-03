@@ -9,7 +9,6 @@ public class UserDB {
     private int userUuid;
 
     public UserDB(){
-        System.out.println("UserDB constructor");
         userUuid = 0;
         Map<String, String> hardcodedUserData = new HashMap<String, String>();
         String hardcodedUserUsername = "juan";
@@ -26,10 +25,14 @@ public class UserDB {
         users.put(hardcodedUserUsername, hardcodedUser);
     }
 
-    public void createUser(Map<String, String> userData) {
-        User newUser = new User(userUuid++, userData);
-        users.put(userData.get("username"), newUser);
-        System.out.println(users);
+    public boolean createUser(Map<String, String> userData) {
+        boolean success = userData.containsKey("username") && users.containsKey(userData.get("username"));
+        if (success) {
+            User newUser = new User(userUuid++, userData);
+            users.put(userData.get("username"), newUser);
+        }
+
+        return success;
     }
 
 }

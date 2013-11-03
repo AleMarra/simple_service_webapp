@@ -34,8 +34,22 @@ public class SecurityMock {
             List<String> value = (List<String>) pair.getValue();
             userData.put(key, value.get(0));
         }
-        users.createUser(userData);
-        return "[Mock] registerUser working";
+
+        String xmlResponse;
+        if (users.createUser(userData)) {
+            xmlResponse =
+                "<securityResponse>\n"              +
+                "   <success>1</success>\n" +
+                "</securityResponse>";
+        } else {
+            xmlResponse =
+                "<response>\n"                                +
+                "   <success>0</success>\n"                   +
+                "    <reason>El usuario ya existe</reason>\n" +
+                "</response>";
+
+        }
+        return xmlResponse;
     }
 
     @POST

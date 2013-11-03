@@ -8,7 +8,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
@@ -24,14 +23,9 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 @Produces(MediaType.APPLICATION_JSON)
 public class SecurityService {
 
-    private static String securityApiUrl = "http://localhost:8080/simple-service-webapp/api/mocks/";
-    private Client client;
-    private WebTarget webTarget;
-
-    public SecurityService() {
-        client = ClientBuilder.newClient();
-        webTarget = client.target(securityApiUrl);
-    }
+    static private String securityApiUrl = "http://localhost:8080/simple-service-webapp/api/mocks/";
+    static private Client client = ClientBuilder.newClient();
+    static private WebTarget webTarget = client.target(securityApiUrl);
 
 
     @POST
@@ -43,8 +37,15 @@ public class SecurityService {
         Response response = resourceWebTarget
                 .request(MediaType.APPLICATION_XML)
                 .post(Entity.form(formParams));
+
         System.out.println(response.getStatus());
         System.out.println(response.readEntity(String.class));
+//        no me sale parsear la puta respuesta
+//        System.out.println(response.readEntity(SecurityResponse.class));
+//        SecurityResponse parsedResponseBody = response.readEntity(SecurityResponse.class);
+//        System.out.println(parsedResponseBody);
+//        System.out.println(parsedResponseBody.isSuccessful());
+//        System.out.println(parsedResponseBody.getReason());
         return "{\"API\": \"registerUser working\"}";
     }
 
