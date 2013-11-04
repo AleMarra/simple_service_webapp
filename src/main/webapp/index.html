@@ -11,95 +11,6 @@
     </style>
 <script>
 
-	function getXMLDoc(url) {
-		var httpRequest;
-		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-			httpRequest = new XMLHttpRequest();
-		} else {// code for IE6, IE5
-			httpRequest = new ActiveXObject("Microsoft.httpRequest");
-		}
-		httpRequest.onreadystatechange = function() {
-			if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-
-				console.log(httpRequest.responseText);
-				
-				xmlDoc = httpRequest.responseXML;
-
-				document.getElementById('User').innerHTML = xmlDoc
-						.getElementsByTagName("user")[0].childNodes[0].nodeValue;
-				document.getElementById('Name').innerHTML = xmlDoc
-						.getElementsByTagName("fullName")[0].childNodes[0].nodeValue;
-				document.getElementById('ID').innerHTML = xmlDoc
-						.getElementsByTagName("id")[0].childNodes[0].nodeValue;
-			}
-		}
-		httpRequest.open("GET", url, true);
-		httpRequest.send();
-	}
-
-	function getJSON(url,fieldID,fieldName,fieldUser) {
-		var httpRequest;
-		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-			httpRequest = new XMLHttpRequest();
-		} else {// code for IE6, IE5
-			httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		httpRequest.onreadystatechange = function() {
-			
-			if (httpRequest.readyState == 4) {
-
-				 if (httpRequest.status != 200){
-					document.getElementById('statusError').innerHTML = httpRequest.status;
-					document.getElementById('messageError').innerHTML = httpRequest.responseText;
-						
-				}else{
-					 
-					console.log(httpRequest.responseText);
-					// Javascript function JSON.parse to parse JSON data
-					var jsonObj = JSON.parse(httpRequest.responseText);
-	
-					// jsonObj variable now contains the data structure and can
-					// be accessed as jsonObj.name and jsonObj.country.
-					document.getElementById(fieldUser).innerHTML = jsonObj.user;
-					document.getElementById(fieldName).innerHTML = jsonObj.fullName;
-					document.getElementById(fieldID).innerHTML = jsonObj.id;
-					
-					document.getElementById('status').innerHTML = httpRequest.status;
-				}
-			}
-		}
-		
-		httpRequest.open("GET", url, true);
-		httpRequest.send();
-	}
-	
-	function postJSON(url) {
-		var xmlhttp;
-		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		} else {// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-				console.log(xmlhttp.responseText);
-				// Javascript function JSON.parse to parse JSON data
-				var jsonObj = JSON.parse(xmlhttp.responseText);
-
-				// jsonObj variable now contains the data structure and can
-				// be accessed as jsonObj.name and jsonObj.country.
-				document.getElementById('UserPosted').innerHTML = jsonObj.user;
-				document.getElementById('NamePosted').innerHTML = jsonObj.fullName;
-				document.getElementById('IDPosted').innerHTML = jsonObj.id;
-			}
-		}
-
-		xmlhttp.open("POST", url);
-		xmlhttp.setRequestHeader("Content-Type", "application/json");
-		xmlhttp.send(JSON.stringify({id:5, user:"myUser", fullName:"myFullName"}));
-	}
     /*
      Usage: receives the id of the DOM element whose inner elements defines the request through
      a class name convention:
@@ -224,7 +135,7 @@
 <section id="login">
     <h2>login test</h2>
     <div class="login">
-        <div   class="url" val="registeruser" style="display: hidden;"/>
+        <div   class="url" val="login" style="display: hidden;"/>
         <div   class="type" val="POST" style="display: hidden;"/>
         <label>Usuario:</label>    <input class="data" param-name="username" type="text" /><br>
         <label>Contraseña:</label> <input class="data" param-name="password" type="password" ><br>

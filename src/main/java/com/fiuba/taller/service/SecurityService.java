@@ -23,7 +23,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 @Produces(MediaType.APPLICATION_JSON)
 public class SecurityService {
 
-    static private String securityApiUrl = "http://localhost:8080/simple-service-webapp/api/mocks/";
+    static private String securityApiUrl = "http://localhost:8080/simple-service-webapp/api/mocks";
     static private Client client = ClientBuilder.newClient();
     static private WebTarget webTarget = client.target(securityApiUrl);
 
@@ -32,21 +32,22 @@ public class SecurityService {
     @Path("registeruser")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String registerUser(MultivaluedMap<String, String> formParams) {
-        System.out.println(formParams);
-        WebTarget resourceWebTarget = webTarget.path("registeruser");
-        Response response = resourceWebTarget
-                .request(MediaType.APPLICATION_XML)
-                .post(Entity.form(formParams));
-
-        System.out.println(response.getStatus());
-        System.out.println(response.readEntity(String.class));
+    	return (formParams.toString());
+//    	System.out.println(formParams);
+//        WebTarget resourceWebTarget = webTarget.path("registeruser");
+//        Response response = resourceWebTarget
+//                .request(MediaType.APPLICATION_XML)
+//                .post(Entity.form(formParams));
+//
+//        System.out.println(response.getStatus());
+//        System.out.println(response.readEntity(String.class));
 //        no me sale parsear la puta respuesta
 //        System.out.println(response.readEntity(SecurityResponse.class));
 //        SecurityResponse parsedResponseBody = response.readEntity(SecurityResponse.class);
 //        System.out.println(parsedResponseBody);
 //        System.out.println(parsedResponseBody.isSuccessful());
 //        System.out.println(parsedResponseBody.getReason());
-        return "{\"API\": \"registerUser working\"}";
+//        return "{\"API\": \"registerUser working\"}";
     }
 
     @POST
