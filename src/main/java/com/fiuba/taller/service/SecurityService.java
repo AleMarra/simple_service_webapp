@@ -32,18 +32,19 @@ public class SecurityService {
     public String registerUser(MultivaluedMap<String, String> formParams) {
         System.out.println(formParams);
         WebTarget resourceWebTarget = webTarget.path("registeruser");
-        Response securityResponse = resourceWebTarget
-                .request(MediaType.APPLICATION_XML)
-                .post(Entity.form(formParams));
+        
+        Response response = resourceWebTarget
+				                .request(MediaType.APPLICATION_XML_TYPE)
+				                .post(Entity.form(formParams));
+        
+        response.bufferEntity();
 
-        System.out.println(securityResponse.getStatus());
-        System.out.println(securityResponse.readEntity(String.class));
-//        no me sale parsear la puta respuesta
-//        System.out.println(securityResponse.readEntity(SecurityResponse.class));
-//        SecurityResponse parsedResponseBody = securityResponse.readEntity(SecurityResponse.class);
-//        System.out.println(parsedResponseBody);
-//        System.out.println(parsedResponseBody.isSuccessful());
-//        System.out.println(parsedResponseBody.getReason());
+        System.out.println(response.toString());
+        
+        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+
+        System.out.println(securityResponse.toString());
+        
         return "{\"API\": \"registerUser working\"}";
     }
 
@@ -52,16 +53,27 @@ public class SecurityService {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response login(MultivaluedMap<String, String> formParams) {
         WebTarget resourceWebTarget = webTarget.path("login");
-        Response securityResponse = resourceWebTarget
-                .request(MediaType.APPLICATION_XML)
+        Response response = resourceWebTarget
+                .request(MediaType.APPLICATION_XML_TYPE)
                 .post(Entity.form(formParams));
 
-        System.out.println(securityResponse.getStatus());
-        System.out.println(securityResponse.readEntity(String.class));
-        return Response
-                .ok()
-                .cookie(new NewCookie("authToken", "bad18eba1ff45jk7858b8ae88a77fa301"))
-                .build();
+        response.bufferEntity();
+        
+        System.out.println(response.toString());
+        
+        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+        
+        if(securityResponse.getSuccess()){
+	        return Response
+	                .ok()
+	                .cookie(new NewCookie("authToken", securityResponse.getAuthToken()))
+	                .build();
+	    }else{
+	    	return Response
+	                .status(response.getStatus())
+	                .type(securityResponse.getReason())
+	                .build();
+	    }
     }
 
     @POST
@@ -73,16 +85,27 @@ public class SecurityService {
 
         WebTarget resourceWebTarget = webTarget.path("logout");
         Response response = resourceWebTarget
-                .request(MediaType.APPLICATION_XML)
+                .request(MediaType.APPLICATION_XML_TYPE)
                 .post(Entity.form(form));
 
-        System.out.println(response.getStatus());
-        System.out.println(response.readEntity(String.class));
-        return Response
-                .ok()
-                .header("Set-Cookie",
-                        "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
-                .build();
+        response.bufferEntity();
+        
+        System.out.println(response.toString());
+        
+        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+        
+        if(securityResponse.getSuccess()){
+	        return Response
+	                .ok()
+	                .header("Set-Cookie",
+	                        "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+	                .build();
+        }else{
+        	return Response
+	                .status(response.getStatus())
+	                .type(securityResponse.getReason())
+	                .build();
+        }
     }
 
     @POST
