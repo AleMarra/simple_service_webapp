@@ -71,7 +71,7 @@ public class SecurityService {
 	    }else{
 	    	return Response
 	                .status(response.getStatus())
-	                .type(securityResponse.getReason())
+	                .entity(securityResponse.getReason())
 	                .build();
 	    }
     }
