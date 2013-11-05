@@ -14,10 +14,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Form;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 @Path("/")
@@ -35,15 +32,15 @@ public class SecurityService {
     public String registerUser(MultivaluedMap<String, String> formParams) {
         System.out.println(formParams);
         WebTarget resourceWebTarget = webTarget.path("registeruser");
-        Response response = resourceWebTarget
+        Response securityResponse = resourceWebTarget
                 .request(MediaType.APPLICATION_XML)
                 .post(Entity.form(formParams));
 
-        System.out.println(response.getStatus());
-        System.out.println(response.readEntity(String.class));
+        System.out.println(securityResponse.getStatus());
+        System.out.println(securityResponse.readEntity(String.class));
 //        no me sale parsear la puta respuesta
-//        System.out.println(response.readEntity(SecurityResponse.class));
-//        SecurityResponse parsedResponseBody = response.readEntity(SecurityResponse.class);
+//        System.out.println(securityResponse.readEntity(SecurityResponse.class));
+//        SecurityResponse parsedResponseBody = securityResponse.readEntity(SecurityResponse.class);
 //        System.out.println(parsedResponseBody);
 //        System.out.println(parsedResponseBody.isSuccessful());
 //        System.out.println(parsedResponseBody.getReason());
@@ -53,20 +50,24 @@ public class SecurityService {
     @POST
     @Path("login")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String login(MultivaluedMap<String, String> formParams) {
+    public Response login(MultivaluedMap<String, String> formParams) {
         WebTarget resourceWebTarget = webTarget.path("login");
-        Response response = resourceWebTarget
+        Response securityResponse = resourceWebTarget
                 .request(MediaType.APPLICATION_XML)
                 .post(Entity.form(formParams));
 
-        System.out.println(response.getStatus());
-        System.out.println(response.readEntity(String.class));
-        return "{\"API\": \"login working\"}";
+        System.out.println(securityResponse.getStatus());
+        System.out.println(securityResponse.readEntity(String.class));
+        return Response
+                .ok()
+                .cookie(new NewCookie("authToken", "bad18eba1ff45jk7858b8ae88a77fa301"))
+                .build();
     }
 
     @POST
     @Path("logout")
-    public String logout(@HeaderParam("authToken") String authToken) {
+    public Response logout(@CookieParam("authToken") String authToken) {
+        System.out.println("@CookieParam: " + authToken);
         Form form = new Form();
         form.param("authToken", authToken);
 
@@ -77,7 +78,11 @@ public class SecurityService {
 
         System.out.println(response.getStatus());
         System.out.println(response.readEntity(String.class));
-        return "{\"API\": \"logout working\"}";
+        return Response
+                .ok()
+                .header("Set-Cookie",
+                        "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                .build();
     }
 
     @POST
