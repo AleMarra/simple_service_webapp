@@ -14,6 +14,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
@@ -51,13 +52,31 @@ public class SecurityService {
 
     @POST
     @Path("login")
-    public String login() {
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String login(MultivaluedMap<String, String> formParams) {
+        WebTarget resourceWebTarget = webTarget.path("login");
+        Response response = resourceWebTarget
+                .request(MediaType.APPLICATION_XML)
+                .post(Entity.form(formParams));
+
+        System.out.println(response.getStatus());
+        System.out.println(response.readEntity(String.class));
         return "{\"API\": \"login working\"}";
     }
 
     @POST
     @Path("logout")
-    public String logout() {
+    public String logout(@HeaderParam("authToken") String authToken) {
+        Form form = new Form();
+        form.param("authToken", authToken);
+
+        WebTarget resourceWebTarget = webTarget.path("logout");
+        Response response = resourceWebTarget
+                .request(MediaType.APPLICATION_XML)
+                .post(Entity.form(form));
+
+        System.out.println(response.getStatus());
+        System.out.println(response.readEntity(String.class));
         return "{\"API\": \"logout working\"}";
     }
 

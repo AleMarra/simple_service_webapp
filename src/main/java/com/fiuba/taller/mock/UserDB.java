@@ -26,13 +26,17 @@ public class UserDB {
     }
 
     public boolean createUser(Map<String, String> userData) {
-        boolean success = userData.containsKey("username") && users.containsKey(userData.get("username"));
+        boolean success = userData.containsKey("username") && !users.containsKey(userData.get("username"));
         if (success) {
             User newUser = new User(userUuid++, userData);
             users.put(userData.get("username"), newUser);
         }
 
         return success;
+    }
+
+    public User getUserByUsername(String username) {
+        return users.get(username);
     }
 
 }

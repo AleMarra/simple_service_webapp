@@ -1,9 +1,6 @@
 package com.fiuba.taller.mock;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import java.util.HashMap;
@@ -16,11 +13,8 @@ import java.util.Map;
 public class SecurityMock {
 
     static private UserDB users = new UserDB();
-    static private String [] authTokens = new String[]{
-            "bad18eba1ff45jk7858b8ae88a77fa30",
-            "bad18eba1ff45jk7858b8ae88a77fa31",
-            "bad18eba1ff45jk7858b8ae88a77fa32"
-    };
+    static private String baseAuthToken = "bad18eba1ff45jk7858b8ae88a77fa30";
+    static private Map<String, String> authenticatedUsers = new HashMap<String, String>();
 
     @POST
     @Path("registeruser")
@@ -38,13 +32,13 @@ public class SecurityMock {
         String xmlResponse;
         if (users.createUser(userData)) {
             xmlResponse =
-                "<securityResponse>\n"              +
-                "   <success>1</success>\n" +
+                "<securityResponse>\n"       +
+                "    <success>1</success>\n" +
                 "</securityResponse>";
         } else {
             xmlResponse =
                 "<response>\n"                                +
-                "   <success>0</success>\n"                   +
+                "    <success>0</success>\n"                  +
                 "    <reason>El usuario ya existe</reason>\n" +
                 "</response>";
 
@@ -54,14 +48,52 @@ public class SecurityMock {
 
     @POST
     @Path("login")
-    public String login() {
-        return "[Mock] login working";
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String login(@FormParam("username") String username, @FormParam("password") String password) {
+        User user = users.getUserByUsername(username);
+        String xmlResponse;
+
+        if (user != null && user.getPassword().equals(password)) {
+            String authToken = baseAuthToken + Integer.toString(user.getId());
+            authenticatedUsers.put(authToken, username);
+            xmlResponse =
+                "<response>\n"                                   +
+                "    <success>1</success>\n"                     +
+                "    <authToken>" + authToken + "</authToken>\n" +
+                "</response>";
+        } else {
+            xmlResponse =
+                "<response>\n"                               +
+                "    <success>0</success>\n"                 +
+                "    <reason>Contraseña inválida</reason>\n" +
+                "</response>";
+
+        }
+        return xmlResponse;
     }
 
     @POST
     @Path("logout")
-    public String logout() {
-        return "[Mock] logout working";
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String logout(@FormParam("authToken") String authToken) {
+        String username = authenticatedUsers.get(authToken);
+        String xmlResponse;
+
+        if (username != null) {
+            authenticatedUsers.remove(authToken);
+            xmlResponse =
+                    "<response>\n"                                   +
+                    "    <success>1</success>\n"                     +
+                    "</response>";
+        } else {
+            xmlResponse =
+                    "<response>\n"                          +
+                    "    <success>0</success>\n"            +
+                    "    <reason>Token inválida</reason>\n" +
+                    "</response>";
+
+        }
+        return xmlResponse;
     }
 
     @POST
