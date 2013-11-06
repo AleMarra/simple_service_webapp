@@ -52,7 +52,7 @@ public class SecurityService {
         }else{
             return Response
                     .status(response.getStatus())
-                    .entity(securityResponse.getReason())
+                    .entity(securityResponse)
                     .build();
         }
     }
@@ -80,7 +80,7 @@ public class SecurityService {
 	    }else{
 	    	return Response
 	                .status(response.getStatus())
-	                .entity(securityResponse.getReason())
+	                .entity(securityResponse)
 	                .build();
 	    }
     }
@@ -112,7 +112,7 @@ public class SecurityService {
         }else{
         	return Response
 	                .status(response.getStatus())
-	                .type(securityResponse.getReason())
+                    .entity(securityResponse)
 	                .build();
         }
     }
