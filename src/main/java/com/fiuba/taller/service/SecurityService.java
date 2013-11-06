@@ -29,7 +29,7 @@ public class SecurityService {
     @POST
     @Path("registeruser")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String registerUser(MultivaluedMap<String, String> formParams) {
+    public Response registerUser(MultivaluedMap<String, String> formParams) {
         System.out.println(formParams);
         WebTarget resourceWebTarget = webTarget.path("registeruser");
         
@@ -44,8 +44,17 @@ public class SecurityService {
         SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
 
         System.out.println(securityResponse.toString());
-        
-        return "{\"API\": \"registerUser working\"}";
+
+        if(securityResponse.getSuccess()){
+            return Response
+                    .ok()
+                    .build();
+        }else{
+            return Response
+                    .status(response.getStatus())
+                    .entity(securityResponse.getReason())
+                    .build();
+        }
     }
 
     @POST
