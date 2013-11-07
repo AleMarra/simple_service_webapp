@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
@@ -21,38 +22,22 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.junit.runner.RunWith;
 
-@RunWith(Parameterized.class)
-public class SecurityServiceTest {
-	
-//	static private final String baseUrl = "http://localhost:8080/simple-service-webapp/api";
-//	
-//	static private Client client = ClientBuilder.newClient();
-//	
-//	static private WebTarget webTarget = client.target(securityApiUrl);
+import parameterized.RESTApiTestCase.Step;
 
-	
-	
-	private String actionType;		  // HTTP action type: GET, POST, PUT, DELETE
-	private String actionUrl;		  // url from base, ie: /controller/method
-	private List<HashMap<String, String>> urlParams;   // Mandatory action params, ie: /controller/method/id
-	private List<HashMap<String, String>> queryParams; // Optional action params, ie: /controller/method/id?opt=val
-	
-	private String expectedResult;
-	
+@RunWith(Parameterized.class)
+public class SecurityServiceTest extends RESTApiTestCase{
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		
+		setBaseTarget("http://localhost:8080/simple-service-webapp/api");
+	}
 
 	/*
-	 * Called once for every @Parameter parameters list 	
+	 * Called once for every @Parameter in generateData result list 	
 	 */
-	public SecurityServiceTest(String actionType, String actionUrl, List<HashMap<String, String>> urlParams,
-			List<HashMap<String, String>> queryParams, String expectedResult) 
-	{
-		
-		this.actionType = actionType;
-		this.actionUrl = actionUrl;
-		this.urlParams = urlParams;
-		this.queryParams = queryParams;
-		this.expectedResult = expectedResult;
-		
+	public SecurityServiceTest(ArrayList<Step> steps){
+		this.steps = steps;
 	}
 	
 	/*
@@ -64,10 +49,6 @@ public class SecurityServiceTest {
 	@Parameters
 	public static Collection<Object[]> generateData()
 	{
-		// In this example, the parameter generator returns a List of
-		// arrays.  Each array has two elements: { datum, expected }.
-		// These data are hard-coded into the class, but they could be
-		// generated or loaded in any way you like.
 		List<HashMap<String, String>> urlParams = new ArrayList<HashMap<String, String>>();
 		HashMap<String, String> url_param = new HashMap<String, String>();  
 		url_param.put("id", "1");
@@ -77,37 +58,49 @@ public class SecurityServiceTest {
 		HashMap<String, String> query_param = new HashMap<String, String>();
 		query_param.put("keepLogged", "false");
 		queryParams.add(query_param);
+	
+		ArrayList<Step> firstRun = new ArrayList<Step>();
+		firstRun.add(new Step("GET",
+							"/login",
+							urlParams,
+							queryParams,
+							"{\"API\": \"login working\"}"));
+		
+		firstRun.add(new Step("POST",
+						"/login",
+						urlParams,
+						queryParams,
+						"{\"API\": \"login working\"}"));
 
+		
+		ArrayList<Step> secondRun = new ArrayList<Step>();
+		firstRun.add(new Step("GET",
+							"/logout",
+							urlParams,
+							new ArrayList<HashMap<String, String>>(),
+							"{\"API\": \"logout working\"}"));
+				
 		return Arrays.asList(new Object[][]{
-			{ "GET", "/login", urlParams, queryParams, "{\"API\": \"login working\"}"},
-			{ "GET", "/logout", urlParams, null, "{\"API\": \"logout working\"}"}
-		  });
+				{firstRun},
+				{secondRun}
+			  });
+
 	}
 	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
+	
 	@Test
-	public void testRequestReturnsOk() {
-		System.out.println("Dummy test: " + this.actionUrl);
-		System.out.println(this.actionType +" "+ this.urlParams.toString() 
-						+" "+ this.expectedResult);
+	public void testRequestReturnsAsExpected() {
+		Iterator<Step> it =  steps.iterator();
 		
-		assertTrue("Dummy test: " + this.actionType + this.actionUrl, true);
+		while (it.hasNext()){
+			Step step = it.next();
+			System.out.println("Dummy test url: "+ baseUrl + step.actionUrl);
+			System.out.println(step.actionType +" "+
+							step.urlParams.toString() +" "+
+							step.queryParams.toString()+" "+
+							step.expectedResult);
+			
+			assertTrue("Dummy test: " + step.actionType + step.actionUrl, true);
+		}
 	}
-
 }

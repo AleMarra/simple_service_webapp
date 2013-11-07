@@ -78,7 +78,6 @@ public class SecurityMock {
     @Produces(MediaType.APPLICATION_XML)
     public Response logout(@FormParam("authToken") String authToken) {
         String username = authenticatedUsers.get(authToken);
-        //String xmlResponse;
         
         SecurityResponse securityEntity = null;
         
@@ -86,20 +85,10 @@ public class SecurityMock {
             authenticatedUsers.remove(authToken);
             
             securityEntity = new SecurityResponse(true, "Logout exitoso");
-//            xmlResponse =
-//                    "<response>\n"                                   +
-//                    "    <success>1</success>\n"                     +
-//                    "</response>";
         } else {
         	securityEntity = new SecurityResponse(true, "Token inválida");
-//            xmlResponse =
-//                    "<response>\n"                          +
-//                    "    <success>0</success>\n"            +
-//                    "    <reason>Token inválida</reason>\n" +
-//                    "</response>";
 
         }
-        //return xmlResponse;
         return Response.status(200)
         		.entity(securityEntity)
         		.build();
