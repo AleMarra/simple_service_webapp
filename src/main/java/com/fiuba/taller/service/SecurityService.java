@@ -118,6 +118,36 @@ public class SecurityService {
     }
 
     @POST
+    @Path("isloggedin")
+    public Response isLoggedIn(@CookieParam("authToken") String authToken) {
+        System.out.println("@CookieParam: " + authToken);
+        Form form = new Form();
+        form.param("authToken", authToken);
+
+        WebTarget resourceWebTarget = webTarget.path("isvalidtoken");
+        Response response = resourceWebTarget
+                .request(MediaType.APPLICATION_XML_TYPE)
+                .post(Entity.form(form));
+
+        response.bufferEntity();
+        
+        System.out.println(response.toString());
+        
+        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+        
+        if(securityResponse.getSuccess()){
+	        return Response
+	                .ok()
+	                .build();
+        }else{
+        	return Response
+	                .status(response.getStatus())
+	                .entity(securityResponse.getReason())
+	                .build();
+        }
+    }
+
+    @POST
     @Path("activateuser")
     public String activateUser() {
         return "{\"API\": \"activateUser working\"}";
