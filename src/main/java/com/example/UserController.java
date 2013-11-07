@@ -90,7 +90,7 @@ public class UserController {
             e.printStackTrace();
         }
 
-        return "laaaaaaallaaa";
+        return "laaaallaaa";
     }
 
     @GET
