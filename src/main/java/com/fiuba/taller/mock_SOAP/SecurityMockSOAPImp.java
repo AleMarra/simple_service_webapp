@@ -1,28 +1,33 @@
-package com.fiuba.taller.mock;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-
-import com.fiuba.taller.service.SecurityResponse;
+package com.fiuba.taller.mock_SOAP;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-@Path("/")
-public class SecurityMock {
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 
-    static private UserDB users = new UserDB();
+import com.fiuba.taller.mock.User;
+import com.fiuba.taller.mock.UserDB;
+import com.fiuba.taller.service.SecurityResponse;
+
+@WebService(endpointInterface = "com.fiuba.taller.mock_SOAP")
+public class SecurityMockSOAPImp implements SecurityMockSOAP{
+
+	static private UserDB users = new UserDB();
     static private String baseAuthToken = "bad18eba1ff45jk7858b8ae88a77fa30";
     static private Map<String, String> authenticatedUsers = new HashMap<String, String>();
 
-    @POST
-    @Path("registeruser")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.APPLICATION_XML)
+    @Override
     public Response registerUser(MultivaluedMap<String, String> formParams) {
 
     	Map<String, String> userData = new HashMap<String, String>();
@@ -63,8 +68,7 @@ public class SecurityMock {
             securityEntity = new SecurityResponse(true, "Login exitoso", authToken);
             
         } else {
-            String reason = user == null ? "Usuario no encontrado" : "Contraseña inválida";
-        	securityEntity = new SecurityResponse(false, reason);
+        	securityEntity = new SecurityResponse(false, "Contraseña inválida");
         }
 
         return Response
@@ -84,73 +88,15 @@ public class SecurityMock {
         
         if (username != null) {
             authenticatedUsers.remove(authToken);
+            
             securityEntity = new SecurityResponse(true, "Logout exitoso");
         } else {
-        	
         	securityEntity = new SecurityResponse(true, "Token inválida");
 
         }
         return Response.status(200)
         		.entity(securityEntity)
         		.build();
-    }
-    
-    @POST
-    @Path("isvalidtoken")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.APPLICATION_XML)
-    public Response isValidToken(@FormParam("authToken") String authToken) {
-        String username = authenticatedUsers.get(authToken);
-        //String xmlResponse;
-        
-        SecurityResponse securityEntity = null;
-        
-        if (username != null) {
-            //authenticatedUsers.refreshTime(authToken);
-            securityEntity = new SecurityResponse(true, "logged in");
-        } else {
-        	securityEntity = new SecurityResponse(false, "Token invalida");
-        }
-
-        return Response.status(200)
-        		.entity(securityEntity)
-        		.build();
-    }
-
-    @POST
-    @Path("activateuser")
-    public String activateUser() {
-        return "[Mock] activateUser working";
-    }
-
-    @POST
-    @Path("changepassword")
-    public String changePassword() {
-        return "[Mock] changePassword working";
-    }
-
-    @POST
-    @Path("resetpassword")
-    public String resetPassword() {
-        return "[Mock] resetPassword working";
-    }
-
-    @POST
-    @Path("disableaccount")
-    public String disableAccount() {
-        return "[Mock] disableAccount working";
-    }
-
-    @POST
-    @Path("enableaccount")
-    public String enableAccount() {
-        return "[Mock] enableAccount working";
-    }
-
-    @POST
-    @Path("enableaccountfromemaill")
-    public String enableAccountFromEmaill() {
-        return "[Mock] enableAccountFromEmaill working";
     }
 
 }
