@@ -93,6 +93,28 @@ public class SecurityMock {
         		.entity(securityEntity)
         		.build();
     }
+    
+    @POST
+    @Path("isvalidtoken")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_XML)
+    public Response isValidToken(@FormParam("authToken") String authToken) {
+        String username = authenticatedUsers.get(authToken);
+        //String xmlResponse;
+        
+        SecurityResponse securityEntity = null;
+        
+        if (username != null) {
+            //authenticatedUsers.refreshTime(authToken);
+            securityEntity = new SecurityResponse(true, "logged in");
+        } else {
+        	securityEntity = new SecurityResponse(false, "Token invalida");
+        }
+
+        return Response.status(200)
+        		.entity(securityEntity)
+        		.build();
+    }
 
     @POST
     @Path("activateuser")

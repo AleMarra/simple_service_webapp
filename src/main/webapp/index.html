@@ -185,13 +185,19 @@
             type: type,
             data: data,
             error: function (jqXHR, textStatus, errorThrown ) {
-                appendAutodeletableMsg('Se rompió todo :D', 'red');
+                appendAutodeletableMsg('Ha ocurrido un error', 'red');
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(errorThrown);
             },
             success: function (data, textStatus, jqXHR) {
-                appendAutodeletableMsg('Salió bien :D', 'blue');
+                if(idType == 'login'){
+                	onSuccessfulLogin();
+                }else if(idType == 'logout'){
+                	onSuccessfulLogout();
+                }else if(idType == 'registeruser'){
+                	appendAutodeletableMsg('El usuario se creo exitosamente', 'blue');
+                }
                 console.log(data);
                 console.log(textStatus);
                 console.log(jqXHR);
@@ -199,101 +205,165 @@
         })
     }
     
+    function onSuccessfulLogin(){
+    	if($('#loggedOutSection').is(":visible")){
+    		$('#loggedOutSection').hide();
+    	}
+    	if(!$('#loggedInSection').is(":visible")){
+    		$('#loggedInSection').show();
+    	}
+    }
+    
+    function onSuccessfulLogout(){
+    	if($('#loggedInSection').is(":visible")){
+    		$('#loggedInSection').hide();
+    	}
+    	if(!$('#loggedOutSection').is(":visible")){
+    		$('#loggedOutSection').show();
+    	}
+    }
+    
+    function checkSession(){
+    	// AJAX request!
+        $.ajax({
+            url: 'api/isloggedin',
+            type: 'POST',
+            data: {},
+            error: function (jqXHR, textStatus, errorThrown ) {
+                onSuccessfulLogout();
+                
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            success: function (data, textStatus, jqXHR) {
+            	onSuccessfulLogin();
+           		
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+            }
+        })
+    }
+    
+    checkSession();
+    
 	</script>
 </head>
 <body>
 
-<section id="registeruser">
-    <h2>registeruser test</h2>
-    <div class="registeruser">
-        <div   class="url" val="registeruser" style="display: hidden;"/>
-        <div   class="type" val="POST" style="display: hidden;"/>
-        <label>Usuario:</label>    <input class="data" param-name="username" type="text" /><br>
-        <label>Contraseña:</label> <input class="data" param-name="password" type="password" ><br>
-        <label>Nombre:</label>     <input class="data" param-name="nombre" type="text" /><br>
-        <label>Apellido:</label>   <input class="data" param-name="apellido" type="text" /><br>
-        <label>Padrón:</label>     <input class="data" param-name="padron" type="text" /><br>
-        <label>FechaNac:</label>   <input class="data" param-name="fechaNac" type="date" /><br>
-        <label>Email:</label>      <input class="data" param-name="email" type="text" /><br>
-        <label>Rol:</label>        <input class="data" param-name="rol" type="number" /><br>
+<div id="loggedOutSection" style="display: none;">
+	<section id="registeruser">
+	    <h2>registeruser test</h2>
+	    <div class="registeruser">
+	        <div   class="url" val="registeruser" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <label>Usuario:</label>    <input class="data" param-name="username" type="text" /><br>
+	        <label>Contraseña:</label> <input class="data" param-name="password" type="password" ><br>
+	        <label>Nombre:</label>     <input class="data" param-name="nombre" type="text" /><br>
+	        <label>Apellido:</label>   <input class="data" param-name="apellido" type="text" /><br>
+	        <label>Padrón:</label>     <input class="data" param-name="padron" type="text" /><br>
+	        <label>FechaNac:</label>   <input class="data" param-name="fechaNac" type="date" /><br>
+	        <label>Email:</label>      <input class="data" param-name="email" type="text" /><br>
+	        <label>Rol:</label>        <input class="data" param-name="rol" type="number" /><br>
+	
+	        <button onclick="sendRequest('registeruser')">Register</button>
+	    </div>
+	</section>
+	
+	<hr />
+	
+	<section id="login">
+	    <h2>login test</h2>
+	    <div class="login">
+	        <div   class="url" val="login" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <label>Usuario:</label>    <input class="data" param-name="username" type="text" /><br>
+	        <label>Contraseña:</label> <input class="data" param-name="password" type="password" ><br>
+	        <button onclick="sendRequest('login')">Login</button>
+	    </div>
+	</section>
+	
+	<hr />
+	
+	<section id="activateUser">
+	    <h2>activateUser test (@todo)</h2>
+	    <div class="activateUser">
+	        <div   class="url" val="activateUser" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <button onclick="sendRequest('activateUser')">Activate</button>
+	    </div>
+	</section>
+	
+	<hr />
+	
+	<section id="changePassword">
+	    <h2>changePassword test (@todo)</h2>
+	    <div class="changePassword">
+	        <div   class="url" val="changePassword" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <button onclick="sendRequest('changePassword')">Change</button>
+	    </div>
+	</section>
+	
+	<hr />
+	
+	<section id="resetPassword">
+	    <h2>resetPassword test (@todo)</h2>
+	    <div class="resetPassword">
+	        <div   class="url" val="resetPassword" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <button onclick="sendRequest('resetPassword')">Reset</button>
+	    </div>
+	</section>
+	
+	<hr />
+	
+	<section id="disableAccount">
+	    <h2>disableAccount test (@todo)</h2>
+	    <div class="disableAccount">
+	        <div   class="url" val="disableAccount" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <button onclick="sendRequest('disableAccount')">Disable</button>
+	    </div>
+	</section>
+	
+	<hr />
+	
+	<section id="enableAccount">
+	    <h2>enableAccount test (@todo)</h2>
+	    <div class="enableAccount">
+	        <div   class="url" val="enableAccount" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <button onclick="sendRequest('enableAccount')">Enable</button>
+	    </div>
+	</section>
+	
+	<hr />
+	
+	<section id="enableAccountFromEmaill">
+	    <h2>enableAccountFromEmail test (@todo)</h2>
+	    <div class="enableAccountFromEmaill">
+	        <div   class="url" val="enableAccountFromEmaill" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <button onclick="sendRequest('enableAccountFromEmaill')">Enable</button>
+	    </div>
+	</section>
+</div>
 
-        <button onclick="sendRequest('registeruser')">Register</button>
-    </div>
-</section>
 
-<section id="login">
-    <h2>login test</h2>
-    <div class="login">
-        <div   class="url" val="login" style="display: hidden;"/>
-        <div   class="type" val="POST" style="display: hidden;"/>
-        <label>Usuario:</label>    <input class="data" param-name="username" type="text" /><br>
-        <label>Contraseña:</label> <input class="data" param-name="password" type="password" ><br>
-        <button onclick="sendRequest('login')">Login</button>
-    </div>
-</section>
+<div id="loggedInSection" style='display:none'>
+	<div>Estas loggeado</div>
 
-<section id="logout">
-    <h2>logout test</h2>
-    <div class="logout">
-        <div   class="url" val="logout" style="display: hidden;"/>
-        <div   class="type" val="POST" style="display: hidden;"/>
-        <button onclick="sendRequest('logout')">Logout</button>
-    </div>
-</section>
-
-<section id="activateUser">
-    <h2>activateUser test (@todo)</h2>
-    <div class="activateUser">
-        <div   class="url" val="activateUser" style="display: hidden;"/>
-        <div   class="type" val="POST" style="display: hidden;"/>
-        <button onclick="sendRequest('activateUser')">Activate</button>
-    </div>
-</section>
-
-<section id="changePassword">
-    <h2>changePassword test (@todo)</h2>
-    <div class="changePassword">
-        <div   class="url" val="changePassword" style="display: hidden;"/>
-        <div   class="type" val="POST" style="display: hidden;"/>
-        <button onclick="sendRequest('changePassword')">Change</button>
-    </div>
-</section>
-
-<section id="resetPassword">
-    <h2>resetPassword test (@todo)</h2>
-    <div class="resetPassword">
-        <div   class="url" val="resetPassword" style="display: hidden;"/>
-        <div   class="type" val="POST" style="display: hidden;"/>
-        <button onclick="sendRequest('resetPassword')">Reset</button>
-    </div>
-</section>
-
-<section id="disableAccount">
-    <h2>disableAccount test (@todo)</h2>
-    <div class="disableAccount">
-        <div   class="url" val="disableAccount" style="display: hidden;"/>
-        <div   class="type" val="POST" style="display: hidden;"/>
-        <button onclick="sendRequest('disableAccount')">Disable</button>
-    </div>
-</section>
-
-<section id="enableAccount">
-    <h2>enableAccount test (@todo)</h2>
-    <div class="enableAccount">
-        <div   class="url" val="enableAccount" style="display: hidden;"/>
-        <div   class="type" val="POST" style="display: hidden;"/>
-        <button onclick="sendRequest('enableAccount')">Enable</button>
-    </div>
-</section>
-
-<section id="enableAccountFromEmaill">
-    <h2>enableAccountFromEmail test (@todo)</h2>
-    <div class="enableAccountFromEmaill">
-        <div   class="url" val="enableAccountFromEmaill" style="display: hidden;"/>
-        <div   class="type" val="POST" style="display: hidden;"/>
-        <button onclick="sendRequest('enableAccountFromEmaill')">Enable</button>
-    </div>
-</section>
+	<section id="logout">
+	    <h2>logout test</h2>
+	    <div class="logout">
+	        <div   class="url" val="logout" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <button onclick="sendRequest('logout')">Logout</button>
+	    </div>
+	</section>
+</div>
     
 </body>
 </html>

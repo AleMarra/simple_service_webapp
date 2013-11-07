@@ -29,7 +29,7 @@ public class SecurityService {
     @POST
     @Path("registeruser")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String registerUser(MultivaluedMap<String, String> formParams) {
+    public Response registerUser(MultivaluedMap<String, String> formParams) {
         System.out.println(formParams);
         WebTarget resourceWebTarget = webTarget.path("registeruser");
         
@@ -44,8 +44,17 @@ public class SecurityService {
         SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
 
         System.out.println(securityResponse.toString());
-        
-        return "{\"API\": \"registerUser working\"}";
+
+        if(securityResponse.getSuccess()){
+            return Response
+                    .ok()
+                    .build();
+        }else{
+            return Response
+                    .status(response.getStatus())
+                    .entity(securityResponse.getReason())
+                    .build();
+        }
     }
 
     @POST
@@ -104,6 +113,36 @@ public class SecurityService {
         	return Response
 	                .status(response.getStatus())
 	                .type(securityResponse.getReason())
+	                .build();
+        }
+    }
+
+    @POST
+    @Path("isloggedin")
+    public Response isLoggedIn(@CookieParam("authToken") String authToken) {
+        System.out.println("@CookieParam: " + authToken);
+        Form form = new Form();
+        form.param("authToken", authToken);
+
+        WebTarget resourceWebTarget = webTarget.path("isvalidtoken");
+        Response response = resourceWebTarget
+                .request(MediaType.APPLICATION_XML_TYPE)
+                .post(Entity.form(form));
+
+        response.bufferEntity();
+        
+        System.out.println(response.toString());
+        
+        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+        
+        if(securityResponse.getSuccess()){
+	        return Response
+	                .ok()
+	                .build();
+        }else{
+        	return Response
+	                .status(response.getStatus())
+	                .entity(securityResponse.getReason())
 	                .build();
         }
     }
