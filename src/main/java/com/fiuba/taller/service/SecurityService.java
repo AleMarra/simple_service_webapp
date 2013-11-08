@@ -107,7 +107,7 @@ public class SecurityService {
 	        return Response
 	                .ok()
 	                .header("Set-Cookie",
-	                        "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
 	                .build();
         }else{
         	return Response
@@ -120,30 +120,41 @@ public class SecurityService {
     @POST
     @Path("isloggedin")
     public Response isLoggedIn(@CookieParam("authToken") String authToken) {
-        System.out.println("@CookieParam: " + authToken);
-        Form form = new Form();
-        form.param("authToken", authToken);
+        SecurityResponse securityResponse;
 
-        WebTarget resourceWebTarget = webTarget.path("isvalidtoken");
-        Response response = resourceWebTarget
-                .request(MediaType.APPLICATION_XML_TYPE)
-                .post(Entity.form(form));
+        if (authToken == null) {
+            securityResponse = new SecurityResponse(false, "No token");
+            return Response
+                    .ok()
+                    .entity(securityResponse)
+                    .build();
+        } else {
+            System.out.println("@CookieParam: " + authToken);
+            Form form = new Form();
+            form.param("authToken", authToken);
 
-        response.bufferEntity();
+            WebTarget resourceWebTarget = webTarget.path("isvalidtoken");
+            Response response = resourceWebTarget
+                    .request(MediaType.APPLICATION_XML_TYPE)
+                    .post(Entity.form(form));
+
+            response.bufferEntity();
+
+            System.out.println(response.toString());
         
-        System.out.println(response.toString());
-        
-        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
-        
-        if(securityResponse.getSuccess()){
-	        return Response
-	                .ok()
-	                .build();
-        }else{
-        	return Response
-	                .status(response.getStatus())
-	                .entity(securityResponse.getReason())
-	                .build();
+            securityResponse = response.readEntity(SecurityResponse.class);
+
+
+            if(securityResponse.getSuccess()){
+                return Response
+                        .ok()
+                        .build();
+            } else {
+                return Response
+                        .status(response.getStatus())
+                        .entity(securityResponse)
+                        .build();
+            }
         }
     }
 

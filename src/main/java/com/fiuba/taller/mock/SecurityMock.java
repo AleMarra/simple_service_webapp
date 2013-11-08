@@ -63,7 +63,8 @@ public class SecurityMock {
             securityEntity = new SecurityResponse(true, "Login exitoso", authToken);
             
         } else {
-        	securityEntity = new SecurityResponse(false, "Contraseña inválida");
+            String reason = user == null ? "Usuario no encontrado" : "Contraseña inválida";
+        	securityEntity = new SecurityResponse(false, reason);
         }
 
         return Response

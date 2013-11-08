@@ -100,6 +100,30 @@
 		xmlhttp.setRequestHeader("Content-Type", "application/json");
 		xmlhttp.send(JSON.stringify({id:5, user:"myUser", fullName:"myFullName"}));
 	}
+
+
+    function getVal ($el) {
+        if ($el.prop("tagName") === 'INPUT')
+            return $el.val();
+        else if ($el.attr('val'))
+            return $el.attr('val');
+        else
+            return '';
+    }
+
+    function appendAutodeletableMsg($el, msg, color) {
+        var id = Math.random().toString(36).substring(2, 12);
+        $el.append('<h4 id="'     +
+                id                +
+                '"style="color: ' +
+                color             +
+                ';">'             +
+                msg               +
+                '</h4>');
+        setTimeout( function () {
+            $('#' + id).remove();
+        }, 5000);
+    }
     /*
      Usage: receives the id of the DOM element whose inner elements defines the request through
      a class name convention:
@@ -110,10 +134,12 @@
      data: body of the request. 'param-name' attribute at the element is needed
 
      url-param, query-string and data elements should be inputs or have a val attribute.
+     onSuccess: callback to be called on request success
+     onError: callback to be called on request error
 
      Although this is our sandbox and nothing here is to be delivered, improvements and suggestions are appreciated.
      */
-    function sendRequest(idType) {
+    function sendRequest(idType, onSuccess, onError) {
         var $el = $("#" + idType),
             url = 'api/',
             type = 'GET',
@@ -125,28 +151,7 @@
             $queryString = $el.find('.query-string'),
             $data = $el.find('.data');
 
-        function getVal ($el) {
-            if ($el.prop("tagName") === 'INPUT')
-                return $el.val();
-            else if ($el.attr('val'))
-                return $el.attr('val');
-            else
-                return '';
-        }
 
-        function appendAutodeletableMsg(msg, color) {
-            var id = Math.random().toString(36).substring(2, 12);
-            $el.append('<h4 id="'     +
-                    id                +
-                    '"style="color: ' +
-                    color             +
-                    ';">'             +
-                    msg               +
-                    '</h4>');
-            setTimeout( function () {
-                $('#' + id).remove();
-            }, 5000);
-        }
 
         function parseData($el) {
             var key = $el.attr('param-name'),
@@ -185,42 +190,55 @@
             type: type,
             data: data,
             error: function (jqXHR, textStatus, errorThrown ) {
-                appendAutodeletableMsg('Ha ocurrido un error', 'red');
-                console.log(jqXHR);
-                console.log(textStatus);
-                console.log(errorThrown);
+                if (typeof onError === "function") {
+                    onError.apply(this, arguments);
+                } else {
+                    appendAutodeletableMsg($el, 'Ha ocurrido un error', 'red');
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
             },
             success: function (data, textStatus, jqXHR) {
-                if(idType == 'login'){
-                	onSuccessfulLogin();
-                }else if(idType == 'logout'){
-                	onSuccessfulLogout();
-                }else if(idType == 'registeruser'){
-                	appendAutodeletableMsg('El usuario se creo exitosamente', 'blue');
+                if (typeof onSuccess === "function") {
+                    onSuccess.apply(this, arguments);
+                } else {
+                    if (data) {
+                        if (data.success) {
+                            appendAutodeletableMsg($el, 'Request OK', 'blue');
+                        } else {
+                            appendAutodeletableMsg($el, 'Request mal; reason: ' + data.reason, 'red');
+                        }
+                    } else {
+                        appendAutodeletableMsg($el, 'Request OK', 'blue');
+                    }
+                    console.log(data);
+                    console.log(textStatus);
+                    console.log(jqXHR);
                 }
-                console.log(data);
-                console.log(textStatus);
-                console.log(jqXHR);
             }
         })
     }
     
-    function onSuccessfulLogin(){
-    	if($('#loggedOutSection').is(":visible")){
-    		$('#loggedOutSection').hide();
-    	}
-    	if(!$('#loggedInSection').is(":visible")){
-    		$('#loggedInSection').show();
-    	}
+    function onSuccessfulLogin(data){
+        function success() {
+            $('#loggedOutSection').hide();
+            $('#loggedInSection').show();
+        }
+        if (data) {
+            if (data.success) {
+                success();
+            } else {
+                appendAutodeletableMsg($('#login'), 'Request mal; reason: ' + data.reason, 'red');
+            }
+        } else {
+            success();
+        }
     }
     
     function onSuccessfulLogout(){
-    	if($('#loggedInSection').is(":visible")){
-    		$('#loggedInSection').hide();
-    	}
-    	if(!$('#loggedOutSection').is(":visible")){
-    		$('#loggedOutSection').show();
-    	}
+        $('#loggedInSection').hide();
+        $('#loggedOutSection').show();
     }
     
     function checkSession(){
@@ -237,8 +255,16 @@
                 console.log(errorThrown);
             },
             success: function (data, textStatus, jqXHR) {
-            	onSuccessfulLogin();
-           		
+                if (data) {
+                    if (data.success) {
+                        onSuccessfulLogin();
+                    } else {
+                        onSuccessfulLogout();
+                    }
+                } else {
+                    onSuccessfulLogin();
+                }
+
                 console.log(data);
                 console.log(textStatus);
                 console.log(jqXHR);
@@ -280,7 +306,7 @@
 	        <div   class="type" val="POST" style="display: hidden;"/>
 	        <label>Usuario:</label>    <input class="data" param-name="username" type="text" /><br>
 	        <label>Contraseña:</label> <input class="data" param-name="password" type="password" ><br>
-	        <button onclick="sendRequest('login')">Login</button>
+	        <button onclick="sendRequest('login', onSuccessfulLogin)">Login</button>
 	    </div>
 	</section>
 	
@@ -360,7 +386,7 @@
 	    <div class="logout">
 	        <div   class="url" val="logout" style="display: hidden;"/>
 	        <div   class="type" val="POST" style="display: hidden;"/>
-	        <button onclick="sendRequest('logout')">Logout</button>
+	        <button onclick="sendRequest('logout', onSuccessfulLogout)">Logout</button>
 	    </div>
 	</section>
 </div>
