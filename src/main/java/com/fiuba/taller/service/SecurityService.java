@@ -1,21 +1,11 @@
 package com.fiuba.taller.service;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-
-import java.io.IOException;
-
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.*;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
@@ -193,49 +183,4 @@ public class SecurityService {
     public String enableAccountFromEmaill() {
         return "{\"API\": \"enableAccountFromEmaill working\"}";
     }
-
-
-    @GET
-    @Path("testRedirect")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String callWs() {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("http://api.despegar.com/cities/tripplanning?includecity=true");
-        HttpResponse response = null;
-        try {
-            response = httpClient.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-
-            if ( entity == null ){
-                ResponseBuilder builder = Response.status(Response.Status.NO_CONTENT);
-                builder.entity("Nothing found in despegar.com");
-                Response error = builder.build();
-
-                throw new WebApplicationException(error);
-            }
-
-            String entityStr = EntityUtils.toString(entity);
-
-            if ( entityStr.contains("exceeded the daily limit") ){
-
-                ResponseBuilder builder = Response.status(Response.Status.FORBIDDEN);
-                builder.entity("Daily limit of requests exceeded");
-                Response error = builder.build();
-
-                throw new WebApplicationException(error);
-            }
-
-            return entityStr;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-            ResponseBuilder builder = Response.status(Response.Status.INTERNAL_SERVER_ERROR);
-            builder.entity("Something went wrong while parsing the response");
-            Response error = builder.build();
-
-            throw new WebApplicationException(error);
-        }
-    }
-
 }
