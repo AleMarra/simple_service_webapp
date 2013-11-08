@@ -82,7 +82,8 @@ public class SecurityServiceTest extends RESTApiTestCase{
 				
 		return Arrays.asList(new Object[][]{
 				{firstRun},
-				{secondRun}
+				{secondRun},
+				{thirdRun}
 			  });
 
 	}
