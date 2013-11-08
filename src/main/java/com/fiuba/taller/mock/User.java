@@ -46,14 +46,15 @@ public class User {
 		return id;
 	}
 	
-	public void setId(int id){
-		this.id=id;
-	}
+    @XmlElement(name = "username")
+    public String getUsername() {
+        return username;
+    }
 
-	@XmlElement(name = "user")
-	public String getUsername() {
-		return username;
-	}
+    @XmlElement(name = "password")
+    public String getPassword() {
+        return password;
+    }
 	
 
 }

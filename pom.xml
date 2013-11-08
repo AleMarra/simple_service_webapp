@@ -18,8 +18,8 @@
                 <version>2.5.1</version>
                 <inherited>true</inherited>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -79,7 +79,6 @@
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 		</dependency>
-            
     </dependencies>
     <properties>
         <jersey.version>2.3.1</jersey.version>

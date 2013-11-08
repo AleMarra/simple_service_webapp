@@ -14,9 +14,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 @Path("/")
@@ -31,35 +29,133 @@ public class SecurityService {
     @POST
     @Path("registeruser")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String registerUser(MultivaluedMap<String, String> formParams) {
-    	return (formParams.toString());
-//    	System.out.println(formParams);
-//        WebTarget resourceWebTarget = webTarget.path("registeruser");
-//        Response response = resourceWebTarget
-//                .request(MediaType.APPLICATION_XML)
-//                .post(Entity.form(formParams));
-//
-//        System.out.println(response.getStatus());
-//        System.out.println(response.readEntity(String.class));
-//        no me sale parsear la puta respuesta
-//        System.out.println(response.readEntity(SecurityResponse.class));
-//        SecurityResponse parsedResponseBody = response.readEntity(SecurityResponse.class);
-//        System.out.println(parsedResponseBody);
-//        System.out.println(parsedResponseBody.isSuccessful());
-//        System.out.println(parsedResponseBody.getReason());
-//        return "{\"API\": \"registerUser working\"}";
+    public Response registerUser(MultivaluedMap<String, String> formParams) {
+        System.out.println(formParams);
+        WebTarget resourceWebTarget = webTarget.path("registeruser");
+        
+        Response response = resourceWebTarget
+				                .request(MediaType.APPLICATION_XML_TYPE)
+				                .post(Entity.form(formParams));
+        
+        response.bufferEntity();
+
+        System.out.println(response.toString());
+        
+        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+
+        System.out.println(securityResponse.toString());
+
+        if(securityResponse.getSuccess()){
+            return Response
+                    .ok()
+                    .build();
+        }else{
+            return Response
+                    .status(response.getStatus())
+                    .entity(securityResponse)
+                    .build();
+        }
     }
 
     @POST
     @Path("login")
-    public String login() {
-        return "{\"API\": \"login working\"}";
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response login(MultivaluedMap<String, String> formParams) {
+        WebTarget resourceWebTarget = webTarget.path("login");
+        Response response = resourceWebTarget
+                .request(MediaType.APPLICATION_XML_TYPE)
+                .post(Entity.form(formParams));
+
+        response.bufferEntity();
+        
+        System.out.println(response.toString());
+        
+        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+        
+        if(securityResponse.getSuccess()){
+	        return Response
+	                .ok()
+	                .cookie(new NewCookie("authToken", securityResponse.getAuthToken()))
+	                .build();
+	    }else{
+	    	return Response
+	                .status(response.getStatus())
+	                .entity(securityResponse)
+	                .build();
+	    }
     }
 
     @POST
     @Path("logout")
-    public String logout() {
-        return "{\"API\": \"logout working\"}";
+    public Response logout(@CookieParam("authToken") String authToken) {
+        System.out.println("@CookieParam: " + authToken);
+        Form form = new Form();
+        form.param("authToken", authToken);
+
+        WebTarget resourceWebTarget = webTarget.path("logout");
+        Response response = resourceWebTarget
+                .request(MediaType.APPLICATION_XML_TYPE)
+                .post(Entity.form(form));
+
+        response.bufferEntity();
+        
+        System.out.println(response.toString());
+        
+        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+        
+        if(securityResponse.getSuccess()){
+	        return Response
+	                .ok()
+	                .header("Set-Cookie",
+                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+	                .build();
+        }else{
+        	return Response
+	                .status(response.getStatus())
+                    .entity(securityResponse)
+	                .build();
+        }
+    }
+
+    @POST
+    @Path("isloggedin")
+    public Response isLoggedIn(@CookieParam("authToken") String authToken) {
+        SecurityResponse securityResponse;
+
+        if (authToken == null) {
+            securityResponse = new SecurityResponse(false, "No token");
+            return Response
+                    .ok()
+                    .entity(securityResponse)
+                    .build();
+        } else {
+            System.out.println("@CookieParam: " + authToken);
+            Form form = new Form();
+            form.param("authToken", authToken);
+
+            WebTarget resourceWebTarget = webTarget.path("isvalidtoken");
+            Response response = resourceWebTarget
+                    .request(MediaType.APPLICATION_XML_TYPE)
+                    .post(Entity.form(form));
+
+            response.bufferEntity();
+
+            System.out.println(response.toString());
+        
+            securityResponse = response.readEntity(SecurityResponse.class);
+
+
+            if(securityResponse.getSuccess()){
+                return Response
+                        .ok()
+                        .build();
+            } else {
+                return Response
+                        .status(response.getStatus())
+                        .entity(securityResponse)
+                        .build();
+            }
+        }
     }
 
     @POST
