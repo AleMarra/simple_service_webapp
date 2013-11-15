@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
+    <groupId>com.fiuba.taller</groupId>
     <artifactId>simple-service-webapp</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -22,6 +22,24 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+            
+             <plugin>
+		        <groupId>org.apache.axis2</groupId>
+		        <artifactId>axis2-java2wsdl-maven-plugin</artifactId>
+		        <version>1.5.4</version>
+		        <executions>
+		          <execution>
+		            <phase>process-classes</phase>
+		            <goals>
+		              <goal>java2wsdl</goal>
+		            </goals>
+		          </execution>
+		        </executions>
+		        <configuration>
+		          <className>com.fiuba.taller.mock_SOAP.SecurityMockSOAP</className>
+		          <outputFileName>${project.build.directory}/SecurityMockSOAP.wsdl</outputFileName>
+		        </configuration>
+		      </plugin>
         </plugins>
     </build>
 
@@ -38,13 +56,19 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
+        <dependency><!-- REST with jersey -->
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>
             <!-- use the following artifactId if you don't need servlet 2.x compatibility -->
             <!-- artifactId>jersey-container-servlet</artifactId -->
         </dependency>
         
+        <dependency>
+	        <groupId>com.sun.jersey</groupId>
+	        <artifactId>jersey-client</artifactId>
+	        <version>1.1.4.1</version>
+	    </dependency>
+               
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-moxy</artifactId>
@@ -74,7 +98,38 @@
             <version>4.3.1</version>
         </dependency>
 
+		 <dependency> <!--  SOAP with AXIS 2 -->
+	      <groupId>javax.servlet</groupId>
+	      <artifactId>servlet-api</artifactId>
+	      <version>2.5</version>
+	      <scope>provided</scope>
+	    </dependency>
+	    
+	    <dependency>
+		  <groupId>org.apache.axis2</groupId>
+		  <artifactId>axis2</artifactId>
+		  <version>1.5.4</version>
+		</dependency>
+		
 		<dependency>
+		  <groupId>org.apache.axis2</groupId>
+		  <artifactId>axis2-transport-http</artifactId>
+		  <version>1.5.4</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.apache.axis2</groupId>
+		  <artifactId>axis2-transport-local</artifactId>
+		  <version>1.5.4</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.apache.xmlbeans</groupId>
+		  <artifactId>xmlbeans</artifactId>
+		  <version>2.4.0</version>
+		</dependency>
+		
+		<dependency><!-- Testing  -->
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>

@@ -1,0 +1,17 @@
+<serviceGroup>
+  <service name="SecurityMockSOAP" targetNamespace="http://webservice.SecurityMockSOAP/">
+    <description>JNLPGenerator service</description>
+    <schema schemaNamespace="http://webservice.SecurityMockSOAP/" />
+    
+    <parameter name="ServiceClass" locked="false">com.fiuba.taller.mock_SOAP.SecurityMockSOAP</parameter>
+    
+    <operation name="ping">
+      <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+    </operation>
+    
+    <operation name="registerUser">
+      <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+    </operation>
+  
+  </service>
+</serviceGroup>
