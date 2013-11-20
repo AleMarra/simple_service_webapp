@@ -1,5 +1,7 @@
-package com.fiuba.taller.service;
+package com.fiuba.taller.service.requests;
 
+import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -54,6 +56,22 @@ public class RegisterUserRequest {
     	
     	
     	return urlEncoded;
+    }
+    
+    public Form toForm(){
+    	
+    	Form dataAsForm = new Form() ;
+    	
+    	dataAsForm = dataAsForm.param("username", username)
+			    			   .param("password", password)
+			    			   .param("nombre", nombre)
+			    			   .param("apellido", apellido)
+			    			   .param("padron", Integer.toString(padron))
+			    			   .param("fechaNac", fechaNac)
+			    			   .param("email", email)
+			    			   .param("rol", Integer.toString(rol));
+    	
+    	return dataAsForm; 
     }
 
 	@XmlElement(name = "username")
