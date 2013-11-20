@@ -19,7 +19,6 @@ import javax.ws.rs.core.MultivaluedMap;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -82,7 +81,8 @@ public class SecurityServiceTest extends RESTApiTestCase{
 				
 		return Arrays.asList(new Object[][]{
 				{firstRun},
-				{secondRun}
+				{secondRun},
+				{thirdRun}
 			  });
 
 	}
