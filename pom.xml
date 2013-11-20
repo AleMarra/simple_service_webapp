@@ -10,7 +10,7 @@
     <name>simple-service-webapp</name>
 
     <build>
-        <finalName>simple-service-webapp</finalName>
+        <finalName>taller-webapp</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
