@@ -50,6 +50,39 @@ public class SecurityService {
                     .build();
         }
     }
+    
+    @POST
+    @Path("registeruserJSON")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response registerUserJSON(RegisterUserRequest request) {
+        System.out.println(request);
+        WebTarget resourceWebTarget = webTarget.path("registeruser");
+        
+//        Response response = resourceWebTarget
+//				                .request(MediaType.APPLICATION_XML_TYPE)
+//				                .post(Entity.form(formParams));
+//        
+//        response.bufferEntity();
+
+//        System.out.println(response.toString());
+        
+//        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+
+        SecurityResponse s = new SecurityResponse(true, request.toString());
+        System.out.println(s.toString());
+
+        if(s.getSuccess()){
+            return Response
+                    .ok()
+                    .entity(s)
+                    .build();
+        }else{
+            return Response
+                    .ok()
+                    .entity(s)
+                    .build();
+        }
+    }
 
     @POST
     @Path("login")
