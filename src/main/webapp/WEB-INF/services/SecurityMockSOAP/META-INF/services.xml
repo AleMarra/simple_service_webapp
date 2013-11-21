@@ -9,7 +9,7 @@
       <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
     </operation>
     
-    <operation name="registerUser">
+    <operation name="registeruser">
       <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
     </operation>
   

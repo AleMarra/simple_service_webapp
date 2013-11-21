@@ -3,14 +3,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.fiuba.taller</groupId>
-    <artifactId>simple-service-webapp</artifactId>
+    <groupId>com.example</groupId>
+    <artifactId>taller-webapp</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>simple-service-webapp</name>
+    <name>taller-webapp</name>
 
     <build>
-        <finalName>simple-service-webapp</finalName>
+        <finalName>taller-webapp</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

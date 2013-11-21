@@ -90,7 +90,8 @@ public class SecurityMock {
         	securityEntity = new SecurityResponse(true, "Token inválida");
 
         }
-        return Response.status(200)
+        return Response
+        		.status(200)
         		.entity(securityEntity)
         		.build();
     }
@@ -112,45 +113,254 @@ public class SecurityMock {
         	securityEntity = new SecurityResponse(false, "Token invalida");
         }
 
-        return Response.status(200)
+        return Response
+        		.status(200)
         		.entity(securityEntity)
         		.build();
     }
 
     @POST
     @Path("activateuser")
-    public String activateUser() {
-        return "[Mock] activateUser working";
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_XML)
+    public Response activateUser(@FormParam("username") String username) {
+    	
+    	boolean status = false;
+    	String reason = "";
+    	
+    	if(username == null){
+    		status = false;
+    		reason = "Parametros Invalidos: username vacio";
+    	}else{
+    		User user = users.getUserByUsername(username);
+    		if(user == null){
+    			status = false;
+        		reason = "Usuario inexistente";
+    		}else{
+    			user.activate();
+    			if(user.isActive()){
+    				status = true;
+            		reason = "Usuario Activado";
+    			}else{
+    				status = false;
+            		reason = "Usuario No Activado";
+    			}
+    		}
+    	}
+    	
+    	SecurityResponse securityEntity = new SecurityResponse(status, reason);
+    	
+    	return Response
+        		.status(200)
+        		.entity(securityEntity)
+        		.build();	
     }
 
     @POST
     @Path("changepassword")
-    public String changePassword() {
-        return "[Mock] changePassword working";
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_XML)
+    public Response changePassword(@FormParam("oldPassword") String oldPassword, @FormParam("newPassword") String newPassword, @FormParam("authToken") String authToken) {
+    	boolean status = false;
+    	String reason = "";
+    	
+    	String username = authenticatedUsers.get(authToken);
+    	User user = users.getUserByUsername(username);
+    	if(user != null){
+    		if(user.getPassword().equals(oldPassword)){
+    			user.changePassword(newPassword);
+    			if(user.getPassword().equals(newPassword)){
+    				status = true;
+        			reason = "Contraseña Actualizada Correctamente";
+    			}else{
+    				status = true;
+        			reason = "Contraseña No Actualizada Correctamente";
+    			}
+    		}else{
+    			status = false;
+    			reason = "Contraseña Incorrecta";
+    		}
+    	}else{
+    		status = false;
+			reason = "Usuario Inexistente";
+    	}
+    	
+    	SecurityResponse securityEntity = new SecurityResponse(status, reason);
+    	
+    	return Response
+        		.status(200)
+        		.entity(securityEntity)
+        		.build();
     }
-
+    
     @POST
     @Path("resetpassword")
-    public String resetPassword() {
-        return "[Mock] resetPassword working";
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_XML)
+    public Response changePassword(@FormParam("userId") String userId, @FormParam("authToken") String authToken) {
+    	boolean status = false;
+    	String reason = "";
+    	
+    	String username = authenticatedUsers.get(authToken);
+    	User loggedUser = users.getUserByUsername(username);
+    	User user; 
+    	
+    	if(userId != null){
+    		int id = Integer.parseInt(userId);
+    		user = users.getUserById(id);
+		}else{
+			user = loggedUser;
+		}
+    	
+    	if(loggedUser != null){
+    		if(loggedUser.canResetPassword()){
+    			if(user != null){
+    				user.resetPassword();
+            		if(user.getPassword().equals("123456")){
+            			status = true;
+                		reason = "Contraseña Reseteada Correctamente";
+            		}else{
+            			status = false;
+                		reason = "Contraseña No Reseteada Correctamente";
+            		}
+    			}else{
+    				status = false;
+            		reason = "Usuario no encontrado";
+    			}
+    		}else{
+    			status = false;
+    			reason = "No tienes permisos para resetear contraseñas.";
+    		}
+    	}else{
+    		status = false;
+			reason = "Usuario Inexistente";
+    	}
+    	
+    	SecurityResponse securityEntity = new SecurityResponse(status, reason);
+    	
+    	return Response
+        		.status(200)
+        		.entity(securityEntity)
+        		.build();
     }
-
+    
     @POST
     @Path("disableaccount")
-    public String disableAccount() {
-        return "[Mock] disableAccount working";
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_XML)
+    public Response disableAccount(@FormParam("userId") String userId, @FormParam("authToken") String authToken) {
+    	boolean status = false;
+    	String reason = "";
+    	
+    	String username = authenticatedUsers.get(authToken);
+    	User loggedUser = users.getUserByUsername(username);
+    	int id = Integer.parseInt(userId);
+		User user = users.getUserById(id);
+		
+		if(loggedUser != null){
+			if(loggedUser.canDisableAccount()){
+				if(user != null){
+					user.disableAccount();
+					if(user.isDisable()){
+						status = true;
+	            		reason = "Usuario deshabilitado correctamente";
+					}else{
+						status = false;
+	            		reason = "Usuario no deshabilitado correctamente";
+					}
+				}else{
+					status = false;
+            		reason = "Usuario no encontrado";
+				}
+			}
+		}else{
+			status = false;
+			reason = "Usuario Inexistente";
+		}
+		
+		SecurityResponse securityEntity = new SecurityResponse(status, reason);
+    	
+    	return Response
+        		.status(200)
+        		.entity(securityEntity)
+        		.build();
     }
 
     @POST
     @Path("enableaccount")
-    public String enableAccount() {
-        return "[Mock] enableAccount working";
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_XML)
+    public Response enableAccount(@FormParam("userId") String userId, @FormParam("authToken") String authToken) {
+    	boolean status = false;
+    	String reason = "";
+    	
+    	String username = authenticatedUsers.get(authToken);
+    	User loggedUser = users.getUserByUsername(username);
+    	int id = Integer.parseInt(userId);
+		User user = users.getUserById(id);
+		
+		if(loggedUser != null){
+			if(loggedUser.canEnableAccount()){
+				if(user != null){
+					user.enableAccount();
+					if(user.isEnable()){
+						status = true;
+	            		reason = "Usuario habilitado correctamente";
+					}else{
+						status = false;
+	            		reason = "Usuario no habilitado correctamente";
+					}
+				}else{
+					status = false;
+            		reason = "Usuario no encontrado";
+				}
+			}
+		}else{
+			status = false;
+			reason = "Usuario Inexistente";
+		}
+		
+		SecurityResponse securityEntity = new SecurityResponse(status, reason);
+    	
+    	return Response
+        		.status(200)
+        		.entity(securityEntity)
+        		.build();
     }
+
 
     @POST
     @Path("enableaccountfromemaill")
-    public String enableAccountFromEmaill() {
-        return "[Mock] enableAccountFromEmaill working";
+    public Response enableAccountFromEmaill(@FormParam("enabledToken") String authToken) {
+    	
+    	boolean status = false;
+    	String reason = "";
+    	
+    	String username = authenticatedUsers.get(authToken);
+    	User loggedUser = users.getUserByUsername(username);
+		
+    	if(loggedUser != null){
+    		if(loggedUser.canEnableAccount()){
+    			loggedUser.enableAccount();
+    			if(loggedUser.isEnable()){
+    				status = true;
+    				reason = "Usuario habilitado correctamente";
+    			}else{
+    				status = false;
+    				reason = "Usuario no habilitado correctamente";
+    			}
+    		}
+    	}else{
+    		status = false;
+    		reason = "Usuario Inexistente";
+    	}
+		
+		SecurityResponse securityEntity = new SecurityResponse(status, reason);
+    	
+    	return Response
+        		.status(200)
+        		.entity(securityEntity)
+        		.build();
     }
 
 }

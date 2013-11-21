@@ -124,6 +124,7 @@
             $('#' + id).remove();
         }, 5000);
     }
+
     /*
      Usage: receives the id of the DOM element whose inner elements defines the request through
      a class name convention:
@@ -141,7 +142,7 @@
      */
     function sendRequest(idType, onSuccess, onError) {
         var $el = $("#" + idType),
-            url = 'api/',
+            url = 'api/securityservice/',
             type = 'GET',
             data = {};
         // DOM $elements
@@ -205,7 +206,7 @@
                 } else {
                     if (data) {
                         if (data.success) {
-                            appendAutodeletableMsg($el, 'Request OK', 'blue');
+                            appendAutodeletableMsg($el, 'Request OK ' + data.reason, 'blue');
                         } else {
                             appendAutodeletableMsg($el, 'Request mal; reason: ' + data.reason, 'red');
                         }
@@ -244,7 +245,7 @@
     function checkSession(){
     	// AJAX request!
         $.ajax({
-            url: 'api/isloggedin',
+            url: 'api/securityservice/isloggedin',
             type: 'POST',
             data: {},
             error: function (jqXHR, textStatus, errorThrown ) {
@@ -312,56 +313,13 @@
 	
 	<hr />
 	
-	<section id="activateUser">
-	    <h2>activateUser test (@todo)</h2>
-	    <div class="activateUser">
-	        <div   class="url" val="activateUser" style="display: hidden;"/>
+	<section id="activateuser">
+	    <h2>activateUser test</h2>
+	    <div class="activateuser">
+	        <div   class="url" val="activateuser" style="display: hidden;"/>
 	        <div   class="type" val="POST" style="display: hidden;"/>
-	        <button onclick="sendRequest('activateUser')">Activate</button>
-	    </div>
-	</section>
-	
-	<hr />
-	
-	<section id="changePassword">
-	    <h2>changePassword test (@todo)</h2>
-	    <div class="changePassword">
-	        <div   class="url" val="changePassword" style="display: hidden;"/>
-	        <div   class="type" val="POST" style="display: hidden;"/>
-	        <button onclick="sendRequest('changePassword')">Change</button>
-	    </div>
-	</section>
-	
-	<hr />
-	
-	<section id="resetPassword">
-	    <h2>resetPassword test (@todo)</h2>
-	    <div class="resetPassword">
-	        <div   class="url" val="resetPassword" style="display: hidden;"/>
-	        <div   class="type" val="POST" style="display: hidden;"/>
-	        <button onclick="sendRequest('resetPassword')">Reset</button>
-	    </div>
-	</section>
-	
-	<hr />
-	
-	<section id="disableAccount">
-	    <h2>disableAccount test (@todo)</h2>
-	    <div class="disableAccount">
-	        <div   class="url" val="disableAccount" style="display: hidden;"/>
-	        <div   class="type" val="POST" style="display: hidden;"/>
-	        <button onclick="sendRequest('disableAccount')">Disable</button>
-	    </div>
-	</section>
-	
-	<hr />
-	
-	<section id="enableAccount">
-	    <h2>enableAccount test (@todo)</h2>
-	    <div class="enableAccount">
-	        <div   class="url" val="enableAccount" style="display: hidden;"/>
-	        <div   class="type" val="POST" style="display: hidden;"/>
-	        <button onclick="sendRequest('enableAccount')">Enable</button>
+	        <label>Usuario:</label> <input class="data" param-name="username" type="text" value="juan" /><br>
+	        <button onclick="sendRequest('activateuser')">Activate</button>
 	    </div>
 	</section>
 	
@@ -380,7 +338,58 @@
 
 <div id="loggedInSection" style='display:none'>
 	<div>Estas loggeado</div>
+	
+	<hr />
+	
+	<section id="changepassword">
+	    <h2>changePassword test</h2>
+	    <div class="changepassword">
+	        <div   class="url" val="changepassword" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <label>Old Password:</label> <input class="data" param-name="oldPassword" type="text" /><br>
+	        <label>New Password:</label> <input class="data" param-name="newPassword" type="text" /><br>
+	        <button onclick="sendRequest('changepassword')">Change</button>
+	    </div>
+	</section>
+	
+	<hr />
+	
+	<section id="resetpassword">
+	    <h2>resetPassword test</h2>
+	    <div class="resetPassword">
+	        <div   class="url" val="resetpassword" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <label>Id Usuario (opcional):</label> <input class="data" param-name="userId" type="text" /><br>
+	        <button onclick="sendRequest('resetpassword')">Reset</button>
+	    </div>
+	</section>
+	
+	<hr />
+	
+	<section id="disableaccount">
+	    <h2>disableAccount test</h2>
+	    <div class="disableAccount">
+	        <div   class="url" val="disableaccount" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <label>Id Usuario:</label> <input class="data" param-name="userId" type="text" /><br>
+	        <button onclick="sendRequest('disableaccount')">Disable</button>
+	    </div>
+	</section>
+	
+	<hr />
+	
+	<section id="enableaccount">
+	    <h2>enableAccount test</h2>
+	    <div class="enableAccount">
+	        <div   class="url" val="enableaccount" style="display: hidden;"/>
+	        <div   class="type" val="POST" style="display: hidden;"/>
+	        <label>Id Usuario:</label> <input class="data" param-name="userId" type="text" /><br>
+	        <button onclick="sendRequest('enableaccount')">Enable</button>
+	    </div>
+	</section>
 
+	<hr />
+	
 	<section id="logout">
 	    <h2>logout test</h2>
 	    <div class="logout">

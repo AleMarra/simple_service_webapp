@@ -2,6 +2,7 @@
 .project
 .settings/
 *.class
+*.jar
 target
 
 # Idea stuff
