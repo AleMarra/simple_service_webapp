@@ -23,23 +23,6 @@
                 </configuration>
             </plugin>
             
-             <plugin>
-		        <groupId>org.apache.axis2</groupId>
-		        <artifactId>axis2-java2wsdl-maven-plugin</artifactId>
-		        <version>1.5.4</version>
-		        <executions>
-		          <execution>
-		            <phase>process-classes</phase>
-		            <goals>
-		              <goal>java2wsdl</goal>
-		            </goals>
-		          </execution>
-		        </executions>
-		        <configuration>
-		          <className>com.fiuba.taller.mock_SOAP.SecurityMockSOAP</className>
-		          <outputFileName>${project.build.directory}/SecurityMockSOAP.wsdl</outputFileName>
-		        </configuration>
-		      </plugin>
         </plugins>
     </build>
     
