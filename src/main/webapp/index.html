@@ -142,7 +142,7 @@
      */
     function sendRequest(idType, onSuccess, onError) {
         var $el = $("#" + idType),
-            url = 'api/',
+            url = 'api/securityservice/',
             type = 'GET',
             data = {};
         // DOM $elements
@@ -245,7 +245,7 @@
     function checkSession(){
     	// AJAX request!
         $.ajax({
-            url: 'api/isloggedin',
+            url: 'api/securityservice/isloggedin',
             type: 'POST',
             data: {},
             error: function (jqXHR, textStatus, errorThrown ) {
