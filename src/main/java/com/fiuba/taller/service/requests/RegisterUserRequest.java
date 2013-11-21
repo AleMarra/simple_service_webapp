@@ -1,5 +1,8 @@
 package com.fiuba.taller.service.requests;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.xml.bind.annotation.XmlElement;
@@ -72,6 +75,22 @@ public class RegisterUserRequest {
 			    			   .param("rol", Integer.toString(rol));
     	
     	return dataAsForm; 
+    }
+    
+    public Map<String, String> toMap(){
+    	
+    	Map<String, String> dataAsMap= new HashMap<String, String>() ;
+    	
+    	dataAsMap.put("username", username);
+    	dataAsMap.put("password", password);
+    	dataAsMap.put("nombre", nombre);
+    	dataAsMap.put("apellido", apellido);
+    	dataAsMap.put("padron", Integer.toString(padron));
+    	dataAsMap.put("fechaNac", fechaNac);
+    	dataAsMap.put("email", email);
+    	dataAsMap.put("rol", Integer.toString(rol));
+    	
+    	return dataAsMap; 
     }
 
 	@XmlElement(name = "username")

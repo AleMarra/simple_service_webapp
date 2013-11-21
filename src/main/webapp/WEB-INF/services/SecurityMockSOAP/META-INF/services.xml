@@ -1,7 +1,7 @@
 <serviceGroup>
-  <service name="SecurityMockSOAP" targetNamespace="http://webservice.SecurityMockSOAP/">
+  <service name="SecurityMockSOAP" targetNamespace=" http://localhost:8080/taller-webapp/services/SecurityMockSOAP/">
     <description>JNLPGenerator service</description>
-    <schema schemaNamespace="http://webservice.SecurityMockSOAP/" />
+    <schema schemaNamespace=" http://localhost:8080/taller-webapp/services/SecurityMockSOAP/" />
     
     <parameter name="ServiceClass" locked="false">com.fiuba.taller.mock_SOAP.SecurityMockSOAP</parameter>
     
@@ -9,7 +9,7 @@
       <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
     </operation>
     
-    <operation name="registeruser">
+    <operation name="registerUser">
       <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
     </operation>
   

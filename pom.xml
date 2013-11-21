@@ -42,6 +42,9 @@
 		      </plugin>
         </plugins>
     </build>
+    
+
+            
 
     <dependencyManagement>
         <dependencies>
@@ -108,19 +111,25 @@
 	    <dependency>
 		  <groupId>org.apache.axis2</groupId>
 		  <artifactId>axis2</artifactId>
-		  <version>1.5.4</version>
+		  <version>1.6.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-kernel</artifactId>
+			<version>1.6.2</version>
 		</dependency>
 		
 		<dependency>
 		  <groupId>org.apache.axis2</groupId>
 		  <artifactId>axis2-transport-http</artifactId>
-		  <version>1.5.4</version>
+		  <version>1.6.2</version>
 		</dependency>
 		
 		<dependency>
 		  <groupId>org.apache.axis2</groupId>
 		  <artifactId>axis2-transport-local</artifactId>
-		  <version>1.5.4</version>
+		  <version>1.6.2</version>
 		</dependency>
 		
 		<dependency>
