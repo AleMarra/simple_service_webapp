@@ -15,7 +15,7 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 public class SecurityService {
 
-    static private String securityApiUrl = "http://localhost:8080/simple-service-webapp/api/mocks";
+    static private String securityApiUrl = "http://localhost:8080/taller-webapp/api/mocks";
     static private Client client = ClientBuilder.newClient();
     static private WebTarget webTarget = client.target(securityApiUrl);
 
@@ -222,6 +222,56 @@ public class SecurityService {
         }
     }
 
+//    @POST
+//    @Path("changepassword")
+//    public Response changePassword(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
+//    	SecurityResponse securityResponse;
+//    	
+//    	if (formParams == null) {
+//            securityResponse = new SecurityResponse(false, "Parametros Invalidos");
+//            return Response
+//                    .ok()
+//                    .entity(securityResponse)
+//                    .build();
+//        } else {
+//        	System.out.println("@CookieParam: " + authToken);
+//            
+//        	Form form = new Form();
+//        	form.param("authToken", authToken);
+//        	
+//        	Iterator it = formParams.entrySet().iterator();
+//            while (it.hasNext()) {
+//                Map.Entry pair = (Map.Entry) it.next();
+//                String key = (String) pair.getKey();
+//                List<String> value = (List<String>) pair.getValue();
+//                form.param(key, value.get(0));
+//            }
+//        	
+//        	WebTarget resourceWebTarget = webTarget.path("changepassword");
+//            Response response = resourceWebTarget
+//                    .request(MediaType.APPLICATION_XML_TYPE)
+//                    .post(Entity.form(form));
+//
+//            response.bufferEntity();
+//
+//            System.out.println(response.toString());
+//        
+//            securityResponse = response.readEntity(SecurityResponse.class);
+//
+//            if(securityResponse.getSuccess()){
+//                return Response
+//                        .ok()
+//                        .entity(securityResponse)
+//                        .build();
+//            } else {
+//                return Response
+//                        .status(response.getStatus())
+//                        .entity(securityResponse)
+//                        .build();
+//            }
+//        }
+//    }
+
     @POST
     @Path("changepassword")
     public Response changePassword(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
@@ -271,6 +321,7 @@ public class SecurityService {
             }
         }
     }
+
     
     @POST
     @Path("resetpassword")
