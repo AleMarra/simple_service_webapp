@@ -331,8 +331,36 @@ public class SecurityMock {
 
     @POST
     @Path("enableaccountfromemaill")
-    public String enableAccountFromEmaill() {
-        return "[Mock] enableAccountFromEmaill working";
+    public Response enableAccountFromEmaill(@FormParam("enabledToken") String authToken) {
+    	
+    	boolean status = false;
+    	String reason = "";
+    	
+    	String username = authenticatedUsers.get(authToken);
+    	User loggedUser = users.getUserByUsername(username);
+		
+    	if(loggedUser != null){
+    		if(loggedUser.canEnableAccount()){
+    			loggedUser.enableAccount();
+    			if(loggedUser.isEnable()){
+    				status = true;
+    				reason = "Usuario habilitado correctamente";
+    			}else{
+    				status = false;
+    				reason = "Usuario no habilitado correctamente";
+    			}
+    		}
+    	}else{
+    		status = false;
+    		reason = "Usuario Inexistente";
+    	}
+		
+		SecurityResponse securityEntity = new SecurityResponse(status, reason);
+    	
+    	return Response
+        		.status(200)
+        		.entity(securityEntity)
+        		.build();
     }
 
 }

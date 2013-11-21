@@ -1,6 +1,7 @@
 package com.fiuba.taller.service;
 
 import com.fiuba.taller.service.requests.LoginRequest;
+import com.fiuba.taller.service.requests.EnableAccountRequest;
 import com.fiuba.taller.service.requests.RegisterUserRequest;
 
 import javax.ws.rs.*;
@@ -14,441 +15,390 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-@Path("/")
+@Path("/securityservice")
 @Produces(MediaType.APPLICATION_JSON)
 public class SecurityService {
 
-    static private String securityApiUrl = "http://localhost:8080/simple-service-webapp/api/mocks";
-    static private Client client = ClientBuilder.newClient();
-    static private WebTarget webTarget = client.target(securityApiUrl);
+	static private String securityApiUrl = "http://localhost:8080/taller-webapp/api/mocks";
+	static private Client client = ClientBuilder.newClient();
+	static private WebTarget webTarget = client.target(securityApiUrl);
 
- 
-    @POST
-    @Path("registeruser")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response registerUser(RegisterUserRequest request) {
-        System.out.println(request);
-        WebTarget resourceWebTarget = webTarget.path("registeruser");
-        
-        Response response = resourceWebTarget
-				                .request(MediaType.APPLICATION_XML_TYPE)
-				                .post(Entity.form(request.toForm()));
-      
-        System.out.println(request.toString());
-        
-        response.bufferEntity();
+	@POST
+	@Path("registeruser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response registerUser(RegisterUserRequest request) {
+		System.out.println(request);
+		WebTarget resourceWebTarget = webTarget.path("registeruser");
 
-        System.out.println(response.toString());
-        
-        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+		Response response = resourceWebTarget.request(
+				MediaType.APPLICATION_XML_TYPE).post(
+				Entity.form(request.toForm()));
 
-        System.out.println(securityResponse.toString());
+		System.out.println(request.toString());
 
-        if(securityResponse.getSuccess()){
-            return Response
-                    .ok()
-                    .entity(securityResponse)
-                    .build();
-        }else{
-            return Response
-                    .status(response.getStatus())
-                    .entity(securityResponse)
-                    .build();
-        }
-    }
+		response.bufferEntity();
 
-    @POST
-    @Path("login")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response login(LoginRequest request) {
-    	
-        WebTarget resourceWebTarget = webTarget.path("login");
-        Response response = resourceWebTarget
-                .request(MediaType.APPLICATION_XML_TYPE)
-                .post(Entity.form(request.toForm()));
+		System.out.println(response.toString());
 
-        System.out.println(request.toString());
-        
-        response.bufferEntity();
-        
-        System.out.println(response.toString());
-        System.out.println(response.readEntity(String.class));
-        
-        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
-        
-        if(securityResponse.getSuccess()){
-	        return Response
-	                .ok()
-	                .cookie(new NewCookie("authToken", securityResponse.getAuthToken()))
-	                .build();
-	    }else{
-	    	return Response
-	                .status(response.getStatus())
-	                .entity(securityResponse)
-	                .build();
-	    }
-    }
+		SecurityResponse securityResponse = response
+				.readEntity(SecurityResponse.class);
 
-    @POST
-    @Path("logout")
-    public Response logout(@CookieParam("authToken") String authToken) {
-        System.out.println("@CookieParam: " + authToken);
-        Form form = new Form();
-        form.param("authToken", authToken);
+		System.out.println(securityResponse.toString());
 
-        WebTarget resourceWebTarget = webTarget.path("logout");
-        Response response = resourceWebTarget
-                .request(MediaType.APPLICATION_XML_TYPE)
-                .post(Entity.form(form));
+		if (securityResponse.getSuccess()) {
+			return Response.ok().entity(securityResponse).build();
+		} else {
+			return Response.status(response.getStatus())
+					.entity(securityResponse).build();
+		}
+	}
 
-        response.bufferEntity();
-        
-        System.out.println(response.toString());
-        
-        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
-        
-        if(securityResponse.getSuccess()){
-	        return Response
-	                .ok()
-	                .header("Set-Cookie",
-                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
-	                .build();
-        }else{
-        	return Response
-	                .status(response.getStatus())
-                    .entity(securityResponse)
-	                .build();
-        }
-    }
+	@POST
+	@Path("login")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response login(LoginRequest request) {
 
-    @POST
-    @Path("isloggedin")
-    public Response isLoggedIn(@CookieParam("authToken") String authToken) {
-        SecurityResponse securityResponse;
+		WebTarget resourceWebTarget = webTarget.path("login");
+		Response response = resourceWebTarget.request(
+				MediaType.APPLICATION_XML_TYPE).post(
+				Entity.form(request.toForm()));
 
-        if (authToken == null) {
-            securityResponse = new SecurityResponse(false, "No token");
-            return Response
-                    .ok()
-                    .entity(securityResponse)
-                    .build();
-        } else {
-            System.out.println("@CookieParam: " + authToken);
-            Form form = new Form();
-            form.param("authToken", authToken);
+		System.out.println(request.toString());
 
-            WebTarget resourceWebTarget = webTarget.path("isvalidtoken");
-            Response response = resourceWebTarget
-                    .request(MediaType.APPLICATION_XML_TYPE)
-                    .post(Entity.form(form));
+		response.bufferEntity();
 
-            response.bufferEntity();
+		System.out.println(response.toString());
+		System.out.println(response.readEntity(String.class));
 
-            System.out.println(response.toString());
-            
-        
-            securityResponse = response.readEntity(SecurityResponse.class);
+		SecurityResponse securityResponse = response
+				.readEntity(SecurityResponse.class);
 
+		if (securityResponse.getSuccess()) {
+			return Response
+					.ok()
+					.cookie(new NewCookie("authToken", securityResponse
+							.getAuthToken())).build();
+		} else {
+			return Response.status(response.getStatus())
+					.entity(securityResponse).build();
+		}
+	}
 
-            if(securityResponse.getSuccess()){
-                return Response
-                        .ok()
-                        .build();
-            } else {
-                return Response
-                        .status(response.getStatus())
-                        .entity(securityResponse)
-                        .build();
-            }
-        }
-    }
+	@POST
+	@Path("logout")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response logout(@CookieParam("authToken") String authToken) {
+		System.out.println("@CookieParam: " + authToken);
+		Form form = new Form();
+		form.param("authToken", authToken);
 
-    @POST
-    @Path("activateuser")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response activateUser(MultivaluedMap<String, String> formParams) {
-    	SecurityResponse securityResponse;
-    	
-    	if (formParams == null) {
-            securityResponse = new SecurityResponse(false, "Parametros Invalidos: username vacio");
-            return Response
-                    .ok()
-                    .entity(securityResponse)
-                    .build();
-        } else {
-        	WebTarget resourceWebTarget = webTarget.path("activateuser");
-            Response response = resourceWebTarget
-                    .request(MediaType.APPLICATION_XML_TYPE)
-                    .post(Entity.form(formParams));
+		WebTarget resourceWebTarget = webTarget.path("logout");
+		Response response = resourceWebTarget.request(
+				MediaType.APPLICATION_XML_TYPE).post(Entity.form(form));
 
-            response.bufferEntity();
+		response.bufferEntity();
 
-            System.out.println(response.toString());
-            System.out.println(response.readEntity(String.class));
-        
-            securityResponse = response.readEntity(SecurityResponse.class);
-//
-//            if(securityResponse.getSuccess()){
-//                return Response
-//                        .ok()
-//                        .entity(securityResponse)
-//                        .build();
-//            } else {
-//                return Response
-//                        .status(response.getStatus())
-//                        .entity(securityResponse)
-//                        .build();
-//            }
-        }
-    	return Response
-              .ok()
-              .entity(new SecurityResponse(false, "Parametros Invalidos: username vacio"))
-              .build();
-    }
+		System.out.println(response.toString());
 
-//    @POST
-//    @Path("activateuser")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response activateUser(LoginRequest request) {
-//    	SecurityResponse securityResponse;
-//    	
-//    	if (request == null) {
-//            securityResponse = new SecurityResponse(false, "Parametros Invalidos: username vacio");
-//            return Response
-//                    .ok()
-//                    .entity(securityResponse)
-//                    .build();
-//        } else {
-//        	WebTarget resourceWebTarget = webTarget.path("activateuser");
-//            Response response = resourceWebTarget
-//                    .request(MediaType.APPLICATION_XML_TYPE)
-//                    .post(Entity.form(request.toForm()));
-//
-//            response.bufferEntity();
-//
-//            System.out.println(request.toString());
-//            
-//            System.out.println(response.toString());
-//        
-//            securityResponse = response.readEntity(SecurityResponse.class);
-//
-//            if(securityResponse.getSuccess()){
-//                return Response
-//                        .ok()
-//                        .entity(securityResponse)
-//                        .build();
-//            } else {
-//                return Response
-//                        .status(response.getStatus())
-//                        .entity(securityResponse)
-//                        .build();
-//            }
-//        }
-//    }
-    
-    @POST
-    @Path("changepassword")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response changePassword(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
-    	SecurityResponse securityResponse;
-    	
-    	if (formParams == null) {
-            securityResponse = new SecurityResponse(false, "Parametros Invalidos");
-            return Response
-                    .ok()
-                    .entity(securityResponse)
-                    .build();
-        } else {
-        	System.out.println("@CookieParam: " + authToken);
-            
-        	Form form = new Form();
-        	form.param("authToken", authToken);
-        	
-        	Iterator it = formParams.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry pair = (Map.Entry) it.next();
-                String key = (String) pair.getKey();
-                List<String> value = (List<String>) pair.getValue();
-                form.param(key, value.get(0));
-            }
-        	
-        	WebTarget resourceWebTarget = webTarget.path("changepassword");
-            Response response = resourceWebTarget
-                    .request(MediaType.APPLICATION_XML_TYPE)
-                    .post(Entity.form(form));
+		SecurityResponse securityResponse = response
+				.readEntity(SecurityResponse.class);
 
-            response.bufferEntity();
+		if (securityResponse.getSuccess()) {
+			return Response
+					.ok()
+					.header("Set-Cookie",
+							"authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+					.build();
+		} else {
+			return Response.status(response.getStatus())
+					.entity(securityResponse).build();
+		}
+	}
 
-            System.out.println(response.toString());
-        
-            securityResponse = response.readEntity(SecurityResponse.class);
+	@POST
+	@Path("isloggedin")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response isLoggedIn(@CookieParam("authToken") String authToken) {
+		SecurityResponse securityResponse;
 
-            if(securityResponse.getSuccess()){
-                return Response
-                        .ok()
-                        .entity(securityResponse)
-                        .build();
-            } else {
-                return Response
-                        .status(response.getStatus())
-                        .entity(securityResponse)
-                        .build();
-            }
-        }
-    }
-    
-    @POST
-    @Path("resetpassword")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response resetPassword(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
-    	SecurityResponse securityResponse;
-    	
-    	System.out.println("@CookieParam: " + authToken);
-            
-        Form form = new Form();
-        form.param("authToken", authToken);
-        	
-        if(formParams != null){
-        	Iterator it = formParams.entrySet().iterator();
-            while (it.hasNext()) {
-            	Map.Entry pair = (Map.Entry) it.next();
-                String key = (String) pair.getKey();
-                List<String> value = (List<String>) pair.getValue();
-                form.param(key, value.get(0));
-            }
-        }
-        	
-        WebTarget resourceWebTarget = webTarget.path("resetpassword");
-        Response response = resourceWebTarget
-                .request(MediaType.APPLICATION_XML_TYPE)
-                .post(Entity.form(form));
+		if (authToken == null) {
+			securityResponse = new SecurityResponse(false, "No token");
+			return Response.ok().entity(securityResponse).build();
+		} else {
+			System.out.println("@CookieParam: " + authToken);
+			Form form = new Form();
+			form.param("authToken", authToken);
 
-        response.bufferEntity();
+			WebTarget resourceWebTarget = webTarget.path("isvalidtoken");
+			Response response = resourceWebTarget.request(
+					MediaType.APPLICATION_XML_TYPE).post(Entity.form(form));
 
-        System.out.println(response.toString());
-        
-        securityResponse = response.readEntity(SecurityResponse.class);
+			response.bufferEntity();
 
-        if(securityResponse.getSuccess()){
-        	return Response
-        			.ok()
-                    .entity(securityResponse)
-                    .build();
-        } else {
-        	return Response
-        			.status(response.getStatus())
-                    .entity(securityResponse)
-                    .build();
-        }
-    }
+			System.out.println(response.toString());
 
+			securityResponse = response.readEntity(SecurityResponse.class);
 
-    @POST
-    @Path("disableaccount")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response disableAccount(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
-    	SecurityResponse securityResponse;
-    	
-    	if (formParams == null) {
-            securityResponse = new SecurityResponse(false, "Parametros Invalidos");
-            return Response
-                    .ok()
-                    .entity(securityResponse)
-                    .build();
-        } else {
-        	System.out.println("@CookieParam: " + authToken);
-            
-        	Form form = new Form();
-        	form.param("authToken", authToken);
-        	
-        	Iterator it = formParams.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry pair = (Map.Entry) it.next();
-                String key = (String) pair.getKey();
-                List<String> value = (List<String>) pair.getValue();
-                form.param(key, value.get(0));
-            }
-        	
-        	WebTarget resourceWebTarget = webTarget.path("disableaccount");
-            Response response = resourceWebTarget
-                    .request(MediaType.APPLICATION_XML_TYPE)
-                    .post(Entity.form(form));
+			if (securityResponse.getSuccess()) {
+				return Response.ok().build();
+			} else {
+				return Response.status(response.getStatus())
+						.entity(securityResponse).build();
+			}
+		}
+	}
 
-            response.bufferEntity();
+	// @POST
+	// @Path("activateuser")
+	// @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	// public Response activateUser(MultivaluedMap<String, String> formParams) {
+	// SecurityResponse securityResponse;
+	//
+	// if (formParams == null) {
+	// securityResponse = new SecurityResponse(false,
+	// "Parametros Invalidos: username vacio");
+	// return Response
+	// .ok()
+	// .entity(securityResponse)
+	// .build();
+	// } else {
+	// WebTarget resourceWebTarget = webTarget.path("activateuser");
+	// Response response = resourceWebTarget
+	// .request(MediaType.APPLICATION_XML_TYPE)
+	// .post(Entity.form(formParams));
+	//
+	// response.bufferEntity();
+	//
+	// System.out.println(response.toString());
+	// System.out.println(response.readEntity(String.class));
+	//
+	// securityResponse = response.readEntity(SecurityResponse.class);
+	//
+	// if(securityResponse.getSuccess()){
+	// return Response
+	// .ok()
+	// .entity(securityResponse)
+	// .build();
+	// } else {
+	// return Response
+	// .status(response.getStatus())
+	// .entity(securityResponse)
+	// .build();
+	// }
+	// }
+	// }
 
-            System.out.println(response.toString());
-        
-            securityResponse = response.readEntity(SecurityResponse.class);
+	@POST
+	@Path("activateuser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response activateUser(LoginRequest request) {
+		SecurityResponse securityResponse;
 
-            if(securityResponse.getSuccess()){
-                return Response
-                        .ok()
-                        .entity(securityResponse)
-                        .build();
-            } else {
-                return Response
-                        .status(response.getStatus())
-                        .entity(securityResponse)
-                        .build();
-            }
-        }
-    }
+		if (request.getUsername() == "") {
+			securityResponse = new SecurityResponse(false,
+					"Parametros Invalidos: username vacio");
+			return Response.ok().entity(securityResponse).build();
+		} else {
+			WebTarget resourceWebTarget = webTarget.path("activateuser");
+			Response response = resourceWebTarget.request(
+					MediaType.APPLICATION_XML_TYPE).post(
+					Entity.form(request.toForm()));
 
-    @POST
-    @Path("enableaccount")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response enableAccount(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
-    	SecurityResponse securityResponse;
-    	
-    	if (formParams == null) {
-            securityResponse = new SecurityResponse(false, "Parametros Invalidos");
-            return Response
-                    .ok()
-                    .entity(securityResponse)
-                    .build();
-        } else {
-        	System.out.println("@CookieParam: " + authToken);
-            
-        	Form form = new Form();
-        	form.param("authToken", authToken);
-        	
-        	Iterator it = formParams.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry pair = (Map.Entry) it.next();
-                String key = (String) pair.getKey();
-                List<String> value = (List<String>) pair.getValue();
-                form.param(key, value.get(0));
-            }
-        	
-        	WebTarget resourceWebTarget = webTarget.path("enableaccount");
-            Response response = resourceWebTarget
-                    .request(MediaType.APPLICATION_XML_TYPE)
-                    .post(Entity.form(form));
+			response.bufferEntity();
 
-            response.bufferEntity();
+			System.out.println(response.toString());
+			System.out.println(response.readEntity(String.class));
 
-            System.out.println(response.toString());
-        
-            securityResponse = response.readEntity(SecurityResponse.class);
+			securityResponse = response.readEntity(SecurityResponse.class);
 
-            if(securityResponse.getSuccess()){
-                return Response
-                        .ok()
-                        .entity(securityResponse)
-                        .build();
-            } else {
-                return Response
-                        .status(response.getStatus())
-                        .entity(securityResponse)
-                        .build();
-            }
-        }
-    }
+			if (securityResponse.getSuccess()) {
+				return Response.ok().entity(securityResponse).build();
+			} else {
+				return Response.status(response.getStatus())
+						.entity(securityResponse).build();
+			}
+		}
+	}
 
+	@POST
+	@Path("changepassword")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response changePassword(EnableAccountRequest request,
+			@CookieParam("authToken") String authToken) {
+		SecurityResponse securityResponse;
 
-    @POST
-    @Path("enableaccountfromemaill")
-    public String enableAccountFromEmaill() {
-        return "{\"API\": \"enableAccountFromEmaill working\"}";
-    }
+		if (request.getOldPassword() == "" || request.getOldPassword() == "") {
+			securityResponse = new SecurityResponse(false,
+					"Parametros Invalidos");
+			return Response.ok().entity(securityResponse).build();
+		} else {
+			System.out.println("@CookieParam: " + authToken);
+
+			Form form = request.toForm();
+			form.param("authToken", authToken);
+
+			WebTarget resourceWebTarget = webTarget.path("changepassword");
+			Response response = resourceWebTarget.request(
+					MediaType.APPLICATION_XML_TYPE).post(Entity.form(form));
+
+			response.bufferEntity();
+
+			System.out.println(response.toString());
+
+			securityResponse = response.readEntity(SecurityResponse.class);
+
+			if (securityResponse.getSuccess()) {
+				return Response.ok().entity(securityResponse).build();
+			} else {
+				return Response.status(response.getStatus())
+						.entity(securityResponse).build();
+			}
+		}
+	}
+
+	@POST
+	@Path("resetpassword")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response resetPassword(LoginRequest request,
+			@CookieParam("authToken") String authToken) {
+		SecurityResponse securityResponse;
+
+		System.out.println("@CookieParam: " + authToken);
+
+		if (request.getUsername() == "") {
+			securityResponse = new SecurityResponse(false,
+					"Parametros Invalidos: username vacio");
+			return Response.ok().entity(securityResponse).build();
+		} else {
+
+			Form form = request.toForm();
+			form.param("authToken", authToken);
+
+			WebTarget resourceWebTarget = webTarget.path("resetpassword");
+			Response response = resourceWebTarget.request(
+					MediaType.APPLICATION_XML_TYPE).post(Entity.form(form));
+
+			response.bufferEntity();
+
+			System.out.println(response.toString());
+
+			securityResponse = response.readEntity(SecurityResponse.class);
+
+			if (securityResponse.getSuccess()) {
+				return Response.ok().entity(securityResponse).build();
+			} else {
+				return Response.status(response.getStatus())
+						.entity(securityResponse).build();
+			}
+		}
+	}
+
+	@POST
+	@Path("disableaccount")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response disableAccount(LoginRequest request,
+			@CookieParam("authToken") String authToken) 
+	{
+		SecurityResponse securityResponse;
+
+		if (request.getUsername() == "") {
+			securityResponse = new SecurityResponse(false,
+					"Parametros Invalidos: username vacio");
+			return Response.ok().entity(securityResponse).build();
+		} else {
+			System.out.println("@CookieParam: " + authToken);
+
+			Form form = request.toForm();
+			form.param("authToken", authToken);
+
+			WebTarget resourceWebTarget = webTarget.path("disableaccount");
+			Response response = resourceWebTarget.request(
+					MediaType.APPLICATION_XML_TYPE).post(Entity.form(form));
+
+			response.bufferEntity();
+
+			System.out.println(response.toString());
+
+			securityResponse = response.readEntity(SecurityResponse.class);
+
+			if (securityResponse.getSuccess()) {
+				return Response.ok().entity(securityResponse).build();
+			} else {
+				return Response.status(response.getStatus())
+						.entity(securityResponse).build();
+			}
+		}
+	}
+
+	@POST
+	@Path("enableaccount")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response enableAccount(EnableAccountRequest request,
+			@CookieParam("authToken") String authToken) 
+	{
+		SecurityResponse securityResponse;
+
+		if (request.getUsername() == "") {
+			securityResponse = new SecurityResponse(false,
+					"Parametros Invalidos: username vacio");
+			return Response.ok().entity(securityResponse).build();
+		} else {
+
+			System.out.println("@CookieParam: " + authToken);
+
+			Form form = request.toForm();
+			form.param("authToken", authToken);
+
+			WebTarget resourceWebTarget = webTarget.path("enableaccount");
+			Response response = resourceWebTarget.request(
+					MediaType.APPLICATION_XML_TYPE).post(Entity.form(form));
+
+			response.bufferEntity();
+
+			System.out.println(response.toString());
+
+			securityResponse = response.readEntity(SecurityResponse.class);
+
+			if (securityResponse.getSuccess()) {
+				return Response.ok().entity(securityResponse).build();
+			} else {
+				return Response.status(response.getStatus())
+						.entity(securityResponse).build();
+			}
+		}
+	}
+
+	@POST
+	@Path("enableaccountfromemaill")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response enableAccountFromEmaill(EnableAccountRequest request) {
+		
+		SecurityResponse securityResponse;
+
+		if (request.getEnabledToken() == "") {
+			securityResponse = new SecurityResponse(false,
+					"Parametros Invalidos: token vacio");
+			return Response.ok().entity(securityResponse).build();
+		} else {
+
+			Form form = request.toForm();
+
+			WebTarget resourceWebTarget = webTarget.path("enableaccountfromemail");
+			Response response = resourceWebTarget.request(
+					MediaType.APPLICATION_XML_TYPE).post(Entity.form(form));
+
+			response.bufferEntity();
+
+			System.out.println(response.toString());
+
+			securityResponse = response.readEntity(SecurityResponse.class);
+
+			if (securityResponse.getSuccess()) {
+				return Response.ok().entity(securityResponse).build();
+			} else {
+				return Response.status(response.getStatus())
+						.entity(securityResponse).build();
+			}
+		}
+	}
 }
