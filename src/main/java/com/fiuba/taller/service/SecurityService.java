@@ -1,27 +1,21 @@
 package com.fiuba.taller.service;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-
-import java.io.IOException;
-
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.*;
-import javax.ws.rs.core.Response.ResponseBuilder;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public class SecurityService {
 
-    static private String securityApiUrl = "http://localhost:8080/simple-service-webapp/api/mocks/";
+    static private String securityApiUrl = "http://localhost:8080/taller-webapp/api/mocks";
     static private Client client = ClientBuilder.newClient();
     static private WebTarget webTarget = client.target(securityApiUrl);
 
@@ -53,6 +47,39 @@ public class SecurityService {
             return Response
                     .status(response.getStatus())
                     .entity(securityResponse)
+                    .build();
+        }
+    }
+    
+    @POST
+    @Path("registeruserJSON")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response registerUserJSON(RegisterUserRequest request) {
+        System.out.println(request);
+        WebTarget resourceWebTarget = webTarget.path("registeruser");
+        
+//        Response response = resourceWebTarget
+//				                .request(MediaType.APPLICATION_XML_TYPE)
+//				                .post(Entity.form(formParams));
+//        
+//        response.bufferEntity();
+
+//        System.out.println(response.toString());
+        
+//        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+
+        SecurityResponse s = new SecurityResponse(true, request.toString());
+        System.out.println(s.toString());
+
+        if(s.getSuccess()){
+            return Response
+                    .ok()
+                    .entity(s)
+                    .build();
+        }else{
+            return Response
+                    .ok()
+                    .entity(s)
                     .build();
         }
     }
@@ -160,82 +187,291 @@ public class SecurityService {
 
     @POST
     @Path("activateuser")
-    public String activateUser() {
-        return "{\"API\": \"activateUser working\"}";
+    public Response activateUser(MultivaluedMap<String, String> formParams) {
+    	SecurityResponse securityResponse;
+    	
+    	if (formParams == null) {
+            securityResponse = new SecurityResponse(false, "Parametros Invalidos: username vacio");
+            return Response
+                    .ok()
+                    .entity(securityResponse)
+                    .build();
+        } else {
+        	WebTarget resourceWebTarget = webTarget.path("activateuser");
+            Response response = resourceWebTarget
+                    .request(MediaType.APPLICATION_XML_TYPE)
+                    .post(Entity.form(formParams));
+
+            response.bufferEntity();
+
+            System.out.println(response.toString());
+        
+            securityResponse = response.readEntity(SecurityResponse.class);
+
+            if(securityResponse.getSuccess()){
+                return Response
+                        .ok()
+                        .entity(securityResponse)
+                        .build();
+            } else {
+                return Response
+                        .status(response.getStatus())
+                        .entity(securityResponse)
+                        .build();
+            }
+        }
     }
+
+//    @POST
+//    @Path("changepassword")
+//    public Response changePassword(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
+//    	SecurityResponse securityResponse;
+//    	
+//    	if (formParams == null) {
+//            securityResponse = new SecurityResponse(false, "Parametros Invalidos");
+//            return Response
+//                    .ok()
+//                    .entity(securityResponse)
+//                    .build();
+//        } else {
+//        	System.out.println("@CookieParam: " + authToken);
+//            
+//        	Form form = new Form();
+//        	form.param("authToken", authToken);
+//        	
+//        	Iterator it = formParams.entrySet().iterator();
+//            while (it.hasNext()) {
+//                Map.Entry pair = (Map.Entry) it.next();
+//                String key = (String) pair.getKey();
+//                List<String> value = (List<String>) pair.getValue();
+//                form.param(key, value.get(0));
+//            }
+//        	
+//        	WebTarget resourceWebTarget = webTarget.path("changepassword");
+//            Response response = resourceWebTarget
+//                    .request(MediaType.APPLICATION_XML_TYPE)
+//                    .post(Entity.form(form));
+//
+//            response.bufferEntity();
+//
+//            System.out.println(response.toString());
+//        
+//            securityResponse = response.readEntity(SecurityResponse.class);
+//
+//            if(securityResponse.getSuccess()){
+//                return Response
+//                        .ok()
+//                        .entity(securityResponse)
+//                        .build();
+//            } else {
+//                return Response
+//                        .status(response.getStatus())
+//                        .entity(securityResponse)
+//                        .build();
+//            }
+//        }
+//    }
 
     @POST
     @Path("changepassword")
-    public String changePassword() {
-        return "{\"API\": \"changePassword working\"}";
+    public Response changePassword(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
+    	SecurityResponse securityResponse;
+    	
+    	if (formParams == null) {
+            securityResponse = new SecurityResponse(false, "Parametros Invalidos");
+            return Response
+                    .ok()
+                    .entity(securityResponse)
+                    .build();
+        } else {
+        	System.out.println("@CookieParam: " + authToken);
+            
+        	Form form = new Form();
+        	form.param("authToken", authToken);
+        	
+        	Iterator it = formParams.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+                String key = (String) pair.getKey();
+                List<String> value = (List<String>) pair.getValue();
+                form.param(key, value.get(0));
+            }
+        	
+        	WebTarget resourceWebTarget = webTarget.path("changepassword");
+            Response response = resourceWebTarget
+                    .request(MediaType.APPLICATION_XML_TYPE)
+                    .post(Entity.form(form));
+
+            response.bufferEntity();
+
+            System.out.println(response.toString());
+        
+            securityResponse = response.readEntity(SecurityResponse.class);
+
+            if(securityResponse.getSuccess()){
+                return Response
+                        .ok()
+                        .entity(securityResponse)
+                        .build();
+            } else {
+                return Response
+                        .status(response.getStatus())
+                        .entity(securityResponse)
+                        .build();
+            }
+        }
     }
 
+    
     @POST
     @Path("resetpassword")
-    public String resetPassword() {
-        return "{\"API\": \"resetpassword working\"}";
+    public Response resetPassword(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
+    	SecurityResponse securityResponse;
+    	
+    	System.out.println("@CookieParam: " + authToken);
+            
+        Form form = new Form();
+        form.param("authToken", authToken);
+        	
+        if(formParams != null){
+        	Iterator it = formParams.entrySet().iterator();
+            while (it.hasNext()) {
+            	Map.Entry pair = (Map.Entry) it.next();
+                String key = (String) pair.getKey();
+                List<String> value = (List<String>) pair.getValue();
+                form.param(key, value.get(0));
+            }
+        }
+        	
+        WebTarget resourceWebTarget = webTarget.path("resetpassword");
+        Response response = resourceWebTarget
+                .request(MediaType.APPLICATION_XML_TYPE)
+                .post(Entity.form(form));
+
+        response.bufferEntity();
+
+        System.out.println(response.toString());
+        
+        securityResponse = response.readEntity(SecurityResponse.class);
+
+        if(securityResponse.getSuccess()){
+        	return Response
+        			.ok()
+                    .entity(securityResponse)
+                    .build();
+        } else {
+        	return Response
+        			.status(response.getStatus())
+                    .entity(securityResponse)
+                    .build();
+        }
     }
+
 
     @POST
     @Path("disableaccount")
-    public String disableAccount() {
-        return "{\"API\": \"disableAccount working\"}";
+    public Response disableAccount(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
+    	SecurityResponse securityResponse;
+    	
+    	if (formParams == null) {
+            securityResponse = new SecurityResponse(false, "Parametros Invalidos");
+            return Response
+                    .ok()
+                    .entity(securityResponse)
+                    .build();
+        } else {
+        	System.out.println("@CookieParam: " + authToken);
+            
+        	Form form = new Form();
+        	form.param("authToken", authToken);
+        	
+        	Iterator it = formParams.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+                String key = (String) pair.getKey();
+                List<String> value = (List<String>) pair.getValue();
+                form.param(key, value.get(0));
+            }
+        	
+        	WebTarget resourceWebTarget = webTarget.path("disableaccount");
+            Response response = resourceWebTarget
+                    .request(MediaType.APPLICATION_XML_TYPE)
+                    .post(Entity.form(form));
+
+            response.bufferEntity();
+
+            System.out.println(response.toString());
+        
+            securityResponse = response.readEntity(SecurityResponse.class);
+
+            if(securityResponse.getSuccess()){
+                return Response
+                        .ok()
+                        .entity(securityResponse)
+                        .build();
+            } else {
+                return Response
+                        .status(response.getStatus())
+                        .entity(securityResponse)
+                        .build();
+            }
+        }
     }
 
     @POST
     @Path("enableaccount")
-    public String enableAccount() {
-        return "{\"API\": \"enableAccount working\"}";
+    public Response enableAccount(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
+    	SecurityResponse securityResponse;
+    	
+    	if (formParams == null) {
+            securityResponse = new SecurityResponse(false, "Parametros Invalidos");
+            return Response
+                    .ok()
+                    .entity(securityResponse)
+                    .build();
+        } else {
+        	System.out.println("@CookieParam: " + authToken);
+            
+        	Form form = new Form();
+        	form.param("authToken", authToken);
+        	
+        	Iterator it = formParams.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+                String key = (String) pair.getKey();
+                List<String> value = (List<String>) pair.getValue();
+                form.param(key, value.get(0));
+            }
+        	
+        	WebTarget resourceWebTarget = webTarget.path("enableaccount");
+            Response response = resourceWebTarget
+                    .request(MediaType.APPLICATION_XML_TYPE)
+                    .post(Entity.form(form));
+
+            response.bufferEntity();
+
+            System.out.println(response.toString());
+        
+            securityResponse = response.readEntity(SecurityResponse.class);
+
+            if(securityResponse.getSuccess()){
+                return Response
+                        .ok()
+                        .entity(securityResponse)
+                        .build();
+            } else {
+                return Response
+                        .status(response.getStatus())
+                        .entity(securityResponse)
+                        .build();
+            }
+        }
     }
+
 
     @POST
     @Path("enableaccountfromemaill")
     public String enableAccountFromEmaill() {
         return "{\"API\": \"enableAccountFromEmaill working\"}";
     }
-
-
-    @GET
-    @Path("testRedirect")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String callWs() {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("http://api.despegar.com/cities/tripplanning?includecity=true");
-        HttpResponse response = null;
-        try {
-            response = httpClient.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-
-            if ( entity == null ){
-                ResponseBuilder builder = Response.status(Response.Status.NO_CONTENT);
-                builder.entity("Nothing found in despegar.com");
-                Response error = builder.build();
-
-                throw new WebApplicationException(error);
-            }
-
-            String entityStr = EntityUtils.toString(entity);
-
-            if ( entityStr.contains("exceeded the daily limit") ){
-
-                ResponseBuilder builder = Response.status(Response.Status.FORBIDDEN);
-                builder.entity("Daily limit of requests exceeded");
-                Response error = builder.build();
-
-                throw new WebApplicationException(error);
-            }
-
-            return entityStr;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-            ResponseBuilder builder = Response.status(Response.Status.INTERNAL_SERVER_ERROR);
-            builder.entity("Something went wrong while parsing the response");
-            Response error = builder.build();
-
-            throw new WebApplicationException(error);
-        }
-    }
-
 }
