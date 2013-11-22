@@ -23,7 +23,7 @@ public class EnableAccountRequest {
         String k = keyValSeparator;
         String p = propSeparator;
 
-        result += "userId" + k + userId + p;
+        result += "userId" + k + userId;
 
         return result;
     }

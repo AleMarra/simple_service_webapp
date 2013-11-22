@@ -23,7 +23,7 @@ public class ActivateUserRequest {
         String k = keyValSeparator;
         String p = propSeparator;
 
-        result += "username" + k + username + p;
+        result += "username" + k + username;
 
         return result;
     }

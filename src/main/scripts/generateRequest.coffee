@@ -47,8 +47,9 @@ for attr, type of payload
                            }
 
                        """
-# Removes last of ", \n"
-constructorParams = constructorParams.replace /, $/, ''
+constructorParams = constructorParams.replace /, $/, ''  # Removes last of ", "
+toReadableBody = toReadableBody.replace /" + p;\n$"/, ';\n'  # Removes last of " + p"
+
 
 outputFilename = "../java/com/fiuba/taller/service/request/#{ className }.java"
 output = """

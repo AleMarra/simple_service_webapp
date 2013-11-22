@@ -26,7 +26,7 @@ public class ChangePasswordRequest {
         String p = propSeparator;
 
         result += "oldPassword" + k + oldPassword + p;
-        result += "newPassword" + k + newPassword + p;
+        result += "newPassword" + k + newPassword;
 
         return result;
     }

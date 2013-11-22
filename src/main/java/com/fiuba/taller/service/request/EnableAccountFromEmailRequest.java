@@ -23,7 +23,7 @@ public class EnableAccountFromEmailRequest {
         String k = keyValSeparator;
         String p = propSeparator;
 
-        result += "enabledToken" + k + enabledToken + p;
+        result += "enabledToken" + k + enabledToken;
 
         return result;
     }

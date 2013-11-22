@@ -26,7 +26,7 @@ public class LoginRequest {
         String p = propSeparator;
 
         result += "username" + k + username + p;
-        result += "password" + k + password + p;
+        result += "password" + k + password;
 
         return result;
     }
