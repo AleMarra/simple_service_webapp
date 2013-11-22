@@ -1,4 +1,4 @@
-package com.fiuba.taller.service;
+package com.fiuba.taller.service.request;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
