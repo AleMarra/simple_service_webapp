@@ -4,6 +4,7 @@
 *.class
 *.jar
 target
+node_modules/
 
 # Idea stuff
 .idea
