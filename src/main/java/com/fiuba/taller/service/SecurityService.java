@@ -21,7 +21,7 @@ public class SecurityService {
 
 
     @POST
-    @Path("registeruser")
+    @Path("registeruser_deprecated")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response registerUser(MultivaluedMap<String, String> formParams) {
         System.out.println(formParams);
@@ -52,7 +52,7 @@ public class SecurityService {
     }
     
     @POST
-    @Path("registeruserJSON")
+    @Path("registeruser")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerUserJSON(RegisterUserRequest request) {
         System.out.println(request);
