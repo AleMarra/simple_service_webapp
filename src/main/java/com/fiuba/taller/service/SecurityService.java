@@ -1,5 +1,7 @@
 package com.fiuba.taller.service;
 
+import com.fiuba.taller.service.request.RegisterUserRequest;
+
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -55,7 +57,7 @@ public class SecurityService {
     @Path("registeruser")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerUserJSON(RegisterUserRequest request) {
-        System.out.println(request);
+        System.out.println(request.toJSON());
         WebTarget resourceWebTarget = webTarget.path("registeruser");
         
 //        Response response = resourceWebTarget
