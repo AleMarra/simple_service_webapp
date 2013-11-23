@@ -12,3 +12,4 @@ target
 # Build script feo
 build.sh
 deployAssets.sh
+noTest.sh
