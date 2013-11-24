@@ -4,6 +4,7 @@
 *.class
 *.jar
 target
+node_modules
 
 # Idea stuff
 .idea
@@ -12,3 +13,4 @@ target
 # Build script feo
 build.sh
 deployAssets.sh
+noTest.sh
