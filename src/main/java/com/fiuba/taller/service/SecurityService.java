@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 
 import com.fiuba.taller.service.requests.EnableAccountRequest;
 import com.fiuba.taller.service.requests.LoginRequest;
-import com.fiuba.taller.service.requests.PasswordChangeRequest;
+import com.fiuba.taller.service.requests.ChangePasswordRequest;
 import com.fiuba.taller.service.requests.RegisterUserRequest;
 import javax.ws.rs.*;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -281,7 +281,7 @@ public class SecurityService {
 	@POST
 	@Path("changepassword")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response changePassword(PasswordChangeRequest request,@CookieParam("authToken") String authToken) 
+	public Response changePassword(ChangePasswordRequest request,@CookieParam("authToken") String authToken)
 			throws ParserConfigurationException, SAXException, IOException
 	{
 		System.out.println(request);
