@@ -23,11 +23,15 @@ capitalize = (str) -> str.charAt(0).toUpperCase() + str.slice(1);
 
 capitalToHyphen = (str) -> str.replace(/[A-Z]/g, (char) -> "-#{char.toLowerCase()}")
 
+javaToString = (attr, type) -> if type is "String" then "#{ attr }" else "#{ type }.toString(#{ attr })"
+
 className         = "#{ capitalize requestName }Request"
 classAttributes   = ""
 constructorParams = ""
 constructorBody   = ""
 toReadableBody    = ""
+toFormBody        = ""
+toMapBody         = ""
 gettersAndSetters = ""
 
 for attr, type of payload
@@ -35,6 +39,8 @@ for attr, type of payload
   constructorParams += "#{type} #{attr}, "
   constructorBody   += "        this.set#{ capitalize attr }(#{ attr });\n"
   toReadableBody    += "        result += \"#{ attr }\" + k + #{ attr } + p;\n"
+  toFormBody        += "        dataAsForm.param(\"#{ attr }\", #{ javaToString attr, type });\n"
+  toMapBody         += "        dataAsMap.put(\"#{ attr }\", #{ javaToString attr, type });\n"
   gettersAndSetters += """
 
                        \t@XmlElement(name = "#{ attr }")
@@ -54,6 +60,11 @@ toReadableBody = toReadableBody.replace /" + p;\n$"/, ';\n'  # Removes last of "
 outputFilename = "../java/com/fiuba/taller/service/requests/#{ className }.java"
 output = """
         package com.fiuba.taller.service.requests;
+
+        import java.util.HashMap;
+        import java.util.Map;
+
+        import javax.ws.rs.core.Form;
 
         import javax.xml.bind.annotation.XmlElement;
         import javax.xml.bind.annotation.XmlRootElement;
@@ -87,6 +98,20 @@ output = """
 
             public String toJSON(){
                 return "{" + toReadable(": ", ", ") + "}";
+            }
+
+            public Form toForm(){
+                Form dataAsForm = new Form();
+
+        #{ toFormBody }
+                return dataAsForm;
+            }
+
+            public Map<String, String> toMap(){
+                Map<String, String> dataAsMap = new HashMap<String, String>();
+
+        #{ toMapBody }
+                return dataAsMap;
             }
 
         #{ gettersAndSetters }
