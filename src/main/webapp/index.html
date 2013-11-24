@@ -134,7 +134,7 @@
      query-string: optional parameters of the request. Also, a 'param-name' attribute at the element is needed
      data: body of the request. 'param-name' attribute at the element is needed
 
-     url-param, query-string and data elements should be inputs or have a val attribute. TODO: take it from id param
+     url-param, query-string and data elements should be inputs or have a val attribute.
      onSuccess: callback to be called on request success
      onError: callback to be called on request error
 
@@ -189,8 +189,7 @@
         $.ajax({
             url: url,
             type: type,
-            data: JSON.stringify(data),
-            contentType: 'application/json',
+            data: data,
             error: function (jqXHR, textStatus, errorThrown ) {
                 if (typeof onError === "function") {
                     onError.apply(this, arguments);
@@ -248,6 +247,7 @@
         $.ajax({
             url: 'api/isloggedin',
             type: 'POST',
+            data: {},
             error: function (jqXHR, textStatus, errorThrown ) {
                 onSuccessfulLogout();
                 
@@ -293,13 +293,13 @@
 	        <label>FechaNac:</label>   <input class="data" param-name="fechaNac" type="date" /><br>
 	        <label>Email:</label>      <input class="data" param-name="email" type="text" /><br>
 	        <label>Rol:</label>        <input class="data" param-name="rol" type="number" /><br>
-
+	
 	        <button onclick="sendRequest('registeruser')">Register</button>
 	    </div>
 	</section>
-
+	
 	<hr />
-
+	
 	<section id="login">
 	    <h2>login test</h2>
 	    <div class="login">
@@ -310,9 +310,9 @@
 	        <button onclick="sendRequest('login', onSuccessfulLogin)">Login</button>
 	    </div>
 	</section>
-
+	
 	<hr />
-
+	
 	<section id="activateuser">
 	    <h2>activateUser test</h2>
 	    <div class="activateuser">
@@ -322,15 +322,15 @@
 	        <button onclick="sendRequest('activateuser')">Activate</button>
 	    </div>
 	</section>
-
+	
 	<hr />
-
-	<section id="enableaccountfromemail">
+	
+	<section id="enableAccountFromEmaill">
 	    <h2>enableAccountFromEmail test (@todo)</h2>
 	    <div class="enableAccountFromEmaill">
-	        <div   class="url" val="enableaccountfromemail" style="display: hidden;"/>
+	        <div   class="url" val="enableAccountFromEmaill" style="display: hidden;"/>
 	        <div   class="type" val="POST" style="display: hidden;"/>
-	        <button onclick="sendRequest('enableaccountfromemail')">Enable</button>
+	        <button onclick="sendRequest('enableAccountFromEmaill')">Enable</button>
 	    </div>
 	</section>
 </div>

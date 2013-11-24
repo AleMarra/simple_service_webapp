@@ -1,4 +1,4 @@
-package com.fiuba.taller.service.request;
+package com.fiuba.taller.service;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -38,31 +38,22 @@ public class RegisterUserRequest {
         
         
     }
-
-    private String toReadable(String keyValSeparator, String propSeparator) {
-        String result = "";
-        String k = keyValSeparator;
-        String p = propSeparator;
-
-        result += "username" + k + username + p;
-        result += "password" + k + password + p;
-        result += "nombre"   + k + nombre   + p;
-        result += "apellido" + k + apellido + p;
-        result += "padron"   + k + padron   + p;
-        result += "fechaNac" + k + fechaNac + p;
-        result += "email"    + k + email    + p;
-        result += "rol"      + k + rol;
-
-        return result;
-    }
     
-    @Override
+    @Override 
     public String toString(){
-        return toReadable("=", "&");
-    }
-    
-    public String toJSON(){
-        return "{" + toReadable(": ", ", ") + "}";
+    	String urlEncoded ="";
+    	
+    	urlEncoded += "username="+username+"&";
+    	urlEncoded += "password="+password+"&";
+    	urlEncoded += "nombre="+nombre+"&";
+    	urlEncoded += "apellido="+apellido+"&";
+    	urlEncoded += "padron="+padron+"&";
+    	urlEncoded += "fechaNac="+fechaNac+"&";
+    	urlEncoded += "email="+email+"&";
+    	urlEncoded += "rol="+rol;
+    	
+    	
+    	return urlEncoded;
     }
 
 	@XmlElement(name = "username")

@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "coffee-script": "~1.6.3",
-    "commander": "~2.0.0"
-  }
-}

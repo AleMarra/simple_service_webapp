@@ -1,7 +1,5 @@
 package com.fiuba.taller.service;
 
-import com.fiuba.taller.service.request.*;
-
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -23,9 +21,9 @@ public class SecurityService {
 
 
     @POST
-    @Path("registeruser_deprecated")
+    @Path("registeruser")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response registerUser_deprecated(MultivaluedMap<String, String> formParams) {
+    public Response registerUser(MultivaluedMap<String, String> formParams) {
         System.out.println(formParams);
         WebTarget resourceWebTarget = webTarget.path("registeruser");
         
@@ -54,10 +52,22 @@ public class SecurityService {
     }
     
     @POST
-    @Path("registeruser")
+    @Path("registeruserJSON")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registerUser(RegisterUserRequest request) {
-        System.out.println(request.toJSON());
+    public Response registerUserJSON(RegisterUserRequest request) {
+        System.out.println(request);
+        WebTarget resourceWebTarget = webTarget.path("registeruser");
+        
+//        Response response = resourceWebTarget
+//				                .request(MediaType.APPLICATION_XML_TYPE)
+//				                .post(Entity.form(formParams));
+//        
+//        response.bufferEntity();
+
+//        System.out.println(response.toString());
+        
+//        SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
+
         SecurityResponse s = new SecurityResponse(true, request.toString());
         System.out.println(s.toString());
 
@@ -75,59 +85,36 @@ public class SecurityService {
     }
 
     @POST
-    @Path("login_deprecated")
+    @Path("login")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response login_deprecated(MultivaluedMap<String, String> formParams) {
+    public Response login(MultivaluedMap<String, String> formParams) {
         WebTarget resourceWebTarget = webTarget.path("login");
         Response response = resourceWebTarget
                 .request(MediaType.APPLICATION_XML_TYPE)
                 .post(Entity.form(formParams));
 
         response.bufferEntity();
-
+        
         System.out.println(response.toString());
-
+        
         SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
-
+        
         if(securityResponse.getSuccess()){
-            return Response
-                    .ok()
-                    .cookie(new NewCookie("authToken", securityResponse.getAuthToken()))
-                    .build();
-        }else{
-            return Response
-                    .status(response.getStatus())
-                    .entity(securityResponse)
-                    .build();
-        }
+	        return Response
+	                .ok()
+	                .cookie(new NewCookie("authToken", securityResponse.getAuthToken()))
+	                .build();
+	    }else{
+	    	return Response
+	                .status(response.getStatus())
+	                .entity(securityResponse)
+	                .build();
+	    }
     }
 
-
     @POST
-    @Path("login")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response login(LoginRequest request) {
-        System.out.println(request.toJSON());
-        SecurityResponse s = new SecurityResponse(true, request.toString());
-        System.out.println(s.toString());
-
-        if(s.getSuccess()){
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }else{
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }
-    }
-
-
-    @POST
-    @Path("logout_deprecated")
-    public Response logout_deprecated(@CookieParam("authToken") String authToken) {
+    @Path("logout")
+    public Response logout(@CookieParam("authToken") String authToken) {
         System.out.println("@CookieParam: " + authToken);
         Form form = new Form();
         form.param("authToken", authToken);
@@ -138,44 +125,22 @@ public class SecurityService {
                 .post(Entity.form(form));
 
         response.bufferEntity();
-
+        
         System.out.println(response.toString());
-
+        
         SecurityResponse securityResponse = response.readEntity(SecurityResponse.class);
-
+        
         if(securityResponse.getSuccess()){
-            return Response
-                    .ok()
-                    .header("Set-Cookie",
+	        return Response
+	                .ok()
+	                .header("Set-Cookie",
                             "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
-                    .build();
+	                .build();
         }else{
-            return Response
-                    .status(response.getStatus())
+        	return Response
+	                .status(response.getStatus())
                     .entity(securityResponse)
-                    .build();
-        }
-    }
-
-
-    @POST
-    @Path("logout")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response logout(LogoutRequest request) {
-        System.out.println(request.toJSON());
-        SecurityResponse s = new SecurityResponse(true, request.toString());
-        System.out.println(s.toString());
-
-        if(s.getSuccess()){
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }else{
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
+	                .build();
         }
     }
 
@@ -220,10 +185,9 @@ public class SecurityService {
         }
     }
 
-
     @POST
-    @Path("activateuser_deprecated")
-    public Response activateUser_deprecated(MultivaluedMap<String, String> formParams) {
+    @Path("activateuser")
+    public Response activateUser(MultivaluedMap<String, String> formParams) {
     	SecurityResponse securityResponse;
     	
     	if (formParams == null) {
@@ -255,27 +219,6 @@ public class SecurityService {
                         .entity(securityResponse)
                         .build();
             }
-        }
-    }
-
-    @POST
-    @Path("activateuser")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response activateUser(ActivateUserRequest request) {
-        System.out.println(request.toJSON());
-        SecurityResponse s = new SecurityResponse(true, request.toString());
-        System.out.println(s.toString());
-
-        if(s.getSuccess()){
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }else{
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
         }
     }
 
@@ -330,8 +273,8 @@ public class SecurityService {
 //    }
 
     @POST
-    @Path("changepassword_deprecated")
-    public Response changePassword_deprecated(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
+    @Path("changepassword")
+    public Response changePassword(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
     	SecurityResponse securityResponse;
     	
     	if (formParams == null) {
@@ -379,31 +322,10 @@ public class SecurityService {
         }
     }
 
-    @POST
-    @Path("changepassword")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response changePassword(ChangePasswordRequest request) {
-        System.out.println(request.toJSON());
-        SecurityResponse s = new SecurityResponse(true, request.toString());
-        System.out.println(s.toString());
-
-        if(s.getSuccess()){
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }else{
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }
-    }
-
     
     @POST
-    @Path("resetpassword_deprecated")
-    public Response resetPassword_deprecated(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
+    @Path("resetpassword")
+    public Response resetPassword(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
     	SecurityResponse securityResponse;
     	
     	System.out.println("@CookieParam: " + authToken);
@@ -445,31 +367,10 @@ public class SecurityService {
         }
     }
 
-    @POST
-    @Path("resetpassword")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response resetPassword(ResetPasswordRequest request) {
-        System.out.println(request.toJSON());
-        SecurityResponse s = new SecurityResponse(true, request.toString());
-        System.out.println(s.toString());
-
-        if(s.getSuccess()){
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }else{
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }
-    }
-
 
     @POST
-    @Path("disableaccount_deprecated")
-    public Response disableAccount_deprecated(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
+    @Path("disableaccount")
+    public Response disableAccount(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
     	SecurityResponse securityResponse;
     	
     	if (formParams == null) {
@@ -518,29 +419,8 @@ public class SecurityService {
     }
 
     @POST
-    @Path("disableaccount")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response disableAccount(DisableAccountRequest request) {
-        System.out.println(request.toJSON());
-        SecurityResponse s = new SecurityResponse(true, request.toString());
-        System.out.println(s.toString());
-
-        if(s.getSuccess()){
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }else{
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }
-    }
-
-    @POST
-    @Path("enableaccount_deprecated")
-    public Response enableAccount_deprecated(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
+    @Path("enableaccount")
+    public Response enableAccount(MultivaluedMap<String, String> formParams, @CookieParam("authToken") String authToken) {
     	SecurityResponse securityResponse;
     	
     	if (formParams == null) {
@@ -588,31 +468,10 @@ public class SecurityService {
         }
     }
 
-    @POST
-    @Path("enableaccount")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response enableAccount(EnableAccountRequest request) {
-        System.out.println(request.toJSON());
-        SecurityResponse s = new SecurityResponse(true, request.toString());
-        System.out.println(s.toString());
-
-        if(s.getSuccess()){
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }else{
-            return Response
-                    .ok()
-                    .entity(s)
-                    .build();
-        }
-    }
-
 
     @POST
-    @Path("enableaccountfromemail")
-    public String enableAccountFromEmail(EnableAccountFromEmailRequest request) {
+    @Path("enableaccountfromemaill")
+    public String enableAccountFromEmaill() {
         return "{\"API\": \"enableAccountFromEmaill working\"}";
     }
 }
