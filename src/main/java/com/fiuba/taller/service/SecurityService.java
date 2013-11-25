@@ -88,7 +88,7 @@ public class SecurityService {
 
 		String success = getFirstElementValue( node, "success");
 
-		if (success == "1"){
+		if (success.equals("1")){
 			response.setSuccess(true);
 			response.setReason("Usuario creado exitosamente");
 
@@ -129,7 +129,7 @@ public class SecurityService {
 
 		String success = getFirstElementValue( node, "success");
 
-		if (success == "1"){
+		if (success.equals("1")){
 
 			return Response.ok()
 					.cookie(new NewCookie("authToken",
@@ -172,7 +172,7 @@ public class SecurityService {
 
 		String success = getFirstElementValue( node, "success");
 
-		if (success == "1"){
+		if (success.equals("1")){
 
 			return Response.ok()
 					.header("Set-Cookie",
@@ -216,7 +216,7 @@ public class SecurityService {
 
 		String success = getFirstElementValue( node, "success");
 
-		if (success == "1"){
+		if (success.equals("1")){
 
 			return Response.ok()
 					.build();
@@ -240,7 +240,7 @@ public class SecurityService {
 		System.out.println(request);
 		SecurityResponse response = new SecurityResponse();
 		
-		if (request.getUsername() == "") {
+		if (request.getUsername().equals("")) {
 			response = new SecurityResponse(false, "Parametros Invalidos: username vacio");
 			
 			return Response.ok().entity(response).build();
@@ -262,7 +262,7 @@ public class SecurityService {
 
 			String success = getFirstElementValue( node, "success");
 
-			if (success == "1"){
+			if (success.equals("1")){
 				response.setSuccess(true);
 				response.setReason("Usuario activado exitosamente");
 				
@@ -288,7 +288,7 @@ public class SecurityService {
 		SecurityResponse response = new SecurityResponse();
 		
 
-		if (request.getOldPassword() == "" || request.getNewPassword() == "") {
+		if (request.getOldPassword().equals("") || request.getNewPassword().equals("")) {
 			response = new SecurityResponse(false,
 					"Parametros Invalidos");
 			
@@ -313,7 +313,7 @@ public class SecurityService {
 
 			String success = getFirstElementValue( node, "success");
 
-			if (success == "1"){
+			if (success.equals("1")){
 				response.setSuccess(true);
 				response.setReason("Contaseña actualizada");
 				
@@ -339,7 +339,7 @@ public class SecurityService {
 		System.out.println(request);
 		SecurityResponse response = new SecurityResponse();
 		
-		if (request.getUsername() == "") {
+		if (request.getUsername().equals("")) {
 			response = new SecurityResponse(false, "Parametros Invalidos: username vacio");
 			
 			return Response.ok().entity(response).build();
@@ -362,7 +362,7 @@ public class SecurityService {
 
 			String success = getFirstElementValue( node, "success");
 
-			if (success == "1"){
+			if (success.equals("1")){
 				response.setSuccess(true);
 				response.setReason("Contraseña Reseteada");
 				
@@ -387,7 +387,7 @@ public class SecurityService {
 		System.out.println(request);
 		SecurityResponse response = new SecurityResponse();
 		
-		if (request.getUsername() == "") {
+		if (request.getUsername().equals("")) {
 			response = new SecurityResponse(false, "Parametros Invalidos: username vacio");
 			
 			return Response.ok().entity(response).build();
@@ -410,7 +410,7 @@ public class SecurityService {
 
 			String success = getFirstElementValue( node, "success");
 
-			if (success == "1"){
+			if (success.equals("1")){
 				response.setSuccess(true);
 				response.setReason("Cuenta suspendida");
 				
@@ -436,7 +436,7 @@ public class SecurityService {
 		System.out.println(request);
 		SecurityResponse response = new SecurityResponse();
 		
-		if (request.getUsername() == "") {
+		if (request.getUsername().equals("")) {
 			response = new SecurityResponse(false, "Parametros Invalidos: username vacio");
 			
 			return Response.ok().entity(response).build();
@@ -459,7 +459,7 @@ public class SecurityService {
 
 			String success = getFirstElementValue( node, "success");
 
-			if (success == "1"){
+			if (success.equals("1")){
 				response.setSuccess(true);
 				response.setReason("Cuenta habilitada");
 				
@@ -486,7 +486,7 @@ public class SecurityService {
 //		System.out.println(request);
 //		SecurityResponse response = new SecurityResponse();
 //
-//		if (request.getEnabledToken() == "") {
+//		if (request.getEnabledToken().equals("")) {
 //			response = new SecurityResponse(false,
 //					"Parametros Invalidos: token vacio");
 //			return Response.ok().entity(response).build();
@@ -508,7 +508,7 @@ public class SecurityService {
 //
 //			String success = getFirstElementValue( node, "success");
 //
-//			if (success == "1"){
+//			if (success.equals("1")){
 //				response.setSuccess(true);
 //				response.setReason("Cuenta habilitada");
 //				
