@@ -18,6 +18,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.axis2.AxisFault;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
@@ -50,8 +51,17 @@ public class SecurityService {
 		
 		Element elem = (Element) node;
 		
-		return elem.getElementsByTagName("success").item(0).getTextContent();
+		return elem.getElementsByTagName(eName).item(0).getTextContent();
 	}
+
+    private Response buildError(String service) {
+        SecurityResponse response = new SecurityResponse();
+
+        response.setSuccess(false);
+        response.setReason("El servicio de " + service + " no está disponible.");
+
+        return Response.status(509).entity(response).build();
+    }
 
 	@POST
 	@Path("registeruser")
@@ -64,11 +74,11 @@ public class SecurityService {
 		
 		// Init
 		SecurityResponse response = new SecurityResponse();
-		
-		LoginAPIHelperStub api = new LoginAPIHelperStub();  
+
+		LoginAPIHelperStub api = new LoginAPIHelperStub();
 		LoginAPIHelperStub.RegisterUser securityRequest = new LoginAPIHelperStub.RegisterUser();
 		LoginAPIHelperStub.RegisterUserResponse wsResponse = new LoginAPIHelperStub.RegisterUserResponse();
-		
+
 		// Armar el request
 		securityRequest.setArgs0(request.getUsername());
 		securityRequest.setArgs1(request.getPassword());
@@ -78,11 +88,16 @@ public class SecurityService {
 		securityRequest.setArgs5(request.getFechaNac());
 		securityRequest.setArgs6(request.getEmail());
 		securityRequest.setArgs7(request.getRol());
-		
+
 		// Hacer el request
-		wsResponse = api.registerUser(securityRequest);
-			
-		// Parsear el response
+        try {
+		    wsResponse = api.registerUser(securityRequest);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("crear usuario");
+        }
+
+        // Parsear el response
 		Document doc = getDoc(wsResponse.get_return());
 		Node node = getNode(doc, "response");
 
@@ -121,7 +136,12 @@ public class SecurityService {
 		securityRequest.setPassword(request.getPassword());
 		
 		// Hacer el request
-		wsResponse = api.login(securityRequest);
+        try {
+            wsResponse = api.login(securityRequest);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("login");
+        }
 
 		// Parsear el response
 		Document doc = getDoc(wsResponse.get_return());
@@ -164,7 +184,12 @@ public class SecurityService {
 		securityRequest.setAuthToken(authToken);
 
 		// Hacer el request
-		wsResponse = api.logout(securityRequest);
+        try {
+            wsResponse = api.logout(securityRequest);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("logout");
+        }
 
 		// Parsear el response
 		Document doc = getDoc(wsResponse.get_return());
@@ -208,7 +233,12 @@ public class SecurityService {
 		securityRequest.setAuthToken(authToken);
 
 		// Hacer el request
-		wsResponse = api.isTokenValid(securityRequest);
+        try {
+            wsResponse = api.isTokenValid(securityRequest);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("sesión");
+        }
 
 		// Parsear el response
 		Document doc = getDoc(wsResponse.get_return());
@@ -254,7 +284,12 @@ public class SecurityService {
 			securityRequest.setUsername(request.getUsername());
 			
 			// Hacer el request
-			wsResponse = api.activateUser(securityRequest);
+            try {
+                wsResponse = api.activateUser(securityRequest);
+            } catch (AxisFault error) {
+                System.out.println(error.getReason());
+                return buildError("activar usuario");
+            }
 
 			// Parsear el response
 			Document doc = getDoc(wsResponse.get_return());
@@ -305,7 +340,12 @@ public class SecurityService {
 			securityRequest.setAuthToken(authToken);
 			
 			// Hacer el request
-			wsResponse = api.changePassword(securityRequest);
+            try {
+                wsResponse = api.changePassword(securityRequest);
+            } catch (AxisFault error) {
+                System.out.println(error.getReason());
+                return buildError("cambiar contraseña");
+            }
 
 			// Parsear el response
 			Document doc = getDoc(wsResponse.get_return());
@@ -354,7 +394,12 @@ public class SecurityService {
 			securityRequest.setUserId(request.getUsername());
 			
 			// Hacer el request
-			wsResponse = api.resetPassword(securityRequest);
+            try {
+                wsResponse = api.resetPassword(securityRequest);
+            } catch (AxisFault error) {
+                System.out.println(error.getReason());
+                return buildError("resetear contraseña");
+            }
 
 			// Parsear el response
 			Document doc = getDoc(wsResponse.get_return());
@@ -402,7 +447,12 @@ public class SecurityService {
 			securityRequest.setUserId(request.getUsername());
 			
 			// Hacer el request
-			wsResponse = api.disableAccount(securityRequest);
+            try {
+                wsResponse = api.disableAccount(securityRequest);
+            } catch (AxisFault error) {
+                System.out.println(error.getReason());
+                return buildError("deshabilitar cuenta");
+            }
 
 			// Parsear el response
 			Document doc = getDoc(wsResponse.get_return());
@@ -451,7 +501,12 @@ public class SecurityService {
 			securityRequest.setUserId(request.getUsername());
 			
 			// Hacer el request
-			wsResponse = api.enableAccount(securityRequest);
+            try {
+                wsResponse = api.enableAccount(securityRequest);
+            } catch (AxisFault error) {
+                System.out.println(error.getReason());
+                return buildError("habilitar cuenta");
+            }
 
 			// Parsear el response
 			Document doc = getDoc(wsResponse.get_return());
