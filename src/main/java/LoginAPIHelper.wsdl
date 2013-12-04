@@ -96,14 +96,14 @@
 <xs:element name="registerUser">
 <xs:complexType>
 <xs:sequence>
-<xs:element minOccurs="0" name="args0" nillable="true" type="xs:string"/>
-<xs:element minOccurs="0" name="args1" nillable="true" type="xs:string"/>
-<xs:element minOccurs="0" name="args2" nillable="true" type="xs:string"/>
-<xs:element minOccurs="0" name="args3" nillable="true" type="xs:string"/>
-<xs:element minOccurs="0" name="args4" nillable="true" type="xs:string"/>
-<xs:element minOccurs="0" name="args5" nillable="true" type="xs:string"/>
-<xs:element minOccurs="0" name="args6" nillable="true" type="xs:string"/>
-<xs:element minOccurs="0" name="args7" type="xs:int"/>
+<xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="nombres" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="apellido" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="padron" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="fecha" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="rol" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 </xs:element>
@@ -490,13 +490,13 @@
 </wsdl:binding>
 <wsdl:service name="LoginAPIHelper">
 <wsdl:port name="LoginAPIHelperHttpSoap11Endpoint" binding="ns:LoginAPIHelperSoap11Binding">
-<soap:address location="http://localhost:8080/SeguridadSesionAxis/services/LoginAPIHelper.LoginAPIHelperHttpSoap11Endpoint/"/>
+<soap:address location="http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap11Endpoint/"/>
 </wsdl:port>
 <wsdl:port name="LoginAPIHelperHttpSoap12Endpoint" binding="ns:LoginAPIHelperSoap12Binding">
-<soap12:address location="http://localhost:8080/SeguridadSesionAxis/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/"/>
+<soap12:address location="http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/"/>
 </wsdl:port>
 <wsdl:port name="LoginAPIHelperHttpEndpoint" binding="ns:LoginAPIHelperHttpBinding">
-<http:address location="http://localhost:8080/SeguridadSesionAxis/services/LoginAPIHelper.LoginAPIHelperHttpEndpoint/"/>
+<http:address location="http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpEndpoint/"/>
 </wsdl:port>
 </wsdl:service>
 </wsdl:definitions>

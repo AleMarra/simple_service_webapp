@@ -202,7 +202,7 @@
      */
     public LoginAPIHelperStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"http://localhost:8080/SeguridadSesionAxis/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
+                    this(configurationContext,"http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
                 
     }
 
@@ -211,7 +211,7 @@
      */
     public LoginAPIHelperStub() throws org.apache.axis2.AxisFault {
         
-                    this("http://localhost:8080/SeguridadSesionAxis/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
+                    this("http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
                 
     }
 
@@ -229,7 +229,7 @@
                      * Auto generated method signature
                      * 
                      * @see wtp.LoginAPIHelper#login
-                     * @param login
+                     * @param login0
                     
                      */
 
@@ -237,7 +237,7 @@
 
                             public  wtp.LoginAPIHelperStub.LoginResponse login(
 
-                            wtp.LoginAPIHelperStub.Login login)
+                            wtp.LoginAPIHelperStub.Login login0)
                         
 
                     throws java.rmi.RemoteException
@@ -264,7 +264,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    login,
+                                                    login0,
                                                     optimizeContent(new javax.xml.namespace.QName("http://wtp",
                                                     "login")), new javax.xml.namespace.QName("http://wtp",
                                                     "login"));
@@ -347,11 +347,158 @@
             }
         }
             
+                /**
+                * Auto generated method signature for Asynchronous Invocations
+                * 
+                * @see wtp.LoginAPIHelper#startlogin
+                    * @param login0
+                
+                */
+                public  void startlogin(
+
+                 wtp.LoginAPIHelperStub.Login login0,
+
+                  final wtp.LoginAPIHelperCallbackHandler callback)
+
+                throws java.rmi.RemoteException{
+
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[0].getName());
+             _operationClient.getOptions().setAction("urn:login");
+             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env=null;
+              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+                    
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    login0,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://wtp",
+                                                    "login")), new javax.xml.namespace.QName("http://wtp",
+                                                    "login"));
+                                                
+        // adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+
+                    
+                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
+                            try {
+                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+                                
+                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
+                                                                         wtp.LoginAPIHelperStub.LoginResponse.class,
+                                                                         getEnvelopeNamespaces(resultEnv));
+                                        callback.receiveResultlogin(
+                                        (wtp.LoginAPIHelperStub.LoginResponse)object);
+                                        
+                            } catch (org.apache.axis2.AxisFault e) {
+                                callback.receiveErrorlogin(e);
+                            }
+                            }
+
+                            public void onError(java.lang.Exception error) {
+								if (error instanceof org.apache.axis2.AxisFault) {
+									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+									org.apache.axiom.om.OMElement faultElt = f.getDetail();
+									if (faultElt!=null){
+										if (faultExceptionNameMap.containsKey(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"login"))){
+											//make the fault by reflection
+											try{
+													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"login"));
+													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+													java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(String.class);
+                                                    java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
+													//message class
+													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"login"));
+														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+															new java.lang.Class[]{messageClass});
+													m.invoke(ex,new java.lang.Object[]{messageObject});
+													
+					
+										            callback.receiveErrorlogin(new java.rmi.RemoteException(ex.getMessage(), ex));
+                                            } catch(java.lang.ClassCastException e){
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogin(f);
+                                            } catch (java.lang.ClassNotFoundException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogin(f);
+                                            } catch (java.lang.NoSuchMethodException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogin(f);
+                                            } catch (java.lang.reflect.InvocationTargetException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogin(f);
+                                            } catch (java.lang.IllegalAccessException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogin(f);
+                                            } catch (java.lang.InstantiationException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogin(f);
+                                            } catch (org.apache.axis2.AxisFault e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogin(f);
+                                            }
+									    } else {
+										    callback.receiveErrorlogin(f);
+									    }
+									} else {
+									    callback.receiveErrorlogin(f);
+									}
+								} else {
+								    callback.receiveErrorlogin(error);
+								}
+                            }
+
+                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
+                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                                onError(fault);
+                            }
+
+                            public void onComplete() {
+                                try {
+                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                                } catch (org.apache.axis2.AxisFault axisFault) {
+                                    callback.receiveErrorlogin(axisFault);
+                                }
+                            }
+                });
+                        
+
+          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+        if ( _operations[0].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+          _operations[0].setMessageReceiver(
+                    _callbackReceiver);
+        }
+
+           //execute the operation client
+           _operationClient.execute(false);
+
+                    }
+                
                     /**
                      * Auto generated method signature
                      * 
                      * @see wtp.LoginAPIHelper#disableAccount
-                     * @param disableAccount
+                     * @param disableAccount2
                     
                      */
 
@@ -359,7 +506,7 @@
 
                             public  wtp.LoginAPIHelperStub.DisableAccountResponse disableAccount(
 
-                            wtp.LoginAPIHelperStub.DisableAccount disableAccount)
+                            wtp.LoginAPIHelperStub.DisableAccount disableAccount2)
                         
 
                     throws java.rmi.RemoteException
@@ -386,7 +533,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    disableAccount,
+                                                    disableAccount2,
                                                     optimizeContent(new javax.xml.namespace.QName("http://wtp",
                                                     "disableAccount")), new javax.xml.namespace.QName("http://wtp",
                                                     "disableAccount"));
@@ -469,11 +616,158 @@
             }
         }
             
+                /**
+                * Auto generated method signature for Asynchronous Invocations
+                * 
+                * @see wtp.LoginAPIHelper#startdisableAccount
+                    * @param disableAccount2
+                
+                */
+                public  void startdisableAccount(
+
+                 wtp.LoginAPIHelperStub.DisableAccount disableAccount2,
+
+                  final wtp.LoginAPIHelperCallbackHandler callback)
+
+                throws java.rmi.RemoteException{
+
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[1].getName());
+             _operationClient.getOptions().setAction("urn:disableAccount");
+             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env=null;
+              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+                    
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    disableAccount2,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://wtp",
+                                                    "disableAccount")), new javax.xml.namespace.QName("http://wtp",
+                                                    "disableAccount"));
+                                                
+        // adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+
+                    
+                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
+                            try {
+                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+                                
+                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
+                                                                         wtp.LoginAPIHelperStub.DisableAccountResponse.class,
+                                                                         getEnvelopeNamespaces(resultEnv));
+                                        callback.receiveResultdisableAccount(
+                                        (wtp.LoginAPIHelperStub.DisableAccountResponse)object);
+                                        
+                            } catch (org.apache.axis2.AxisFault e) {
+                                callback.receiveErrordisableAccount(e);
+                            }
+                            }
+
+                            public void onError(java.lang.Exception error) {
+								if (error instanceof org.apache.axis2.AxisFault) {
+									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+									org.apache.axiom.om.OMElement faultElt = f.getDetail();
+									if (faultElt!=null){
+										if (faultExceptionNameMap.containsKey(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"disableAccount"))){
+											//make the fault by reflection
+											try{
+													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"disableAccount"));
+													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+													java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(String.class);
+                                                    java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
+													//message class
+													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"disableAccount"));
+														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+															new java.lang.Class[]{messageClass});
+													m.invoke(ex,new java.lang.Object[]{messageObject});
+													
+					
+										            callback.receiveErrordisableAccount(new java.rmi.RemoteException(ex.getMessage(), ex));
+                                            } catch(java.lang.ClassCastException e){
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrordisableAccount(f);
+                                            } catch (java.lang.ClassNotFoundException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrordisableAccount(f);
+                                            } catch (java.lang.NoSuchMethodException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrordisableAccount(f);
+                                            } catch (java.lang.reflect.InvocationTargetException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrordisableAccount(f);
+                                            } catch (java.lang.IllegalAccessException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrordisableAccount(f);
+                                            } catch (java.lang.InstantiationException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrordisableAccount(f);
+                                            } catch (org.apache.axis2.AxisFault e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrordisableAccount(f);
+                                            }
+									    } else {
+										    callback.receiveErrordisableAccount(f);
+									    }
+									} else {
+									    callback.receiveErrordisableAccount(f);
+									}
+								} else {
+								    callback.receiveErrordisableAccount(error);
+								}
+                            }
+
+                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
+                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                                onError(fault);
+                            }
+
+                            public void onComplete() {
+                                try {
+                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                                } catch (org.apache.axis2.AxisFault axisFault) {
+                                    callback.receiveErrordisableAccount(axisFault);
+                                }
+                            }
+                });
+                        
+
+          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+        if ( _operations[1].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+          _operations[1].setMessageReceiver(
+                    _callbackReceiver);
+        }
+
+           //execute the operation client
+           _operationClient.execute(false);
+
+                    }
+                
                     /**
                      * Auto generated method signature
                      * 
                      * @see wtp.LoginAPIHelper#activateUser
-                     * @param activateUser
+                     * @param activateUser4
                     
                      */
 
@@ -481,7 +775,7 @@
 
                             public  wtp.LoginAPIHelperStub.ActivateUserResponse activateUser(
 
-                            wtp.LoginAPIHelperStub.ActivateUser activateUser)
+                            wtp.LoginAPIHelperStub.ActivateUser activateUser4)
                         
 
                     throws java.rmi.RemoteException
@@ -508,7 +802,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    activateUser,
+                                                    activateUser4,
                                                     optimizeContent(new javax.xml.namespace.QName("http://wtp",
                                                     "activateUser")), new javax.xml.namespace.QName("http://wtp",
                                                     "activateUser"));
@@ -591,11 +885,158 @@
             }
         }
             
+                /**
+                * Auto generated method signature for Asynchronous Invocations
+                * 
+                * @see wtp.LoginAPIHelper#startactivateUser
+                    * @param activateUser4
+                
+                */
+                public  void startactivateUser(
+
+                 wtp.LoginAPIHelperStub.ActivateUser activateUser4,
+
+                  final wtp.LoginAPIHelperCallbackHandler callback)
+
+                throws java.rmi.RemoteException{
+
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
+             _operationClient.getOptions().setAction("urn:activateUser");
+             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env=null;
+              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+                    
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    activateUser4,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://wtp",
+                                                    "activateUser")), new javax.xml.namespace.QName("http://wtp",
+                                                    "activateUser"));
+                                                
+        // adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+
+                    
+                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
+                            try {
+                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+                                
+                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
+                                                                         wtp.LoginAPIHelperStub.ActivateUserResponse.class,
+                                                                         getEnvelopeNamespaces(resultEnv));
+                                        callback.receiveResultactivateUser(
+                                        (wtp.LoginAPIHelperStub.ActivateUserResponse)object);
+                                        
+                            } catch (org.apache.axis2.AxisFault e) {
+                                callback.receiveErroractivateUser(e);
+                            }
+                            }
+
+                            public void onError(java.lang.Exception error) {
+								if (error instanceof org.apache.axis2.AxisFault) {
+									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+									org.apache.axiom.om.OMElement faultElt = f.getDetail();
+									if (faultElt!=null){
+										if (faultExceptionNameMap.containsKey(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"activateUser"))){
+											//make the fault by reflection
+											try{
+													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"activateUser"));
+													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+													java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(String.class);
+                                                    java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
+													//message class
+													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"activateUser"));
+														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+															new java.lang.Class[]{messageClass});
+													m.invoke(ex,new java.lang.Object[]{messageObject});
+													
+					
+										            callback.receiveErroractivateUser(new java.rmi.RemoteException(ex.getMessage(), ex));
+                                            } catch(java.lang.ClassCastException e){
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErroractivateUser(f);
+                                            } catch (java.lang.ClassNotFoundException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErroractivateUser(f);
+                                            } catch (java.lang.NoSuchMethodException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErroractivateUser(f);
+                                            } catch (java.lang.reflect.InvocationTargetException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErroractivateUser(f);
+                                            } catch (java.lang.IllegalAccessException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErroractivateUser(f);
+                                            } catch (java.lang.InstantiationException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErroractivateUser(f);
+                                            } catch (org.apache.axis2.AxisFault e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErroractivateUser(f);
+                                            }
+									    } else {
+										    callback.receiveErroractivateUser(f);
+									    }
+									} else {
+									    callback.receiveErroractivateUser(f);
+									}
+								} else {
+								    callback.receiveErroractivateUser(error);
+								}
+                            }
+
+                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
+                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                                onError(fault);
+                            }
+
+                            public void onComplete() {
+                                try {
+                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                                } catch (org.apache.axis2.AxisFault axisFault) {
+                                    callback.receiveErroractivateUser(axisFault);
+                                }
+                            }
+                });
+                        
+
+          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+        if ( _operations[2].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+          _operations[2].setMessageReceiver(
+                    _callbackReceiver);
+        }
+
+           //execute the operation client
+           _operationClient.execute(false);
+
+                    }
+                
                     /**
                      * Auto generated method signature
                      * 
                      * @see wtp.LoginAPIHelper#resetPassword
-                     * @param resetPassword
+                     * @param resetPassword6
                     
                      */
 
@@ -603,7 +1044,7 @@
 
                             public  wtp.LoginAPIHelperStub.ResetPasswordResponse resetPassword(
 
-                            wtp.LoginAPIHelperStub.ResetPassword resetPassword)
+                            wtp.LoginAPIHelperStub.ResetPassword resetPassword6)
                         
 
                     throws java.rmi.RemoteException
@@ -630,7 +1071,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    resetPassword,
+                                                    resetPassword6,
                                                     optimizeContent(new javax.xml.namespace.QName("http://wtp",
                                                     "resetPassword")), new javax.xml.namespace.QName("http://wtp",
                                                     "resetPassword"));
@@ -713,11 +1154,158 @@
             }
         }
             
+                /**
+                * Auto generated method signature for Asynchronous Invocations
+                * 
+                * @see wtp.LoginAPIHelper#startresetPassword
+                    * @param resetPassword6
+                
+                */
+                public  void startresetPassword(
+
+                 wtp.LoginAPIHelperStub.ResetPassword resetPassword6,
+
+                  final wtp.LoginAPIHelperCallbackHandler callback)
+
+                throws java.rmi.RemoteException{
+
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[3].getName());
+             _operationClient.getOptions().setAction("urn:resetPassword");
+             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env=null;
+              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+                    
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    resetPassword6,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://wtp",
+                                                    "resetPassword")), new javax.xml.namespace.QName("http://wtp",
+                                                    "resetPassword"));
+                                                
+        // adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+
+                    
+                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
+                            try {
+                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+                                
+                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
+                                                                         wtp.LoginAPIHelperStub.ResetPasswordResponse.class,
+                                                                         getEnvelopeNamespaces(resultEnv));
+                                        callback.receiveResultresetPassword(
+                                        (wtp.LoginAPIHelperStub.ResetPasswordResponse)object);
+                                        
+                            } catch (org.apache.axis2.AxisFault e) {
+                                callback.receiveErrorresetPassword(e);
+                            }
+                            }
+
+                            public void onError(java.lang.Exception error) {
+								if (error instanceof org.apache.axis2.AxisFault) {
+									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+									org.apache.axiom.om.OMElement faultElt = f.getDetail();
+									if (faultElt!=null){
+										if (faultExceptionNameMap.containsKey(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"resetPassword"))){
+											//make the fault by reflection
+											try{
+													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"resetPassword"));
+													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+													java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(String.class);
+                                                    java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
+													//message class
+													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"resetPassword"));
+														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+															new java.lang.Class[]{messageClass});
+													m.invoke(ex,new java.lang.Object[]{messageObject});
+													
+					
+										            callback.receiveErrorresetPassword(new java.rmi.RemoteException(ex.getMessage(), ex));
+                                            } catch(java.lang.ClassCastException e){
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorresetPassword(f);
+                                            } catch (java.lang.ClassNotFoundException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorresetPassword(f);
+                                            } catch (java.lang.NoSuchMethodException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorresetPassword(f);
+                                            } catch (java.lang.reflect.InvocationTargetException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorresetPassword(f);
+                                            } catch (java.lang.IllegalAccessException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorresetPassword(f);
+                                            } catch (java.lang.InstantiationException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorresetPassword(f);
+                                            } catch (org.apache.axis2.AxisFault e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorresetPassword(f);
+                                            }
+									    } else {
+										    callback.receiveErrorresetPassword(f);
+									    }
+									} else {
+									    callback.receiveErrorresetPassword(f);
+									}
+								} else {
+								    callback.receiveErrorresetPassword(error);
+								}
+                            }
+
+                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
+                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                                onError(fault);
+                            }
+
+                            public void onComplete() {
+                                try {
+                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                                } catch (org.apache.axis2.AxisFault axisFault) {
+                                    callback.receiveErrorresetPassword(axisFault);
+                                }
+                            }
+                });
+                        
+
+          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+        if ( _operations[3].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+          _operations[3].setMessageReceiver(
+                    _callbackReceiver);
+        }
+
+           //execute the operation client
+           _operationClient.execute(false);
+
+                    }
+                
                     /**
                      * Auto generated method signature
                      * 
                      * @see wtp.LoginAPIHelper#logout
-                     * @param logout
+                     * @param logout8
                     
                      */
 
@@ -725,7 +1313,7 @@
 
                             public  wtp.LoginAPIHelperStub.LogoutResponse logout(
 
-                            wtp.LoginAPIHelperStub.Logout logout)
+                            wtp.LoginAPIHelperStub.Logout logout8)
                         
 
                     throws java.rmi.RemoteException
@@ -752,7 +1340,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    logout,
+                                                    logout8,
                                                     optimizeContent(new javax.xml.namespace.QName("http://wtp",
                                                     "logout")), new javax.xml.namespace.QName("http://wtp",
                                                     "logout"));
@@ -835,11 +1423,158 @@
             }
         }
             
+                /**
+                * Auto generated method signature for Asynchronous Invocations
+                * 
+                * @see wtp.LoginAPIHelper#startlogout
+                    * @param logout8
+                
+                */
+                public  void startlogout(
+
+                 wtp.LoginAPIHelperStub.Logout logout8,
+
+                  final wtp.LoginAPIHelperCallbackHandler callback)
+
+                throws java.rmi.RemoteException{
+
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[4].getName());
+             _operationClient.getOptions().setAction("urn:logout");
+             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env=null;
+              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+                    
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    logout8,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://wtp",
+                                                    "logout")), new javax.xml.namespace.QName("http://wtp",
+                                                    "logout"));
+                                                
+        // adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+
+                    
+                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
+                            try {
+                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+                                
+                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
+                                                                         wtp.LoginAPIHelperStub.LogoutResponse.class,
+                                                                         getEnvelopeNamespaces(resultEnv));
+                                        callback.receiveResultlogout(
+                                        (wtp.LoginAPIHelperStub.LogoutResponse)object);
+                                        
+                            } catch (org.apache.axis2.AxisFault e) {
+                                callback.receiveErrorlogout(e);
+                            }
+                            }
+
+                            public void onError(java.lang.Exception error) {
+								if (error instanceof org.apache.axis2.AxisFault) {
+									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+									org.apache.axiom.om.OMElement faultElt = f.getDetail();
+									if (faultElt!=null){
+										if (faultExceptionNameMap.containsKey(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"logout"))){
+											//make the fault by reflection
+											try{
+													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"logout"));
+													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+													java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(String.class);
+                                                    java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
+													//message class
+													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"logout"));
+														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+															new java.lang.Class[]{messageClass});
+													m.invoke(ex,new java.lang.Object[]{messageObject});
+													
+					
+										            callback.receiveErrorlogout(new java.rmi.RemoteException(ex.getMessage(), ex));
+                                            } catch(java.lang.ClassCastException e){
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogout(f);
+                                            } catch (java.lang.ClassNotFoundException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogout(f);
+                                            } catch (java.lang.NoSuchMethodException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogout(f);
+                                            } catch (java.lang.reflect.InvocationTargetException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogout(f);
+                                            } catch (java.lang.IllegalAccessException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogout(f);
+                                            } catch (java.lang.InstantiationException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogout(f);
+                                            } catch (org.apache.axis2.AxisFault e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorlogout(f);
+                                            }
+									    } else {
+										    callback.receiveErrorlogout(f);
+									    }
+									} else {
+									    callback.receiveErrorlogout(f);
+									}
+								} else {
+								    callback.receiveErrorlogout(error);
+								}
+                            }
+
+                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
+                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                                onError(fault);
+                            }
+
+                            public void onComplete() {
+                                try {
+                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                                } catch (org.apache.axis2.AxisFault axisFault) {
+                                    callback.receiveErrorlogout(axisFault);
+                                }
+                            }
+                });
+                        
+
+          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+        if ( _operations[4].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+          _operations[4].setMessageReceiver(
+                    _callbackReceiver);
+        }
+
+           //execute the operation client
+           _operationClient.execute(false);
+
+                    }
+                
                     /**
                      * Auto generated method signature
                      * 
                      * @see wtp.LoginAPIHelper#enableAccount
-                     * @param enableAccount
+                     * @param enableAccount10
                     
                      */
 
@@ -847,7 +1582,7 @@
 
                             public  wtp.LoginAPIHelperStub.EnableAccountResponse enableAccount(
 
-                            wtp.LoginAPIHelperStub.EnableAccount enableAccount)
+                            wtp.LoginAPIHelperStub.EnableAccount enableAccount10)
                         
 
                     throws java.rmi.RemoteException
@@ -874,7 +1609,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    enableAccount,
+                                                    enableAccount10,
                                                     optimizeContent(new javax.xml.namespace.QName("http://wtp",
                                                     "enableAccount")), new javax.xml.namespace.QName("http://wtp",
                                                     "enableAccount"));
@@ -957,11 +1692,158 @@
             }
         }
             
+                /**
+                * Auto generated method signature for Asynchronous Invocations
+                * 
+                * @see wtp.LoginAPIHelper#startenableAccount
+                    * @param enableAccount10
+                
+                */
+                public  void startenableAccount(
+
+                 wtp.LoginAPIHelperStub.EnableAccount enableAccount10,
+
+                  final wtp.LoginAPIHelperCallbackHandler callback)
+
+                throws java.rmi.RemoteException{
+
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[5].getName());
+             _operationClient.getOptions().setAction("urn:enableAccount");
+             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env=null;
+              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+                    
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    enableAccount10,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://wtp",
+                                                    "enableAccount")), new javax.xml.namespace.QName("http://wtp",
+                                                    "enableAccount"));
+                                                
+        // adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+
+                    
+                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
+                            try {
+                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+                                
+                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
+                                                                         wtp.LoginAPIHelperStub.EnableAccountResponse.class,
+                                                                         getEnvelopeNamespaces(resultEnv));
+                                        callback.receiveResultenableAccount(
+                                        (wtp.LoginAPIHelperStub.EnableAccountResponse)object);
+                                        
+                            } catch (org.apache.axis2.AxisFault e) {
+                                callback.receiveErrorenableAccount(e);
+                            }
+                            }
+
+                            public void onError(java.lang.Exception error) {
+								if (error instanceof org.apache.axis2.AxisFault) {
+									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+									org.apache.axiom.om.OMElement faultElt = f.getDetail();
+									if (faultElt!=null){
+										if (faultExceptionNameMap.containsKey(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"enableAccount"))){
+											//make the fault by reflection
+											try{
+													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"enableAccount"));
+													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+													java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(String.class);
+                                                    java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
+													//message class
+													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"enableAccount"));
+														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+															new java.lang.Class[]{messageClass});
+													m.invoke(ex,new java.lang.Object[]{messageObject});
+													
+					
+										            callback.receiveErrorenableAccount(new java.rmi.RemoteException(ex.getMessage(), ex));
+                                            } catch(java.lang.ClassCastException e){
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorenableAccount(f);
+                                            } catch (java.lang.ClassNotFoundException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorenableAccount(f);
+                                            } catch (java.lang.NoSuchMethodException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorenableAccount(f);
+                                            } catch (java.lang.reflect.InvocationTargetException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorenableAccount(f);
+                                            } catch (java.lang.IllegalAccessException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorenableAccount(f);
+                                            } catch (java.lang.InstantiationException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorenableAccount(f);
+                                            } catch (org.apache.axis2.AxisFault e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorenableAccount(f);
+                                            }
+									    } else {
+										    callback.receiveErrorenableAccount(f);
+									    }
+									} else {
+									    callback.receiveErrorenableAccount(f);
+									}
+								} else {
+								    callback.receiveErrorenableAccount(error);
+								}
+                            }
+
+                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
+                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                                onError(fault);
+                            }
+
+                            public void onComplete() {
+                                try {
+                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                                } catch (org.apache.axis2.AxisFault axisFault) {
+                                    callback.receiveErrorenableAccount(axisFault);
+                                }
+                            }
+                });
+                        
+
+          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+        if ( _operations[5].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+          _operations[5].setMessageReceiver(
+                    _callbackReceiver);
+        }
+
+           //execute the operation client
+           _operationClient.execute(false);
+
+                    }
+                
                     /**
                      * Auto generated method signature
                      * 
                      * @see wtp.LoginAPIHelper#registerUser
-                     * @param registerUser
+                     * @param registerUser12
                     
                      */
 
@@ -969,7 +1851,7 @@
 
                             public  wtp.LoginAPIHelperStub.RegisterUserResponse registerUser(
 
-                            wtp.LoginAPIHelperStub.RegisterUser registerUser)
+                            wtp.LoginAPIHelperStub.RegisterUser registerUser12)
                         
 
                     throws java.rmi.RemoteException
@@ -996,7 +1878,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    registerUser,
+                                                    registerUser12,
                                                     optimizeContent(new javax.xml.namespace.QName("http://wtp",
                                                     "registerUser")), new javax.xml.namespace.QName("http://wtp",
                                                     "registerUser"));
@@ -1079,11 +1961,158 @@
             }
         }
             
+                /**
+                * Auto generated method signature for Asynchronous Invocations
+                * 
+                * @see wtp.LoginAPIHelper#startregisterUser
+                    * @param registerUser12
+                
+                */
+                public  void startregisterUser(
+
+                 wtp.LoginAPIHelperStub.RegisterUser registerUser12,
+
+                  final wtp.LoginAPIHelperCallbackHandler callback)
+
+                throws java.rmi.RemoteException{
+
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[6].getName());
+             _operationClient.getOptions().setAction("urn:registerUser");
+             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env=null;
+              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+                    
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    registerUser12,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://wtp",
+                                                    "registerUser")), new javax.xml.namespace.QName("http://wtp",
+                                                    "registerUser"));
+                                                
+        // adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+
+                    
+                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
+                            try {
+                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+                                
+                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
+                                                                         wtp.LoginAPIHelperStub.RegisterUserResponse.class,
+                                                                         getEnvelopeNamespaces(resultEnv));
+                                        callback.receiveResultregisterUser(
+                                        (wtp.LoginAPIHelperStub.RegisterUserResponse)object);
+                                        
+                            } catch (org.apache.axis2.AxisFault e) {
+                                callback.receiveErrorregisterUser(e);
+                            }
+                            }
+
+                            public void onError(java.lang.Exception error) {
+								if (error instanceof org.apache.axis2.AxisFault) {
+									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+									org.apache.axiom.om.OMElement faultElt = f.getDetail();
+									if (faultElt!=null){
+										if (faultExceptionNameMap.containsKey(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"registerUser"))){
+											//make the fault by reflection
+											try{
+													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"registerUser"));
+													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+													java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(String.class);
+                                                    java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
+													//message class
+													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"registerUser"));
+														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+															new java.lang.Class[]{messageClass});
+													m.invoke(ex,new java.lang.Object[]{messageObject});
+													
+					
+										            callback.receiveErrorregisterUser(new java.rmi.RemoteException(ex.getMessage(), ex));
+                                            } catch(java.lang.ClassCastException e){
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorregisterUser(f);
+                                            } catch (java.lang.ClassNotFoundException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorregisterUser(f);
+                                            } catch (java.lang.NoSuchMethodException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorregisterUser(f);
+                                            } catch (java.lang.reflect.InvocationTargetException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorregisterUser(f);
+                                            } catch (java.lang.IllegalAccessException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorregisterUser(f);
+                                            } catch (java.lang.InstantiationException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorregisterUser(f);
+                                            } catch (org.apache.axis2.AxisFault e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorregisterUser(f);
+                                            }
+									    } else {
+										    callback.receiveErrorregisterUser(f);
+									    }
+									} else {
+									    callback.receiveErrorregisterUser(f);
+									}
+								} else {
+								    callback.receiveErrorregisterUser(error);
+								}
+                            }
+
+                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
+                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                                onError(fault);
+                            }
+
+                            public void onComplete() {
+                                try {
+                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                                } catch (org.apache.axis2.AxisFault axisFault) {
+                                    callback.receiveErrorregisterUser(axisFault);
+                                }
+                            }
+                });
+                        
+
+          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+        if ( _operations[6].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+          _operations[6].setMessageReceiver(
+                    _callbackReceiver);
+        }
+
+           //execute the operation client
+           _operationClient.execute(false);
+
+                    }
+                
                     /**
                      * Auto generated method signature
                      * 
                      * @see wtp.LoginAPIHelper#isTokenValid
-                     * @param isTokenValid
+                     * @param isTokenValid14
                     
                      */
 
@@ -1091,7 +2120,7 @@
 
                             public  wtp.LoginAPIHelperStub.IsTokenValidResponse isTokenValid(
 
-                            wtp.LoginAPIHelperStub.IsTokenValid isTokenValid)
+                            wtp.LoginAPIHelperStub.IsTokenValid isTokenValid14)
                         
 
                     throws java.rmi.RemoteException
@@ -1118,7 +2147,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    isTokenValid,
+                                                    isTokenValid14,
                                                     optimizeContent(new javax.xml.namespace.QName("http://wtp",
                                                     "isTokenValid")), new javax.xml.namespace.QName("http://wtp",
                                                     "isTokenValid"));
@@ -1201,11 +2230,158 @@
             }
         }
             
+                /**
+                * Auto generated method signature for Asynchronous Invocations
+                * 
+                * @see wtp.LoginAPIHelper#startisTokenValid
+                    * @param isTokenValid14
+                
+                */
+                public  void startisTokenValid(
+
+                 wtp.LoginAPIHelperStub.IsTokenValid isTokenValid14,
+
+                  final wtp.LoginAPIHelperCallbackHandler callback)
+
+                throws java.rmi.RemoteException{
+
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[7].getName());
+             _operationClient.getOptions().setAction("urn:isTokenValid");
+             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env=null;
+              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+                    
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    isTokenValid14,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://wtp",
+                                                    "isTokenValid")), new javax.xml.namespace.QName("http://wtp",
+                                                    "isTokenValid"));
+                                                
+        // adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+
+                    
+                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
+                            try {
+                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+                                
+                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
+                                                                         wtp.LoginAPIHelperStub.IsTokenValidResponse.class,
+                                                                         getEnvelopeNamespaces(resultEnv));
+                                        callback.receiveResultisTokenValid(
+                                        (wtp.LoginAPIHelperStub.IsTokenValidResponse)object);
+                                        
+                            } catch (org.apache.axis2.AxisFault e) {
+                                callback.receiveErrorisTokenValid(e);
+                            }
+                            }
+
+                            public void onError(java.lang.Exception error) {
+								if (error instanceof org.apache.axis2.AxisFault) {
+									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+									org.apache.axiom.om.OMElement faultElt = f.getDetail();
+									if (faultElt!=null){
+										if (faultExceptionNameMap.containsKey(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"isTokenValid"))){
+											//make the fault by reflection
+											try{
+													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"isTokenValid"));
+													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+													java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(String.class);
+                                                    java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
+													//message class
+													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"isTokenValid"));
+														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+															new java.lang.Class[]{messageClass});
+													m.invoke(ex,new java.lang.Object[]{messageObject});
+													
+					
+										            callback.receiveErrorisTokenValid(new java.rmi.RemoteException(ex.getMessage(), ex));
+                                            } catch(java.lang.ClassCastException e){
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorisTokenValid(f);
+                                            } catch (java.lang.ClassNotFoundException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorisTokenValid(f);
+                                            } catch (java.lang.NoSuchMethodException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorisTokenValid(f);
+                                            } catch (java.lang.reflect.InvocationTargetException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorisTokenValid(f);
+                                            } catch (java.lang.IllegalAccessException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorisTokenValid(f);
+                                            } catch (java.lang.InstantiationException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorisTokenValid(f);
+                                            } catch (org.apache.axis2.AxisFault e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorisTokenValid(f);
+                                            }
+									    } else {
+										    callback.receiveErrorisTokenValid(f);
+									    }
+									} else {
+									    callback.receiveErrorisTokenValid(f);
+									}
+								} else {
+								    callback.receiveErrorisTokenValid(error);
+								}
+                            }
+
+                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
+                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                                onError(fault);
+                            }
+
+                            public void onComplete() {
+                                try {
+                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                                } catch (org.apache.axis2.AxisFault axisFault) {
+                                    callback.receiveErrorisTokenValid(axisFault);
+                                }
+                            }
+                });
+                        
+
+          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+        if ( _operations[7].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+          _operations[7].setMessageReceiver(
+                    _callbackReceiver);
+        }
+
+           //execute the operation client
+           _operationClient.execute(false);
+
+                    }
+                
                     /**
                      * Auto generated method signature
                      * 
                      * @see wtp.LoginAPIHelper#changePassword
-                     * @param changePassword
+                     * @param changePassword16
                     
                      */
 
@@ -1213,7 +2389,7 @@
 
                             public  wtp.LoginAPIHelperStub.ChangePasswordResponse changePassword(
 
-                            wtp.LoginAPIHelperStub.ChangePassword changePassword)
+                            wtp.LoginAPIHelperStub.ChangePassword changePassword16)
                         
 
                     throws java.rmi.RemoteException
@@ -1240,7 +2416,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    changePassword,
+                                                    changePassword16,
                                                     optimizeContent(new javax.xml.namespace.QName("http://wtp",
                                                     "changePassword")), new javax.xml.namespace.QName("http://wtp",
                                                     "changePassword"));
@@ -1323,6 +2499,153 @@
             }
         }
             
+                /**
+                * Auto generated method signature for Asynchronous Invocations
+                * 
+                * @see wtp.LoginAPIHelper#startchangePassword
+                    * @param changePassword16
+                
+                */
+                public  void startchangePassword(
+
+                 wtp.LoginAPIHelperStub.ChangePassword changePassword16,
+
+                  final wtp.LoginAPIHelperCallbackHandler callback)
+
+                throws java.rmi.RemoteException{
+
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[8].getName());
+             _operationClient.getOptions().setAction("urn:changePassword");
+             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env=null;
+              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+                    
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    changePassword16,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://wtp",
+                                                    "changePassword")), new javax.xml.namespace.QName("http://wtp",
+                                                    "changePassword"));
+                                                
+        // adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+
+                    
+                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
+                            try {
+                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+                                
+                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
+                                                                         wtp.LoginAPIHelperStub.ChangePasswordResponse.class,
+                                                                         getEnvelopeNamespaces(resultEnv));
+                                        callback.receiveResultchangePassword(
+                                        (wtp.LoginAPIHelperStub.ChangePasswordResponse)object);
+                                        
+                            } catch (org.apache.axis2.AxisFault e) {
+                                callback.receiveErrorchangePassword(e);
+                            }
+                            }
+
+                            public void onError(java.lang.Exception error) {
+								if (error instanceof org.apache.axis2.AxisFault) {
+									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+									org.apache.axiom.om.OMElement faultElt = f.getDetail();
+									if (faultElt!=null){
+										if (faultExceptionNameMap.containsKey(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"changePassword"))){
+											//make the fault by reflection
+											try{
+													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"changePassword"));
+													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+													java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(String.class);
+                                                    java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
+													//message class
+													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(faultElt.getQName(),"changePassword"));
+														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+															new java.lang.Class[]{messageClass});
+													m.invoke(ex,new java.lang.Object[]{messageObject});
+													
+					
+										            callback.receiveErrorchangePassword(new java.rmi.RemoteException(ex.getMessage(), ex));
+                                            } catch(java.lang.ClassCastException e){
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorchangePassword(f);
+                                            } catch (java.lang.ClassNotFoundException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorchangePassword(f);
+                                            } catch (java.lang.NoSuchMethodException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorchangePassword(f);
+                                            } catch (java.lang.reflect.InvocationTargetException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorchangePassword(f);
+                                            } catch (java.lang.IllegalAccessException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorchangePassword(f);
+                                            } catch (java.lang.InstantiationException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorchangePassword(f);
+                                            } catch (org.apache.axis2.AxisFault e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorchangePassword(f);
+                                            }
+									    } else {
+										    callback.receiveErrorchangePassword(f);
+									    }
+									} else {
+									    callback.receiveErrorchangePassword(f);
+									}
+								} else {
+								    callback.receiveErrorchangePassword(error);
+								}
+                            }
+
+                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
+                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                                onError(fault);
+                            }
+
+                            public void onComplete() {
+                                try {
+                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                                } catch (org.apache.axis2.AxisFault axisFault) {
+                                    callback.receiveErrorchangePassword(axisFault);
+                                }
+                            }
+                });
+                        
+
+          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+        if ( _operations[8].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+          _operations[8].setMessageReceiver(
+                    _callbackReceiver);
+        }
+
+           //execute the operation client
+           _operationClient.execute(false);
+
+                    }
+                
 
 
        /**
@@ -1354,7 +2677,7 @@
         }
         return false;
     }
-     //http://localhost:8080/SeguridadSesionAxis/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/
+     //http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/
         public static class ActivateUserResponse
         implements org.apache.axis2.databinding.ADBBean{
         
@@ -8200,20 +9523,20 @@
             
 
                         /**
-                        * field for Args0
+                        * field for Username
                         */
 
                         
-                                    protected java.lang.String localArgs0 ;
+                                    protected java.lang.String localUsername ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localArgs0Tracker = false ;
+                           protected boolean localUsernameTracker = false ;
 
-                           public boolean isArgs0Specified(){
-                               return localArgs0Tracker;
+                           public boolean isUsernameSpecified(){
+                               return localUsernameTracker;
                            }
 
                            
@@ -8222,40 +9545,40 @@
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getArgs0(){
-                               return localArgs0;
+                           public  java.lang.String getUsername(){
+                               return localUsername;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Args0
+                               * @param param Username
                                */
-                               public void setArgs0(java.lang.String param){
-                            localArgs0Tracker = true;
+                               public void setUsername(java.lang.String param){
+                            localUsernameTracker = true;
                                    
-                                            this.localArgs0=param;
+                                            this.localUsername=param;
                                     
 
                                }
                             
 
                         /**
-                        * field for Args1
+                        * field for Password
                         */
 
                         
-                                    protected java.lang.String localArgs1 ;
+                                    protected java.lang.String localPassword ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localArgs1Tracker = false ;
+                           protected boolean localPasswordTracker = false ;
 
-                           public boolean isArgs1Specified(){
-                               return localArgs1Tracker;
+                           public boolean isPasswordSpecified(){
+                               return localPasswordTracker;
                            }
 
                            
@@ -8264,40 +9587,40 @@
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getArgs1(){
-                               return localArgs1;
+                           public  java.lang.String getPassword(){
+                               return localPassword;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Args1
+                               * @param param Password
                                */
-                               public void setArgs1(java.lang.String param){
-                            localArgs1Tracker = true;
+                               public void setPassword(java.lang.String param){
+                            localPasswordTracker = true;
                                    
-                                            this.localArgs1=param;
+                                            this.localPassword=param;
                                     
 
                                }
                             
 
                         /**
-                        * field for Args2
+                        * field for Nombres
                         */
 
                         
-                                    protected java.lang.String localArgs2 ;
+                                    protected java.lang.String localNombres ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localArgs2Tracker = false ;
+                           protected boolean localNombresTracker = false ;
 
-                           public boolean isArgs2Specified(){
-                               return localArgs2Tracker;
+                           public boolean isNombresSpecified(){
+                               return localNombresTracker;
                            }
 
                            
@@ -8306,40 +9629,40 @@
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getArgs2(){
-                               return localArgs2;
+                           public  java.lang.String getNombres(){
+                               return localNombres;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Args2
+                               * @param param Nombres
                                */
-                               public void setArgs2(java.lang.String param){
-                            localArgs2Tracker = true;
+                               public void setNombres(java.lang.String param){
+                            localNombresTracker = true;
                                    
-                                            this.localArgs2=param;
+                                            this.localNombres=param;
                                     
 
                                }
                             
 
                         /**
-                        * field for Args3
+                        * field for Apellido
                         */
 
                         
-                                    protected java.lang.String localArgs3 ;
+                                    protected java.lang.String localApellido ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localArgs3Tracker = false ;
+                           protected boolean localApellidoTracker = false ;
 
-                           public boolean isArgs3Specified(){
-                               return localArgs3Tracker;
+                           public boolean isApellidoSpecified(){
+                               return localApellidoTracker;
                            }
 
                            
@@ -8348,40 +9671,40 @@
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getArgs3(){
-                               return localArgs3;
+                           public  java.lang.String getApellido(){
+                               return localApellido;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Args3
+                               * @param param Apellido
                                */
-                               public void setArgs3(java.lang.String param){
-                            localArgs3Tracker = true;
+                               public void setApellido(java.lang.String param){
+                            localApellidoTracker = true;
                                    
-                                            this.localArgs3=param;
+                                            this.localApellido=param;
                                     
 
                                }
                             
 
                         /**
-                        * field for Args4
+                        * field for Padron
                         */
 
                         
-                                    protected java.lang.String localArgs4 ;
+                                    protected java.lang.String localPadron ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localArgs4Tracker = false ;
+                           protected boolean localPadronTracker = false ;
 
-                           public boolean isArgs4Specified(){
-                               return localArgs4Tracker;
+                           public boolean isPadronSpecified(){
+                               return localPadronTracker;
                            }
 
                            
@@ -8390,40 +9713,40 @@
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getArgs4(){
-                               return localArgs4;
+                           public  java.lang.String getPadron(){
+                               return localPadron;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Args4
+                               * @param param Padron
                                */
-                               public void setArgs4(java.lang.String param){
-                            localArgs4Tracker = true;
+                               public void setPadron(java.lang.String param){
+                            localPadronTracker = true;
                                    
-                                            this.localArgs4=param;
+                                            this.localPadron=param;
                                     
 
                                }
                             
 
                         /**
-                        * field for Args5
+                        * field for Fecha
                         */
 
                         
-                                    protected java.lang.String localArgs5 ;
+                                    protected java.lang.String localFecha ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localArgs5Tracker = false ;
+                           protected boolean localFechaTracker = false ;
 
-                           public boolean isArgs5Specified(){
-                               return localArgs5Tracker;
+                           public boolean isFechaSpecified(){
+                               return localFechaTracker;
                            }
 
                            
@@ -8432,40 +9755,40 @@
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getArgs5(){
-                               return localArgs5;
+                           public  java.lang.String getFecha(){
+                               return localFecha;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Args5
+                               * @param param Fecha
                                */
-                               public void setArgs5(java.lang.String param){
-                            localArgs5Tracker = true;
+                               public void setFecha(java.lang.String param){
+                            localFechaTracker = true;
                                    
-                                            this.localArgs5=param;
+                                            this.localFecha=param;
                                     
 
                                }
                             
 
                         /**
-                        * field for Args6
+                        * field for Email
                         */
 
                         
-                                    protected java.lang.String localArgs6 ;
+                                    protected java.lang.String localEmail ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localArgs6Tracker = false ;
+                           protected boolean localEmailTracker = false ;
 
-                           public boolean isArgs6Specified(){
-                               return localArgs6Tracker;
+                           public boolean isEmailSpecified(){
+                               return localEmailTracker;
                            }
 
                            
@@ -8474,40 +9797,40 @@
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getArgs6(){
-                               return localArgs6;
+                           public  java.lang.String getEmail(){
+                               return localEmail;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Args6
+                               * @param param Email
                                */
-                               public void setArgs6(java.lang.String param){
-                            localArgs6Tracker = true;
+                               public void setEmail(java.lang.String param){
+                            localEmailTracker = true;
                                    
-                                            this.localArgs6=param;
+                                            this.localEmail=param;
                                     
 
                                }
                             
 
                         /**
-                        * field for Args7
+                        * field for Rol
                         */
 
                         
-                                    protected int localArgs7 ;
+                                    protected int localRol ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localArgs7Tracker = false ;
+                           protected boolean localRolTracker = false ;
 
-                           public boolean isArgs7Specified(){
-                               return localArgs7Tracker;
+                           public boolean isRolSpecified(){
+                               return localRolTracker;
                            }
 
                            
@@ -8516,23 +9839,23 @@
                            * Auto generated getter method
                            * @return int
                            */
-                           public  int getArgs7(){
-                               return localArgs7;
+                           public  int getRol(){
+                               return localRol;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Args7
+                               * @param param Rol
                                */
-                               public void setArgs7(int param){
+                               public void setRol(int param){
                             
                                        // setting primitive attribute tracker to true
-                                       localArgs7Tracker =
+                                       localRolTracker =
                                        param != java.lang.Integer.MIN_VALUE;
                                    
-                                            this.localArgs7=param;
+                                            this.localRol=param;
                                     
 
                                }
@@ -8596,12 +9919,12 @@
 
                
                    }
-                if (localArgs0Tracker){
+                if (localUsernameTracker){
                                     namespace = "http://wtp";
-                                    writeStartElement(null, namespace, "args0", xmlWriter);
+                                    writeStartElement(null, namespace, "username", xmlWriter);
                              
 
-                                          if (localArgs0==null){
+                                          if (localUsername==null){
                                               // write the nil attribute
                                               
                                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
@@ -8609,17 +9932,17 @@
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localArgs0);
+                                                   xmlWriter.writeCharacters(localUsername);
                                             
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localArgs1Tracker){
+                             } if (localPasswordTracker){
                                     namespace = "http://wtp";
-                                    writeStartElement(null, namespace, "args1", xmlWriter);
+                                    writeStartElement(null, namespace, "password", xmlWriter);
                              
 
-                                          if (localArgs1==null){
+                                          if (localPassword==null){
                                               // write the nil attribute
                                               
                                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
@@ -8627,17 +9950,17 @@
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localArgs1);
+                                                   xmlWriter.writeCharacters(localPassword);
                                             
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localArgs2Tracker){
+                             } if (localNombresTracker){
                                     namespace = "http://wtp";
-                                    writeStartElement(null, namespace, "args2", xmlWriter);
+                                    writeStartElement(null, namespace, "nombres", xmlWriter);
                              
 
-                                          if (localArgs2==null){
+                                          if (localNombres==null){
                                               // write the nil attribute
                                               
                                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
@@ -8645,17 +9968,17 @@
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localArgs2);
+                                                   xmlWriter.writeCharacters(localNombres);
                                             
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localArgs3Tracker){
+                             } if (localApellidoTracker){
                                     namespace = "http://wtp";
-                                    writeStartElement(null, namespace, "args3", xmlWriter);
+                                    writeStartElement(null, namespace, "apellido", xmlWriter);
                              
 
-                                          if (localArgs3==null){
+                                          if (localApellido==null){
                                               // write the nil attribute
                                               
                                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
@@ -8663,17 +9986,17 @@
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localArgs3);
+                                                   xmlWriter.writeCharacters(localApellido);
                                             
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localArgs4Tracker){
+                             } if (localPadronTracker){
                                     namespace = "http://wtp";
-                                    writeStartElement(null, namespace, "args4", xmlWriter);
+                                    writeStartElement(null, namespace, "padron", xmlWriter);
                              
 
-                                          if (localArgs4==null){
+                                          if (localPadron==null){
                                               // write the nil attribute
                                               
                                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
@@ -8681,17 +10004,17 @@
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localArgs4);
+                                                   xmlWriter.writeCharacters(localPadron);
                                             
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localArgs5Tracker){
+                             } if (localFechaTracker){
                                     namespace = "http://wtp";
-                                    writeStartElement(null, namespace, "args5", xmlWriter);
+                                    writeStartElement(null, namespace, "fecha", xmlWriter);
                              
 
-                                          if (localArgs5==null){
+                                          if (localFecha==null){
                                               // write the nil attribute
                                               
                                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
@@ -8699,17 +10022,17 @@
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localArgs5);
+                                                   xmlWriter.writeCharacters(localFecha);
                                             
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localArgs6Tracker){
+                             } if (localEmailTracker){
                                     namespace = "http://wtp";
-                                    writeStartElement(null, namespace, "args6", xmlWriter);
+                                    writeStartElement(null, namespace, "email", xmlWriter);
                              
 
-                                          if (localArgs6==null){
+                                          if (localEmail==null){
                                               // write the nil attribute
                                               
                                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
@@ -8717,21 +10040,21 @@
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localArgs6);
+                                                   xmlWriter.writeCharacters(localEmail);
                                             
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localArgs7Tracker){
+                             } if (localRolTracker){
                                     namespace = "http://wtp";
-                                    writeStartElement(null, namespace, "args7", xmlWriter);
+                                    writeStartElement(null, namespace, "rol", xmlWriter);
                              
-                                               if (localArgs7==java.lang.Integer.MIN_VALUE) {
+                                               if (localRol==java.lang.Integer.MIN_VALUE) {
                                            
-                                                         throw new org.apache.axis2.databinding.ADBException("args7 cannot be null!!");
+                                                         throw new org.apache.axis2.databinding.ADBException("rol cannot be null!!");
                                                       
                                                } else {
-                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localArgs7));
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localRol));
                                                }
                                     
                                    xmlWriter.writeEndElement();
@@ -8920,54 +10243,54 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localArgs0Tracker){
+                 if (localUsernameTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://wtp",
-                                                                      "args0"));
+                                                                      "username"));
                                  
-                                         elementList.add(localArgs0==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localArgs0));
-                                    } if (localArgs1Tracker){
+                                         elementList.add(localUsername==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUsername));
+                                    } if (localPasswordTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://wtp",
-                                                                      "args1"));
+                                                                      "password"));
                                  
-                                         elementList.add(localArgs1==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localArgs1));
-                                    } if (localArgs2Tracker){
+                                         elementList.add(localPassword==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPassword));
+                                    } if (localNombresTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://wtp",
-                                                                      "args2"));
+                                                                      "nombres"));
                                  
-                                         elementList.add(localArgs2==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localArgs2));
-                                    } if (localArgs3Tracker){
+                                         elementList.add(localNombres==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localNombres));
+                                    } if (localApellidoTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://wtp",
-                                                                      "args3"));
+                                                                      "apellido"));
                                  
-                                         elementList.add(localArgs3==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localArgs3));
-                                    } if (localArgs4Tracker){
+                                         elementList.add(localApellido==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localApellido));
+                                    } if (localPadronTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://wtp",
-                                                                      "args4"));
+                                                                      "padron"));
                                  
-                                         elementList.add(localArgs4==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localArgs4));
-                                    } if (localArgs5Tracker){
+                                         elementList.add(localPadron==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPadron));
+                                    } if (localFechaTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://wtp",
-                                                                      "args5"));
+                                                                      "fecha"));
                                  
-                                         elementList.add(localArgs5==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localArgs5));
-                                    } if (localArgs6Tracker){
+                                         elementList.add(localFecha==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localFecha));
+                                    } if (localEmailTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://wtp",
-                                                                      "args6"));
+                                                                      "email"));
                                  
-                                         elementList.add(localArgs6==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localArgs6));
-                                    } if (localArgs7Tracker){
+                                         elementList.add(localEmail==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localEmail));
+                                    } if (localRolTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://wtp",
-                                                                      "args7"));
+                                                                      "rol"));
                                  
                                 elementList.add(
-                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localArgs7));
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localRol));
                             }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
@@ -9047,7 +10370,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","args0").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","username").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
@@ -9055,7 +10378,7 @@
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setArgs0(
+                                              object.setUsername(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                             
                                        } else {
@@ -9075,7 +10398,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","args1").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","password").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
@@ -9083,7 +10406,7 @@
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setArgs1(
+                                              object.setPassword(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                             
                                        } else {
@@ -9103,7 +10426,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","args2").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","nombres").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
@@ -9111,7 +10434,7 @@
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setArgs2(
+                                              object.setNombres(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                             
                                        } else {
@@ -9131,7 +10454,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","args3").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","apellido").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
@@ -9139,7 +10462,7 @@
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setArgs3(
+                                              object.setApellido(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                             
                                        } else {
@@ -9159,7 +10482,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","args4").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","padron").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
@@ -9167,7 +10490,7 @@
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setArgs4(
+                                              object.setPadron(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                             
                                        } else {
@@ -9187,7 +10510,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","args5").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","fecha").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
@@ -9195,7 +10518,7 @@
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setArgs5(
+                                              object.setFecha(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                             
                                        } else {
@@ -9215,7 +10538,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","args6").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","email").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
@@ -9223,7 +10546,7 @@
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setArgs6(
+                                              object.setEmail(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                             
                                        } else {
@@ -9243,17 +10566,17 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","args7").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://wtp","rol").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"args7" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"rol" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setArgs7(
+                                              object.setRol(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
@@ -9262,7 +10585,7 @@
                                 
                                     else {
                                         
-                                               object.setArgs7(java.lang.Integer.MIN_VALUE);
+                                               object.setRol(java.lang.Integer.MIN_VALUE);
                                            
                                     }
                                   
