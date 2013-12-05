@@ -20,7 +20,7 @@ public class CORSFilter implements Filter {
             // Asumimos que cualquier request del frontend es seguro, así que le permitimos
             // cualquier header
             String allowedHeaders = request.getHeader("Access-Control-Request-Headers");
-            response.addHeader("Access-Control-Allow-Origin", "http://localhost:5000");
+            response.addHeader("Access-Control-Allow-Origin", "*");
             response.addHeader("Access-Control-Allow-Headers", allowedHeaders);
         }
     }
