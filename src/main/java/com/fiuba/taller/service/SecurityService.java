@@ -117,18 +117,6 @@ public class SecurityService {
 		return Response.ok().entity(response).build();
 	}
 
-    @OPTIONS
-    @Path("login")
-    public Response loginOptions(@Context HttpHeaders hh) {
-        // Asumimos que cualquier request del frontend es seguro, así que le permitimos
-        // cualquier header
-        String allowedHeaders = hh.getHeaderString("Access-Control-Request-Headers");
-        return Response.ok()
-                .header("Access-Control-Allow-Origin", "http://localhost:5000")
-                .header("Access-Control-Allow-Headers", allowedHeaders)
-                .build();
-    }
-
 	@POST
 	@Path("login")
 	@Consumes(MediaType.APPLICATION_JSON)
