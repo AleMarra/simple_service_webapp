@@ -5,9 +5,7 @@ import java.io.StringReader;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.NewCookie;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 
 import com.fiuba.taller.service.requests.EnableAccountRequest;
 import com.fiuba.taller.service.requests.LoginRequest;
@@ -118,7 +116,6 @@ public class SecurityService {
 
 		return Response.ok().entity(response).build();
 	}
-	
 
 	@POST
 	@Path("login")
@@ -483,7 +480,7 @@ public class SecurityService {
 
 	@POST
 	@Path("enableaccount")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response enableAccount(EnableAccountRequest request,@CookieParam("authToken") String authToken)
 			throws ParserConfigurationException, SAXException, IOException
 	{
