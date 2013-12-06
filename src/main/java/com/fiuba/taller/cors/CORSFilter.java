@@ -13,22 +13,28 @@ public class CORSFilter implements Filter {
     }
 
     private void doFilter(HttpServletRequest request,
-                          HttpServletResponse response) {
+                          HttpServletResponse response,
+                          FilterChain chain) throws IOException, ServletException {
 
-        // CORS preflight request es siempre HTTP OPTIONS
-        if (request.getMethod().equals("OPTIONS")) {
-            // Asumimos que cualquier request del frontend es seguro, así que le permitimos
-            // cualquier header
-            String allowedHeaders = request.getHeader("Access-Control-Request-Headers");
-            response.addHeader("Access-Control-Allow-Origin", "*");
-            response.addHeader("Access-Control-Allow-Headers", allowedHeaders);
+        // Asumimos que cualquier request del frontend es seguro, así que le permitimos
+        // cualquier header
+        String allowedHeaders = request.getHeader("Access-Control-Request-Headers");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", allowedHeaders);
+
+        // CORS preflight request es siempre HTTP OPTIONS, y no hay ws en nuestro dominio que use
+        // este verbo. Entonces, sólo se propaga si no es OPTIONS
+        if (!request.getMethod().equalsIgnoreCase("OPTIONS")) {
+            chain.doFilter(request, response);
         }
     }
 
     @Override()
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if (servletRequest instanceof HttpServletRequest && servletResponse instanceof HttpServletResponse) {
-            doFilter((HttpServletRequest)servletRequest, (HttpServletResponse)servletResponse);
+            doFilter((HttpServletRequest)servletRequest, (HttpServletResponse)servletResponse, filterChain);
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 

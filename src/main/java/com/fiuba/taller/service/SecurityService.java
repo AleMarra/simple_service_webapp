@@ -58,7 +58,7 @@ public class SecurityService {
         response.setSuccess(false);
         response.setReason("El servicio de " + service + " no está disponible.");
 
-        return Response.status(509).entity(response).build();
+        return Response.status(502).entity(response).build();
     }
     
     // El valor verdadero en String debería estar definido en algún archivo de cosas comunes, y en ese caso
