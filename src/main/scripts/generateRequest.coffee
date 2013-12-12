@@ -15,7 +15,7 @@ requestName = program.args.shift()
 serviceName = program.args.shift()
 payload     = program.args.shift()
 
-if !requestName|| !payload
+if !requestName || !serviceName || !payload
   program.help()
 
 payload = JSON.parse(payload)
