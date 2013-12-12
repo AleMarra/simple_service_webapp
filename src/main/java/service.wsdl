@@ -1,0 +1,1224 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ax27="http://dom.w3c.org/xsd" xmlns:ns="http://actividad.taller.fiuba" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax23="http://io.java/xsd" xmlns:ax21="http://excepcion.actividad.taller.fiuba/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax22="http://rmi.java/xsd" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://actividad.taller.fiuba">
+    <wsdl:types>
+        <xs:schema xmlns:ax24="http://io.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://rmi.java/xsd">
+            <xs:import namespace="http://io.java/xsd"/>
+            <xs:complexType name="RemoteException">
+                <xs:complexContent>
+                    <xs:extension base="ax23:IOException">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="cause" nillable="true" type="xs:anyType"/>
+                            <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax28="http://dom.w3c.org/xsd" xmlns:ax26="http://excepcion.actividad.taller.fiuba/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://actividad.taller.fiuba">
+            <xs:import namespace="http://excepcion.actividad.taller.fiuba/xsd"/>
+            <xs:import namespace="http://dom.w3c.org/xsd"/>
+            <xs:element name="ActividadXmlErroneoExcepcion">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="XmlErroneoExcepcion" nillable="true" type="ax26:XmlErroneoExcepcion"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearActividadIndividualEvaluable">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="xmlPropiedades" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearActividadIndividualEvaluableResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearActividadGrupalEvaluable">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="xmlPropiedades" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearActividadGrupalEvaluableResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ActividadParticipanteExistenteExcepcion">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="ParticipanteExistenteExcepcion" nillable="true" type="ax26:ParticipanteExistenteExcepcion"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="agregarParticipante">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ActividadParticipanteInexistenteExcepcion">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="ParticipanteInexistenteExcepcion" nillable="true" type="ax26:ParticipanteInexistenteExcepcion"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarParticipante">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ActividadTransformerException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="TransformerException" nillable="true" type="xs:anyType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getStringFromDocument">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="doc" nillable="true" type="ax27:Document"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getStringFromDocumentResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getParticipantes">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getParticipantesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getParticipante">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                        <xs:element minOccurs="0" name="idParticipante" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="agregarGrupo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                        <xs:element minOccurs="0" name="xmlGrupo" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarGrupo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                        <xs:element minOccurs="0" name="idGrupo" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getGrupos">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getGruposResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPropiedades">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPropiedadesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="evaluar">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                        <xs:element minOccurs="0" name="idEvaluado" type="xs:long"/>
+                        <xs:element minOccurs="0" name="nota" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ActividadNotaInexistenteExcepcion">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="NotaInexistenteExcepcion" nillable="true" type="ax26:NotaInexistenteExcepcion"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNota">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                        <xs:element minOccurs="0" name="idEvaluado" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNotaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNotas">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNotasResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNombre">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNombreResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setNombre">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idActividad" type="xs:long"/>
+                        <xs:element minOccurs="0" name="nombre" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getActividades">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idAmbito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="tipoAmbito" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getActividadesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearActividadIndividual">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="xmlPropiedades" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearActividadIndividualResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearActividadGrupal">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="xmlPropiedades" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearActividadGrupalResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://dom.w3c.org/xsd">
+            <xs:complexType name="Document">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="doctype" nillable="true" type="ax27:DocumentType"/>
+                    <xs:element minOccurs="0" name="documentElement" nillable="true" type="ax27:Element"/>
+                    <xs:element minOccurs="0" name="documentURI" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="domConfig" nillable="true" type="ax27:DOMConfiguration"/>
+                    <xs:element minOccurs="0" name="implementation" nillable="true" type="ax27:DOMImplementation"/>
+                    <xs:element minOccurs="0" name="inputEncoding" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strictErrorChecking" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="xmlEncoding" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="xmlStandalone" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="xmlVersion" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DocumentType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="entities" nillable="true" type="ax27:NamedNodeMap"/>
+                    <xs:element minOccurs="0" name="internalSubset" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="notations" nillable="true" type="ax27:NamedNodeMap"/>
+                    <xs:element minOccurs="0" name="publicId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="systemId" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="NamedNodeMap">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="length" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Element">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="schemaTypeInfo" nillable="true" type="ax27:TypeInfo"/>
+                    <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TypeInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="typeName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="typeNamespace" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DOMConfiguration">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="parameterNames" nillable="true" type="ax27:DOMStringList"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DOMStringList">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="length" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DOMImplementation">
+                <xs:sequence/>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://io.java/xsd">
+            <xs:complexType name="IOException">
+                <xs:sequence/>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax25="http://rmi.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://excepcion.actividad.taller.fiuba/xsd">
+            <xs:import namespace="http://rmi.java/xsd"/>
+            <xs:complexType name="XmlErroneoExcepcion">
+                <xs:complexContent>
+                    <xs:extension base="ax25:RemoteException">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="ParticipanteExistenteExcepcion">
+                <xs:complexContent>
+                    <xs:extension base="ax25:RemoteException">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="ParticipanteInexistenteExcepcion">
+                <xs:complexContent>
+                    <xs:extension base="ax25:RemoteException">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="NotaInexistenteExcepcion">
+                <xs:complexContent>
+                    <xs:extension base="ax25:RemoteException">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="agregarGrupoRequest">
+        <wsdl:part name="parameters" element="ns:agregarGrupo"/>
+    </wsdl:message>
+    <wsdl:message name="ActividadXmlErroneoExcepcion">
+        <wsdl:part name="parameters" element="ns:ActividadXmlErroneoExcepcion"/>
+    </wsdl:message>
+    <wsdl:message name="eliminarGrupoRequest">
+        <wsdl:part name="parameters" element="ns:eliminarGrupo"/>
+    </wsdl:message>
+    <wsdl:message name="getNotasRequest">
+        <wsdl:part name="parameters" element="ns:getNotas"/>
+    </wsdl:message>
+    <wsdl:message name="getNotasResponse">
+        <wsdl:part name="parameters" element="ns:getNotasResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getStringFromDocumentRequest">
+        <wsdl:part name="parameters" element="ns:getStringFromDocument"/>
+    </wsdl:message>
+    <wsdl:message name="getStringFromDocumentResponse">
+        <wsdl:part name="parameters" element="ns:getStringFromDocumentResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ActividadTransformerException">
+        <wsdl:part name="parameters" element="ns:ActividadTransformerException"/>
+    </wsdl:message>
+    <wsdl:message name="setNombreRequest">
+        <wsdl:part name="parameters" element="ns:setNombre"/>
+    </wsdl:message>
+    <wsdl:message name="getActividadesRequest">
+        <wsdl:part name="parameters" element="ns:getActividades"/>
+    </wsdl:message>
+    <wsdl:message name="getActividadesResponse">
+        <wsdl:part name="parameters" element="ns:getActividadesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="crearActividadGrupalEvaluableRequest">
+        <wsdl:part name="parameters" element="ns:crearActividadGrupalEvaluable"/>
+    </wsdl:message>
+    <wsdl:message name="crearActividadGrupalEvaluableResponse">
+        <wsdl:part name="parameters" element="ns:crearActividadGrupalEvaluableResponse"/>
+    </wsdl:message>
+    <wsdl:message name="agregarParticipanteRequest">
+        <wsdl:part name="parameters" element="ns:agregarParticipante"/>
+    </wsdl:message>
+    <wsdl:message name="ActividadParticipanteExistenteExcepcion">
+        <wsdl:part name="parameters" element="ns:ActividadParticipanteExistenteExcepcion"/>
+    </wsdl:message>
+    <wsdl:message name="getNombreRequest">
+        <wsdl:part name="parameters" element="ns:getNombre"/>
+    </wsdl:message>
+    <wsdl:message name="getNombreResponse">
+        <wsdl:part name="parameters" element="ns:getNombreResponse"/>
+    </wsdl:message>
+    <wsdl:message name="crearActividadIndividualEvaluableRequest">
+        <wsdl:part name="parameters" element="ns:crearActividadIndividualEvaluable"/>
+    </wsdl:message>
+    <wsdl:message name="crearActividadIndividualEvaluableResponse">
+        <wsdl:part name="parameters" element="ns:crearActividadIndividualEvaluableResponse"/>
+    </wsdl:message>
+    <wsdl:message name="eliminarParticipanteRequest">
+        <wsdl:part name="parameters" element="ns:eliminarParticipante"/>
+    </wsdl:message>
+    <wsdl:message name="ActividadParticipanteInexistenteExcepcion">
+        <wsdl:part name="parameters" element="ns:ActividadParticipanteInexistenteExcepcion"/>
+    </wsdl:message>
+    <wsdl:message name="crearActividadGrupalRequest">
+        <wsdl:part name="parameters" element="ns:crearActividadGrupal"/>
+    </wsdl:message>
+    <wsdl:message name="crearActividadGrupalResponse">
+        <wsdl:part name="parameters" element="ns:crearActividadGrupalResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getParticipanteRequest">
+        <wsdl:part name="parameters" element="ns:getParticipante"/>
+    </wsdl:message>
+    <wsdl:message name="crearActividadIndividualRequest">
+        <wsdl:part name="parameters" element="ns:crearActividadIndividual"/>
+    </wsdl:message>
+    <wsdl:message name="crearActividadIndividualResponse">
+        <wsdl:part name="parameters" element="ns:crearActividadIndividualResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getGruposRequest">
+        <wsdl:part name="parameters" element="ns:getGrupos"/>
+    </wsdl:message>
+    <wsdl:message name="getGruposResponse">
+        <wsdl:part name="parameters" element="ns:getGruposResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getParticipantesRequest">
+        <wsdl:part name="parameters" element="ns:getParticipantes"/>
+    </wsdl:message>
+    <wsdl:message name="getParticipantesResponse">
+        <wsdl:part name="parameters" element="ns:getParticipantesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getNotaRequest">
+        <wsdl:part name="parameters" element="ns:getNota"/>
+    </wsdl:message>
+    <wsdl:message name="getNotaResponse">
+        <wsdl:part name="parameters" element="ns:getNotaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ActividadNotaInexistenteExcepcion">
+        <wsdl:part name="parameters" element="ns:ActividadNotaInexistenteExcepcion"/>
+    </wsdl:message>
+    <wsdl:message name="getPropiedadesRequest">
+        <wsdl:part name="parameters" element="ns:getPropiedades"/>
+    </wsdl:message>
+    <wsdl:message name="getPropiedadesResponse">
+        <wsdl:part name="parameters" element="ns:getPropiedadesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="evaluarRequest">
+        <wsdl:part name="parameters" element="ns:evaluar"/>
+    </wsdl:message>
+    <wsdl:portType name="ActividadPortType">
+        <wsdl:operation name="agregarGrupo">
+            <wsdl:input message="ns:agregarGrupoRequest" wsaw:Action="urn:agregarGrupo"/>
+            <wsdl:output message="ns:null" wsaw:Action="urn:agregarGrupoResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:agregarGrupoActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarGrupo">
+            <wsdl:input message="ns:eliminarGrupoRequest" wsaw:Action="urn:eliminarGrupo"/>
+            <wsdl:output message="ns:null" wsaw:Action="urn:eliminarGrupoResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:eliminarGrupoActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="getNotas">
+            <wsdl:input message="ns:getNotasRequest" wsaw:Action="urn:getNotas"/>
+            <wsdl:output message="ns:getNotasResponse" wsaw:Action="urn:getNotasResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:getNotasActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="getStringFromDocument">
+            <wsdl:input message="ns:getStringFromDocumentRequest" wsaw:Action="urn:getStringFromDocument"/>
+            <wsdl:output message="ns:getStringFromDocumentResponse" wsaw:Action="urn:getStringFromDocumentResponse"/>
+            <wsdl:fault message="ns:ActividadTransformerException" name="ActividadTransformerException" wsaw:Action="urn:getStringFromDocumentActividadTransformerException"/>
+        </wsdl:operation>
+        <wsdl:operation name="setNombre">
+            <wsdl:input message="ns:setNombreRequest" wsaw:Action="urn:setNombre"/>
+            <wsdl:output message="ns:null" wsaw:Action="urn:setNombreResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:setNombreActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="getActividades">
+            <wsdl:input message="ns:getActividadesRequest" wsaw:Action="urn:getActividades"/>
+            <wsdl:output message="ns:getActividadesResponse" wsaw:Action="urn:getActividadesResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadGrupalEvaluable">
+            <wsdl:input message="ns:crearActividadGrupalEvaluableRequest" wsaw:Action="urn:crearActividadGrupalEvaluable"/>
+            <wsdl:output message="ns:crearActividadGrupalEvaluableResponse" wsaw:Action="urn:crearActividadGrupalEvaluableResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:crearActividadGrupalEvaluableActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="agregarParticipante">
+            <wsdl:input message="ns:agregarParticipanteRequest" wsaw:Action="urn:agregarParticipante"/>
+            <wsdl:output message="ns:null" wsaw:Action="urn:agregarParticipanteResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:agregarParticipanteActividadXmlErroneoExcepcion"/>
+            <wsdl:fault message="ns:ActividadParticipanteExistenteExcepcion" name="ActividadParticipanteExistenteExcepcion" wsaw:Action="urn:agregarParticipanteActividadParticipanteExistenteExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="getNombre">
+            <wsdl:input message="ns:getNombreRequest" wsaw:Action="urn:getNombre"/>
+            <wsdl:output message="ns:getNombreResponse" wsaw:Action="urn:getNombreResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:getNombreActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadIndividualEvaluable">
+            <wsdl:input message="ns:crearActividadIndividualEvaluableRequest" wsaw:Action="urn:crearActividadIndividualEvaluable"/>
+            <wsdl:output message="ns:crearActividadIndividualEvaluableResponse" wsaw:Action="urn:crearActividadIndividualEvaluableResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:crearActividadIndividualEvaluableActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarParticipante">
+            <wsdl:input message="ns:eliminarParticipanteRequest" wsaw:Action="urn:eliminarParticipante"/>
+            <wsdl:output message="ns:null" wsaw:Action="urn:eliminarParticipanteResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:eliminarParticipanteActividadXmlErroneoExcepcion"/>
+            <wsdl:fault message="ns:ActividadParticipanteInexistenteExcepcion" name="ActividadParticipanteInexistenteExcepcion" wsaw:Action="urn:eliminarParticipanteActividadParticipanteInexistenteExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadGrupal">
+            <wsdl:input message="ns:crearActividadGrupalRequest" wsaw:Action="urn:crearActividadGrupal"/>
+            <wsdl:output message="ns:crearActividadGrupalResponse" wsaw:Action="urn:crearActividadGrupalResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:crearActividadGrupalActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="getParticipante">
+            <wsdl:input message="ns:getParticipanteRequest" wsaw:Action="urn:getParticipante"/>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadIndividual">
+            <wsdl:input message="ns:crearActividadIndividualRequest" wsaw:Action="urn:crearActividadIndividual"/>
+            <wsdl:output message="ns:crearActividadIndividualResponse" wsaw:Action="urn:crearActividadIndividualResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:crearActividadIndividualActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="getGrupos">
+            <wsdl:input message="ns:getGruposRequest" wsaw:Action="urn:getGrupos"/>
+            <wsdl:output message="ns:getGruposResponse" wsaw:Action="urn:getGruposResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:getGruposActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="getParticipantes">
+            <wsdl:input message="ns:getParticipantesRequest" wsaw:Action="urn:getParticipantes"/>
+            <wsdl:output message="ns:getParticipantesResponse" wsaw:Action="urn:getParticipantesResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:getParticipantesActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="getNota">
+            <wsdl:input message="ns:getNotaRequest" wsaw:Action="urn:getNota"/>
+            <wsdl:output message="ns:getNotaResponse" wsaw:Action="urn:getNotaResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:getNotaActividadXmlErroneoExcepcion"/>
+            <wsdl:fault message="ns:ActividadNotaInexistenteExcepcion" name="ActividadNotaInexistenteExcepcion" wsaw:Action="urn:getNotaActividadNotaInexistenteExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPropiedades">
+            <wsdl:input message="ns:getPropiedadesRequest" wsaw:Action="urn:getPropiedades"/>
+            <wsdl:output message="ns:getPropiedadesResponse" wsaw:Action="urn:getPropiedadesResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:getPropiedadesActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+        <wsdl:operation name="evaluar">
+            <wsdl:input message="ns:evaluarRequest" wsaw:Action="urn:evaluar"/>
+            <wsdl:output message="ns:null" wsaw:Action="urn:evaluarResponse"/>
+            <wsdl:fault message="ns:ActividadXmlErroneoExcepcion" name="ActividadXmlErroneoExcepcion" wsaw:Action="urn:evaluarActividadXmlErroneoExcepcion"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ActividadSoap11Binding" type="ns:ActividadPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="agregarGrupo">
+            <soap:operation soapAction="urn:agregarGrupo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarGrupo">
+            <soap:operation soapAction="urn:eliminarGrupo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getStringFromDocument">
+            <soap:operation soapAction="urn:getStringFromDocument" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadTransformerException">
+                <soap:fault use="literal" name="ActividadTransformerException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getNotas">
+            <soap:operation soapAction="urn:getNotas" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setNombre">
+            <soap:operation soapAction="urn:setNombre" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getActividades">
+            <soap:operation soapAction="urn:getActividades" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadGrupalEvaluable">
+            <soap:operation soapAction="urn:crearActividadGrupalEvaluable" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="agregarParticipante">
+            <soap:operation soapAction="urn:agregarParticipante" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadParticipanteExistenteExcepcion">
+                <soap:fault use="literal" name="ActividadParticipanteExistenteExcepcion"/>
+            </wsdl:fault>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadIndividualEvaluable">
+            <soap:operation soapAction="urn:crearActividadIndividualEvaluable" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getNombre">
+            <soap:operation soapAction="urn:getNombre" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarParticipante">
+            <soap:operation soapAction="urn:eliminarParticipante" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+            <wsdl:fault name="ActividadParticipanteInexistenteExcepcion">
+                <soap:fault use="literal" name="ActividadParticipanteInexistenteExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadGrupal">
+            <soap:operation soapAction="urn:crearActividadGrupal" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getParticipante">
+            <soap:operation soapAction="urn:getParticipante" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadIndividual">
+            <soap:operation soapAction="urn:crearActividadIndividual" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getGrupos">
+            <soap:operation soapAction="urn:getGrupos" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getParticipantes">
+            <soap:operation soapAction="urn:getParticipantes" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getNota">
+            <soap:operation soapAction="urn:getNota" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadNotaInexistenteExcepcion">
+                <soap:fault use="literal" name="ActividadNotaInexistenteExcepcion"/>
+            </wsdl:fault>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPropiedades">
+            <soap:operation soapAction="urn:getPropiedades" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="evaluar">
+            <soap:operation soapAction="urn:evaluar" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ActividadSoap12Binding" type="ns:ActividadPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="agregarGrupo">
+            <soap12:operation soapAction="urn:agregarGrupo" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarGrupo">
+            <soap12:operation soapAction="urn:eliminarGrupo" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getStringFromDocument">
+            <soap12:operation soapAction="urn:getStringFromDocument" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadTransformerException">
+                <soap12:fault use="literal" name="ActividadTransformerException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getNotas">
+            <soap12:operation soapAction="urn:getNotas" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setNombre">
+            <soap12:operation soapAction="urn:setNombre" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getActividades">
+            <soap12:operation soapAction="urn:getActividades" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadGrupalEvaluable">
+            <soap12:operation soapAction="urn:crearActividadGrupalEvaluable" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="agregarParticipante">
+            <soap12:operation soapAction="urn:agregarParticipante" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadParticipanteExistenteExcepcion">
+                <soap12:fault use="literal" name="ActividadParticipanteExistenteExcepcion"/>
+            </wsdl:fault>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadIndividualEvaluable">
+            <soap12:operation soapAction="urn:crearActividadIndividualEvaluable" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getNombre">
+            <soap12:operation soapAction="urn:getNombre" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarParticipante">
+            <soap12:operation soapAction="urn:eliminarParticipante" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+            <wsdl:fault name="ActividadParticipanteInexistenteExcepcion">
+                <soap12:fault use="literal" name="ActividadParticipanteInexistenteExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadGrupal">
+            <soap12:operation soapAction="urn:crearActividadGrupal" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getParticipante">
+            <soap12:operation soapAction="urn:getParticipante" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadIndividual">
+            <soap12:operation soapAction="urn:crearActividadIndividual" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getGrupos">
+            <soap12:operation soapAction="urn:getGrupos" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getParticipantes">
+            <soap12:operation soapAction="urn:getParticipantes" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getNota">
+            <soap12:operation soapAction="urn:getNota" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadNotaInexistenteExcepcion">
+                <soap12:fault use="literal" name="ActividadNotaInexistenteExcepcion"/>
+            </wsdl:fault>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPropiedades">
+            <soap12:operation soapAction="urn:getPropiedades" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="evaluar">
+            <soap12:operation soapAction="urn:evaluar" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ActividadXmlErroneoExcepcion">
+                <soap12:fault use="literal" name="ActividadXmlErroneoExcepcion"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ActividadHttpBinding" type="ns:ActividadPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="agregarGrupo">
+            <http:operation location="agregarGrupo"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarGrupo">
+            <http:operation location="eliminarGrupo"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getStringFromDocument">
+            <http:operation location="getStringFromDocument"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNotas">
+            <http:operation location="getNotas"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setNombre">
+            <http:operation location="setNombre"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getActividades">
+            <http:operation location="getActividades"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadGrupalEvaluable">
+            <http:operation location="crearActividadGrupalEvaluable"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="agregarParticipante">
+            <http:operation location="agregarParticipante"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadIndividualEvaluable">
+            <http:operation location="crearActividadIndividualEvaluable"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNombre">
+            <http:operation location="getNombre"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarParticipante">
+            <http:operation location="eliminarParticipante"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadGrupal">
+            <http:operation location="crearActividadGrupal"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getParticipante">
+            <http:operation location="getParticipante"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="crearActividadIndividual">
+            <http:operation location="crearActividadIndividual"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getGrupos">
+            <http:operation location="getGrupos"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getParticipantes">
+            <http:operation location="getParticipantes"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNota">
+            <http:operation location="getNota"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPropiedades">
+            <http:operation location="getPropiedades"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="evaluar">
+            <http:operation location="evaluar"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Actividad">
+        <wsdl:port name="ActividadHttpSoap11Endpoint" binding="ns:ActividadSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/Actividad"/>
+        </wsdl:port>
+        <wsdl:port name="ActividadHttpSoap12Endpoint" binding="ns:ActividadSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/Actividad"/>
+        </wsdl:port>
+        <wsdl:port name="ActividadHttpEndpoint" binding="ns:ActividadHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/Actividad"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
