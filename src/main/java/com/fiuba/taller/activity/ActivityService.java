@@ -53,7 +53,7 @@ public class ActivityService {
 	}
 
     private Response buildError(String service) {
-        SecurityResponse response = new SecurityResponse();
+        ActivityResponse response = new ActivityResponse ();
 
         response.setSuccess(false);
         response.setReason("El servicio de " + service + " no está disponible.");
@@ -95,18 +95,18 @@ public class ActivityService {
         }*/
 
         // Parsear el response
-		Document doc = getDoc(wsResponse.get_return());
-		Node node = getNode(doc, "response");
+//		Document doc = getDoc(wsResponse.get_return());
+//		Node node = getNode(doc, "response");
 
-        String successString = getFirstElementValue( node, "success");
-        boolean success = successString.equals(TRUE_STRING);
-        response.setSuccess(success);
-
-		if (success){
-			response.setReason("algo exitosamente");
-		}else{
-    		response.setReason(getFirstElementValue(node, "reason"));
-		}
+//        String successString = getFirstElementValue( node, "success");
+//        boolean success = successString.equals(TRUE_STRING);
+//        response.setSuccess(success);
+//
+//		if (success){
+//			response.setReason("algo exitosamente");
+//		}else{
+//    		response.setReason(getFirstElementValue(node, "reason"));
+//		}
 
 		return Response.ok().entity(response).build();
 	}

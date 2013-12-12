@@ -27,7 +27,7 @@ import wtp.LoginAPIHelperStub;
 
 
 @Path("/securityservice")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class SecurityService {
 
 	private Document getDoc(String xml) throws ParserConfigurationException, SAXException, IOException{
@@ -52,11 +52,12 @@ public class SecurityService {
 		return elem.getElementsByTagName(eName).item(0).getTextContent();
 	}
 
-    private Response buildError(String service) {
+    private Response buildError(String service, String fullReason) {
         SecurityResponse response = new SecurityResponse();
 
         response.setSuccess(false);
         response.setReason("El servicio de " + service + " no está disponible.");
+        response.setFullReason(fullReason);
 
         return Response.status(502).entity(response).build();
     }
@@ -97,7 +98,7 @@ public class SecurityService {
 		    wsResponse = api.registerUser(securityRequest);
         } catch (AxisFault error) {
             System.out.println(error.getReason());
-            return buildError("crear usuario");
+            return buildError("crear usuario", error.getReason());
         }
 
         // Parsear el response
@@ -141,7 +142,7 @@ public class SecurityService {
             wsResponse = api.login(securityRequest);
         } catch (AxisFault error) {
             System.out.println(error.getReason());
-            return buildError("login");
+            return buildError("login", error.getReason());
         }
 
 		// Parsear el response
@@ -190,7 +191,7 @@ public class SecurityService {
             wsResponse = api.logout(securityRequest);
         } catch (AxisFault error) {
             System.out.println(error.getReason());
-            return buildError("logout");
+            return buildError("logout", error.getReason());
         }
 
 		// Parsear el response
@@ -240,7 +241,7 @@ public class SecurityService {
             wsResponse = api.isTokenValid(securityRequest);
         } catch (AxisFault error) {
             System.out.println(error.getReason());
-            return buildError("sesión");
+            return buildError("sesión", error.getReason());
         }
 
 		// Parsear el response
@@ -292,7 +293,7 @@ public class SecurityService {
                 wsResponse = api.activateUser(securityRequest);
             } catch (AxisFault error) {
                 System.out.println(error.getReason());
-                return buildError("activar usuario");
+                return buildError("activar usuario", error.getReason());
             }
 
 			// Parsear el response
@@ -347,7 +348,7 @@ public class SecurityService {
                 wsResponse = api.changePassword(securityRequest);
             } catch (AxisFault error) {
                 System.out.println(error.getReason());
-                return buildError("cambiar contraseña");
+                return buildError("cambiar contraseña", error.getReason());
             }
 
 			// Parsear el response
@@ -402,7 +403,7 @@ public class SecurityService {
                 wsResponse = api.resetPassword(securityRequest);
             } catch (AxisFault error) {
                 System.out.println(error.getReason());
-                return buildError("resetear contraseña");
+                return buildError("resetear contraseña", error.getReason());
             }
 
 			// Parsear el response
@@ -453,7 +454,7 @@ public class SecurityService {
                 wsResponse = api.disableAccount(securityRequest);
             } catch (AxisFault error) {
                 System.out.println(error.getReason());
-                return buildError("deshabilitar cuenta");
+                return buildError("deshabilitar cuenta", error.getReason());
             }
 
 			// Parsear el response
@@ -507,7 +508,7 @@ public class SecurityService {
                 wsResponse = api.enableAccount(securityRequest);
             } catch (AxisFault error) {
                 System.out.println(error.getReason());
-                return buildError("habilitar cuenta");
+                return buildError("habilitar cuenta", error.getReason());
             }
 
 			// Parsear el response
