@@ -8,6 +8,7 @@ public class SecurityResponse {
 	
     private boolean success;
     private String reason;
+    private String fullReason;
     private String authToken;
 
     public SecurityResponse(){}
@@ -55,9 +56,20 @@ public class SecurityResponse {
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
     }
-    
 
-    
+
+
+    @XmlElement(name = "fullReason")
+    public String getFullReason() {
+        return fullReason;
+    }
+
+    public void setFullReason(String fullReason) {
+        this.fullReason = fullReason;
+    }
+
+
+
     @Override 
     public String toString(){
     	return String.format("SecurityResponse - Successful: %s ; Reason: %s ; AuthToken: %s",
