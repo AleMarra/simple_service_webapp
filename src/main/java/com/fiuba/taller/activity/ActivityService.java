@@ -152,6 +152,9 @@ public class ActivityService {
         String successString = getFirstElementValue( node, "success");
         boolean success = successString.equals(TRUE_STRING);
 
+        if (success) {
+            username = getFirstElementValue( node, "username");
+        }
 
         return username;
     }
