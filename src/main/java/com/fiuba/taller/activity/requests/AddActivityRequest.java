@@ -1,4 +1,4 @@
-package com.fiuba.taller.service.requests;
+package com.fiuba.taller.activity.requests;
 
 import java.util.HashMap;
 import java.util.Map;
