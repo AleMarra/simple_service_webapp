@@ -60,7 +60,7 @@ toReadableBody = toReadableBody.replace /\s\+ p;\n$/, ';\n'  # Removes last of "
 
 outputFilename = "../java/com/fiuba/taller/#{ serviceName  }/requests/#{ className }.java"
 output = """
-        package com.fiuba.taller.service.requests;
+        package com.fiuba.taller.#{ serviceName }.requests;
 
         import java.util.HashMap;
         import java.util.Map;
