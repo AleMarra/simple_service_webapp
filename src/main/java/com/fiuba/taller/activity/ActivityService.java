@@ -48,7 +48,7 @@ import wtp.src.fiuba.taller.actividad.*;
 //import wtp.LoginAPIHelperStub;
 
 
-@Path("/activityservice")
+@Path("/activity")
 @Produces(MediaType.APPLICATION_JSON)
 public class ActivityService {
 
@@ -207,5 +207,52 @@ public class ActivityService {
 
 		return Response.ok().entity(response).build();
 	}
-
+	
+	
+	@POST
+	@Path("creategroupevaluableactivity")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createGroupEvaluableActivity(CreateGroupEvaluableActivityRequest request, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("createindividualactivity")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createIndividualActivity(CreateIndividualActivityRequest request, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("createindividualevaluableactivity")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createIndividualEvaluableActivity(CreateIndividualEvaluableActivityRequest request, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		return Response.ok().build();
+	}
+	
+	
+	@POST
+	@Path("getproperties") //TODO /ID
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityProperties(ActivityPropertiesRequest request, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("setproperties") //TODO /ID
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response setActivityProperties(ActivityPropertiesRequest request, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		return Response.ok().build();
+	}
+	
 }
