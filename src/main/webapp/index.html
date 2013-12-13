@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>>-->
+    <script src="js/jquery.js"></script>>
     <style>
         label {
             display: inline-block;
@@ -51,7 +52,7 @@
          */
         function sendRequest(idType, onSuccess, onError) {
             var $el = $("#" + idType),
-                    url = 'api/securityservice/',
+                    url = 'api/activity/',
                     type = 'GET',
                     data = {};
             // DOM $elements
@@ -309,5 +310,21 @@
     </section>
 </div>
 
+<div id="creategroupactivity">
+    <h2>Crear actividad grupal</h2>
+    <div class="creategroupactivity">
+        <div   class="url" val="creategroupactivity" style="display: hidden;"/>
+        <div   class="type" val="POST" style="display: hidden;"/>
+
+        <label>Nombre actividad:</label> <input class="data" param-name="nombre" type="text" /><br>
+        <label>Descripcion:</label> <input class="data" param-name="descripcion" type="text" /><br>
+        <label>Id Ambito Superior:</label> <input class="data" param-name="idAmbitoSuperior" type="text" /><br>
+        <label>Id Actividad Superior:</label> <input class="data" param-name="idActividadSuperior" type="text" /><br>
+        <label>Fecha Inicio:</label> <input class="data" param-name="fechaInicio" type="date" /><br>
+        <label>Fecha Fin:</label> <input class="data" param-name="fechaFin" type="date" /><br>
+        <label>Grupos Exclusivos:</label> <input class="data" param-name="gruposExclusivos" type="text" /><br>
+        <button onclick="sendRequest('creategroupactivity')">Crear</button>
+    </div>
+</div>
 </body>
 </html>
