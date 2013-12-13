@@ -170,12 +170,21 @@ public class ActivityService {
 		
 		// Init
 		ActivityResponse response = new ActivityResponse();
+        String username = getUsernameFromAuthToken(token);
+        if (username.equals("")) {
+            response.setSuccess(false);
+            response.setReason("Usuario no logueado");
+            return Response.ok()
+                    .header("Set-Cookie",
+                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                    .entity(response).build();
+        }
 		
 		ActividadStub api = new ActividadStub();
 		ActividadStub.CrearActividadGrupal crearActividadRequest = new ActividadStub.CrearActividadGrupal();
 		ActividadStub.CrearActividadGrupalResponse wsResponse = new ActividadStub.CrearActividadGrupalResponse();
 		
-		crearActividadRequest.setUsername(getUsernameFromAuthToken(token));
+		crearActividadRequest.setUsername(username);
 		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
 		
 		boolean success = true;
@@ -220,12 +229,21 @@ public class ActivityService {
 		
 		// Init
 		ActivityResponse response = new ActivityResponse();
+        String username = getUsernameFromAuthToken(token);
+        if (username.equals("")) {
+            response.setSuccess(false);
+            response.setReason("Usuario no logueado");
+            return Response.ok()
+                    .header("Set-Cookie",
+                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                    .entity(response).build();
+        }
 		
 		ActividadStub api = new ActividadStub();
 		ActividadStub.CrearActividadGrupalEvaluable crearActividadRequest = new ActividadStub.CrearActividadGrupalEvaluable();
 		ActividadStub.CrearActividadGrupalEvaluableResponse wsResponse = new ActividadStub.CrearActividadGrupalEvaluableResponse();
 		
-		crearActividadRequest.setUsername(getUsernameFromAuthToken(token));
+		crearActividadRequest.setUsername(username);
 		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
 		
 		boolean success = true;
@@ -266,12 +284,21 @@ public class ActivityService {
 	{
 		// Init
 		ActivityResponse response = new ActivityResponse();
+        String username = getUsernameFromAuthToken(token);
+        if (username.equals("")) {
+            response.setSuccess(false);
+            response.setReason("Usuario no logueado");
+            return Response.ok()
+                    .header("Set-Cookie",
+                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                    .entity(response).build();
+        }
 		
 		ActividadStub api = new ActividadStub();
 		ActividadStub.CrearActividadIndividual crearActividadRequest = new ActividadStub.CrearActividadIndividual();
 		ActividadStub.CrearActividadIndividualResponse wsResponse = new ActividadStub.CrearActividadIndividualResponse();
 		
-		crearActividadRequest.setUsername(getUsernameFromAuthToken(token));
+		crearActividadRequest.setUsername(username);
 		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
 		
 		boolean success = true;
@@ -313,12 +340,21 @@ public class ActivityService {
 	
 		// Init
 		ActivityResponse response = new ActivityResponse();
+        String username = getUsernameFromAuthToken(token);
+        if (username.equals("")) {
+            response.setSuccess(false);
+            response.setReason("Usuario no logueado");
+            return Response.ok()
+                    .header("Set-Cookie",
+                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                    .entity(response).build();
+        }
 		
 		ActividadStub api = new ActividadStub();
 		ActividadStub.CrearActividadIndividualEvaluable crearActividadRequest = new ActividadStub.CrearActividadIndividualEvaluable();
 		ActividadStub.CrearActividadIndividualEvaluableResponse wsResponse = new ActividadStub.CrearActividadIndividualEvaluableResponse();
 		
-		crearActividadRequest.setUsername(getUsernameFromAuthToken(token));
+		crearActividadRequest.setUsername(username);
 		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
 		
 		boolean success = true;
@@ -358,17 +394,92 @@ public class ActivityService {
 	public Response getActivityProperties(@PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
-		
+        // Init
+        ActivityResponse response = new ActivityResponse();
+        String username = getUsernameFromAuthToken(token);
+        if (username.equals("")) {
+            response.setSuccess(false);
+            response.setReason("Usuario no logueado");
+            return Response.ok()
+                    .header("Set-Cookie",
+                    "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                    .entity(response).build();
+        }
+
+        ActividadStub api = new ActividadStub();
+        ActividadStub.GetPropiedades getPropiedadesRequest = new ActividadStub.GetPropiedades();
+        ActividadStub.GetPropiedadesResponse wsResponse = new ActividadStub.GetPropiedadesResponse();
+
+        getPropiedadesRequest.setUsername(username);
+        getPropiedadesRequest.setIdActividad(id);
+
+        boolean success = true;
+        String message = "";
+
+        // Hacer el request
+        try {
+            wsResponse = api.getPropiedades(getPropiedadesRequest);
+        } catch (ActividadXmlErroneoExcepcionException e) {
+            success = false;
+            message = e.toString();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return buildError(e.toString());
+        }
+
+        response.setSuccess(success);
+
+        if (success) {
+//            response.setCosas("lalalala");
+            response.setReason("lalalala");
+        }
+
 		return Response.ok().build();
 	}
 	
 	@POST
 	@Path("setproperties/{id}") //TODO /ID
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response setActivityProperties(@PathParam("id") long id, @CookieParam("authToken") String token)
+	public Response setActivityProperties(EditActivityRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
-		return Response.ok().build();
+//        // Init
+//        ActivityResponse response = new ActivityResponse();
+//        String username = getUsernameFromAuthToken(token);
+//        if (username.equals("")) {
+//            response.setSuccess(false);
+//            response.setReason("Usuario no logueado");
+//            return Response.ok()
+//                    .header("Set-Cookie",
+//                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+//                    .entity(response).build();
+//        }
+//
+//        ActividadStub api = new ActividadStub();
+//        ActividadStub.SetPropiedades editarActividadRequest = new ActividadStub.SetPropiedades();
+//        // cuál es la response de esto?!
+//        ActividadStub.SetPropiedadesResponse wsResponse = new ActividadStub.SetPropiedadesResponse();
+//
+//        editarActividadRequest.setUsername(username);
+//        editarActividadRequest.setPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
+//
+//        boolean success = true;
+//        String message = "";
+//
+//        // Hacer el request
+//        try {
+//            wsResponse = api.crearActividadIndividualEvaluable(editarActividadRequest);
+//        } catch (ActividadXmlErroneoExcepcionException e) {
+//            success = false;
+//            message = e.toString();
+//
+//        } catch (Exception e) {
+//            System.out.println(e.toString());
+//            return buildError(e.toString());
+//        }
+
+        return Response.ok().build();
 	}
 	
 }
