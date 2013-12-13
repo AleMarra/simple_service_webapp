@@ -34,7 +34,8 @@ import javax.ws.rs.core.*;
 //import com.fiuba.taller.service.requests.RegisterUserRequest;
 import javax.ws.rs.*;
 
-import com.fiuba.taller.activity.requests.CreateGroupActivityRequest;
+import com.fiuba.taller.activity.requests.*;
+
 import com.fiuba.taller.service.SecurityResponse;
 
 import org.apache.axis2.AxisFault;
@@ -43,9 +44,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import wtp.LoginAPIHelperStub;
-import wtp.src.fiuba.taller.actividad.*;
-
-//import wtp.LoginAPIHelperStub;
+import wtp.activity.src.fiuba.taller.actividad.*;
 
 
 @Path("/activity")
@@ -160,6 +159,8 @@ public class ActivityService {
         return username;
     }
 
+    
+    // ------------------------------------------------ API METHODS ------------------------------------------------
 	@POST
 	@Path("creategroupactivity")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -171,41 +172,42 @@ public class ActivityService {
 		ActivityResponse response = new ActivityResponse();
 		
 		ActividadStub api = new ActividadStub();
-		ActividadStub.CrearActividadGrupal crearActividad = new ActividadStub.CrearActividadGrupal();
-		ActividadStub.CrearActividadGrupalResponse crearActividadResponse = new ActividadStub.CrearActividadGrupalResponse();
+		ActividadStub.CrearActividadGrupal crearActividadRequest = new ActividadStub.CrearActividadGrupal();
+		ActividadStub.CrearActividadGrupalResponse wsResponse = new ActividadStub.CrearActividadGrupalResponse();
 		
-		crearActividad.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
+		crearActividadRequest.setUsername(getUsernameFromAuthToken(token));
+		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
 		
-		/*LoginAPIHelperStub api = new LoginAPIHelperStub();
-		LoginAPIHelperStub.RegisterUser securityRequest = new LoginAPIHelperStub.RegisterUser();
-		LoginAPIHelperStub.RegisterUserResponse wsResponse = new LoginAPIHelperStub.RegisterUserResponse();*/
-
-		// Armar el request
-		/*securityRequest.setUsername(request.getUsername());*/
-		
+		boolean success = true;
+	    String message = "";
+	        
 		// Hacer el request
-        /*try {
-		    wsResponse = api.registerUser(securityRequest);
-        } catch (AxisFault error) {
-            System.out.println(error.getReason());
-            return buildError("algo");
-        }*/
+        try {
+		    wsResponse = api.crearActividadGrupal(crearActividadRequest);
+        } catch (ActividadXmlErroneoExcepcionException e) {
+        	success = false;
+        	message = e.toString();
+        	
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return buildError(e.toString());
+        }
 
-        // Parsear el response
-//		Document doc = getDoc(wsResponse.get_return());
-//		Node node = getNode(doc, "response");
-
-//        String successString = getFirstElementValue( node, "success");
-//        boolean success = successString.equals(TRUE_STRING);
-//        response.setSuccess(success);
-//
-//		if (success){
-//			response.setReason("algo exitosamente");
-//		}else{
-//    		response.setReason(getFirstElementValue(node, "reason"));
-//		}
+      
+        //  Parsear el response
+		long activityID =  wsResponse.get_return();
+		
+		response.setSuccess(success);
+		
+		if (success){
+			response.setReason(Integer.toString((int)activityID));
+		}else{
+    		response.setReason(message);
+		}
 
 		return Response.ok().entity(response).build();
+		  
+
 	}
 	
 	
@@ -215,7 +217,45 @@ public class ActivityService {
 	public Response createGroupEvaluableActivity(CreateGroupEvaluableActivityRequest request, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
-		return Response.ok().build();
+		
+		// Init
+		ActivityResponse response = new ActivityResponse();
+		
+		ActividadStub api = new ActividadStub();
+		ActividadStub.CrearActividadGrupalEvaluable crearActividadRequest = new ActividadStub.CrearActividadGrupalEvaluable();
+		ActividadStub.CrearActividadGrupalEvaluableResponse wsResponse = new ActividadStub.CrearActividadGrupalEvaluableResponse();
+		
+		crearActividadRequest.setUsername(getUsernameFromAuthToken(token));
+		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
+		
+		boolean success = true;
+	    String message = "";
+	        
+		// Hacer el request
+        try {
+		    wsResponse = api.crearActividadGrupalEvaluable(crearActividadRequest);
+        } catch (ActividadXmlErroneoExcepcionException e) {
+        	success = false;
+        	message = e.toString();
+        	
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return buildError(e.toString());
+        }
+
+        //  Parsear el response
+		long activityID =  wsResponse.get_return();
+		
+		response.setSuccess(success);
+		
+		if (success){
+			response.setReason(Integer.toString((int)activityID));
+		}else{
+    		response.setReason(message);
+		}
+
+		return Response.ok().entity(response).build();
+		
 	}
 	
 	@POST
@@ -224,7 +264,44 @@ public class ActivityService {
 	public Response createIndividualActivity(CreateIndividualActivityRequest request, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
-		return Response.ok().build();
+		// Init
+		ActivityResponse response = new ActivityResponse();
+		
+		ActividadStub api = new ActividadStub();
+		ActividadStub.CrearActividadIndividual crearActividadRequest = new ActividadStub.CrearActividadIndividual();
+		ActividadStub.CrearActividadIndividualResponse wsResponse = new ActividadStub.CrearActividadIndividualResponse();
+		
+		crearActividadRequest.setUsername(getUsernameFromAuthToken(token));
+		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
+		
+		boolean success = true;
+	    String message = "";
+	        
+		// Hacer el request
+        try {
+		    wsResponse = api.crearActividadIndividual(crearActividadRequest);
+        } catch (ActividadXmlErroneoExcepcionException e) {
+        	success = false;
+        	message = e.toString();
+        	
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return buildError(e.toString());
+        }
+
+        //  Parsear el response
+		long activityID =  wsResponse.get_return();
+		
+		response.setSuccess(success);
+		
+		if (success){
+			response.setReason(Integer.toString((int)activityID));
+		}else{
+    		response.setReason(message);
+		}
+
+		return Response.ok().entity(response).build();
+
 	}
 	
 	@POST
@@ -233,23 +310,62 @@ public class ActivityService {
 	public Response createIndividualEvaluableActivity(CreateIndividualEvaluableActivityRequest request, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
-		return Response.ok().build();
+	
+		// Init
+		ActivityResponse response = new ActivityResponse();
+		
+		ActividadStub api = new ActividadStub();
+		ActividadStub.CrearActividadIndividualEvaluable crearActividadRequest = new ActividadStub.CrearActividadIndividualEvaluable();
+		ActividadStub.CrearActividadIndividualEvaluableResponse wsResponse = new ActividadStub.CrearActividadIndividualEvaluableResponse();
+		
+		crearActividadRequest.setUsername(getUsernameFromAuthToken(token));
+		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
+		
+		boolean success = true;
+	    String message = "";
+	        
+		// Hacer el request
+        try {
+		    wsResponse = api.crearActividadIndividualEvaluable(crearActividadRequest);
+        } catch (ActividadXmlErroneoExcepcionException e) {
+        	success = false;
+        	message = e.toString();
+        	
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return buildError(e.toString());
+        }
+
+        //  Parsear el response
+		long activityID =  wsResponse.get_return();
+		
+		response.setSuccess(success);
+		
+		if (success){
+			response.setReason(Integer.toString((int)activityID));
+		}else{
+    		response.setReason(message);
+		}
+
+		return Response.ok().entity(response).build();
+		
 	}
 	
 	
 	@POST
-	@Path("getproperties") //TODO /ID
+	@Path("getproperties/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getActivityProperties(ActivityPropertiesRequest request, @CookieParam("authToken") String token)
+	public Response getActivityProperties(@PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
+		
 		return Response.ok().build();
 	}
 	
 	@POST
-	@Path("setproperties") //TODO /ID
+	@Path("setproperties/{id}") //TODO /ID
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response setActivityProperties(ActivityPropertiesRequest request, @CookieParam("authToken") String token)
+	public Response setActivityProperties(@PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
 		return Response.ok().build();
