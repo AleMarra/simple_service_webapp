@@ -19,6 +19,7 @@ import org.w3c.dom.Element;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.rmi.RemoteException;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,11 +34,14 @@ import javax.ws.rs.core.*;
 //import com.fiuba.taller.service.requests.RegisterUserRequest;
 import javax.ws.rs.*;
 
+import com.fiuba.taller.service.SecurityResponse;
 import org.apache.axis2.AxisFault;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import wtp.LoginAPIHelperStub;
+import wtp.src.fiuba.taller.actividad.ActividadStub;
 import wtp.src.fiuba.taller.actividad.*;
 
 //import wtp.LoginAPIHelperStub;
@@ -77,7 +81,17 @@ public class ActivityService {
 
         return Response.status(502).entity(response).build();
     }
-    
+
+    private Response buildError(String service, String fullReason) {
+        SecurityResponse response = new SecurityResponse();
+
+        response.setSuccess(false);
+        response.setReason("El servicio de " + service + " no está disponible.");
+        response.setFullReason(fullReason);
+
+        return Response.status(502).entity(response).build();
+    }
+
     // El valor verdadero en String debería estar definido en algún archivo de cosas comunes, y en ese caso
     // no nos hubiera afectado el cambio de "1" como valor verdadero a "true"
     private static String TRUE_STRING = "true";
@@ -114,8 +128,34 @@ public class ActivityService {
 		String output = writer.getBuffer().toString().replaceAll("\n|\r", "");
 		
 		return output;
-   } 
-    
+   }
+    // Devuelve string vacía si la sesión es inválida
+    private String getUsernameFromAuthToken(String authToken) throws IOException, SAXException, ParserConfigurationException {
+        String username = "";
+        LoginAPIHelperStub api = new LoginAPIHelperStub();
+        LoginAPIHelperStub.IsTokenValid securityRequest = new LoginAPIHelperStub.IsTokenValid();
+        LoginAPIHelperStub.IsTokenValidResponse wsResponse;
+        securityRequest.setAuthToken(authToken);
+
+        // Hacer el request
+        try {
+            wsResponse = api.isTokenValid(securityRequest);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return username;
+        }
+
+        // Parsear el response
+        Document doc = getDoc(wsResponse.get_return());
+        Node node = getNode(doc, "response");
+
+        String successString = getFirstElementValue( node, "success");
+        boolean success = successString.equals(TRUE_STRING);
+
+
+        return username;
+    }
+
 	@POST
 	@Path("algo")
 	@Consumes(MediaType.APPLICATION_JSON)
