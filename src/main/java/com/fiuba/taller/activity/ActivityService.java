@@ -34,14 +34,15 @@ import javax.ws.rs.core.*;
 //import com.fiuba.taller.service.requests.RegisterUserRequest;
 import javax.ws.rs.*;
 
+import com.fiuba.taller.activity.requests.CreateGroupActivityRequest;
 import com.fiuba.taller.service.SecurityResponse;
+
 import org.apache.axis2.AxisFault;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import wtp.LoginAPIHelperStub;
-import wtp.src.fiuba.taller.actividad.ActividadStub;
 import wtp.src.fiuba.taller.actividad.*;
 
 //import wtp.LoginAPIHelperStub;
@@ -97,7 +98,7 @@ public class ActivityService {
     private static String TRUE_STRING = "true";
 
 
-    String makeXMLFromList(String root, HashMap<String,String> map) throws ParserConfigurationException, TransformerException{
+    String makeXMLFromMap(String root, HashMap<String,String> map) throws ParserConfigurationException, TransformerException{
     	
     	DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -160,10 +161,10 @@ public class ActivityService {
     }
 
 	@POST
-	@Path("algo")
+	@Path("creategroupactivity")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response algo()
-			throws ParserConfigurationException, SAXException, IOException
+	public Response createGroupActivity(CreateGroupActivityRequest request, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
 		
 		// Init
@@ -173,7 +174,7 @@ public class ActivityService {
 		ActividadStub.CrearActividadGrupal crearActividad = new ActividadStub.CrearActividadGrupal();
 		ActividadStub.CrearActividadGrupalResponse crearActividadResponse = new ActividadStub.CrearActividadGrupalResponse();
 		
-		crearActividad.setXmlPropiedades(param);
+		crearActividad.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
 		
 		/*LoginAPIHelperStub api = new LoginAPIHelperStub();
 		LoginAPIHelperStub.RegisterUser securityRequest = new LoginAPIHelperStub.RegisterUser();
