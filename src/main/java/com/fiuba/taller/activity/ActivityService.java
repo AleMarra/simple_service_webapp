@@ -1,27 +1,44 @@
 package com.fiuba.taller.activity;
 
+import java.io.File;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.*;
-
 //import com.fiuba.taller.service.requests.EnableAccountRequest;
 //import com.fiuba.taller.service.requests.LoginRequest;
 //import com.fiuba.taller.service.requests.ChangePasswordRequest;
 //import com.fiuba.taller.service.requests.RegisterUserRequest;
 import javax.ws.rs.*;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.axis2.AxisFault;
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import wtp.src.fiuba.taller.actividad.*;
 
 //import wtp.LoginAPIHelperStub;
 
@@ -66,6 +83,39 @@ public class ActivityService {
     private static String TRUE_STRING = "true";
 
 
+    String makeXMLFromList(String root, HashMap<String,String> map) throws ParserConfigurationException, TransformerException{
+    	
+    	DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+		// root elements
+		Document doc = docBuilder.newDocument();
+		Element rootElement = doc.createElement(root);
+		doc.appendChild(rootElement);
+		
+		Iterator<String> it = map.keySet().iterator();
+		
+		while(it.hasNext()){
+			
+			String key = it.next();
+			String val = map.get(key);
+			
+			Element elem = doc.createElement(key);
+			elem.appendChild(doc.createTextNode(val));
+			
+			rootElement.appendChild(elem);
+		}
+		
+		TransformerFactory tf = TransformerFactory.newInstance();
+		Transformer transformer = tf.newTransformer();
+		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+		StringWriter writer = new StringWriter();
+		transformer.transform(new DOMSource(doc), new StreamResult(writer));
+		String output = writer.getBuffer().toString().replaceAll("\n|\r", "");
+		
+		return output;
+   } 
+    
 	@POST
 	@Path("algo")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -76,9 +126,12 @@ public class ActivityService {
 		// Init
 		ActivityResponse response = new ActivityResponse();
 		
-		// Check if user is loggedIn (this method also returns as the username, that we will need to use)
-		// 
-
+		ActividadStub api = new ActividadStub();
+		ActividadStub.CrearActividadGrupal crearActividad = new ActividadStub.CrearActividadGrupal();
+		ActividadStub.CrearActividadGrupalResponse crearActividadResponse = new ActividadStub.CrearActividadGrupalResponse();
+		
+		crearActividad.setXmlPropiedades(param);
+		
 		/*LoginAPIHelperStub api = new LoginAPIHelperStub();
 		LoginAPIHelperStub.RegisterUser securityRequest = new LoginAPIHelperStub.RegisterUser();
 		LoginAPIHelperStub.RegisterUserResponse wsResponse = new LoginAPIHelperStub.RegisterUserResponse();*/
