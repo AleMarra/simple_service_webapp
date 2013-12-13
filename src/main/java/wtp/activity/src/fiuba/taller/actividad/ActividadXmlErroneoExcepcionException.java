@@ -6,13 +6,13 @@
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
  */
 
-package fiuba.taller.actividad;
+package wtp.activity.src.fiuba.taller.actividad;
 
 public class ActividadXmlErroneoExcepcionException extends java.lang.Exception{
 
-    private static final long serialVersionUID = 1386889259566L;
+    private static final long serialVersionUID = 1386934718078L;
     
-    private fiuba.taller.actividad.ActividadStub.ActividadXmlErroneoExcepcion faultMessage;
+    private wtp.activity.src.fiuba.taller.actividad.ActividadStub.ActividadXmlErroneoExcepcion faultMessage;
 
     
         public ActividadXmlErroneoExcepcionException() {
@@ -32,11 +32,11 @@ public class ActividadXmlErroneoExcepcionException extends java.lang.Exception{
         }
     
 
-    public void setFaultMessage(fiuba.taller.actividad.ActividadStub.ActividadXmlErroneoExcepcion msg){
+    public void setFaultMessage(wtp.activity.src.fiuba.taller.actividad.ActividadStub.ActividadXmlErroneoExcepcion msg){
        faultMessage = msg;
     }
     
-    public fiuba.taller.actividad.ActividadStub.ActividadXmlErroneoExcepcion getFaultMessage(){
+    public wtp.activity.src.fiuba.taller.actividad.ActividadStub.ActividadXmlErroneoExcepcion getFaultMessage(){
        return faultMessage;
     }
 }

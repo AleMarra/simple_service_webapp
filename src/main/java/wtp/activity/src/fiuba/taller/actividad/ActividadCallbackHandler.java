@@ -6,7 +6,7 @@
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
  */
 
-    package fiuba.taller.actividad;
+    package wtp.activity.src.fiuba.taller.actividad;
 
     /**
      *  ActividadCallbackHandler Callback class, Users can extend this class and implement
@@ -44,12 +44,14 @@
      }
 
         
+               // No methods generated for meps other than in-out
+                
            /**
             * auto generated Axis2 call back method for getGrupos method
             * override this method for handling normal response from getGrupos operation
             */
            public void receiveResultgetGrupos(
-                    fiuba.taller.actividad.ActividadStub.GetGruposResponse result
+                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetGruposResponse result
                         ) {
            }
 
@@ -60,12 +62,30 @@
             public void receiveErrorgetGrupos(java.lang.Exception e) {
             }
                 
+               // No methods generated for meps other than in-out
+                
+           /**
+            * auto generated Axis2 call back method for getActividadesDeAmbito method
+            * override this method for handling normal response from getActividadesDeAmbito operation
+            */
+           public void receiveResultgetActividadesDeAmbito(
+                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetActividadesDeAmbitoResponse result
+                        ) {
+           }
+
+          /**
+           * auto generated Axis2 Error handler
+           * override this method for handling error response from getActividadesDeAmbito operation
+           */
+            public void receiveErrorgetActividadesDeAmbito(java.lang.Exception e) {
+            }
+                
            /**
             * auto generated Axis2 call back method for crearActividadIndividualEvaluable method
             * override this method for handling normal response from crearActividadIndividualEvaluable operation
             */
            public void receiveResultcrearActividadIndividualEvaluable(
-                    fiuba.taller.actividad.ActividadStub.CrearActividadIndividualEvaluableResponse result
+                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.CrearActividadIndividualEvaluableResponse result
                         ) {
            }
 
@@ -77,26 +97,11 @@
             }
                 
            /**
-            * auto generated Axis2 call back method for setNombre method
-            * override this method for handling normal response from setNombre operation
-            */
-           public void receiveResultsetNombre(
-                    ) {
-           }
-
-          /**
-           * auto generated Axis2 Error handler
-           * override this method for handling error response from setNombre operation
-           */
-            public void receiveErrorsetNombre(java.lang.Exception e) {
-            }
-                
-           /**
             * auto generated Axis2 call back method for getPropiedades method
             * override this method for handling normal response from getPropiedades operation
             */
            public void receiveResultgetPropiedades(
-                    fiuba.taller.actividad.ActividadStub.GetPropiedadesResponse result
+                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetPropiedadesResponse result
                         ) {
            }
 
@@ -127,7 +132,7 @@
             * override this method for handling normal response from crearActividadGrupalEvaluable operation
             */
            public void receiveResultcrearActividadGrupalEvaluable(
-                    fiuba.taller.actividad.ActividadStub.CrearActividadGrupalEvaluableResponse result
+                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.CrearActividadGrupalEvaluableResponse result
                         ) {
            }
 
@@ -138,12 +143,14 @@
             public void receiveErrorcrearActividadGrupalEvaluable(java.lang.Exception e) {
             }
                 
+               // No methods generated for meps other than in-out
+                
            /**
             * auto generated Axis2 call back method for getNotas method
             * override this method for handling normal response from getNotas operation
             */
            public void receiveResultgetNotas(
-                    fiuba.taller.actividad.ActividadStub.GetNotasResponse result
+                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetNotasResponse result
                         ) {
            }
 
@@ -155,35 +162,19 @@
             }
                 
            /**
-            * auto generated Axis2 call back method for getNombre method
-            * override this method for handling normal response from getNombre operation
+            * auto generated Axis2 call back method for getActividadesDeActividad method
+            * override this method for handling normal response from getActividadesDeActividad operation
             */
-           public void receiveResultgetNombre(
-                    fiuba.taller.actividad.ActividadStub.GetNombreResponse result
+           public void receiveResultgetActividadesDeActividad(
+                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetActividadesDeActividadResponse result
                         ) {
            }
 
           /**
            * auto generated Axis2 Error handler
-           * override this method for handling error response from getNombre operation
+           * override this method for handling error response from getActividadesDeActividad operation
            */
-            public void receiveErrorgetNombre(java.lang.Exception e) {
-            }
-                
-           /**
-            * auto generated Axis2 call back method for getStringFromDocument method
-            * override this method for handling normal response from getStringFromDocument operation
-            */
-           public void receiveResultgetStringFromDocument(
-                    fiuba.taller.actividad.ActividadStub.GetStringFromDocumentResponse result
-                        ) {
-           }
-
-          /**
-           * auto generated Axis2 Error handler
-           * override this method for handling error response from getStringFromDocument operation
-           */
-            public void receiveErrorgetStringFromDocument(java.lang.Exception e) {
+            public void receiveErrorgetActividadesDeActividad(java.lang.Exception e) {
             }
                 
            /**
@@ -191,7 +182,7 @@
             * override this method for handling normal response from crearActividadGrupal operation
             */
            public void receiveResultcrearActividadGrupal(
-                    fiuba.taller.actividad.ActividadStub.CrearActividadGrupalResponse result
+                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.CrearActividadGrupalResponse result
                         ) {
            }
 
@@ -201,6 +192,8 @@
            */
             public void receiveErrorcrearActividadGrupal(java.lang.Exception e) {
             }
+                
+               // No methods generated for meps other than in-out
                 
            /**
             * auto generated Axis2 call back method for evaluar method
@@ -217,14 +210,12 @@
             public void receiveErrorevaluar(java.lang.Exception e) {
             }
                 
-               // No methods generated for meps other than in-out
-                
            /**
             * auto generated Axis2 call back method for getParticipantes method
             * override this method for handling normal response from getParticipantes operation
             */
            public void receiveResultgetParticipantes(
-                    fiuba.taller.actividad.ActividadStub.GetParticipantesResponse result
+                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetParticipantesResponse result
                         ) {
            }
 
@@ -240,7 +231,7 @@
             * override this method for handling normal response from crearActividadIndividual operation
             */
            public void receiveResultcrearActividadIndividual(
-                    fiuba.taller.actividad.ActividadStub.CrearActividadIndividualResponse result
+                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.CrearActividadIndividualResponse result
                         ) {
            }
 
@@ -286,7 +277,7 @@
             * override this method for handling normal response from getNota operation
             */
            public void receiveResultgetNota(
-                    fiuba.taller.actividad.ActividadStub.GetNotaResponse result
+                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetNotaResponse result
                         ) {
            }
 
@@ -295,22 +286,6 @@
            * override this method for handling error response from getNota operation
            */
             public void receiveErrorgetNota(java.lang.Exception e) {
-            }
-                
-           /**
-            * auto generated Axis2 call back method for getActividades method
-            * override this method for handling normal response from getActividades operation
-            */
-           public void receiveResultgetActividades(
-                    fiuba.taller.actividad.ActividadStub.GetActividadesResponse result
-                        ) {
-           }
-
-          /**
-           * auto generated Axis2 Error handler
-           * override this method for handling error response from getActividades operation
-           */
-            public void receiveErrorgetActividades(java.lang.Exception e) {
             }
                 
            /**

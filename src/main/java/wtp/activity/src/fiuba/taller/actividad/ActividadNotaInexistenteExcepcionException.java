@@ -6,13 +6,13 @@
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
  */
 
-package fiuba.taller.actividad;
+package wtp.activity.src.fiuba.taller.actividad;
 
 public class ActividadNotaInexistenteExcepcionException extends java.lang.Exception{
 
-    private static final long serialVersionUID = 1386889259556L;
+    private static final long serialVersionUID = 1386934718069L;
     
-    private fiuba.taller.actividad.ActividadStub.ActividadNotaInexistenteExcepcion faultMessage;
+    private wtp.activity.src.fiuba.taller.actividad.ActividadStub.ActividadNotaInexistenteExcepcion faultMessage;
 
     
         public ActividadNotaInexistenteExcepcionException() {
@@ -32,11 +32,11 @@ public class ActividadNotaInexistenteExcepcionException extends java.lang.Except
         }
     
 
-    public void setFaultMessage(fiuba.taller.actividad.ActividadStub.ActividadNotaInexistenteExcepcion msg){
+    public void setFaultMessage(wtp.activity.src.fiuba.taller.actividad.ActividadStub.ActividadNotaInexistenteExcepcion msg){
        faultMessage = msg;
     }
     
-    public fiuba.taller.actividad.ActividadStub.ActividadNotaInexistenteExcepcion getFaultMessage(){
+    public wtp.activity.src.fiuba.taller.actividad.ActividadStub.ActividadNotaInexistenteExcepcion getFaultMessage(){
        return faultMessage;
     }
 }
