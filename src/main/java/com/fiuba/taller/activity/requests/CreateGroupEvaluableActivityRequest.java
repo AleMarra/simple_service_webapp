@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "create-group-activity-request")
-public class CreateIndividualActivityRequest {
+public class CreateGroupEvaluableActivityRequest {
 
     private String nombre;
     private String descripcion;
@@ -17,11 +17,13 @@ public class CreateIndividualActivityRequest {
     private Integer idActividadSuperior;
     private String fechaInicio;
     private String fechaFin;
+    private Boolean gruposExclusivos;
+    private Integer nota;
 
 
-    public CreateIndividualActivityRequest(){}
+    public CreateGroupEvaluableActivityRequest(){}
 
-    public CreateIndividualActivityRequest(String nombre, String descripcion, Integer idAmbitoSuperior, Integer idActividadSuperior, String fechaInicio, String fechaFin)
+    public CreateGroupEvaluableActivityRequest(String nombre, String descripcion, Integer idAmbitoSuperior, Integer idActividadSuperior, String fechaInicio, String fechaFin, Boolean gruposExclusivos, Integer nota)
     {
         super();
         this.setNombre(nombre);
@@ -30,6 +32,8 @@ public class CreateIndividualActivityRequest {
         this.setIdActividadSuperior(idActividadSuperior);
         this.setFechaInicio(fechaInicio);
         this.setFechaFin(fechaFin);
+        this.setGruposExclusivos(gruposExclusivos);
+        this.setNota(nota);
 
     }
 
@@ -43,7 +47,9 @@ public class CreateIndividualActivityRequest {
         result += "idAmbitoSuperior" + k + idAmbitoSuperior + p;
         result += "idActividadSuperior" + k + idActividadSuperior + p;
         result += "fechaInicio" + k + fechaInicio + p;
-        result += "fechaFin" + k + fechaFin;
+        result += "fechaFin" + k + fechaFin + p;
+        result += "gruposExclusivos" + k + gruposExclusivos + p;
+        result += "nota" + k + nota;
 
         return result;
     }
@@ -66,6 +72,8 @@ public class CreateIndividualActivityRequest {
         dataAsForm.param("idActividadSuperior", Integer.toString(idActividadSuperior));
         dataAsForm.param("fechaInicio", fechaInicio);
         dataAsForm.param("fechaFin", fechaFin);
+        dataAsForm.param("gruposExclusivos", Boolean.toString(gruposExclusivos));
+        dataAsForm.param("nota", Integer.toString(nota));
 
         return dataAsForm;
     }
@@ -79,6 +87,8 @@ public class CreateIndividualActivityRequest {
         dataAsMap.put("idActividadSuperior", Integer.toString(idActividadSuperior));
         dataAsMap.put("fechaInicio", fechaInicio);
         dataAsMap.put("fechaFin", fechaFin);
+        dataAsMap.put("gruposExclusivos", Boolean.toString(gruposExclusivos));
+        dataAsMap.put("nota", Integer.toString(nota));
 
         return dataAsMap;
     }
@@ -131,4 +141,22 @@ public class CreateIndividualActivityRequest {
     public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
+	@XmlElement(name = "gruposExclusivos")
+    public Boolean getGruposExclusivos() {
+        return gruposExclusivos;
+    }
+
+    public void setGruposExclusivos(Boolean gruposExclusivos) {
+        this.gruposExclusivos = gruposExclusivos;
+    }
+    
+	@XmlElement(name = "nota")
+    public Integer getNota() {
+        return nota;
+    }
+
+    public void setNota(Integer nota) {
+        this.nota = nota;
+    }
+
 }
