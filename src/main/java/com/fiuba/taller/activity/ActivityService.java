@@ -47,7 +47,7 @@ import wtp.LoginAPIHelperStub;
 import wtp.activity.src.fiuba.taller.actividad.*;
 
 
-@Path("/activity")
+@Path("/activityservice")
 @Produces(MediaType.APPLICATION_JSON)
 public class ActivityService {
 
@@ -183,9 +183,9 @@ public class ActivityService {
                     .entity(response).build();
         }
 		
-		ActividadStub api = new ActividadStub();
-		ActividadStub.CrearActividadGrupal crearActividadRequest = new ActividadStub.CrearActividadGrupal();
-		ActividadStub.CrearActividadGrupalResponse wsResponse = new ActividadStub.CrearActividadGrupalResponse();
+		ActividadControladorStub api = new ActividadControladorStub();
+		ActividadControladorStub.CrearActividadGrupal crearActividadRequest = new ActividadControladorStub.CrearActividadGrupal();
+		ActividadControladorStub.CrearActividadGrupalResponse wsResponse = new ActividadControladorStub.CrearActividadGrupalResponse();
 		
 		crearActividadRequest.setUsername(username);
 		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
@@ -196,7 +196,7 @@ public class ActivityService {
 		// Hacer el request
         try {
 		    wsResponse = api.crearActividadGrupal(crearActividadRequest);
-        } catch (ActividadXmlErroneoExcepcionException e) {
+        } catch (ActividadControladorXmlErroneoExcepcionException e) {
         	success = false;
         	message = e.toString();
         	
@@ -242,9 +242,9 @@ public class ActivityService {
                     .entity(response).build();
         }
 		
-		ActividadStub api = new ActividadStub();
-		ActividadStub.CrearActividadGrupalEvaluable crearActividadRequest = new ActividadStub.CrearActividadGrupalEvaluable();
-		ActividadStub.CrearActividadGrupalEvaluableResponse wsResponse = new ActividadStub.CrearActividadGrupalEvaluableResponse();
+		ActividadControladorStub api = new ActividadControladorStub();
+		ActividadControladorStub.CrearActividadGrupalEvaluable crearActividadRequest = new ActividadControladorStub.CrearActividadGrupalEvaluable();
+		ActividadControladorStub.CrearActividadGrupalEvaluableResponse wsResponse = new ActividadControladorStub.CrearActividadGrupalEvaluableResponse();
 		
 		crearActividadRequest.setUsername(username);
 		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
@@ -255,7 +255,7 @@ public class ActivityService {
 		// Hacer el request
         try {
 		    wsResponse = api.crearActividadGrupalEvaluable(crearActividadRequest);
-        } catch (ActividadXmlErroneoExcepcionException e) {
+        } catch (ActividadControladorXmlErroneoExcepcionException e) {
         	success = false;
         	message = e.toString();
         	
@@ -297,9 +297,9 @@ public class ActivityService {
                     .entity(response).build();
         }
 		
-		ActividadStub api = new ActividadStub();
-		ActividadStub.CrearActividadIndividual crearActividadRequest = new ActividadStub.CrearActividadIndividual();
-		ActividadStub.CrearActividadIndividualResponse wsResponse = new ActividadStub.CrearActividadIndividualResponse();
+		ActividadControladorStub api = new ActividadControladorStub();
+		ActividadControladorStub.CrearActividadIndividual crearActividadRequest = new ActividadControladorStub.CrearActividadIndividual();
+		ActividadControladorStub.CrearActividadIndividualResponse wsResponse = new ActividadControladorStub.CrearActividadIndividualResponse();
 		
 		crearActividadRequest.setUsername(username);
 		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
@@ -310,7 +310,7 @@ public class ActivityService {
 		// Hacer el request
         try {
 		    wsResponse = api.crearActividadIndividual(crearActividadRequest);
-        } catch (ActividadXmlErroneoExcepcionException e) {
+        } catch (ActividadControladorXmlErroneoExcepcionException e) {
         	success = false;
         	message = e.toString();
         	
@@ -353,9 +353,9 @@ public class ActivityService {
                     .entity(response).build();
         }
 		
-		ActividadStub api = new ActividadStub();
-		ActividadStub.CrearActividadIndividualEvaluable crearActividadRequest = new ActividadStub.CrearActividadIndividualEvaluable();
-		ActividadStub.CrearActividadIndividualEvaluableResponse wsResponse = new ActividadStub.CrearActividadIndividualEvaluableResponse();
+		ActividadControladorStub api = new ActividadControladorStub();
+		ActividadControladorStub.CrearActividadIndividualEvaluable crearActividadRequest = new ActividadControladorStub.CrearActividadIndividualEvaluable();
+		ActividadControladorStub.CrearActividadIndividualEvaluableResponse wsResponse = new ActividadControladorStub.CrearActividadIndividualEvaluableResponse();
 		
 		crearActividadRequest.setUsername(username);
 		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
@@ -366,7 +366,7 @@ public class ActivityService {
 		// Hacer el request
         try {
 		    wsResponse = api.crearActividadIndividualEvaluable(crearActividadRequest);
-        } catch (ActividadXmlErroneoExcepcionException e) {
+        } catch (ActividadControladorXmlErroneoExcepcionException e) {
         	success = false;
         	message = e.toString();
         	
@@ -409,9 +409,9 @@ public class ActivityService {
                     .entity(response).build();
         }
 
-        ActividadStub api = new ActividadStub();
-        ActividadStub.GetPropiedades getPropiedadesRequest = new ActividadStub.GetPropiedades();
-        ActividadStub.GetPropiedadesResponse wsResponse = new ActividadStub.GetPropiedadesResponse();
+        ActividadControladorStub api = new ActividadControladorStub();
+        ActividadControladorStub.GetPropiedades getPropiedadesRequest = new ActividadControladorStub.GetPropiedades();
+        ActividadControladorStub.GetPropiedadesResponse wsResponse = new ActividadControladorStub.GetPropiedadesResponse();
 
         getPropiedadesRequest.setUsername(username);
         getPropiedadesRequest.setIdActividad(id);
@@ -422,7 +422,7 @@ public class ActivityService {
         // Hacer el request
         try {
             wsResponse = api.getPropiedades(getPropiedadesRequest);
-        } catch (ActividadXmlErroneoExcepcionException e) {
+        } catch (ActividadControladorXmlErroneoExcepcionException e) {
             success = false;
             message = e.toString();
 
@@ -459,10 +459,10 @@ public class ActivityService {
 //                    .entity(response).build();
 //        }
 //
-//        ActividadStub api = new ActividadStub();
-//        ActividadStub.SetPropiedades editarActividadRequest = new ActividadStub.SetPropiedades();
+//        ActividadControladorStub api = new ActividadControladorStub();
+//        ActividadControladorStub.SetPropiedades editarActividadRequest = new ActividadControladorStub.SetPropiedades();
 //        // cuál es la response de esto?!
-//        ActividadStub.SetPropiedadesResponse wsResponse = new ActividadStub.SetPropiedadesResponse();
+//        ActividadControladorStub.SetPropiedadesResponse wsResponse = new ActividadControladorStub.SetPropiedadesResponse();
 //
 //        editarActividadRequest.setUsername(username);
 //        editarActividadRequest.setPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
@@ -473,7 +473,7 @@ public class ActivityService {
 //        // Hacer el request
 //        try {
 //            wsResponse = api.crearActividadIndividualEvaluable(editarActividadRequest);
-//        } catch (ActividadXmlErroneoExcepcionException e) {
+//        } catch (ActividadControladorXmlErroneoExcepcionException e) {
 //            success = false;
 //            message = e.toString();
 //
