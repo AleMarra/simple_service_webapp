@@ -15,16 +15,17 @@ public class CreateGroupActivityRequest {
     private String descripcion;
     private Integer idAmbitoSuperior;
     private Integer idActividadSuperior;
+    private Integer Id;
     private String fechaInicio;
     private String fechaFin;
     private Boolean gruposExclusivos;
 
 
-    public CreateGroupActivityRequest(){}
+    public CreateGroupActivityRequest(){Id=1;}
 
     public CreateGroupActivityRequest(String nombre, String descripcion, Integer idAmbitoSuperior, Integer idActividadSuperior, String fechaInicio, String fechaFin, Boolean gruposExclusivos)
     {
-        super();
+        super();Id=1;
         this.setNombre(nombre);
         this.setDescripcion(descripcion);
         this.setIdAmbitoSuperior(idAmbitoSuperior);
@@ -77,13 +78,15 @@ public class CreateGroupActivityRequest {
     public Map<String, String> toMap(){
         Map<String, String> dataAsMap = new HashMap<String, String>();
 
-        dataAsMap.put("nombre", nombre);
-        dataAsMap.put("descripcion", descripcion);
-        dataAsMap.put("idAmbitoSuperior", Integer.toString(idAmbitoSuperior));
-        dataAsMap.put("idActividadSuperior", Integer.toString(idActividadSuperior));
-        dataAsMap.put("fechaInicio", fechaInicio);
-        dataAsMap.put("fechaFin", fechaFin);
-        dataAsMap.put("gruposExclusivos", Boolean.toString(gruposExclusivos));
+        dataAsMap.put("Nombre", nombre);
+        dataAsMap.put("Descripcion", descripcion);
+        dataAsMap.put("IdAmbitoSuperior", Integer.toString(idAmbitoSuperior));
+        dataAsMap.put("IdActividadSuperior", Integer.toString(idActividadSuperior));
+        dataAsMap.put("Id", Integer.toString(Id));
+        dataAsMap.put("FechaInicio", Long.toString(1386980044));
+        dataAsMap.put("FechaFin", Long.toString(1386980045));
+        dataAsMap.put("GruposExclusivos", Boolean.toString(gruposExclusivos));
+        dataAsMap.put("Tipo", "fghfghs");
 
         return dataAsMap;
     }
@@ -104,9 +107,17 @@ public class CreateGroupActivityRequest {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-	@XmlElement(name = "idAmbitoSuperior")
+    @XmlElement(name = "idAmbitoSuperior")
     public Integer getIdAmbitoSuperior() {
         return idAmbitoSuperior;
+    }
+
+    public void setId(Integer idAmbitoSuperior) {
+        this.Id = 1;
+    }
+    @XmlElement(name = "Id")
+    public Integer getId() {
+        return Id;
     }
 
     public void setIdAmbitoSuperior(Integer idAmbitoSuperior) {
