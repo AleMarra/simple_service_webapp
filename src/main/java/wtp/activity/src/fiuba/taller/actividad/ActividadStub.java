@@ -402,7 +402,7 @@
      */
     public ActividadStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"http://localhost:8080/axis2/services/Actividad" );
+                    this(configurationContext,"http://localhost:8080/axis2/services/ActividadControlador" );
                 
     }
 
@@ -411,7 +411,7 @@
      */
     public ActividadStub() throws org.apache.axis2.AxisFault {
         
-                    this("http://localhost:8080/axis2/services/Actividad" );
+                    this("http://localhost:8080/axis2/services/ActividadControlador" );
                 
     }
 
