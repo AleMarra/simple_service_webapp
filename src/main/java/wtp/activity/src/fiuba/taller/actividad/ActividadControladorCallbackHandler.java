@@ -1,6 +1,6 @@
 
 /**
- * ActividadCallbackHandler.java
+ * ActividadControladorCallbackHandler.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
@@ -9,10 +9,10 @@
     package wtp.activity.src.fiuba.taller.actividad;
 
     /**
-     *  ActividadCallbackHandler Callback class, Users can extend this class and implement
+     *  ActividadControladorCallbackHandler Callback class, Users can extend this class and implement
      *  their own receiveResult and receiveError methods.
      */
-    public abstract class ActividadCallbackHandler{
+    public abstract class ActividadControladorCallbackHandler{
 
 
 
@@ -24,14 +24,14 @@
     * @param clientData Object mechanism by which the user can pass in user data
     * that will be avilable at the time this callback is called.
     */
-    public ActividadCallbackHandler(Object clientData){
+    public ActividadControladorCallbackHandler(Object clientData){
         this.clientData = clientData;
     }
 
     /**
     * Please use this constructor if you don't want to set any clientData
     */
-    public ActividadCallbackHandler(){
+    public ActividadControladorCallbackHandler(){
         this.clientData = null;
     }
 
@@ -44,14 +44,27 @@
      }
 
         
-               // No methods generated for meps other than in-out
+           /**
+            * auto generated Axis2 call back method for setPropiedades method
+            * override this method for handling normal response from setPropiedades operation
+            */
+           public void receiveResultsetPropiedades(
+                    ) {
+           }
+
+          /**
+           * auto generated Axis2 Error handler
+           * override this method for handling error response from setPropiedades operation
+           */
+            public void receiveErrorsetPropiedades(java.lang.Exception e) {
+            }
                 
            /**
             * auto generated Axis2 call back method for getGrupos method
             * override this method for handling normal response from getGrupos operation
             */
            public void receiveResultgetGrupos(
-                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetGruposResponse result
+                    ActividadControladorStub.GetGruposResponse result
                         ) {
            }
 
@@ -69,7 +82,7 @@
             * override this method for handling normal response from getActividadesDeAmbito operation
             */
            public void receiveResultgetActividadesDeAmbito(
-                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetActividadesDeAmbitoResponse result
+                    ActividadControladorStub.GetActividadesDeAmbitoResponse result
                         ) {
            }
 
@@ -85,7 +98,7 @@
             * override this method for handling normal response from crearActividadIndividualEvaluable operation
             */
            public void receiveResultcrearActividadIndividualEvaluable(
-                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.CrearActividadIndividualEvaluableResponse result
+                    ActividadControladorStub.CrearActividadIndividualEvaluableResponse result
                         ) {
            }
 
@@ -101,7 +114,7 @@
             * override this method for handling normal response from getPropiedades operation
             */
            public void receiveResultgetPropiedades(
-                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetPropiedadesResponse result
+                    ActividadControladorStub.GetPropiedadesResponse result
                         ) {
            }
 
@@ -132,7 +145,7 @@
             * override this method for handling normal response from crearActividadGrupalEvaluable operation
             */
            public void receiveResultcrearActividadGrupalEvaluable(
-                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.CrearActividadGrupalEvaluableResponse result
+                    ActividadControladorStub.CrearActividadGrupalEvaluableResponse result
                         ) {
            }
 
@@ -150,7 +163,7 @@
             * override this method for handling normal response from getNotas operation
             */
            public void receiveResultgetNotas(
-                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetNotasResponse result
+                    ActividadControladorStub.GetNotasResponse result
                         ) {
            }
 
@@ -166,7 +179,7 @@
             * override this method for handling normal response from getActividadesDeActividad operation
             */
            public void receiveResultgetActividadesDeActividad(
-                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetActividadesDeActividadResponse result
+                    ActividadControladorStub.GetActividadesDeActividadResponse result
                         ) {
            }
 
@@ -182,7 +195,7 @@
             * override this method for handling normal response from crearActividadGrupal operation
             */
            public void receiveResultcrearActividadGrupal(
-                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.CrearActividadGrupalResponse result
+                    ActividadControladorStub.CrearActividadGrupalResponse result
                         ) {
            }
 
@@ -215,7 +228,7 @@
             * override this method for handling normal response from getParticipantes operation
             */
            public void receiveResultgetParticipantes(
-                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetParticipantesResponse result
+                    ActividadControladorStub.GetParticipantesResponse result
                         ) {
            }
 
@@ -231,7 +244,7 @@
             * override this method for handling normal response from crearActividadIndividual operation
             */
            public void receiveResultcrearActividadIndividual(
-                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.CrearActividadIndividualResponse result
+                    ActividadControladorStub.CrearActividadIndividualResponse result
                         ) {
            }
 
@@ -277,7 +290,7 @@
             * override this method for handling normal response from getNota operation
             */
            public void receiveResultgetNota(
-                    wtp.activity.src.fiuba.taller.actividad.ActividadStub.GetNotaResponse result
+                    ActividadControladorStub.GetNotaResponse result
                         ) {
            }
 
