@@ -1,18 +1,18 @@
 
 /**
- * ActividadControladorCallbackHandler.java
+ * ActividadCallbackHandler.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
  */
 
-    package wtp.activity.src.fiuba.taller.actividad;
+    package wtp.activity.fiuba.taller.actividad;
 
     /**
-     *  ActividadControladorCallbackHandler Callback class, Users can extend this class and implement
+     *  ActividadCallbackHandler Callback class, Users can extend this class and implement
      *  their own receiveResult and receiveError methods.
      */
-    public abstract class ActividadControladorCallbackHandler{
+    public abstract class ActividadCallbackHandler{
 
 
 
@@ -24,14 +24,14 @@
     * @param clientData Object mechanism by which the user can pass in user data
     * that will be avilable at the time this callback is called.
     */
-    public ActividadControladorCallbackHandler(Object clientData){
+    public ActividadCallbackHandler(Object clientData){
         this.clientData = clientData;
     }
 
     /**
     * Please use this constructor if you don't want to set any clientData
     */
-    public ActividadControladorCallbackHandler(){
+    public ActividadCallbackHandler(){
         this.clientData = null;
     }
 
@@ -64,7 +64,7 @@
             * override this method for handling normal response from getGrupos operation
             */
            public void receiveResultgetGrupos(
-                    ActividadControladorStub.GetGruposResponse result
+                    ActividadStub.GetGruposResponse result
                         ) {
            }
 
@@ -82,7 +82,7 @@
             * override this method for handling normal response from getActividadesDeAmbito operation
             */
            public void receiveResultgetActividadesDeAmbito(
-                    ActividadControladorStub.GetActividadesDeAmbitoResponse result
+                    ActividadStub.GetActividadesDeAmbitoResponse result
                         ) {
            }
 
@@ -98,7 +98,7 @@
             * override this method for handling normal response from crearActividadIndividualEvaluable operation
             */
            public void receiveResultcrearActividadIndividualEvaluable(
-                    ActividadControladorStub.CrearActividadIndividualEvaluableResponse result
+                    ActividadStub.CrearActividadIndividualEvaluableResponse result
                         ) {
            }
 
@@ -114,7 +114,7 @@
             * override this method for handling normal response from getPropiedades operation
             */
            public void receiveResultgetPropiedades(
-                    ActividadControladorStub.GetPropiedadesResponse result
+                    ActividadStub.GetPropiedadesResponse result
                         ) {
            }
 
@@ -145,7 +145,7 @@
             * override this method for handling normal response from crearActividadGrupalEvaluable operation
             */
            public void receiveResultcrearActividadGrupalEvaluable(
-                    ActividadControladorStub.CrearActividadGrupalEvaluableResponse result
+                    ActividadStub.CrearActividadGrupalEvaluableResponse result
                         ) {
            }
 
@@ -163,7 +163,7 @@
             * override this method for handling normal response from getNotas operation
             */
            public void receiveResultgetNotas(
-                    ActividadControladorStub.GetNotasResponse result
+                    ActividadStub.GetNotasResponse result
                         ) {
            }
 
@@ -179,7 +179,7 @@
             * override this method for handling normal response from getActividadesDeActividad operation
             */
            public void receiveResultgetActividadesDeActividad(
-                    ActividadControladorStub.GetActividadesDeActividadResponse result
+                    ActividadStub.GetActividadesDeActividadResponse result
                         ) {
            }
 
@@ -195,7 +195,7 @@
             * override this method for handling normal response from crearActividadGrupal operation
             */
            public void receiveResultcrearActividadGrupal(
-                    ActividadControladorStub.CrearActividadGrupalResponse result
+                    ActividadStub.CrearActividadGrupalResponse result
                         ) {
            }
 
@@ -228,7 +228,7 @@
             * override this method for handling normal response from getParticipantes operation
             */
            public void receiveResultgetParticipantes(
-                    ActividadControladorStub.GetParticipantesResponse result
+                    ActividadStub.GetParticipantesResponse result
                         ) {
            }
 
@@ -244,7 +244,7 @@
             * override this method for handling normal response from crearActividadIndividual operation
             */
            public void receiveResultcrearActividadIndividual(
-                    ActividadControladorStub.CrearActividadIndividualResponse result
+                    ActividadStub.CrearActividadIndividualResponse result
                         ) {
            }
 
@@ -290,7 +290,7 @@
             * override this method for handling normal response from getNota operation
             */
            public void receiveResultgetNota(
-                    ActividadControladorStub.GetNotaResponse result
+                    ActividadStub.GetNotaResponse result
                         ) {
            }
 
