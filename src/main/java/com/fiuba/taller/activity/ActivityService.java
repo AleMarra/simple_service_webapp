@@ -391,7 +391,7 @@ public class ActivityService {
 	}
 	
 	
-	@POST
+	@GET
 	@Path("getproperties/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getActivityProperties(@PathParam("id") long id, @CookieParam("authToken") String token)
