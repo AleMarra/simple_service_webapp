@@ -49,7 +49,7 @@
             * override this method for handling normal response from obtenerRecursos operation
             */
            public void receiveResultobtenerRecursos(
-        		   wtp.materials.src.service.MaterialsImplServiceStub.ObtenerRecursosResponseE result
+        		   MaterialsImplServiceStub.ObtenerRecursosResponseE result
                         ) {
            }
 
@@ -65,7 +65,7 @@
             * override this method for handling normal response from setArchivo operation
             */
            public void receiveResultsetArchivo(
-                   wtp.materials.src.service.MaterialsImplServiceStub.SetArchivoResponseE result
+                   MaterialsImplServiceStub.SetArchivoResponseE result
                         ) {
            }
 
@@ -81,7 +81,7 @@
             * override this method for handling normal response from getEncuesta operation
             */
            public void receiveResultgetEncuesta(
-                   wtp.materials.src.service.MaterialsImplServiceStub.GetEncuestaResponseE result
+                   MaterialsImplServiceStub.GetEncuestaResponseE result
                         ) {
            }
 
@@ -97,7 +97,7 @@
             * override this method for handling normal response from getEncuestaRespondida operation
             */
            public void receiveResultgetEncuestaRespondida(
-                   wtp.materials.src.service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE result
+                   MaterialsImplServiceStub.GetEncuestaRespondidaResponseE result
                         ) {
            }
 
@@ -113,7 +113,7 @@
             * override this method for handling normal response from agregarLink operation
             */
            public void receiveResultagregarLink(
-                   wtp.materials.src.service.MaterialsImplServiceStub.AgregarLinkResponseE result
+                   MaterialsImplServiceStub.AgregarLinkResponseE result
                         ) {
            }
 
@@ -129,7 +129,7 @@
             * override this method for handling normal response from agregarEncuestaRespondida operation
             */
            public void receiveResultagregarEncuestaRespondida(
-                   wtp.materials.src.service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE result
+                   MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE result
                         ) {
            }
 
@@ -145,7 +145,7 @@
             * override this method for handling normal response from agregarEncuesta operation
             */
            public void receiveResultagregarEncuesta(
-                   wtp.materials.src.service.MaterialsImplServiceStub.AgregarEncuestaResponseE result
+                   MaterialsImplServiceStub.AgregarEncuestaResponseE result
                         ) {
            }
 
@@ -161,7 +161,7 @@
             * override this method for handling normal response from sayHello operation
             */
            public void receiveResultsayHello(
-                   wtp.materials.src.service.MaterialsImplServiceStub.SayHelloResponseE result
+                   MaterialsImplServiceStub.SayHelloResponseE result
                         ) {
            }
 
