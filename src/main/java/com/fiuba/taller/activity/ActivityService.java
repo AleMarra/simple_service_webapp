@@ -426,7 +426,6 @@ public class ActivityService {
         response.setSuccess(success);
 
         if (success) {
-//            response.setCosas("lalalala");
             response.setReason("lalalala");
         }
 
