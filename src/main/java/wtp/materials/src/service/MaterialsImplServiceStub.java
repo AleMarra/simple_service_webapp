@@ -247,16 +247,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see MaterialsImplService#obtenerRecursos
+                     * @see wtp.materials.src.serviceMaterialsImplService#obtenerRecursos
                      * @param obtenerRecursos0
                     
                      */
 
                     
 
-                            public  MaterialsImplServiceStub.ObtenerRecursosResponseE obtenerRecursos(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosResponseE obtenerRecursos(
 
-                            MaterialsImplServiceStub.ObtenerRecursosE obtenerRecursos0)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosE obtenerRecursos0)
                         
 
                     throws java.rmi.RemoteException
@@ -307,11 +307,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             MaterialsImplServiceStub.ObtenerRecursosResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (MaterialsImplServiceStub.ObtenerRecursosResponseE)object;
+                                        return (service.MaterialsImplServiceStub.ObtenerRecursosResponseE)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -369,15 +369,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see MaterialsImplService#startobtenerRecursos
+                * @see wtp.materials.src.serviceMaterialsImplService#startobtenerRecursos
                     * @param obtenerRecursos0
                 
                 */
                 public  void startobtenerRecursos(
 
-                 MaterialsImplServiceStub.ObtenerRecursosE obtenerRecursos0,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosE obtenerRecursos0,
 
-                  final MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -421,10 +421,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         MaterialsImplServiceStub.ObtenerRecursosResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultobtenerRecursos(
-                                        (MaterialsImplServiceStub.ObtenerRecursosResponseE)object);
+                                        (service.MaterialsImplServiceStub.ObtenerRecursosResponseE)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorobtenerRecursos(e);
@@ -516,16 +516,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see MaterialsImplService#setArchivo
+                     * @see wtp.materials.src.serviceMaterialsImplService#setArchivo
                      * @param setArchivo2
                     
                      */
 
                     
 
-                            public  MaterialsImplServiceStub.SetArchivoResponseE setArchivo(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoResponseE setArchivo(
 
-                            MaterialsImplServiceStub.SetArchivoE setArchivo2)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoE setArchivo2)
                         
 
                     throws java.rmi.RemoteException
@@ -576,11 +576,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             MaterialsImplServiceStub.SetArchivoResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (MaterialsImplServiceStub.SetArchivoResponseE)object;
+                                        return (service.MaterialsImplServiceStub.SetArchivoResponseE)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -638,15 +638,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see MaterialsImplService#startsetArchivo
+                * @see wtp.materials.src.serviceMaterialsImplService#startsetArchivo
                     * @param setArchivo2
                 
                 */
                 public  void startsetArchivo(
 
-                 MaterialsImplServiceStub.SetArchivoE setArchivo2,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoE setArchivo2,
 
-                  final MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -690,10 +690,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         MaterialsImplServiceStub.SetArchivoResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultsetArchivo(
-                                        (MaterialsImplServiceStub.SetArchivoResponseE)object);
+                                        (service.MaterialsImplServiceStub.SetArchivoResponseE)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorsetArchivo(e);
@@ -785,16 +785,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see MaterialsImplService#getEncuesta
+                     * @see wtp.materials.src.serviceMaterialsImplService#getEncuesta
                      * @param getEncuesta4
                     
                      */
 
                     
 
-                            public  MaterialsImplServiceStub.GetEncuestaResponseE getEncuesta(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaResponseE getEncuesta(
 
-                            MaterialsImplServiceStub.GetEncuestaE getEncuesta4)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaE getEncuesta4)
                         
 
                     throws java.rmi.RemoteException
@@ -845,11 +845,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             MaterialsImplServiceStub.GetEncuestaResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (MaterialsImplServiceStub.GetEncuestaResponseE)object;
+                                        return (service.MaterialsImplServiceStub.GetEncuestaResponseE)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -907,15 +907,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see MaterialsImplService#startgetEncuesta
+                * @see wtp.materials.src.serviceMaterialsImplService#startgetEncuesta
                     * @param getEncuesta4
                 
                 */
                 public  void startgetEncuesta(
 
-                 MaterialsImplServiceStub.GetEncuestaE getEncuesta4,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaE getEncuesta4,
 
-                  final MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -959,10 +959,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         MaterialsImplServiceStub.GetEncuestaResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultgetEncuesta(
-                                        (MaterialsImplServiceStub.GetEncuestaResponseE)object);
+                                        (service.MaterialsImplServiceStub.GetEncuestaResponseE)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorgetEncuesta(e);
@@ -1054,16 +1054,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see MaterialsImplService#getEncuestaRespondida
+                     * @see wtp.materials.src.serviceMaterialsImplService#getEncuestaRespondida
                      * @param getEncuestaRespondida6
                     
                      */
 
                     
 
-                            public  MaterialsImplServiceStub.GetEncuestaRespondidaResponseE getEncuestaRespondida(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaResponseE getEncuestaRespondida(
 
-                            MaterialsImplServiceStub.GetEncuestaRespondidaE getEncuestaRespondida6)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaE getEncuestaRespondida6)
                         
 
                     throws java.rmi.RemoteException
@@ -1114,11 +1114,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             MaterialsImplServiceStub.GetEncuestaRespondidaResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (MaterialsImplServiceStub.GetEncuestaRespondidaResponseE)object;
+                                        return (service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -1176,15 +1176,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see MaterialsImplService#startgetEncuestaRespondida
+                * @see wtp.materials.src.serviceMaterialsImplService#startgetEncuestaRespondida
                     * @param getEncuestaRespondida6
                 
                 */
                 public  void startgetEncuestaRespondida(
 
-                 MaterialsImplServiceStub.GetEncuestaRespondidaE getEncuestaRespondida6,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaE getEncuestaRespondida6,
 
-                  final MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -1228,10 +1228,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         MaterialsImplServiceStub.GetEncuestaRespondidaResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultgetEncuestaRespondida(
-                                        (MaterialsImplServiceStub.GetEncuestaRespondidaResponseE)object);
+                                        (service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorgetEncuestaRespondida(e);
@@ -1323,16 +1323,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see MaterialsImplService#agregarLink
+                     * @see wtp.materials.src.serviceMaterialsImplService#agregarLink
                      * @param agregarLink8
                     
                      */
 
                     
 
-                            public  MaterialsImplServiceStub.AgregarLinkResponseE agregarLink(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkResponseE agregarLink(
 
-                            MaterialsImplServiceStub.AgregarLinkE agregarLink8)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkE agregarLink8)
                         
 
                     throws java.rmi.RemoteException
@@ -1383,11 +1383,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             MaterialsImplServiceStub.AgregarLinkResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (MaterialsImplServiceStub.AgregarLinkResponseE)object;
+                                        return (service.MaterialsImplServiceStub.AgregarLinkResponseE)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -1445,15 +1445,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see MaterialsImplService#startagregarLink
+                * @see wtp.materials.src.serviceMaterialsImplService#startagregarLink
                     * @param agregarLink8
                 
                 */
                 public  void startagregarLink(
 
-                 MaterialsImplServiceStub.AgregarLinkE agregarLink8,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkE agregarLink8,
 
-                  final MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -1497,10 +1497,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         MaterialsImplServiceStub.AgregarLinkResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultagregarLink(
-                                        (MaterialsImplServiceStub.AgregarLinkResponseE)object);
+                                        (service.MaterialsImplServiceStub.AgregarLinkResponseE)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErroragregarLink(e);
@@ -1592,16 +1592,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see MaterialsImplService#agregarEncuestaRespondida
+                     * @see wtp.materials.src.serviceMaterialsImplService#agregarEncuestaRespondida
                      * @param agregarEncuestaRespondida10
                     
                      */
 
                     
 
-                            public  MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE agregarEncuestaRespondida(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE agregarEncuestaRespondida(
 
-                            MaterialsImplServiceStub.AgregarEncuestaRespondidaE agregarEncuestaRespondida10)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaE agregarEncuestaRespondida10)
                         
 
                     throws java.rmi.RemoteException
@@ -1652,11 +1652,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE)object;
+                                        return (service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -1714,15 +1714,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see MaterialsImplService#startagregarEncuestaRespondida
+                * @see wtp.materials.src.serviceMaterialsImplService#startagregarEncuestaRespondida
                     * @param agregarEncuestaRespondida10
                 
                 */
                 public  void startagregarEncuestaRespondida(
 
-                 MaterialsImplServiceStub.AgregarEncuestaRespondidaE agregarEncuestaRespondida10,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaE agregarEncuestaRespondida10,
 
-                  final MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -1766,10 +1766,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultagregarEncuestaRespondida(
-                                        (MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE)object);
+                                        (service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErroragregarEncuestaRespondida(e);
@@ -1861,16 +1861,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see MaterialsImplService#agregarEncuesta
+                     * @see wtp.materials.src.serviceMaterialsImplService#agregarEncuesta
                      * @param agregarEncuesta12
                     
                      */
 
                     
 
-                            public  MaterialsImplServiceStub.AgregarEncuestaResponseE agregarEncuesta(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaResponseE agregarEncuesta(
 
-                            MaterialsImplServiceStub.AgregarEncuestaE agregarEncuesta12)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaE agregarEncuesta12)
                         
 
                     throws java.rmi.RemoteException
@@ -1921,11 +1921,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             MaterialsImplServiceStub.AgregarEncuestaResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (MaterialsImplServiceStub.AgregarEncuestaResponseE)object;
+                                        return (service.MaterialsImplServiceStub.AgregarEncuestaResponseE)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -1983,15 +1983,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see MaterialsImplService#startagregarEncuesta
+                * @see wtp.materials.src.serviceMaterialsImplService#startagregarEncuesta
                     * @param agregarEncuesta12
                 
                 */
                 public  void startagregarEncuesta(
 
-                 MaterialsImplServiceStub.AgregarEncuestaE agregarEncuesta12,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaE agregarEncuesta12,
 
-                  final MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -2035,10 +2035,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         MaterialsImplServiceStub.AgregarEncuestaResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultagregarEncuesta(
-                                        (MaterialsImplServiceStub.AgregarEncuestaResponseE)object);
+                                        (service.MaterialsImplServiceStub.AgregarEncuestaResponseE)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErroragregarEncuesta(e);
@@ -2130,16 +2130,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see MaterialsImplService#sayHello
+                     * @see wtp.materials.src.serviceMaterialsImplService#sayHello
                      * @param sayHello14
                     
                      */
 
                     
 
-                            public  MaterialsImplServiceStub.SayHelloResponseE sayHello(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloResponseE sayHello(
 
-                            MaterialsImplServiceStub.SayHelloE sayHello14)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloE sayHello14)
                         
 
                     throws java.rmi.RemoteException
@@ -2190,11 +2190,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             MaterialsImplServiceStub.SayHelloResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (MaterialsImplServiceStub.SayHelloResponseE)object;
+                                        return (service.MaterialsImplServiceStub.SayHelloResponseE)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -2252,15 +2252,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see MaterialsImplService#startsayHello
+                * @see wtp.materials.src.serviceMaterialsImplService#startsayHello
                     * @param sayHello14
                 
                 */
                 public  void startsayHello(
 
-                 MaterialsImplServiceStub.SayHelloE sayHello14,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloE sayHello14,
 
-                  final MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -2304,10 +2304,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         MaterialsImplServiceStub.SayHelloResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultsayHello(
-                                        (MaterialsImplServiceStub.SayHelloResponseE)object);
+                                        (service.MaterialsImplServiceStub.SayHelloResponseE)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorsayHello(e);
@@ -20824,12 +20824,12 @@
         }
            
     
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.ObtenerRecursosE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.ObtenerRecursosE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.ObtenerRecursosE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.ObtenerRecursosE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20838,12 +20838,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.ObtenerRecursosResponseE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.ObtenerRecursosResponseE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.ObtenerRecursosResponseE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.ObtenerRecursosResponseE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20852,12 +20852,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.SetArchivoE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.SetArchivoE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.SetArchivoE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.SetArchivoE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20866,12 +20866,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.SetArchivoResponseE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.SetArchivoResponseE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.SetArchivoResponseE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.SetArchivoResponseE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20880,12 +20880,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.GetEncuestaE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.GetEncuestaE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.GetEncuestaE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.GetEncuestaE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20894,12 +20894,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.GetEncuestaResponseE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.GetEncuestaResponseE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.GetEncuestaResponseE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.GetEncuestaResponseE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20908,12 +20908,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.GetEncuestaRespondidaE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.GetEncuestaRespondidaE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.GetEncuestaRespondidaE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.GetEncuestaRespondidaE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20922,12 +20922,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.GetEncuestaRespondidaResponseE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.GetEncuestaRespondidaResponseE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20936,12 +20936,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.AgregarLinkE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.AgregarLinkE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.AgregarLinkE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.AgregarLinkE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20950,12 +20950,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.AgregarLinkResponseE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.AgregarLinkResponseE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.AgregarLinkResponseE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.AgregarLinkResponseE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20964,12 +20964,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.AgregarEncuestaRespondidaE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.AgregarEncuestaRespondidaE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.AgregarEncuestaRespondidaE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.AgregarEncuestaRespondidaE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20978,12 +20978,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -20992,12 +20992,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.AgregarEncuestaE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.AgregarEncuestaE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.AgregarEncuestaE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.AgregarEncuestaE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21006,12 +21006,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.AgregarEncuestaResponseE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.AgregarEncuestaResponseE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.AgregarEncuestaResponseE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.AgregarEncuestaResponseE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21020,12 +21020,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.SayHelloE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.SayHelloE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.SayHelloE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.SayHelloE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21034,12 +21034,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(MaterialsImplServiceStub.SayHelloResponseE param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(service.MaterialsImplServiceStub.SayHelloResponseE param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(MaterialsImplServiceStub.SayHelloResponseE.MY_QNAME,
+                             return param.getOMElement(service.MaterialsImplServiceStub.SayHelloResponseE.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21049,14 +21049,14 @@
             }
         
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, MaterialsImplServiceStub.ObtenerRecursosE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(MaterialsImplServiceStub.ObtenerRecursosE.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(service.MaterialsImplServiceStub.ObtenerRecursosE.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21070,14 +21070,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, MaterialsImplServiceStub.SetArchivoE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(MaterialsImplServiceStub.SetArchivoE.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(service.MaterialsImplServiceStub.SetArchivoE.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21091,14 +21091,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, MaterialsImplServiceStub.GetEncuestaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(MaterialsImplServiceStub.GetEncuestaE.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(service.MaterialsImplServiceStub.GetEncuestaE.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21112,14 +21112,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, MaterialsImplServiceStub.GetEncuestaRespondidaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(MaterialsImplServiceStub.GetEncuestaRespondidaE.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(service.MaterialsImplServiceStub.GetEncuestaRespondidaE.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21133,14 +21133,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, MaterialsImplServiceStub.AgregarLinkE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(MaterialsImplServiceStub.AgregarLinkE.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(service.MaterialsImplServiceStub.AgregarLinkE.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21154,14 +21154,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, MaterialsImplServiceStub.AgregarEncuestaRespondidaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(MaterialsImplServiceStub.AgregarEncuestaRespondidaE.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(service.MaterialsImplServiceStub.AgregarEncuestaRespondidaE.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21175,14 +21175,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, MaterialsImplServiceStub.AgregarEncuestaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(MaterialsImplServiceStub.AgregarEncuestaE.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(service.MaterialsImplServiceStub.AgregarEncuestaE.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21196,14 +21196,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, MaterialsImplServiceStub.SayHelloE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(MaterialsImplServiceStub.SayHelloE.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(service.MaterialsImplServiceStub.SayHelloE.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -21233,114 +21233,114 @@
 
         try {
         
-                if (MaterialsImplServiceStub.ObtenerRecursosE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.ObtenerRecursosE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.ObtenerRecursosE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.ObtenerRecursosResponseE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.ObtenerRecursosResponseE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.ObtenerRecursosResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.SetArchivoE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.SetArchivoE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.SetArchivoE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.SetArchivoResponseE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.SetArchivoResponseE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.SetArchivoResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.GetEncuestaE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.GetEncuestaE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.GetEncuestaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.GetEncuestaResponseE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.GetEncuestaResponseE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.GetEncuestaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.GetEncuestaRespondidaE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.GetEncuestaRespondidaE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.GetEncuestaRespondidaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.GetEncuestaRespondidaResponseE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.GetEncuestaRespondidaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.AgregarLinkE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.AgregarLinkE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.AgregarLinkE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.AgregarLinkResponseE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.AgregarLinkResponseE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.AgregarLinkResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.AgregarEncuestaRespondidaE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.AgregarEncuestaRespondidaE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.AgregarEncuestaRespondidaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.AgregarEncuestaE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.AgregarEncuestaE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.AgregarEncuestaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.AgregarEncuestaResponseE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.AgregarEncuestaResponseE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.AgregarEncuestaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.SayHelloE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.SayHelloE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.SayHelloE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (MaterialsImplServiceStub.SayHelloResponseE.class.equals(type)){
+                if (service.MaterialsImplServiceStub.SayHelloResponseE.class.equals(type)){
                 
-                           return MaterialsImplServiceStub.SayHelloResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
