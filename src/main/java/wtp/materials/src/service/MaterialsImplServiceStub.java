@@ -5,7 +5,7 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
  */
-        package service;
+        package wtp.materials.src.service;
 
         
 
@@ -247,16 +247,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see service.MaterialsImplService#obtenerRecursos
+                     * @see wtp.materials.src.serviceMaterialsImplService#obtenerRecursos
                      * @param obtenerRecursos0
                     
                      */
 
                     
 
-                            public  service.MaterialsImplServiceStub.ObtenerRecursosResponseE obtenerRecursos(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosResponseE obtenerRecursos(
 
-                            service.MaterialsImplServiceStub.ObtenerRecursosE obtenerRecursos0)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosE obtenerRecursos0)
                         
 
                     throws java.rmi.RemoteException
@@ -307,7 +307,7 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             service.MaterialsImplServiceStub.ObtenerRecursosResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
@@ -369,15 +369,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see service.MaterialsImplService#startobtenerRecursos
+                * @see wtp.materials.src.serviceMaterialsImplService#startobtenerRecursos
                     * @param obtenerRecursos0
                 
                 */
                 public  void startobtenerRecursos(
 
-                 service.MaterialsImplServiceStub.ObtenerRecursosE obtenerRecursos0,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosE obtenerRecursos0,
 
-                  final service.MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -421,7 +421,7 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         service.MaterialsImplServiceStub.ObtenerRecursosResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultobtenerRecursos(
                                         (service.MaterialsImplServiceStub.ObtenerRecursosResponseE)object);
@@ -516,16 +516,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see service.MaterialsImplService#setArchivo
+                     * @see wtp.materials.src.serviceMaterialsImplService#setArchivo
                      * @param setArchivo2
                     
                      */
 
                     
 
-                            public  service.MaterialsImplServiceStub.SetArchivoResponseE setArchivo(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoResponseE setArchivo(
 
-                            service.MaterialsImplServiceStub.SetArchivoE setArchivo2)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoE setArchivo2)
                         
 
                     throws java.rmi.RemoteException
@@ -576,7 +576,7 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             service.MaterialsImplServiceStub.SetArchivoResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
@@ -638,15 +638,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see service.MaterialsImplService#startsetArchivo
+                * @see wtp.materials.src.serviceMaterialsImplService#startsetArchivo
                     * @param setArchivo2
                 
                 */
                 public  void startsetArchivo(
 
-                 service.MaterialsImplServiceStub.SetArchivoE setArchivo2,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoE setArchivo2,
 
-                  final service.MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -690,7 +690,7 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         service.MaterialsImplServiceStub.SetArchivoResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultsetArchivo(
                                         (service.MaterialsImplServiceStub.SetArchivoResponseE)object);
@@ -785,16 +785,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see service.MaterialsImplService#getEncuesta
+                     * @see wtp.materials.src.serviceMaterialsImplService#getEncuesta
                      * @param getEncuesta4
                     
                      */
 
                     
 
-                            public  service.MaterialsImplServiceStub.GetEncuestaResponseE getEncuesta(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaResponseE getEncuesta(
 
-                            service.MaterialsImplServiceStub.GetEncuestaE getEncuesta4)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaE getEncuesta4)
                         
 
                     throws java.rmi.RemoteException
@@ -845,7 +845,7 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             service.MaterialsImplServiceStub.GetEncuestaResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
@@ -907,15 +907,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see service.MaterialsImplService#startgetEncuesta
+                * @see wtp.materials.src.serviceMaterialsImplService#startgetEncuesta
                     * @param getEncuesta4
                 
                 */
                 public  void startgetEncuesta(
 
-                 service.MaterialsImplServiceStub.GetEncuestaE getEncuesta4,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaE getEncuesta4,
 
-                  final service.MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -959,7 +959,7 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         service.MaterialsImplServiceStub.GetEncuestaResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultgetEncuesta(
                                         (service.MaterialsImplServiceStub.GetEncuestaResponseE)object);
@@ -1054,16 +1054,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see service.MaterialsImplService#getEncuestaRespondida
+                     * @see wtp.materials.src.serviceMaterialsImplService#getEncuestaRespondida
                      * @param getEncuestaRespondida6
                     
                      */
 
                     
 
-                            public  service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE getEncuestaRespondida(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaResponseE getEncuestaRespondida(
 
-                            service.MaterialsImplServiceStub.GetEncuestaRespondidaE getEncuestaRespondida6)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaE getEncuestaRespondida6)
                         
 
                     throws java.rmi.RemoteException
@@ -1114,7 +1114,7 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
@@ -1176,15 +1176,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see service.MaterialsImplService#startgetEncuestaRespondida
+                * @see wtp.materials.src.serviceMaterialsImplService#startgetEncuestaRespondida
                     * @param getEncuestaRespondida6
                 
                 */
                 public  void startgetEncuestaRespondida(
 
-                 service.MaterialsImplServiceStub.GetEncuestaRespondidaE getEncuestaRespondida6,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaE getEncuestaRespondida6,
 
-                  final service.MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -1228,7 +1228,7 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultgetEncuestaRespondida(
                                         (service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE)object);
@@ -1323,16 +1323,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see service.MaterialsImplService#agregarLink
+                     * @see wtp.materials.src.serviceMaterialsImplService#agregarLink
                      * @param agregarLink8
                     
                      */
 
                     
 
-                            public  service.MaterialsImplServiceStub.AgregarLinkResponseE agregarLink(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkResponseE agregarLink(
 
-                            service.MaterialsImplServiceStub.AgregarLinkE agregarLink8)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkE agregarLink8)
                         
 
                     throws java.rmi.RemoteException
@@ -1383,7 +1383,7 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             service.MaterialsImplServiceStub.AgregarLinkResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
@@ -1445,15 +1445,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see service.MaterialsImplService#startagregarLink
+                * @see wtp.materials.src.serviceMaterialsImplService#startagregarLink
                     * @param agregarLink8
                 
                 */
                 public  void startagregarLink(
 
-                 service.MaterialsImplServiceStub.AgregarLinkE agregarLink8,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkE agregarLink8,
 
-                  final service.MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -1497,7 +1497,7 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         service.MaterialsImplServiceStub.AgregarLinkResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultagregarLink(
                                         (service.MaterialsImplServiceStub.AgregarLinkResponseE)object);
@@ -1592,16 +1592,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see service.MaterialsImplService#agregarEncuestaRespondida
+                     * @see wtp.materials.src.serviceMaterialsImplService#agregarEncuestaRespondida
                      * @param agregarEncuestaRespondida10
                     
                      */
 
                     
 
-                            public  service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE agregarEncuestaRespondida(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE agregarEncuestaRespondida(
 
-                            service.MaterialsImplServiceStub.AgregarEncuestaRespondidaE agregarEncuestaRespondida10)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaE agregarEncuestaRespondida10)
                         
 
                     throws java.rmi.RemoteException
@@ -1652,7 +1652,7 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
@@ -1714,15 +1714,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see service.MaterialsImplService#startagregarEncuestaRespondida
+                * @see wtp.materials.src.serviceMaterialsImplService#startagregarEncuestaRespondida
                     * @param agregarEncuestaRespondida10
                 
                 */
                 public  void startagregarEncuestaRespondida(
 
-                 service.MaterialsImplServiceStub.AgregarEncuestaRespondidaE agregarEncuestaRespondida10,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaE agregarEncuestaRespondida10,
 
-                  final service.MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -1766,7 +1766,7 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultagregarEncuestaRespondida(
                                         (service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE)object);
@@ -1861,16 +1861,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see service.MaterialsImplService#agregarEncuesta
+                     * @see wtp.materials.src.serviceMaterialsImplService#agregarEncuesta
                      * @param agregarEncuesta12
                     
                      */
 
                     
 
-                            public  service.MaterialsImplServiceStub.AgregarEncuestaResponseE agregarEncuesta(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaResponseE agregarEncuesta(
 
-                            service.MaterialsImplServiceStub.AgregarEncuestaE agregarEncuesta12)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaE agregarEncuesta12)
                         
 
                     throws java.rmi.RemoteException
@@ -1921,7 +1921,7 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             service.MaterialsImplServiceStub.AgregarEncuestaResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
@@ -1983,15 +1983,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see service.MaterialsImplService#startagregarEncuesta
+                * @see wtp.materials.src.serviceMaterialsImplService#startagregarEncuesta
                     * @param agregarEncuesta12
                 
                 */
                 public  void startagregarEncuesta(
 
-                 service.MaterialsImplServiceStub.AgregarEncuestaE agregarEncuesta12,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaE agregarEncuesta12,
 
-                  final service.MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -2035,7 +2035,7 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         service.MaterialsImplServiceStub.AgregarEncuestaResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultagregarEncuesta(
                                         (service.MaterialsImplServiceStub.AgregarEncuestaResponseE)object);
@@ -2130,16 +2130,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see service.MaterialsImplService#sayHello
+                     * @see wtp.materials.src.serviceMaterialsImplService#sayHello
                      * @param sayHello14
                     
                      */
 
                     
 
-                            public  service.MaterialsImplServiceStub.SayHelloResponseE sayHello(
+                            public  wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloResponseE sayHello(
 
-                            service.MaterialsImplServiceStub.SayHelloE sayHello14)
+                            wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloE sayHello14)
                         
 
                     throws java.rmi.RemoteException
@@ -2190,7 +2190,7 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             service.MaterialsImplServiceStub.SayHelloResponseE.class,
+                                             wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloResponseE.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
@@ -2252,15 +2252,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see service.MaterialsImplService#startsayHello
+                * @see wtp.materials.src.serviceMaterialsImplService#startsayHello
                     * @param sayHello14
                 
                 */
                 public  void startsayHello(
 
-                 service.MaterialsImplServiceStub.SayHelloE sayHello14,
+                 wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloE sayHello14,
 
-                  final service.MaterialsImplServiceCallbackHandler callback)
+                  final wtp.materials.src.serviceMaterialsImplServiceCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -2304,7 +2304,7 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         service.MaterialsImplServiceStub.SayHelloResponseE.class,
+                                                                         wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloResponseE.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultsayHello(
                                         (service.MaterialsImplServiceStub.SayHelloResponseE)object);
@@ -21049,7 +21049,7 @@
             }
         
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, service.MaterialsImplServiceStub.ObtenerRecursosE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
@@ -21070,7 +21070,7 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, service.MaterialsImplServiceStub.SetArchivoE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
@@ -21091,7 +21091,7 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, service.MaterialsImplServiceStub.GetEncuestaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
@@ -21112,7 +21112,7 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, service.MaterialsImplServiceStub.GetEncuestaRespondidaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
@@ -21133,7 +21133,7 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, service.MaterialsImplServiceStub.AgregarLinkE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
@@ -21154,7 +21154,7 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, service.MaterialsImplServiceStub.AgregarEncuestaRespondidaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
@@ -21175,7 +21175,7 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, service.MaterialsImplServiceStub.AgregarEncuestaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
@@ -21196,7 +21196,7 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, service.MaterialsImplServiceStub.SayHelloE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloE param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
@@ -21235,112 +21235,112 @@
         
                 if (service.MaterialsImplServiceStub.ObtenerRecursosE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.ObtenerRecursosE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.ObtenerRecursosResponseE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.ObtenerRecursosResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.ObtenerRecursosResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.SetArchivoE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.SetArchivoE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.SetArchivoResponseE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.SetArchivoResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.SetArchivoResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.GetEncuestaE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.GetEncuestaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.GetEncuestaResponseE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.GetEncuestaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.GetEncuestaRespondidaE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.GetEncuestaRespondidaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.GetEncuestaRespondidaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.AgregarLinkE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.AgregarLinkE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.AgregarLinkResponseE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.AgregarLinkResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarLinkResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.AgregarEncuestaRespondidaE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.AgregarEncuestaRespondidaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.AgregarEncuestaE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.AgregarEncuestaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.AgregarEncuestaResponseE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.AgregarEncuestaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.AgregarEncuestaResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.SayHelloE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.SayHelloE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
                 if (service.MaterialsImplServiceStub.SayHelloResponseE.class.equals(type)){
                 
-                           return service.MaterialsImplServiceStub.SayHelloResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return wtp.materials.src.serviceMaterialsImplServiceStub.SayHelloResponseE.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
