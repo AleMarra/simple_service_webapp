@@ -45,7 +45,7 @@ import wtp.activity.fiuba.taller.actividad.*;
 import wtp.materials.src.service.MaterialsImplServiceStub;
 
 
-@Path("/activityservice")
+@Path("/materialsservice")
 @Produces(MediaType.APPLICATION_JSON)
 public class MaterialsService {
 
