@@ -345,5 +345,203 @@ public class ActivityService extends BaseService {
 
         return Response.ok().build();
 	}
+
+
+	/*-------//TODO------*/
+	
+	@POST
+	@Path("deleteactivity/{id}") //TODO
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteActivity(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+//		// Init
+//		ActivityResponse response = new ActivityResponse();
+//		String username = getUsernameFromAuthToken(token);
+//		if (username.equals("")) {
+//			response.setSuccess(false);
+//			response.setReason("Usuario no logueado");
+//			return Response.ok()
+//					.header("Set-Cookie",
+//							"authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+//							.entity(response).build();
+//		}
+//
+//		ActividadStub api = new ActividadStub();
+//		ActividadStub.DestruirActividad destruirActividadRequest = new ActividadStub.DestruirActividad();
+//		ActividadStub.DestruirActividadResponse wsResponse = new ActividadStub.DestruirActividadResponse();
+//
+//		destruirActividadRequest.setUsername(username);
+//		destruirActividadRequest.setIdActividad(id);
+//
+//		boolean success = true;
+//		String message = "";
+//
+//		// Hacer el request
+//		try {
+//			wsResponse = api.destruirActividad(destruirActividadRequest);
+//		} catch (ActividadRemoteExceptionException e) {
+//			success = false;
+//			message = e.toString();
+//
+//		} catch (Exception e) {
+//			System.out.println(e.toString());
+//			return buildServiceUnavailable(e.toString());
+//		}
+//	
+//		long activityID =  wsResponse.get_return();
+//		
+//		response.setSuccess(success);
+//		
+//		if (success){
+//			response.setReason(Integer.toString((int)activityID));
+//		}else{
+//			response.setReason(message);
+//		}
+//
+//		return Response.ok().entity(response).build();
+		
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("addcoordinator/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addActivityCoordinator(EditCoordinatorRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("deletecoordinator/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteActivityCoordinator(EditCoordinatorRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+
+	@POST
+	@Path("getcoordinators/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityCoordinator(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("addparticipant/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addActivityParticipant(EditParticipantRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("deleteparticipant/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteActivityParticipant(EditParticipantRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("getparticipants/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityParticipants(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("getscopeactivities/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getScopeActivities(@PathParam("id") long scopeId, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("getactivityactivities/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityActivities(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("addgroup/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addActivityGroup(AddGroupRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("deletegroup/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addActivityGroup(DeleteGroupRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("getgroups/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityGroups(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	/*@POST
+	@Path("evaluate/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response evaluateActivity(AddNoteRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO: add "AddnoteRequest"
+        return Response.ok().build();
+	}*/
+	
+	@POST
+	@Path("getgrade/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityGrade(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("getgrades/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityGrades(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
 	
 }
