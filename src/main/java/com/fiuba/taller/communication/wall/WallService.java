@@ -2,7 +2,6 @@ package com.fiuba.taller.communication.wall;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.rmi.RemoteException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.CookieParam;
@@ -24,14 +23,12 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.fiuba.taller.communication.CommunicationResponse;
 import com.fiuba.taller.communication.wall.requests.EventCreate;
 import com.fiuba.taller.communication.wall.requests.EventDelete;
 import com.fiuba.taller.communication.wall.requests.EventEdit;
 import com.fiuba.taller.communication.wall.requests.EventsSearchByWords;
 import com.fiuba.taller.service.SecurityResponse;
 
-import wtp.LoginAPIHelperStub;
 import wtp.ServiceStub;
 
 @Path("/")

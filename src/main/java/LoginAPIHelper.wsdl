@@ -490,13 +490,13 @@
 </wsdl:binding>
 <wsdl:service name="LoginAPIHelper">
 <wsdl:port name="LoginAPIHelperHttpSoap11Endpoint" binding="ns:LoginAPIHelperSoap11Binding">
-<soap:address location="http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap11Endpoint/"/>
+<soap:address location="http://localhost:58080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap11Endpoint/"/>
 </wsdl:port>
 <wsdl:port name="LoginAPIHelperHttpSoap12Endpoint" binding="ns:LoginAPIHelperSoap12Binding">
-<soap12:address location="http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/"/>
+<soap12:address location="http://localhost:58080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/"/>
 </wsdl:port>
 <wsdl:port name="LoginAPIHelperHttpEndpoint" binding="ns:LoginAPIHelperHttpBinding">
-<http:address location="http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpEndpoint/"/>
+<http:address location="http://localhost:58080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpEndpoint/"/>
 </wsdl:port>
 </wsdl:service>
 </wsdl:definitions>

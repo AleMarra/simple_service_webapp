@@ -5,7 +5,7 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
  */
-        package wtp;
+        package wtp.loginapihelper.wtp;
 
         
 
@@ -202,7 +202,7 @@
      */
     public LoginAPIHelperStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
+                    this(configurationContext,"http://localhost:58080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
                 
     }
 
@@ -211,7 +211,7 @@
      */
     public LoginAPIHelperStub() throws org.apache.axis2.AxisFault {
         
-                    this("http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
+                    this("http://localhost:58080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
                 
     }
 
@@ -228,16 +228,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see wtp.LoginAPIHelper#login
+                     * @see LoginAPIHelper#login
                      * @param login0
                     
                      */
 
                     
 
-                            public  wtp.LoginAPIHelperStub.LoginResponse login(
+                            public  LoginAPIHelperStub.LoginResponse login(
 
-                            wtp.LoginAPIHelperStub.Login login0)
+                            LoginAPIHelperStub.Login login0)
                         
 
                     throws java.rmi.RemoteException
@@ -288,11 +288,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             wtp.LoginAPIHelperStub.LoginResponse.class,
+                                             LoginAPIHelperStub.LoginResponse.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (wtp.LoginAPIHelperStub.LoginResponse)object;
+                                        return (LoginAPIHelperStub.LoginResponse)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -350,15 +350,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see wtp.LoginAPIHelper#startlogin
+                * @see LoginAPIHelper#startlogin
                     * @param login0
                 
                 */
                 public  void startlogin(
 
-                 wtp.LoginAPIHelperStub.Login login0,
+                 LoginAPIHelperStub.Login login0,
 
-                  final wtp.LoginAPIHelperCallbackHandler callback)
+                  final LoginAPIHelperCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -402,10 +402,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         wtp.LoginAPIHelperStub.LoginResponse.class,
+                                                                         LoginAPIHelperStub.LoginResponse.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultlogin(
-                                        (wtp.LoginAPIHelperStub.LoginResponse)object);
+                                        (LoginAPIHelperStub.LoginResponse)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorlogin(e);
@@ -497,16 +497,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see wtp.LoginAPIHelper#disableAccount
+                     * @see LoginAPIHelper#disableAccount
                      * @param disableAccount2
                     
                      */
 
                     
 
-                            public  wtp.LoginAPIHelperStub.DisableAccountResponse disableAccount(
+                            public  LoginAPIHelperStub.DisableAccountResponse disableAccount(
 
-                            wtp.LoginAPIHelperStub.DisableAccount disableAccount2)
+                            LoginAPIHelperStub.DisableAccount disableAccount2)
                         
 
                     throws java.rmi.RemoteException
@@ -557,11 +557,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             wtp.LoginAPIHelperStub.DisableAccountResponse.class,
+                                             LoginAPIHelperStub.DisableAccountResponse.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (wtp.LoginAPIHelperStub.DisableAccountResponse)object;
+                                        return (LoginAPIHelperStub.DisableAccountResponse)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -619,15 +619,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see wtp.LoginAPIHelper#startdisableAccount
+                * @see LoginAPIHelper#startdisableAccount
                     * @param disableAccount2
                 
                 */
                 public  void startdisableAccount(
 
-                 wtp.LoginAPIHelperStub.DisableAccount disableAccount2,
+                 LoginAPIHelperStub.DisableAccount disableAccount2,
 
-                  final wtp.LoginAPIHelperCallbackHandler callback)
+                  final LoginAPIHelperCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -671,10 +671,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         wtp.LoginAPIHelperStub.DisableAccountResponse.class,
+                                                                         LoginAPIHelperStub.DisableAccountResponse.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultdisableAccount(
-                                        (wtp.LoginAPIHelperStub.DisableAccountResponse)object);
+                                        (LoginAPIHelperStub.DisableAccountResponse)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrordisableAccount(e);
@@ -766,16 +766,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see wtp.LoginAPIHelper#activateUser
+                     * @see LoginAPIHelper#activateUser
                      * @param activateUser4
                     
                      */
 
                     
 
-                            public  wtp.LoginAPIHelperStub.ActivateUserResponse activateUser(
+                            public  LoginAPIHelperStub.ActivateUserResponse activateUser(
 
-                            wtp.LoginAPIHelperStub.ActivateUser activateUser4)
+                            LoginAPIHelperStub.ActivateUser activateUser4)
                         
 
                     throws java.rmi.RemoteException
@@ -826,11 +826,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             wtp.LoginAPIHelperStub.ActivateUserResponse.class,
+                                             LoginAPIHelperStub.ActivateUserResponse.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (wtp.LoginAPIHelperStub.ActivateUserResponse)object;
+                                        return (LoginAPIHelperStub.ActivateUserResponse)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -888,15 +888,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see wtp.LoginAPIHelper#startactivateUser
+                * @see LoginAPIHelper#startactivateUser
                     * @param activateUser4
                 
                 */
                 public  void startactivateUser(
 
-                 wtp.LoginAPIHelperStub.ActivateUser activateUser4,
+                 LoginAPIHelperStub.ActivateUser activateUser4,
 
-                  final wtp.LoginAPIHelperCallbackHandler callback)
+                  final LoginAPIHelperCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -940,10 +940,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         wtp.LoginAPIHelperStub.ActivateUserResponse.class,
+                                                                         LoginAPIHelperStub.ActivateUserResponse.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultactivateUser(
-                                        (wtp.LoginAPIHelperStub.ActivateUserResponse)object);
+                                        (LoginAPIHelperStub.ActivateUserResponse)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErroractivateUser(e);
@@ -1035,16 +1035,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see wtp.LoginAPIHelper#resetPassword
+                     * @see LoginAPIHelper#resetPassword
                      * @param resetPassword6
                     
                      */
 
                     
 
-                            public  wtp.LoginAPIHelperStub.ResetPasswordResponse resetPassword(
+                            public  LoginAPIHelperStub.ResetPasswordResponse resetPassword(
 
-                            wtp.LoginAPIHelperStub.ResetPassword resetPassword6)
+                            LoginAPIHelperStub.ResetPassword resetPassword6)
                         
 
                     throws java.rmi.RemoteException
@@ -1095,11 +1095,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             wtp.LoginAPIHelperStub.ResetPasswordResponse.class,
+                                             LoginAPIHelperStub.ResetPasswordResponse.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (wtp.LoginAPIHelperStub.ResetPasswordResponse)object;
+                                        return (LoginAPIHelperStub.ResetPasswordResponse)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -1157,15 +1157,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see wtp.LoginAPIHelper#startresetPassword
+                * @see LoginAPIHelper#startresetPassword
                     * @param resetPassword6
                 
                 */
                 public  void startresetPassword(
 
-                 wtp.LoginAPIHelperStub.ResetPassword resetPassword6,
+                 LoginAPIHelperStub.ResetPassword resetPassword6,
 
-                  final wtp.LoginAPIHelperCallbackHandler callback)
+                  final LoginAPIHelperCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -1209,10 +1209,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         wtp.LoginAPIHelperStub.ResetPasswordResponse.class,
+                                                                         LoginAPIHelperStub.ResetPasswordResponse.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultresetPassword(
-                                        (wtp.LoginAPIHelperStub.ResetPasswordResponse)object);
+                                        (LoginAPIHelperStub.ResetPasswordResponse)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorresetPassword(e);
@@ -1304,16 +1304,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see wtp.LoginAPIHelper#logout
+                     * @see LoginAPIHelper#logout
                      * @param logout8
                     
                      */
 
                     
 
-                            public  wtp.LoginAPIHelperStub.LogoutResponse logout(
+                            public  LoginAPIHelperStub.LogoutResponse logout(
 
-                            wtp.LoginAPIHelperStub.Logout logout8)
+                            LoginAPIHelperStub.Logout logout8)
                         
 
                     throws java.rmi.RemoteException
@@ -1364,11 +1364,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             wtp.LoginAPIHelperStub.LogoutResponse.class,
+                                             LoginAPIHelperStub.LogoutResponse.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (wtp.LoginAPIHelperStub.LogoutResponse)object;
+                                        return (LoginAPIHelperStub.LogoutResponse)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -1426,15 +1426,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see wtp.LoginAPIHelper#startlogout
+                * @see LoginAPIHelper#startlogout
                     * @param logout8
                 
                 */
                 public  void startlogout(
 
-                 wtp.LoginAPIHelperStub.Logout logout8,
+                 LoginAPIHelperStub.Logout logout8,
 
-                  final wtp.LoginAPIHelperCallbackHandler callback)
+                  final LoginAPIHelperCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -1478,10 +1478,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         wtp.LoginAPIHelperStub.LogoutResponse.class,
+                                                                         LoginAPIHelperStub.LogoutResponse.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultlogout(
-                                        (wtp.LoginAPIHelperStub.LogoutResponse)object);
+                                        (LoginAPIHelperStub.LogoutResponse)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorlogout(e);
@@ -1573,16 +1573,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see wtp.LoginAPIHelper#enableAccount
+                     * @see LoginAPIHelper#enableAccount
                      * @param enableAccount10
                     
                      */
 
                     
 
-                            public  wtp.LoginAPIHelperStub.EnableAccountResponse enableAccount(
+                            public  LoginAPIHelperStub.EnableAccountResponse enableAccount(
 
-                            wtp.LoginAPIHelperStub.EnableAccount enableAccount10)
+                            LoginAPIHelperStub.EnableAccount enableAccount10)
                         
 
                     throws java.rmi.RemoteException
@@ -1633,11 +1633,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             wtp.LoginAPIHelperStub.EnableAccountResponse.class,
+                                             LoginAPIHelperStub.EnableAccountResponse.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (wtp.LoginAPIHelperStub.EnableAccountResponse)object;
+                                        return (LoginAPIHelperStub.EnableAccountResponse)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -1695,15 +1695,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see wtp.LoginAPIHelper#startenableAccount
+                * @see LoginAPIHelper#startenableAccount
                     * @param enableAccount10
                 
                 */
                 public  void startenableAccount(
 
-                 wtp.LoginAPIHelperStub.EnableAccount enableAccount10,
+                 LoginAPIHelperStub.EnableAccount enableAccount10,
 
-                  final wtp.LoginAPIHelperCallbackHandler callback)
+                  final LoginAPIHelperCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -1747,10 +1747,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         wtp.LoginAPIHelperStub.EnableAccountResponse.class,
+                                                                         LoginAPIHelperStub.EnableAccountResponse.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultenableAccount(
-                                        (wtp.LoginAPIHelperStub.EnableAccountResponse)object);
+                                        (LoginAPIHelperStub.EnableAccountResponse)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorenableAccount(e);
@@ -1842,16 +1842,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see wtp.LoginAPIHelper#registerUser
+                     * @see LoginAPIHelper#registerUser
                      * @param registerUser12
                     
                      */
 
                     
 
-                            public  wtp.LoginAPIHelperStub.RegisterUserResponse registerUser(
+                            public  LoginAPIHelperStub.RegisterUserResponse registerUser(
 
-                            wtp.LoginAPIHelperStub.RegisterUser registerUser12)
+                            LoginAPIHelperStub.RegisterUser registerUser12)
                         
 
                     throws java.rmi.RemoteException
@@ -1902,11 +1902,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             wtp.LoginAPIHelperStub.RegisterUserResponse.class,
+                                             LoginAPIHelperStub.RegisterUserResponse.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (wtp.LoginAPIHelperStub.RegisterUserResponse)object;
+                                        return (LoginAPIHelperStub.RegisterUserResponse)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -1964,15 +1964,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see wtp.LoginAPIHelper#startregisterUser
+                * @see LoginAPIHelper#startregisterUser
                     * @param registerUser12
                 
                 */
                 public  void startregisterUser(
 
-                 wtp.LoginAPIHelperStub.RegisterUser registerUser12,
+                 LoginAPIHelperStub.RegisterUser registerUser12,
 
-                  final wtp.LoginAPIHelperCallbackHandler callback)
+                  final LoginAPIHelperCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -2016,10 +2016,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         wtp.LoginAPIHelperStub.RegisterUserResponse.class,
+                                                                         LoginAPIHelperStub.RegisterUserResponse.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultregisterUser(
-                                        (wtp.LoginAPIHelperStub.RegisterUserResponse)object);
+                                        (LoginAPIHelperStub.RegisterUserResponse)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorregisterUser(e);
@@ -2111,16 +2111,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see wtp.LoginAPIHelper#isTokenValid
+                     * @see LoginAPIHelper#isTokenValid
                      * @param isTokenValid14
                     
                      */
 
                     
 
-                            public  wtp.LoginAPIHelperStub.IsTokenValidResponse isTokenValid(
+                            public  LoginAPIHelperStub.IsTokenValidResponse isTokenValid(
 
-                            wtp.LoginAPIHelperStub.IsTokenValid isTokenValid14)
+                            LoginAPIHelperStub.IsTokenValid isTokenValid14)
                         
 
                     throws java.rmi.RemoteException
@@ -2171,11 +2171,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             wtp.LoginAPIHelperStub.IsTokenValidResponse.class,
+                                             LoginAPIHelperStub.IsTokenValidResponse.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (wtp.LoginAPIHelperStub.IsTokenValidResponse)object;
+                                        return (LoginAPIHelperStub.IsTokenValidResponse)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -2233,15 +2233,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see wtp.LoginAPIHelper#startisTokenValid
+                * @see LoginAPIHelper#startisTokenValid
                     * @param isTokenValid14
                 
                 */
                 public  void startisTokenValid(
 
-                 wtp.LoginAPIHelperStub.IsTokenValid isTokenValid14,
+                 LoginAPIHelperStub.IsTokenValid isTokenValid14,
 
-                  final wtp.LoginAPIHelperCallbackHandler callback)
+                  final LoginAPIHelperCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -2285,10 +2285,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         wtp.LoginAPIHelperStub.IsTokenValidResponse.class,
+                                                                         LoginAPIHelperStub.IsTokenValidResponse.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultisTokenValid(
-                                        (wtp.LoginAPIHelperStub.IsTokenValidResponse)object);
+                                        (LoginAPIHelperStub.IsTokenValidResponse)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorisTokenValid(e);
@@ -2380,16 +2380,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see wtp.LoginAPIHelper#changePassword
+                     * @see LoginAPIHelper#changePassword
                      * @param changePassword16
                     
                      */
 
                     
 
-                            public  wtp.LoginAPIHelperStub.ChangePasswordResponse changePassword(
+                            public  LoginAPIHelperStub.ChangePasswordResponse changePassword(
 
-                            wtp.LoginAPIHelperStub.ChangePassword changePassword16)
+                            LoginAPIHelperStub.ChangePassword changePassword16)
                         
 
                     throws java.rmi.RemoteException
@@ -2440,11 +2440,11 @@
                 
                                 java.lang.Object object = fromOM(
                                              _returnEnv.getBody().getFirstElement() ,
-                                             wtp.LoginAPIHelperStub.ChangePasswordResponse.class,
+                                             LoginAPIHelperStub.ChangePasswordResponse.class,
                                               getEnvelopeNamespaces(_returnEnv));
 
                                
-                                        return (wtp.LoginAPIHelperStub.ChangePasswordResponse)object;
+                                        return (LoginAPIHelperStub.ChangePasswordResponse)object;
                                    
          }catch(org.apache.axis2.AxisFault f){
 
@@ -2502,15 +2502,15 @@
                 /**
                 * Auto generated method signature for Asynchronous Invocations
                 * 
-                * @see wtp.LoginAPIHelper#startchangePassword
+                * @see LoginAPIHelper#startchangePassword
                     * @param changePassword16
                 
                 */
                 public  void startchangePassword(
 
-                 wtp.LoginAPIHelperStub.ChangePassword changePassword16,
+                 LoginAPIHelperStub.ChangePassword changePassword16,
 
-                  final wtp.LoginAPIHelperCallbackHandler callback)
+                  final LoginAPIHelperCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
@@ -2554,10 +2554,10 @@
                                 org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
                                 
                                         java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
-                                                                         wtp.LoginAPIHelperStub.ChangePasswordResponse.class,
+                                                                         LoginAPIHelperStub.ChangePasswordResponse.class,
                                                                          getEnvelopeNamespaces(resultEnv));
                                         callback.receiveResultchangePassword(
-                                        (wtp.LoginAPIHelperStub.ChangePasswordResponse)object);
+                                        (LoginAPIHelperStub.ChangePasswordResponse)object);
                                         
                             } catch (org.apache.axis2.AxisFault e) {
                                 callback.receiveErrorchangePassword(e);
@@ -2677,7 +2677,7 @@
         }
         return false;
     }
-     //http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/
+     //http://localhost:58080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/
         public static class ActivateUserResponse
         implements org.apache.axis2.databinding.ADBBean{
         
@@ -12048,12 +12048,12 @@
         }
            
     
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.Login param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.Login param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.Login.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.Login.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12062,12 +12062,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.LoginResponse param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.LoginResponse param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.LoginResponse.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.LoginResponse.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12076,12 +12076,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.DisableAccount param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.DisableAccount param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.DisableAccount.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.DisableAccount.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12090,12 +12090,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.DisableAccountResponse param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.DisableAccountResponse param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.DisableAccountResponse.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.DisableAccountResponse.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12104,12 +12104,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.ActivateUser param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.ActivateUser param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.ActivateUser.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.ActivateUser.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12118,12 +12118,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.ActivateUserResponse param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.ActivateUserResponse param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.ActivateUserResponse.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.ActivateUserResponse.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12132,12 +12132,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.ResetPassword param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.ResetPassword param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.ResetPassword.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.ResetPassword.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12146,12 +12146,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.ResetPasswordResponse param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.ResetPasswordResponse param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.ResetPasswordResponse.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.ResetPasswordResponse.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12160,12 +12160,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.Logout param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.Logout param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.Logout.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.Logout.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12174,12 +12174,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.LogoutResponse param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.LogoutResponse param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.LogoutResponse.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.LogoutResponse.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12188,12 +12188,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.EnableAccount param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.EnableAccount param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.EnableAccount.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.EnableAccount.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12202,12 +12202,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.EnableAccountResponse param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.EnableAccountResponse param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.EnableAccountResponse.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.EnableAccountResponse.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12216,12 +12216,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.RegisterUser param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.RegisterUser param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.RegisterUser.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.RegisterUser.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12230,12 +12230,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.RegisterUserResponse param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.RegisterUserResponse param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.RegisterUserResponse.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.RegisterUserResponse.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12244,12 +12244,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.IsTokenValid param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.IsTokenValid param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.IsTokenValid.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.IsTokenValid.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12258,12 +12258,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.IsTokenValidResponse param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.IsTokenValidResponse param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.IsTokenValidResponse.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.IsTokenValidResponse.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12272,12 +12272,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.ChangePassword param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.ChangePassword param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.ChangePassword.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.ChangePassword.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12286,12 +12286,12 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(wtp.LoginAPIHelperStub.ChangePasswordResponse param, boolean optimizeContent)
+            private  org.apache.axiom.om.OMElement  toOM(LoginAPIHelperStub.ChangePasswordResponse param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
             
                         try{
-                             return param.getOMElement(wtp.LoginAPIHelperStub.ChangePasswordResponse.MY_QNAME,
+                             return param.getOMElement(LoginAPIHelperStub.ChangePasswordResponse.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12301,14 +12301,14 @@
             }
         
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.LoginAPIHelperStub.Login param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, LoginAPIHelperStub.Login param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(wtp.LoginAPIHelperStub.Login.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(LoginAPIHelperStub.Login.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12322,14 +12322,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.LoginAPIHelperStub.DisableAccount param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, LoginAPIHelperStub.DisableAccount param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(wtp.LoginAPIHelperStub.DisableAccount.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(LoginAPIHelperStub.DisableAccount.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12343,14 +12343,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.LoginAPIHelperStub.ActivateUser param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, LoginAPIHelperStub.ActivateUser param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(wtp.LoginAPIHelperStub.ActivateUser.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(LoginAPIHelperStub.ActivateUser.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12364,14 +12364,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.LoginAPIHelperStub.ResetPassword param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, LoginAPIHelperStub.ResetPassword param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(wtp.LoginAPIHelperStub.ResetPassword.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(LoginAPIHelperStub.ResetPassword.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12385,14 +12385,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.LoginAPIHelperStub.Logout param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, LoginAPIHelperStub.Logout param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(wtp.LoginAPIHelperStub.Logout.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(LoginAPIHelperStub.Logout.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12406,14 +12406,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.LoginAPIHelperStub.EnableAccount param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, LoginAPIHelperStub.EnableAccount param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(wtp.LoginAPIHelperStub.EnableAccount.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(LoginAPIHelperStub.EnableAccount.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12427,14 +12427,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.LoginAPIHelperStub.RegisterUser param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, LoginAPIHelperStub.RegisterUser param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(wtp.LoginAPIHelperStub.RegisterUser.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(LoginAPIHelperStub.RegisterUser.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12448,14 +12448,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.LoginAPIHelperStub.IsTokenValid param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, LoginAPIHelperStub.IsTokenValid param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(wtp.LoginAPIHelperStub.IsTokenValid.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(LoginAPIHelperStub.IsTokenValid.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12469,14 +12469,14 @@
 
                              
                                     
-                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, wtp.LoginAPIHelperStub.ChangePassword param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, LoginAPIHelperStub.ChangePassword param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                                         throws org.apache.axis2.AxisFault{
 
                                              
                                                     try{
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-                                                            emptyEnvelope.getBody().addChild(param.getOMElement(wtp.LoginAPIHelperStub.ChangePassword.MY_QNAME,factory));
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(LoginAPIHelperStub.ChangePassword.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -12506,128 +12506,128 @@
 
         try {
         
-                if (wtp.LoginAPIHelperStub.Login.class.equals(type)){
+                if (LoginAPIHelperStub.Login.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.Login.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.Login.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.LoginResponse.class.equals(type)){
+                if (LoginAPIHelperStub.LoginResponse.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.LoginResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.LoginResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.DisableAccount.class.equals(type)){
+                if (LoginAPIHelperStub.DisableAccount.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.DisableAccount.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.DisableAccount.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.DisableAccountResponse.class.equals(type)){
+                if (LoginAPIHelperStub.DisableAccountResponse.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.DisableAccountResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.DisableAccountResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.ActivateUser.class.equals(type)){
+                if (LoginAPIHelperStub.ActivateUser.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.ActivateUser.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.ActivateUser.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.ActivateUserResponse.class.equals(type)){
+                if (LoginAPIHelperStub.ActivateUserResponse.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.ActivateUserResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.ActivateUserResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.ResetPassword.class.equals(type)){
+                if (LoginAPIHelperStub.ResetPassword.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.ResetPassword.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.ResetPassword.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.ResetPasswordResponse.class.equals(type)){
+                if (LoginAPIHelperStub.ResetPasswordResponse.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.ResetPasswordResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.ResetPasswordResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.Logout.class.equals(type)){
+                if (LoginAPIHelperStub.Logout.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.Logout.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.Logout.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.LogoutResponse.class.equals(type)){
+                if (LoginAPIHelperStub.LogoutResponse.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.LogoutResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.LogoutResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.EnableAccount.class.equals(type)){
+                if (LoginAPIHelperStub.EnableAccount.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.EnableAccount.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.EnableAccount.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.EnableAccountResponse.class.equals(type)){
+                if (LoginAPIHelperStub.EnableAccountResponse.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.EnableAccountResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.EnableAccountResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.RegisterUser.class.equals(type)){
+                if (LoginAPIHelperStub.RegisterUser.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.RegisterUser.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.RegisterUser.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.RegisterUserResponse.class.equals(type)){
+                if (LoginAPIHelperStub.RegisterUserResponse.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.RegisterUserResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.RegisterUserResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.IsTokenValid.class.equals(type)){
+                if (LoginAPIHelperStub.IsTokenValid.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.IsTokenValid.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.IsTokenValid.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.IsTokenValidResponse.class.equals(type)){
+                if (LoginAPIHelperStub.IsTokenValidResponse.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.IsTokenValidResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.IsTokenValidResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.ChangePassword.class.equals(type)){
+                if (LoginAPIHelperStub.ChangePassword.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.ChangePassword.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.ChangePassword.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
            
-                if (wtp.LoginAPIHelperStub.ChangePasswordResponse.class.equals(type)){
+                if (LoginAPIHelperStub.ChangePasswordResponse.class.equals(type)){
                 
-                           return wtp.LoginAPIHelperStub.ChangePasswordResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                           return LoginAPIHelperStub.ChangePasswordResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }

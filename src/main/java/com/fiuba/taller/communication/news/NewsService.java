@@ -2,7 +2,6 @@ package com.fiuba.taller.communication.news;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.rmi.RemoteException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.CookieParam;
@@ -24,18 +23,14 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.fiuba.taller.communication.CommunicationResponse;
 import com.fiuba.taller.communication.news.requests.NewsDelete;
 import com.fiuba.taller.communication.news.requests.NewsEdit;
 import com.fiuba.taller.communication.news.requests.NewsCreate;
 import com.fiuba.taller.communication.news.requests.NewsSearchByUser;
 import com.fiuba.taller.communication.news.requests.NewsSearchByWords;
-import com.fiuba.taller.communication.wall.requests.EventsSearchByWords;
 import com.fiuba.taller.service.SecurityResponse;
 
-import wtp.LoginAPIHelperStub;
 import wtp.ServiceStub;
-import wtp.MessagerStub.Chat;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
