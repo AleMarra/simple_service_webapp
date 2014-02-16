@@ -2,7 +2,6 @@ package com.fiuba.taller.chat;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.rmi.RemoteException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.CookieParam;
@@ -27,13 +26,10 @@ import org.xml.sax.SAXException;
 import com.fiuba.taller.chat.requests.CreateChatRequest;
 import com.fiuba.taller.chat.requests.HistoryMessageRequest;
 import com.fiuba.taller.chat.requests.SendMessageRequest;
-import com.fiuba.taller.communication.CommunicationResponse;
 import com.fiuba.taller.service.SecurityResponse;
 
-import wtp.LoginAPIHelperStub;
 import wtp.MessagerStub;
 import wtp.MessagerStub.Chat;
-import wtp.MessagerStub.GetHistoryChatResponse;
 import wtp.MessagerStub.MensajeChat;
 import wtp.MessagerStub.Miembros;
 

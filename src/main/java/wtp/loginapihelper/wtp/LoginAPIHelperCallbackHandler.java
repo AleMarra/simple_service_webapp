@@ -6,7 +6,7 @@
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
  */
 
-    package wtp;
+    package wtp.loginapihelper.wtp;
 
     /**
      *  LoginAPIHelperCallbackHandler Callback class, Users can extend this class and implement
@@ -49,7 +49,7 @@
             * override this method for handling normal response from login operation
             */
            public void receiveResultlogin(
-                    wtp.LoginAPIHelperStub.LoginResponse result
+                    LoginAPIHelperStub.LoginResponse result
                         ) {
            }
 
@@ -65,7 +65,7 @@
             * override this method for handling normal response from disableAccount operation
             */
            public void receiveResultdisableAccount(
-                    wtp.LoginAPIHelperStub.DisableAccountResponse result
+                    LoginAPIHelperStub.DisableAccountResponse result
                         ) {
            }
 
@@ -81,7 +81,7 @@
             * override this method for handling normal response from activateUser operation
             */
            public void receiveResultactivateUser(
-                    wtp.LoginAPIHelperStub.ActivateUserResponse result
+                    LoginAPIHelperStub.ActivateUserResponse result
                         ) {
            }
 
@@ -97,7 +97,7 @@
             * override this method for handling normal response from resetPassword operation
             */
            public void receiveResultresetPassword(
-                    wtp.LoginAPIHelperStub.ResetPasswordResponse result
+                    LoginAPIHelperStub.ResetPasswordResponse result
                         ) {
            }
 
@@ -113,7 +113,7 @@
             * override this method for handling normal response from logout operation
             */
            public void receiveResultlogout(
-                    wtp.LoginAPIHelperStub.LogoutResponse result
+                    LoginAPIHelperStub.LogoutResponse result
                         ) {
            }
 
@@ -129,7 +129,7 @@
             * override this method for handling normal response from enableAccount operation
             */
            public void receiveResultenableAccount(
-                    wtp.LoginAPIHelperStub.EnableAccountResponse result
+                    LoginAPIHelperStub.EnableAccountResponse result
                         ) {
            }
 
@@ -145,7 +145,7 @@
             * override this method for handling normal response from registerUser operation
             */
            public void receiveResultregisterUser(
-                    wtp.LoginAPIHelperStub.RegisterUserResponse result
+                    LoginAPIHelperStub.RegisterUserResponse result
                         ) {
            }
 
@@ -161,7 +161,7 @@
             * override this method for handling normal response from isTokenValid operation
             */
            public void receiveResultisTokenValid(
-                    wtp.LoginAPIHelperStub.IsTokenValidResponse result
+                    LoginAPIHelperStub.IsTokenValidResponse result
                         ) {
            }
 
@@ -177,7 +177,7 @@
             * override this method for handling normal response from changePassword operation
             */
            public void receiveResultchangePassword(
-                    wtp.LoginAPIHelperStub.ChangePasswordResponse result
+                    LoginAPIHelperStub.ChangePasswordResponse result
                         ) {
            }
 

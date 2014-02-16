@@ -19,7 +19,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-import wtp.LoginAPIHelperStub;
+import wtp.loginapihelper.wtp.LoginAPIHelperStub;
 
 
 @Path("/securityservice")

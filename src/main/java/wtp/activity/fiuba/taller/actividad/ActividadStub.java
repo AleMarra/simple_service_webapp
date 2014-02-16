@@ -394,7 +394,7 @@
      */
     public ActividadStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"http://localhost:8080/axis2/services/Actividad" );
+                    this(configurationContext,"http://localhost:58080/axis2/services/Actividad" );
                 
     }
 
@@ -403,7 +403,7 @@
      */
     public ActividadStub() throws org.apache.axis2.AxisFault {
         
-                    this("http://localhost:8080/axis2/services/Actividad" );
+                    this("http://localhost:58080/axis2/services/Actividad" );
                 
     }
 
@@ -4760,7 +4760,7 @@
         }
         return false;
     }
-     //http://localhost:8080/axis2/services/Actividad
+     //http://localhost:58080/axis2/services/Actividad
         public static class IOException
         implements org.apache.axis2.databinding.ADBBean{
         /* This type was generated from the piece of schema that had

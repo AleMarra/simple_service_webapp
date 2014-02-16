@@ -21,15 +21,13 @@ import java.util.Iterator;
 
 import javax.ws.rs.core.Response;
 
-import com.fiuba.taller.service.SecurityResponse;
-
 import org.apache.axis2.AxisFault;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import wtp.LoginAPIHelperStub;
+import wtp.loginapihelper.wtp.LoginAPIHelperStub;
 
 
 public class BaseService {
