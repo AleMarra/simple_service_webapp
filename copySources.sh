@@ -1,10 +1,10 @@
 TIME=$1
 
 if [ -z $TIME ]; then
-	TIME=-300
+	TIME=300
 fi
 
-FILES=$(find src -name *.java -mmin $TIME)
+FILES=$(find src -name *.java -mmin -$TIME)
 
 if [ -z "$FILES" ]; then
 	echo "Nothing modified during the last $TIME minutes"
