@@ -1081,13 +1081,13 @@
     </wsdl:binding>
     <wsdl:service name="Actividad">
         <wsdl:port name="ActividadHttpSoap11Endpoint" binding="ns:ActividadSoap11Binding">
-            <soap:address location="http://localhost:58080/axis2/services/Actividad"/>
+            <soap:address location="http://localhost:8080/axis2/services/Actividad"/>
         </wsdl:port>
         <wsdl:port name="ActividadHttpSoap12Endpoint" binding="ns:ActividadSoap12Binding">
-            <soap12:address location="http://localhost:58080/axis2/services/Actividad"/>
+            <soap12:address location="http://localhost:8080/axis2/services/Actividad"/>
         </wsdl:port>
         <wsdl:port name="ActividadHttpEndpoint" binding="ns:ActividadHttpBinding">
-            <http:address location="http://localhost:58080/axis2/services/Actividad"/>
+            <http:address location="http://localhost:8080/axis2/services/Actividad"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

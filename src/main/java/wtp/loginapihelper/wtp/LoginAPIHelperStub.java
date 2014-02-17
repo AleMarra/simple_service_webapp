@@ -202,7 +202,7 @@
      */
     public LoginAPIHelperStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"http://localhost:58080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
+                    this(configurationContext,"http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
                 
     }
 
@@ -211,7 +211,7 @@
      */
     public LoginAPIHelperStub() throws org.apache.axis2.AxisFault {
         
-                    this("http://localhost:58080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
+                    this("http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/" );
                 
     }
 
@@ -2677,7 +2677,7 @@
         }
         return false;
     }
-     //http://localhost:58080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/
+     //http://localhost:8080/axis2/services/LoginAPIHelper.LoginAPIHelperHttpSoap12Endpoint/
         public static class ActivateUserResponse
         implements org.apache.axis2.databinding.ADBBean{
         
