@@ -13,4 +13,6 @@ fi
 
 scp -rP 2522 $FILES root@vmtaller:/home/presentación/
 
+echo ""
+echo "#############"
 echo "Done. Don't forget to run the script 'buildAndDeploy.sh' located at vmtaller:/home/presentación"
