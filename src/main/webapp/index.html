@@ -189,6 +189,7 @@
 </head>
 <body>
 
+<<<<<<< HEAD
 <div id="loggedOutSection" style="display: none;">
     <section id="registeruser">
         <h2>registeruser test</h2>
@@ -245,6 +246,50 @@
     </section>
 </div>
 
+=======
+	<h2>Jersey RESTful Web Application with simple html+AJAX in client-side</h2>
+
+	<h2>Retrieve data from XML object => 'Admin' user</h2>
+	<p>	<b>User: </b><span id="User"></span>
+	</p>
+	<p>	<b>Name: </b><span id="Name"></span>
+	</p>
+	<p>	<b>ID: </b><span id="ID"></span>
+	</p>
+	<button onclick="loadXMLDoc('userController/testXML/admin')">Get XML data</button>
+
+	<h2>Retrieve data from Json object => 'Common' User</h2>
+	<p>	<b>User: </b><span id="UserJson"></span>
+	</p>
+	<p>	<b>Name: </b><span id="NameJson"></span>
+	</p>
+	<p>	<b>ID: </b><span id="IDJson"></span>
+	</p>
+	<button onclick="loadJSON('userController/testJSON?userkey=common','IDJson','NameJson','UserJson')">Get JSON data</button>
+
+    <h2>SEND data with Json Object {id:5, user:"pepe", fullName:"elPepeMujica"} => Returns modified object</h2>
+    <p>	<b>User: </b><span id="UserPosted"></span>
+    </p>
+    <p>	<b>Name: </b><span id="NamePosted"></span>
+    </p>
+    <p>	<b>ID: </b><span id="IDPosted"></span>
+    </p>
+    <button onclick="postJSON('userController/testJSON/upload')">POST JSON data</button>
+
+<hr />
+
+    <h2>Get Despegar.com available cities for their Trip Planning service</h2>
+    <button onclick="getDespegar()">GET through redirection <br/> to another service</button>
+    <div id="despegar"></div>
+
+    <h2>Test Grails' controller template implemented in Java -- check console</h2>
+    <div id="list">
+        <h3>List</h3>
+        <div   class="url" val="list" style="display: hidden;"></div>
+        <input class="query-string" param-name="max" placeholder="list size"/>
+        <button onclick="testGrailsTemplates('list')">GET!</button>
+    </div>
+>>>>>>> cd2e8f9169e756459a53fbaa2ddebcfe791fca68
 
 <div id="loggedInSection" style='display:none'>
     <div>Estas loggeado</div>
