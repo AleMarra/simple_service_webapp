@@ -6,7 +6,7 @@
  * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
  */
 
-    package service;
+    package wtp.materials;
 
     /**
      *  MaterialsImplServiceCallbackHandler Callback class, Users can extend this class and implement
@@ -49,7 +49,7 @@
             * override this method for handling normal response from getRecursos operation
             */
            public void receiveResultgetRecursos(
-                    service.MaterialsImplServiceStub.GetRecursosResponseE result
+        		   wtp.materials.MaterialsImplServiceStub.GetRecursosResponseE result
                         ) {
            }
 
@@ -65,7 +65,7 @@
             * override this method for handling normal response from getEncuestaRespondida operation
             */
            public void receiveResultgetEncuestaRespondida(
-                    service.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE result
+        		   wtp.materials.MaterialsImplServiceStub.GetEncuestaRespondidaResponseE result
                         ) {
            }
 
@@ -81,7 +81,7 @@
             * override this method for handling normal response from borrarRecurso operation
             */
            public void receiveResultborrarRecurso(
-                    service.MaterialsImplServiceStub.BorrarRecursoResponseE result
+        		   wtp.materials.MaterialsImplServiceStub.BorrarRecursoResponseE result
                         ) {
            }
 
@@ -97,7 +97,7 @@
             * override this method for handling normal response from agregarEncuestaRespondida operation
             */
            public void receiveResultagregarEncuestaRespondida(
-                    service.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE result
+        		   wtp.materials.MaterialsImplServiceStub.AgregarEncuestaRespondidaResponseE result
                         ) {
            }
 
@@ -113,7 +113,7 @@
             * override this method for handling normal response from agregarRecurso operation
             */
            public void receiveResultagregarRecurso(
-                    service.MaterialsImplServiceStub.AgregarRecursoResponseE result
+                    wtp.materials.MaterialsImplServiceStub.AgregarRecursoResponseE result
                         ) {
            }
 
@@ -129,7 +129,7 @@
             * override this method for handling normal response from sayHello operation
             */
            public void receiveResultsayHello(
-                    service.MaterialsImplServiceStub.SayHelloResponseE result
+                    wtp.materials.MaterialsImplServiceStub.SayHelloResponseE result
                         ) {
            }
 
@@ -145,7 +145,7 @@
             * override this method for handling normal response from agregarArchivo operation
             */
            public void receiveResultagregarArchivo(
-                    service.MaterialsImplServiceStub.AgregarArchivoResponseE result
+                    wtp.materials.MaterialsImplServiceStub.AgregarArchivoResponseE result
                         ) {
            }
 
@@ -161,7 +161,7 @@
             * override this method for handling normal response from getRecurso operation
             */
            public void receiveResultgetRecurso(
-                    service.MaterialsImplServiceStub.GetRecursoResponseE result
+                    wtp.materials.MaterialsImplServiceStub.GetRecursoResponseE result
                         ) {
            }
 

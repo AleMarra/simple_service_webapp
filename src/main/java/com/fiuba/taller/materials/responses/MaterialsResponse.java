@@ -1,12 +1,12 @@
-package com.fiuba.taller.materials;
+package com.fiuba.taller.materials.responses;
 
 import javax.xml.bind.annotation.XmlElement;
 
 public class MaterialsResponse {
 
-    private boolean success;
-    private String reason;
-    private String authToken;
+    protected boolean success = false;
+    protected String reason = "";
+    protected String authToken = "";
 
     public MaterialsResponse(){}
     
@@ -54,7 +54,6 @@ public class MaterialsResponse {
         this.authToken = authToken;
     }
     
-
     
     @Override 
     public String toString(){
