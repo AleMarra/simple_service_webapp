@@ -33,7 +33,6 @@ import com.fiuba.taller.activity.requests.*;
 
 import com.fiuba.taller.materials.requests.GetResourceRequest;
 import com.fiuba.taller.materials.requests.GetResourcesListRequest;
-import com.fiuba.taller.materials.responses.GetResourceResponse;
 import com.fiuba.taller.materials.responses.GetResourcesListResponse;
 import com.fiuba.taller.materials.responses.MaterialsResponse;
 import com.fiuba.taller.service.SecurityResponse;
@@ -53,7 +52,7 @@ import wtp.materials.MaterialsImplServiceStub.GetRecursos;
 import wtp.materials.MaterialsImplServiceStub.GetRecursosE;
 
 
-@Path("/activityservice")
+@Path("/materialsservice")
 @Produces(MediaType.APPLICATION_JSON)
 public class MaterialsService {
 
@@ -478,7 +477,8 @@ public class MaterialsService {
 
 		return null;
 
-			}
-
-
+	
+	}
+	
+	
 }
