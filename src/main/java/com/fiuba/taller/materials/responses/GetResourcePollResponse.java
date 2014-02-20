@@ -1,18 +1,12 @@
 package com.fiuba.taller.materials.responses;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.fiuba.taller.materials.MaterialsResource;
-import com.fiuba.taller.materials.responses.GetResourceLinkResponse.MaterialsLinkResource;
 import com.fiuba.taller.utils.XmlHandler;
 
 public class GetResourcePollResponse extends MaterialsResponse {
@@ -22,18 +16,19 @@ public class GetResourcePollResponse extends MaterialsResponse {
 	public static class MaterialsPollResource extends MaterialsResource{
 		
 		public MaterialsPollResource(){}
-
-		private List<PollQuestion> questions = new LinkedList<PollQuestion>();
 		
 		private Boolean evaluable;
+
+		
+		private PollQuestionElementBundler questionsBundle;
 		
 		@XmlElement(name="preguntas")
-		public List<PollQuestion> getQuestions() {
-			return questions;
+		public PollQuestionElementBundler getQuestionsBundle() {
+			return questionsBundle;
 		}
 
-		public void setQuestions(List<PollQuestion> questions) {
-			this.questions = questions;
+		public void setQuestionsBundle(PollQuestionElementBundler questionsBundle) {
+			this.questionsBundle = questionsBundle;
 		}
 		
 		@XmlAttribute(name="evaluada")
@@ -48,8 +43,10 @@ public class GetResourcePollResponse extends MaterialsResponse {
 		@Override 
 		public String toString(){
 			return String.format("MaterialsPollResource: recurso: %s; ambito: %s; tipo: %s; desc: %s; questionsCount: %d", 
-					recursoId, ambitoId, tipo, descripcion, questions.size());
+					recursoId, ambitoId, tipo, descripcion, questionsBundle.toString());
 		}
+
+	
 	}
 	
 	private MaterialsPollResource resource = new MaterialsPollResource();
@@ -69,7 +66,8 @@ public class GetResourcePollResponse extends MaterialsResponse {
 	public void setResourcesFromXML(Element resourceRoot) {
 
 		MaterialsPollResource pollResource = new MaterialsPollResource();
-		List<PollQuestion> pollQuestions = new LinkedList<PollQuestion>();
+		PollQuestionElementBundler questionsBundle = new PollQuestionElementBundler();
+
 		
 		NodeList questionsNodes = xmlHandler.getFirstElementWithTag(resourceRoot, "preguntas").getChildNodes();
 		Element question = null;
@@ -77,19 +75,14 @@ public class GetResourcePollResponse extends MaterialsResponse {
 			if(questionsNodes.item(i).getNodeType() == Node.ELEMENT_NODE){
 				question = (Element) questionsNodes.item(i);
 				
-				PollQuestion current = null;
 				if(question.getTagName().equals("preguntaConOpciones"))
-					current = new QuestionWithOptions();
+					questionsBundle.addQuestionsWithOptions( new QuestionWithOptions(question));
 				else
-					current = new QuestionWithoutOptions();
-				
-				current.setFromXML(question);
-				
-				pollQuestions.add(current);
+					questionsBundle.addQuestionsWithoutOptions( new QuestionWithoutOptions(question));
 			}
 		}
 		
-		pollResource.setQuestions(pollQuestions);
+		pollResource.setQuestionsBundle(questionsBundle);
 		
 		pollResource.setAmbitoId(Integer.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "ambitoId")));
 		pollResource.setRecursoId(Integer.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "recursoId")));
