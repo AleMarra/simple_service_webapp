@@ -1,5 +1,6 @@
 package com.fiuba.taller.materials;
 
+import javax.ws.rs.ext.ExceptionMapper;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -11,6 +12,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import com.fiuba.taller.BaseService;
+import com.fiuba.taller.materials.responses.GetResourcesListResponse;
 import com.fiuba.taller.materials.responses.MaterialsResponse;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -60,7 +62,7 @@ public class MaterialsService extends BaseService {
 	{
 		
 		// Init
-		MaterialsResponse response = new MaterialsResponse();
+        GetResourcesListResponse response = new GetResourcesListResponse();
         String username = getUsernameFromAuthToken(token);
         if (username.equals("")) {
             response.setSuccess(false);
@@ -80,25 +82,60 @@ public class MaterialsService extends BaseService {
         MaterialsImplServiceStub.GetRecursosResponse wsResponse = new MaterialsImplServiceStub.GetRecursosResponse();
 
 //        getRecursosRequest.setParametros(payload.toString());
-        getRecursosRequest.setParametros("fuck");
+        getRecursosRequest.setParametros("" +
+                "<parametro>" +
+                    "<recurso>" +
+                        "<ambitoId>3</ambitoId>" +
+                    "</recurso>" +
+                    "<usuarioId>2</usuarioId>" +
+                "</parametro>");
         getRecursosERequest.setGetRecursos(getRecursosRequest);
 
 		boolean success = true;
 	    String message = "";
 	        
-		// Hacer el request
-        // No necesita try/catch porque las clases 'E' wrappean las excepciones al parecer
-        wsResponseE = api.getRecursos(getRecursosERequest);
-
-        //  Parsear el response
-        wsResponse =  wsResponseE.getGetRecursosResponse();
+//		// Hacer el request
+//        try {
+//            // Las clases 'E' wrappean las excepciones controladas, como poner los parámetros mal
+//            wsResponseE = api.getRecursos(getRecursosERequest);
+//        } catch (AxisFault error) {
+//            System.out.println(error.getReason());
+//            return buildServiceUnavailable("obtener recursos", error.getReason());
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//        //  Parsear el response
+//        wsResponse =  wsResponseE.getGetRecursosResponse();
 
         // Parsear el response
-        Document doc = getDoc(wsResponse.getRecursos());
+//        Document doc = getDoc(wsResponse.getRecursos());
+        Document doc = getDoc("" +
+                "<response>" +
+                    "<success>true</success>" +
+                    "<recursos>" +
+                        "<recurso>" +
+                            "<recursoId>11002</recursoId>" +
+                            "<tipo>Link</tipo>" +
+                            "<ambitoId>-1</ambitoId>" +
+                            "<descripcion>un link a google copado</descripcion>" +
+                        "</recurso>" +
+                        "<recurso>" +
+                            "<recursoId>11003</recursoId>" +
+                            "<tipo>Encuesta</tipo>" +
+                            "<ambitoId>-1</ambitoId>" +
+                            "<descripcion>una encuesta chica</descripcion>" +
+                        "</recurso>" +
+                        "<recurso>" +
+                            "<recursoId>11004</recursoId>" +
+                            "<tipo>Encuesta</tipo>" +
+                            "<ambitoId>-1</ambitoId>" +
+                            "<descripcion>una encuesta grande</descripcion>" +
+                        "</recurso>" +
+                    "</recursos>" +
+                "</response>");
         Node node = getNode(doc, "response");
 
         String successString = getFirstElementValue( node, "success");
-        response.setSuccess(success);
 
         if (successString == null) {
             return buildWrongXmlError("success");
@@ -106,9 +143,9 @@ public class MaterialsService extends BaseService {
         success = successString.equals(TRUE_STRING);
         response.setSuccess(success);
 
-        if (success){
-            response.setReason("llaal");
-        }else{
+        if (success) {
+            response.setResourcesFromXML((Element) getNode(doc, "recursos"));
+        } else {
             response.setReason(getFirstElementValue(node, "reason"));
         }
 
