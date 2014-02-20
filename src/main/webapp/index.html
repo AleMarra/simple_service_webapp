@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>>-->
+    <script src="js/jquery.js"></script>
     <style>
         label {
             display: inline-block;
@@ -37,7 +38,7 @@
         /*
          Usage: receives the id of the DOM element whose inner elements defines the request through
          a class name convention:
-         url: the URL for the request. Appended to 'api/securityservice/'
+         url: the URL for the request. Appended to 'api/'
          type: HTTP verb. Defaults to 'GET'
          url-param: mandatory parameters of the request, such us user id when using getUser. Appended to the URL
          query-string: optional parameters of the request. Also, a 'param-name' attribute at the element is needed
@@ -51,7 +52,7 @@
          */
         function sendRequest(idType, onSuccess, onError) {
             var $el = $("#" + idType),
-                    url = 'api/securityservice/',
+                    url = 'api/',
                     type = 'GET',
                     data = {};
             // DOM $elements
@@ -192,7 +193,7 @@
     <section id="registeruser">
         <h2>registeruser test</h2>
         <div class="registeruser">
-            <div   class="url" val="registeruser" style="display: hidden;"/>
+            <div   class="url" val="securityservice/registeruser" style="display: hidden;"/>
             <div   class="type" val="POST" style="display: hidden;"/>
             <label>Usuario:</label>    <input class="data" param-name="username" type="text" /><br>
             <label>Contraseña:</label> <input class="data" param-name="password" type="password" ><br>
@@ -212,7 +213,7 @@
     <section id="login">
         <h2>login test</h2>
         <div class="login">
-            <div   class="url" val="login" style="display: hidden;"/>
+            <div   class="url" val="securityservice/login" style="display: hidden;"/>
             <div   class="type" val="POST" style="display: hidden;"/>
             <label>Usuario:</label>    <input class="data" param-name="username" type="text" /><br>
             <label>Contraseña:</label> <input class="data" param-name="password" type="password" ><br>
@@ -225,7 +226,7 @@
     <section id="activateuser">
         <h2>activateUser test</h2>
         <div class="activateuser">
-            <div   class="url" val="activateuser" style="display: hidden;"/>
+            <div   class="url" val="securityservice/activateuser" style="display: hidden;"/>
             <div   class="type" val="POST" style="display: hidden;"/>
             <label>Usuario:</label> <input class="data" param-name="username" type="text" value="juan" /><br>
             <button onclick="sendRequest('activateuser')">Activate</button>
@@ -237,7 +238,7 @@
     <section id="enableaccountfromemail">
         <h2>enableAccountFromEmail test (@todo)</h2>
         <div class="enableAccountFromEmaill">
-            <div   class="url" val="enableaccountfromemail" style="display: hidden;"/>
+            <div   class="url" val="securityservice/enableaccountfromemail" style="display: hidden;"/>
             <div   class="type" val="POST" style="display: hidden;"/>
             <button onclick="sendRequest('enableaccountfromemail')">Enable</button>
         </div>
@@ -253,7 +254,7 @@
     <section id="changepassword">
         <h2>changePassword test</h2>
         <div class="changepassword">
-            <div   class="url" val="changepassword" style="display: hidden;"/>
+            <div   class="url" val="securityservice/changepassword" style="display: hidden;"/>
             <div   class="type" val="POST" style="display: hidden;"/>
             <label>Old Password:</label> <input class="data" param-name="oldPassword" type="text" /><br>
             <label>New Password:</label> <input class="data" param-name="newPassword" type="text" /><br>
@@ -266,7 +267,7 @@
     <section id="resetpassword">
         <h2>resetPassword test</h2>
         <div class="resetPassword">
-            <div   class="url" val="resetpassword" style="display: hidden;"/>
+            <div   class="url" val="securityservice/resetpassword" style="display: hidden;"/>
             <div   class="type" val="POST" style="display: hidden;"/>
             <label>Id Usuario (opcional):</label> <input class="data" param-name="userId" type="text" /><br>
             <button onclick="sendRequest('resetpassword')">Reset</button>
@@ -278,7 +279,7 @@
     <section id="disableaccount">
         <h2>disableAccount test</h2>
         <div class="disableAccount">
-            <div   class="url" val="disableaccount" style="display: hidden;"/>
+            <div   class="url" val="securityservice/disableaccount" style="display: hidden;"/>
             <div   class="type" val="POST" style="display: hidden;"/>
             <label>Id Usuario:</label> <input class="data" param-name="userId" type="text" /><br>
             <button onclick="sendRequest('disableaccount')">Disable</button>
@@ -290,7 +291,7 @@
     <section id="enableaccount">
         <h2>enableAccount test</h2>
         <div class="enableAccount">
-            <div   class="url" val="enableaccount" style="display: hidden;"/>
+            <div   class="url" val="securityservice/enableaccount" style="display: hidden;"/>
             <div   class="type" val="POST" style="display: hidden;"/>
             <label>Id Usuario:</label> <input class="data" param-name="userId" type="text" /><br>
             <button onclick="sendRequest('enableaccount')">Enable</button>
@@ -302,12 +303,28 @@
     <section id="logout">
         <h2>logout test</h2>
         <div class="logout">
-            <div   class="url" val="logout" style="display: hidden;"/>
+            <div   class="url" val="securityservice/logout" style="display: hidden;"/>
             <div   class="type" val="POST" style="display: hidden;"/>
             <button onclick="sendRequest('logout', onSuccessfulLogout)">Logout</button>
         </div>
     </section>
 </div>
 
+<div id="creategroupactivity">
+    <h2>Crear actividad grupal</h2>
+    <div class="creategroupactivity">
+        <div   class="url" val="activityservice/creategroupactivity" style="display: hidden;"/>
+        <div   class="type" val="POST" style="display: hidden;"/>
+
+        <label>Nombre actividad:</label> <input class="data" param-name="nombre" type="text" /><br>
+        <label>Descripcion:</label> <input class="data" param-name="descripcion" type="text" /><br>
+        <label>Id Ambito Superior:</label> <input class="data" param-name="idAmbitoSuperior" type="text" /><br>
+        <label>Id Actividad Superior:</label> <input class="data" param-name="idActividadSuperior" type="text" /><br>
+        <label>Fecha Inicio:</label> <input class="data" param-name="fechaInicio" type="date" /><br>
+        <label>Fecha Fin:</label> <input class="data" param-name="fechaFin" type="date" /><br>
+        <label>Grupos Exclusivos:</label> <input class="data" param-name="gruposExclusivos" type="text" /><br>
+        <button onclick="sendRequest('creategroupactivity')">Crear</button>
+    </div>
+</div>
 </body>
 </html>

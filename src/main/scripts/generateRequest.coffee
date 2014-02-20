@@ -7,14 +7,15 @@ fs      = require 'fs'
 
 
 program
-  .usage('<request name camelCased> <JSON string payload>')
+  .usage('<request name camelCased> <service name lowercased> <JSON string payload>')
   .parse(process.argv)
 
 
 requestName = program.args.shift()
+serviceName = program.args.shift()
 payload     = program.args.shift()
 
-if !requestName|| !payload
+if !requestName || !serviceName || !payload
   program.help()
 
 payload = JSON.parse(payload)
@@ -57,9 +58,9 @@ constructorParams = constructorParams.replace /, $/, ''  # Removes last of ", "
 toReadableBody = toReadableBody.replace /\s\+ p;\n$/, ';\n'  # Removes last of " + p"
 
 
-outputFilename = "../java/com/fiuba/taller/service/requests/#{ className }.java"
+outputFilename = "../java/com/fiuba/taller/#{ serviceName  }/requests/#{ className }.java"
 output = """
-        package com.fiuba.taller.service.requests;
+        package com.fiuba.taller.#{ serviceName }.requests;
 
         import java.util.HashMap;
         import java.util.Map;

@@ -1,26 +1,26 @@
-package com.fiuba.taller.service;
+package com.fiuba.taller.activity;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "security-response")
-public class SecurityResponse {
+@XmlRootElement(name = "activity-response")
+public class ActivityResponse {
 	
     private boolean success;
     private String reason;
     private String fullReason;
     private String authToken;
 
-    public SecurityResponse(){}
+    public ActivityResponse(){}
     
-    public SecurityResponse(boolean success, String reason) {
+    public ActivityResponse(boolean success, String reason) {
         super();
         this.success= success;
         this.reason = reason;
         this.authToken = "";
     }
     
-    public SecurityResponse(boolean success, String reason, String authToken) {
+    public ActivityResponse(boolean success, String reason, String authToken) {
         super();
         this.success= success;
         this.reason = reason;
@@ -72,7 +72,7 @@ public class SecurityResponse {
 
     @Override 
     public String toString(){
-    	return String.format("SecurityResponse - Successful: %s ; Reason: %s ; AuthToken: %s",
+    	return String.format("ActivityResponse - Successful: %s ; Reason: %s ; AuthToken: %s",
     					success, reason, authToken);
     }
 }

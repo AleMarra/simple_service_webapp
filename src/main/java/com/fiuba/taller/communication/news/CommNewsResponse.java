@@ -3,10 +3,10 @@ package com.fiuba.taller.communication.news;
 public class CommNewsResponse {
     private boolean success;
     private String reason;
-    private int[] news; 
-    private String newShow; 
+    private int[] news;
+    private String newShow;
     private int id_new;
-    		
+
 	/**
 	 * @return the success
 	 */
@@ -76,6 +76,6 @@ public class CommNewsResponse {
 	public void setId_new(int id_new) {
 		this.id_new = id_new;
 	}
-    
-    
+
+
 }

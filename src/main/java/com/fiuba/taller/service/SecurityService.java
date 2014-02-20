@@ -1,70 +1,30 @@
 package com.fiuba.taller.service;
 
 import java.io.IOException;
-import java.io.StringReader;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.*;
 
+import com.fiuba.taller.BaseService;
 import com.fiuba.taller.service.requests.EnableAccountRequest;
 import com.fiuba.taller.service.requests.LoginRequest;
 import com.fiuba.taller.service.requests.ChangePasswordRequest;
 import com.fiuba.taller.service.requests.RegisterUserRequest;
 import javax.ws.rs.*;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.axis2.AxisFault;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.Element;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import wtp.LoginAPIHelperStub;
+import wtp.loginapihelper.wtp.LoginAPIHelperStub;
 
 
 @Path("/securityservice")
-@Produces(MediaType.APPLICATION_JSON)
-public class SecurityService {
-
-	private Document getDoc(String xml) throws ParserConfigurationException, SAXException, IOException{
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		InputSource is = new InputSource(new StringReader(xml));
-		Document doc = dBuilder.parse(is);
-		doc.getDocumentElement().normalize();
-		
-		return doc;
-	} 
-	
-	private Node getNode(Document doc, String nodeName){
-		
-		return doc.getElementsByTagName(nodeName).item(0);
-	}
-	
-	private String getFirstElementValue(Node node, String eName){
-		
-		Element elem = (Element) node;
-		
-		return elem.getElementsByTagName(eName).item(0).getTextContent();
-	}
-
-    private Response buildError(String service) {
-        SecurityResponse response = new SecurityResponse();
-
-        response.setSuccess(false);
-        response.setReason("El servicio de " + service + " no está disponible.");
-
-        return Response.status(502).entity(response).build();
-    }
-    
-    // El valor verdadero en String debería estar definido en algún archivo de cosas comunes, y en ese caso
-    // no nos hubiera afectado el cambio de "1" como valor verdadero a "true"
-    private static String TRUE_STRING = "true";
-
+@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+public class SecurityService  extends BaseService {
 
 	@POST
 	@Path("registeruser")
@@ -97,7 +57,7 @@ public class SecurityService {
 		    wsResponse = api.registerUser(securityRequest);
         } catch (AxisFault error) {
             System.out.println(error.getReason());
-            return buildError("crear usuario");
+            return buildServiceUnavailable("crear usuario", error.getReason());
         }
 
         // Parsear el response
@@ -105,6 +65,9 @@ public class SecurityService {
 		Node node = getNode(doc, "response");
 
         String successString = getFirstElementValue( node, "success");
+        if (successString == null) {
+            return buildWrongXmlError("success");
+        }
         boolean success = successString.equals(TRUE_STRING);
         response.setSuccess(success);
 
@@ -141,7 +104,7 @@ public class SecurityService {
             wsResponse = api.login(securityRequest);
         } catch (AxisFault error) {
             System.out.println(error.getReason());
-            return buildError("login");
+            return buildServiceUnavailable("login", error.getReason());
         }
 
 		// Parsear el response
@@ -149,6 +112,9 @@ public class SecurityService {
 		Node node = getNode(doc, "response");
 
 		String successString = getFirstElementValue( node, "success");
+        if (successString == null) {
+            return buildWrongXmlError("success");
+        }
         boolean success = successString.equals(TRUE_STRING);
 
 		if (success){
@@ -190,7 +156,7 @@ public class SecurityService {
             wsResponse = api.logout(securityRequest);
         } catch (AxisFault error) {
             System.out.println(error.getReason());
-            return buildError("logout");
+            return buildServiceUnavailable("logout", error.getReason());
         }
 
 		// Parsear el response
@@ -198,6 +164,9 @@ public class SecurityService {
 		Node node = getNode(doc, "response");
 
         String successString = getFirstElementValue( node, "success");
+        if (successString == null) {
+            return buildWrongXmlError("success");
+        }
         boolean success = successString.equals(TRUE_STRING);
 
         if (success){
@@ -240,7 +209,7 @@ public class SecurityService {
             wsResponse = api.isTokenValid(securityRequest);
         } catch (AxisFault error) {
             System.out.println(error.getReason());
-            return buildError("sesión");
+            return buildServiceUnavailable("sesión", error.getReason());
         }
 
 		// Parsear el response
@@ -248,6 +217,9 @@ public class SecurityService {
 		Node node = getNode(doc, "response");
 
         String successString = getFirstElementValue( node, "success");
+        if (successString == null) {
+            return buildWrongXmlError("success");
+        }
         boolean success = successString.equals(TRUE_STRING);
 
         if (success){
@@ -292,7 +264,7 @@ public class SecurityService {
                 wsResponse = api.activateUser(securityRequest);
             } catch (AxisFault error) {
                 System.out.println(error.getReason());
-                return buildError("activar usuario");
+                return buildServiceUnavailable("activar usuario", error.getReason());
             }
 
 			// Parsear el response
@@ -300,6 +272,9 @@ public class SecurityService {
 			Node node = getNode(doc, "response");
 
             String successString = getFirstElementValue( node, "success");
+            if (successString == null) {
+                return buildWrongXmlError("success");
+            }
             boolean success = successString.equals(TRUE_STRING);
 
             response.setSuccess(success);
@@ -347,7 +322,7 @@ public class SecurityService {
                 wsResponse = api.changePassword(securityRequest);
             } catch (AxisFault error) {
                 System.out.println(error.getReason());
-                return buildError("cambiar contraseña");
+                return buildServiceUnavailable("cambiar contraseña", error.getReason());
             }
 
 			// Parsear el response
@@ -356,6 +331,9 @@ public class SecurityService {
 
 
             String successString = getFirstElementValue( node, "success");
+            if (successString == null) {
+                return buildWrongXmlError("success");
+            }
             boolean success = successString.equals(TRUE_STRING);
 
             response.setSuccess(success);
@@ -402,7 +380,7 @@ public class SecurityService {
                 wsResponse = api.resetPassword(securityRequest);
             } catch (AxisFault error) {
                 System.out.println(error.getReason());
-                return buildError("resetear contraseña");
+                return buildServiceUnavailable("resetear contraseña", error.getReason());
             }
 
 			// Parsear el response
@@ -410,6 +388,9 @@ public class SecurityService {
 			Node node = getNode(doc, "response");
 
             String successString = getFirstElementValue( node, "success");
+            if (successString == null) {
+                return buildWrongXmlError("success");
+            }
             boolean success = successString.equals(TRUE_STRING);
 
             response.setSuccess(success);
@@ -453,7 +434,7 @@ public class SecurityService {
                 wsResponse = api.disableAccount(securityRequest);
             } catch (AxisFault error) {
                 System.out.println(error.getReason());
-                return buildError("deshabilitar cuenta");
+                return buildServiceUnavailable("deshabilitar cuenta", error.getReason());
             }
 
 			// Parsear el response
@@ -461,6 +442,9 @@ public class SecurityService {
 			Node node = getNode(doc, "response");
 
             String successString = getFirstElementValue( node, "success");
+            if (successString == null) {
+                return buildWrongXmlError("success");
+            }
             boolean success = successString.equals(TRUE_STRING);
 
             response.setSuccess(success);
@@ -507,7 +491,7 @@ public class SecurityService {
                 wsResponse = api.enableAccount(securityRequest);
             } catch (AxisFault error) {
                 System.out.println(error.getReason());
-                return buildError("habilitar cuenta");
+                return buildServiceUnavailable("habilitar cuenta", error.getReason());
             }
 
 			// Parsear el response
@@ -515,6 +499,9 @@ public class SecurityService {
 			Node node = getNode(doc, "response");
 
             String successString = getFirstElementValue( node, "success");
+            if (successString == null) {
+                return buildWrongXmlError("success");
+            }
             boolean success = successString.equals(TRUE_STRING);
 
             response.setSuccess(success);
@@ -563,6 +550,9 @@ public class SecurityService {
 //			Node node = getNode(doc, "response");
 //
 //          String successString = getFirstElementValue( node, "success");
+//          if (successString == null) {
+//              return buildWrongXmlError("success");
+//          }
 //          boolean success = successString.equals(TRUE_STRING);
 //
 //          response.setSuccess(success);

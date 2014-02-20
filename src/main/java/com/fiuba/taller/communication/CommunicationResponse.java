@@ -46,6 +46,6 @@ public class CommunicationResponse {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-    
-    
+
+
 }

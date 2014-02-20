@@ -7,7 +7,7 @@ public class CommWallResponse {
     private String wall;
     private int id_event;
     private String event;
-    		
+
 	/**
 	 * @return the success
 	 */
@@ -91,6 +91,6 @@ public class CommWallResponse {
 	public void setEvent(String event) {
 		this.event = event;
 	}
-   
-	
+
+
 }
