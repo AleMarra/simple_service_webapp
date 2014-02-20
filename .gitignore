@@ -14,8 +14,5 @@ node_modules
 build.sh
 deployAssets.sh
 noTest.sh
-<<<<<<< HEAD
 copySources.sh
-=======
 
->>>>>>> 0b5ec9b77754092a0bab435c3b770d6d0cf5b892
