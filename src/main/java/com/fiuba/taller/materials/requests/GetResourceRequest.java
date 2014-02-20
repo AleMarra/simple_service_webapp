@@ -1,16 +1,19 @@
 package com.fiuba.taller.materials.requests;
 
 import java.util.HashMap;
+
 import java.util.Map;
 
 import javax.ws.rs.core.Form;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fiuba.taller.materials.MaterialsResource;
+
+import static com.fiuba.taller.materials.MaterialsResource.ResourceTypes;
+
 @XmlRootElement(name = "get-resources-request")
 public class GetResourceRequest{
-	
-	public static enum Resource_Types {ARCHIVO, LINK, ENCUESTA}; 
 	
 	private Integer recursoId;
 	private String tipo; 
@@ -78,16 +81,11 @@ public class GetResourceRequest{
 
 	public void setTipo(String tipo) {
 		
-		if( tipo.toUpperCase().equals(Resource_Types.ARCHIVO.name()) ||
-			tipo.toUpperCase().equals(Resource_Types.LINK.name()) || 
-			tipo.toUpperCase().equals(Resource_Types.ENCUESTA.name()))
-		{
+		if(MaterialsResource.castToType(tipo) != null)
 			this.tipo = tipo.toLowerCase();
-		
-		}else {
+		else
 			this.tipo = "unknown";
-		}
+		
 	}
-
 }
 

@@ -2,7 +2,9 @@ package com.fiuba.taller.materials.responses;
 
 import javax.xml.bind.annotation.XmlElement;
 
-public class MaterialsResponse {
+import org.w3c.dom.Element;
+
+public abstract class MaterialsResponse {
 
     protected boolean success = false;
     protected String reason = "";
@@ -60,4 +62,6 @@ public class MaterialsResponse {
     	return String.format("MaterialsResponse - Successful: %s ; Reason: %s ; AuthToken: %s",
     					success, reason, authToken);
     }
+    
+    public abstract void setResourcesFromXML(Element resourcesRoot);
 }

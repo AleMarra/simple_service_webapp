@@ -41,6 +41,7 @@ public class GetResourcesListResponse extends MaterialsResponse {
 		this.resources = resources;
 	}
 	
+	
 	public void setResourcesFromXML(Element resourcesRoot) {
 		
 		NodeList elements = resourcesRoot.getElementsByTagName("recurso");

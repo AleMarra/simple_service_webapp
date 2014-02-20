@@ -13,8 +13,11 @@ import javax.xml.transform.stream.StreamResult;
 
 
 import com.fiuba.taller.BaseService;
+import com.fiuba.taller.materials.MaterialsResource.ResourceTypes;
 import com.fiuba.taller.materials.responses.GetResourcesListResponse;
 import com.fiuba.taller.materials.responses.MaterialsResponse;
+import com.fiuba.taller.materials.responses.MaterialsResponseFactory;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -62,70 +65,12 @@ import wtp.loginapihelper.wtp.LoginAPIHelperStub;
 public class MaterialsService extends BaseService{
 
 	private static final XmlHandler xmlHandler = new XmlHandler();
-	private static final String ATTRIBUTES_KEY = "attributes";
-	private static final String PARAMS_KEY = "parametro";
-
 	
-	private Response buildError(String service) {
-		MaterialsResponse response = new MaterialsResponse();
-
-		response.setSuccess(false);
-		response.setReason("El servicio de " + service + " no está disponible.");
-
-		return Response.status(502).entity(response).build();
-	}
-
-	private Response buildError(String service, String fullReason) {
-		SecurityResponse response = new SecurityResponse();
-
-		response.setSuccess(false);
-		response.setReason("El servicio de " + service + " no está disponible.");
-		response.setFullReason(fullReason);
-
-		return Response.status(502).entity(response).build();
-	}
-
 	// El valor verdadero en String debería estar definido en algún archivo de cosas comunes, y en ese caso
 	// no nos hubiera afectado el cambio de "1" como valor verdadero a "true"
 	private static String TRUE_STRING = "true";
 
 
-	@SuppressWarnings("unchecked")
-	Element appendChildsFromMap(Document doc, Element parent, Map<String,Object> map) 
-			throws ParserConfigurationException, TransformerException
-	{
-		for(String key: map.keySet()){
-
-			if(key.equals(ATTRIBUTES_KEY)){
-				setAttributes(parent, (Map<String, String>)map.get(key));
-			
-			}else{
-				Element elem = doc.createElement(key);
-	
-				if(map.get(key) instanceof Map){
-					appendChildsFromMap(doc, elem, (Map<String, Object>)map.get(key));
-	
-				}else{
-					elem.setTextContent((String)map.get(key));
-				}
-	
-				parent.appendChild(elem);
-			}
-		}
-		return parent;
-	}
-	
-
-	Element setAttributes(Element parent, Map<String, String> attributes){
-
-		for(String attrName: attributes.keySet()){
-			parent.setAttribute(attrName, attributes.get(attrName));
-		}
-		
-		return parent;
-	}
-
-	
 	public String materialsRequestBuilder(Map<String, Object> params) 
 			throws ParserConfigurationException, TransformerException
 	{
@@ -135,10 +80,10 @@ public class MaterialsService extends BaseService{
 
 		// root elements
 		Document doc = docBuilder.newDocument();
-		Element rootElement = doc.createElement(PARAMS_KEY);
+		Element rootElement = doc.createElement(xmlHandler.PARAMS_KEY);
 		doc.appendChild(rootElement);
 
-		appendChildsFromMap(doc, rootElement, params);
+		xmlHandler.appendChildsFromMap(doc, rootElement, params);
 
 		TransformerFactory tf = TransformerFactory.newInstance();
 		Transformer transformer = tf.newTransformer();
@@ -173,7 +118,7 @@ public class MaterialsService extends BaseService{
 		// Init
 		String username = getUsernameFromAuthToken(token);
 		if (username.equals("")) {
-			MaterialsResponse response = new MaterialsResponse();
+			MaterialsResponse response = MaterialsResponseFactory.getResourceResponse(ResourceTypes.SIMPLE);
 			response.setSuccess(false);
 			response.setReason("Usuario no logueado");
 			return Response.ok()
@@ -197,6 +142,7 @@ public class MaterialsService extends BaseService{
 		params.put("recurso", resource);
 		params.put("usuarioId", Integer.toString(00001)); //FIXME no hardcodear userId
 
+		System.out.println(materialsRequestBuilder(params));
 		resourceRequest.setParametros(materialsRequestBuilder(params));
 		requestEnvelope.setGetRecursos(resourceRequest);
 		
@@ -242,9 +188,12 @@ public class MaterialsService extends BaseService{
 		Element responseElement = xmlHandler.getFirstElementWithTag(doc, "response");
 
 		String successString = xmlHandler.getFirstElementValue( responseElement, "success");
-		boolean success = successString.equals(TRUE_STRING);
+		if (successString == null) {
+            return buildWrongXmlError("success");
+        }
+        boolean success = successString.equals(TRUE_STRING);
 		
-		GetResourcesListResponse response = new GetResourcesListResponse();
+		MaterialsResponse response = MaterialsResponseFactory.getResourceResponse(ResourceTypes.LISTA);
 		response.setSuccess(success);
 
 		if (success){
@@ -347,75 +296,115 @@ public class MaterialsService extends BaseService{
 	//	</recurso>
 	//	</parametro>
 	//	
-//	@POST
-//	@Path("getresource")
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public Response getResource(GetResourceRequest request, @CookieParam("authToken") String token)
-//			throws ParserConfigurationException, SAXException, IOException, TransformerException
-//	{
-//		System.out.println(request);
-//
-//		// Init
-//		String username = getUsernameFromAuthToken(token);
-//		if (username.equals("")) {
-//			MaterialsResponse response = new MaterialsResponse();
-//			response.setSuccess(false);
-//			response.setReason("Usuario no logueado");
-//			return Response.ok()
-//					.header("Set-Cookie",
-//							"authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
-//							.entity(response).build();
-//		}
-//		
-//		MaterialsImplServiceStub api = new MaterialsImplServiceStub();
-//		MaterialsImplServiceStub.GetRecurso resourceRequest = new MaterialsImplServiceStub.GetRecurso();
-//		MaterialsImplServiceStub.GetRecursoE requestEnvelope = new MaterialsImplServiceStub.GetRecursoE(); 
-//		MaterialsImplServiceStub.GetRecursoResponse wsResponse= new MaterialsImplServiceStub.GetRecursoResponse();
-//
-//		// Armar el request
-//		Map<String, Object> params = new HashMap<String, Object>();
-//		Map<String, String> resource = new HashMap<String, String>();
-//		
-//		resource.put("recursoId", request.getRecursoId().toString());
-//		resource.put("tipo", request.getTipo());
-//		
-//		params.put("recurso", resource);
-//		params.put("usuarioId", Integer.toString(00001)); //FIXME no hardcodear userId
-//
-//		resourceRequest.setParametro(materialsRequestBuilder(params));
-//		requestEnvelope.setGetRecurso(resourceRequest);
-//		
-//		
+	@POST
+	@Path("getresource")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getResource(GetResourceRequest request, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		System.out.println(request);
+
+		// Init
+		String username = getUsernameFromAuthToken(token);
+		if (username.equals("")) {
+			MaterialsResponse response = MaterialsResponseFactory.getResourceResponse(ResourceTypes.SIMPLE);
+			response.setSuccess(false);
+			response.setReason("Usuario no logueado");
+			return Response.ok()
+					.header("Set-Cookie",
+							"authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+							.entity(response).build();
+		}
+		
+		MaterialsImplServiceStub api = new MaterialsImplServiceStub();
+		MaterialsImplServiceStub.GetRecurso resourceRequest = new MaterialsImplServiceStub.GetRecurso();
+		MaterialsImplServiceStub.GetRecursoE requestEnvelope = new MaterialsImplServiceStub.GetRecursoE(); 
+		MaterialsImplServiceStub.GetRecursoResponse wsResponse= new MaterialsImplServiceStub.GetRecursoResponse();
+
+		// Armar el request
+		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, String> resource = new HashMap<String, String>();
+		
+		resource.put("recursoId", request.getRecursoId().toString());
+		resource.put("tipo", request.getTipo());
+		
+		params.put("recurso", resource);
+		params.put("usuarioId", Integer.toString(00001)); //FIXME no hardcodear userId
+
+		System.out.println(materialsRequestBuilder(params));
+		resourceRequest.setParametro(materialsRequestBuilder(params));
+		requestEnvelope.setGetRecurso(resourceRequest);
+		
 //		// Hacer el request
 //		try {
 //			wsResponse = api.getRecurso(requestEnvelope).getGetRecursoResponse();
 //			
 //		} catch (AxisFault error) {
 //			System.out.println(error.getReason());
-//			return buildError("get recurso", error.getReason());
+//			return buildServiceUnavailable("obtener recursos", error.getReason());
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
 //		}
 //
 //		// Parsear el response
 //		Document doc = xmlHandler.getDoc(wsResponse.getRecurso());
-//		Element responseElement = xmlHandler.getFirstElementWithTag(doc, "response");
-//
-//		String successString = xmlHandler.getFirstElementValue( responseElement, "success");
-//		boolean success = successString.equals(TRUE_STRING);
-//		
-//		//TODO select response depending on the type retrieved.
-//		response.setSuccess(success);
-//
-//		if (success){
-//			response.setReason("Recursos obtenidos exitosamente");
-//			response.setResourcesFromXML(xmlHandler.getFirstElementWithTag(responseElement, "recursos"));
-//			
-//		}else{
-//			response.setReason(xmlHandler.getFirstElementValue(responseElement, "reason"));
-//		}
-//		
-//		
-//		return Response.ok().entity(response).build();
-//	}
+		
+//		Document doc = xmlHandler.getDoc(
+//										"<response>" +
+//											"<success>true</success>" +
+//											"<recurso>" +
+//												"<recursoId>1002</recursoId>" +
+//												"<tipo>Link</tipo>"+
+//												"<ambitoId>-1</ambitoId>"+
+//												"<descripcion>un link a google copado</descripcion>"+
+//												"<link>www.google.com.ar</link>"+
+//											"</recurso>"+
+//										"</response>");
+		Document doc = xmlHandler.getDoc(
+				"<response>"+
+				"<success>true</success>"+
+				"<encuesta evaluada='true'>"+
+				"<recursoId>11004</recursoId>"+
+				"<tipo>Encuesta</tipo>"+
+				"<ambitoId>-1</ambitoId>"+
+				"<descripcion>una encuesta grande</descripcion>"+
+				"<preguntas>"+
+				"<preguntaConOpciones multiplesCorrectas='false' correctas='4' idPregunta='1' enunciado='de que color es el caballo blanco de san martin?'>"+
+				"<respuestas>rojo,verde,azul,blanco</respuestas>"+
+				"</preguntaConOpciones>"+
+				"<preguntaConOpciones multiplesCorrectas='true' correctas='1,8,11,12,13,7' idPregunta='2' enunciado='Un test unitario debe presentar las siguientes caractersticas'>"+
+				"<respuestas>Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente,Automatizable</respuestas>"+
+				"</preguntaConOpciones>"+
+				"<preguntaSinOpciones correcta='4' idPregunta='5' enunciado='cuantas patas tiene un gato?'/>"+
+				"</preguntas>"+
+				"</encuesta>"+
+				"</response>"
+				);
+				
+		Element responseElement = xmlHandler.getFirstElementWithTag(doc, "response");
+		Element successElement = xmlHandler.getFirstElementWithTag(responseElement, "success");
+		if (successElement == null) {
+			return buildWrongXmlError("success");
+		}
+		boolean success = successElement.getTextContent().equals(TRUE_STRING);
+
+		MaterialsResponse response = null;
+		if (success){
+			// Uso suibling porque los nombres de los TAGS cambian, - encuesta, recurso, archivo - 
+			response = MaterialsResponseFactory.getResourceResponseFromXml((Element)successElement.getNextSibling());
+			
+			response.setSuccess(success);
+			response.setReason("Recursos obtenidos exitosamente");
+			
+		}else{
+			response = MaterialsResponseFactory.getResourceResponse(ResourceTypes.SIMPLE);
+			response.setSuccess(success);
+			response.setReason(xmlHandler.getFirstElementValue(responseElement, "reason"));
+		}
+		
+		
+		return Response.ok().entity(response).build();
+	}
 	
 	//BORRAR RECURSO
 	//	<parametro>
@@ -469,71 +458,6 @@ public class MaterialsService extends BaseService{
 	//	<usuarioId>5</usuarioId>
 	//	</parametro>
 
-
-
-	//	@POST
-	//	@Path("getresourceslist")
-	//	@Consumes(MediaType.APPLICATION_JSON)
-	//	public Response getResourcesList(GetResourcesListRequest request, @CookieParam("authToken") String token)
-	//			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	//	{
-	//		
-	//		// Init
-	//		MaterialsResponse response = new MaterialsResponse();
-	//        String username = getUsernameFromAuthToken(token);
-	//        if (username.equals("")) {
-	//            response.setSuccess(false);
-	//            response.setReason("Usuario no logueado");
-	//            return Response.ok()
-	//                    .header("Set-Cookie",
-	//                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
-	//                    .entity(response).build();
-	//        }
-	//		
-	//		MaterialsImplServiceStub api = new MaterialsImplServiceStub();
-	//		
-	//		MaterialsImplServiceStub.ObtenerRecursos payload = new MaterialsImplServiceStub.ObtenerRecursos()
-	//		
-	//		MaterialsImplServiceStub.ObtenerRecursosE obtenerRecursosRequest = new MaterialsImplServiceStub.ObtenerRecursosE();
-	//		MaterialsImplServiceStub.ObtenerRecursosResponseE wsResponse = new MaterialsImplServiceStub.ObtenerRecursosResponseE();
-	//		
-	//		payload.setArg0(request.getAmbientId());
-	//		payload.setArg1(request.getUserId());
-	//		
-	//		obtenerRecursosRequest.setObtenerRecursos(payload);
-	//		
-	//		boolean success = true;
-	//	    String message = "";
-	//	        
-	//		// Hacer el request
-	//        try {
-	//		    wsResponse = api.obtenerRecursos(obtenerRecursosRequest); //      	no se que va acá ni que es la implementacion "ObtenerRecursosE"
-	//        } catch (ActividadRemoteExceptionException e) {
-	//        	success = false;
-	//        	message = e.toString();
-	//        	
-	//        } catch (Exception e) {
-	//            System.out.println(e.toString());
-	//            return buildError(e.toString());
-	//        }
-	//
-	//      
-	//        //  Parsear el response
-	//        MaterialsImplServiceStub.ObtenerRecursosResponse resourcesResponse =  wsResponse.getObtenerRecursosResponse();				
-	//		response.setSuccess(success);
-	//		
-	//		if (success){
-	//			response.setReason( /* TODO */ );
-	//		}else{
-	//    		response.setReason(message);
-	//		}
-	//
-	//		return Response.ok().entity(response).build();
-	//
-	//	}
-	//	
-
-	
 	
 	@POST
 	@Path("addpoll")

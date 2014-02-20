@@ -13,10 +13,12 @@ public class GetResourceLinkResponse extends MaterialsResponse {
 
 	private static final XmlHandler xmlHandler = new XmlHandler();
 
-	public class MaterialsLinkResource extends MaterialsResource{
+	public static class MaterialsLinkResource extends MaterialsResource{
 		
 		protected String link;
 
+		public MaterialsLinkResource(){}
+		
 		@XmlElement(name="link")
 		public String getLink() {
 			return link;
