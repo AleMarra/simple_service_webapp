@@ -135,12 +135,14 @@ public class MaterialsService extends BaseService{
 
 		// Armar el request
 		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Object> user = new HashMap<String, Object>();
 		Map<String, String> resource = new HashMap<String, String>();
 		
 		resource.put("ambitoId", request.getAmbitoId().toString()); 
+		user.put("username", username);
 		
 		params.put("recurso", resource);
-		params.put("usuarioId", Integer.toString(00001)); //FIXME no hardcodear userId
+		params.put("Usuario", user);
 
 		System.out.println(materialsRequestBuilder(params));
 		resourceRequest.setParametros(materialsRequestBuilder(params));
@@ -321,15 +323,18 @@ public class MaterialsService extends BaseService{
 		MaterialsImplServiceStub.GetRecursoE requestEnvelope = new MaterialsImplServiceStub.GetRecursoE(); 
 		MaterialsImplServiceStub.GetRecursoResponse wsResponse= new MaterialsImplServiceStub.GetRecursoResponse();
 
+
 		// Armar el request
 		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Object> user = new HashMap<String, Object>();
 		Map<String, String> resource = new HashMap<String, String>();
 		
 		resource.put("recursoId", request.getRecursoId().toString());
 		resource.put("tipo", request.getTipo());
+		user.put("username", username);
 		
 		params.put("recurso", resource);
-		params.put("usuarioId", Integer.toString(00001)); //FIXME no hardcodear userId
+		params.put("Usuario", user); //FIXME no hardcodear userId
 
 		System.out.println(materialsRequestBuilder(params));
 		resourceRequest.setParametro(materialsRequestBuilder(params));
