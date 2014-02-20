@@ -2,7 +2,6 @@ package com.fiuba.taller.communication.forum;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.rmi.RemoteException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.CookieParam;
@@ -41,8 +40,6 @@ import com.fiuba.taller.communication.forum.requests.ThreadDeleteRequest;
 import com.fiuba.taller.communication.forum.requests.ThreadEditRequest;
 import com.fiuba.taller.service.SecurityResponse;
 
-import wtp.LoginAPIHelperStub;
-import wtp.MessagerStub;
 import wtp.ServiceStub;
 
 

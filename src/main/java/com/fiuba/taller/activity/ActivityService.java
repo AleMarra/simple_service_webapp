@@ -19,6 +19,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Iterator;
+import com.fiuba.taller.BaseService;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -35,126 +36,13 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import wtp.LoginAPIHelperStub;
 import wtp.activity.fiuba.taller.actividad.*;
 
 
 @Path("/activityservice")
-@Produces(MediaType.APPLICATION_JSON)
-public class ActivityService {
+@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+public class ActivityService extends BaseService {
 
-	private Document getDoc(String xml) throws ParserConfigurationException, SAXException, IOException{
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		InputSource is = new InputSource(new StringReader(xml));
-		Document doc = dBuilder.parse(is);
-		doc.getDocumentElement().normalize();
-		
-		return doc;
-	} 
-	
-	private Node getNode(Document doc, String nodeName){
-		
-		return doc.getElementsByTagName(nodeName).item(0);
-	}
-	
-	private String getFirstElementValue(Node node, String eName){
-		
-		Element elem = (Element) node;
-		
-		return elem.getElementsByTagName(eName).item(0).getTextContent();
-	}
-
-    private Response buildError(String service) {
-        ActivityResponse response = new ActivityResponse ();
-
-        response.setSuccess(false);
-        response.setReason("El servicio de " + service + " no está disponible.");
-
-        return Response.status(502).entity(response).build();
-    }
-
-    private Response buildError(String service, String fullReason) {
-        SecurityResponse response = new SecurityResponse();
-
-        response.setSuccess(false);
-        response.setReason("El servicio de " + service + " no está disponible.");
-        response.setFullReason(fullReason);
-
-        return Response.status(502).entity(response).build();
-    }
-
-    // El valor verdadero en String debería estar definido en algún archivo de cosas comunes, y en ese caso
-    // no nos hubiera afectado el cambio de "1" como valor verdadero a "true"
-    private static String TRUE_STRING = "true";
-
-
-    String makeXMLFromMap(String root, HashMap<String,String> map) throws ParserConfigurationException, TransformerException{
-    	
-    	DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-		// root elements
-		Document doc = docBuilder.newDocument();
-		Element rootElement = doc.createElement(root);
-		doc.appendChild(rootElement);
-		
-		Iterator<String> it = map.keySet().iterator();
-		
-		while(it.hasNext()){
-			
-			String key = it.next();
-			String val = map.get(key);
-			
-			Element elem = doc.createElement(key);
-			elem.appendChild(doc.createTextNode(val));
-			
-			rootElement.appendChild(elem);
-		}
-		
-		TransformerFactory tf = TransformerFactory.newInstance();
-		Transformer transformer = tf.newTransformer();
-		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-		StringWriter writer = new StringWriter();
-		transformer.transform(new DOMSource(doc), new StreamResult(writer));
-		String output = writer.getBuffer().toString().replaceAll("\n|\r", "");
-		
-		return output;
-   }
-    // Devuelve string vacía si la sesión es inválida
-    private String getUsernameFromAuthToken(String authToken) throws IOException, SAXException, ParserConfigurationException {
-        if (true) {
-            return "juan hardcodeado";
-        }
-        String username = "";
-        LoginAPIHelperStub api = new LoginAPIHelperStub();
-        LoginAPIHelperStub.IsTokenValid securityRequest = new LoginAPIHelperStub.IsTokenValid();
-        LoginAPIHelperStub.IsTokenValidResponse wsResponse;
-        securityRequest.setAuthToken(authToken);
-
-        // Hacer el request
-        try {
-            wsResponse = api.isTokenValid(securityRequest);
-        } catch (AxisFault error) {
-            System.out.println(error.getReason());
-            return username;
-        }
-
-        // Parsear el response
-        Document doc = getDoc(wsResponse.get_return());
-        Node node = getNode(doc, "response");
-
-        String successString = getFirstElementValue( node, "success");
-        boolean success = successString.equals(TRUE_STRING);
-
-        if (success) {
-            username = getFirstElementValue( node, "username");
-        }
-
-        return username;
-    }
-
-    
     // ------------------------------------------------ API METHODS ------------------------------------------------
 	@POST
 	@Path("creategroupactivity")
@@ -194,7 +82,7 @@ public class ActivityService {
         	
         } catch (Exception e) {
             System.out.println(e.toString());
-            return buildError(e.toString());
+            return buildServiceUnavailable(e.toString());
         }
 
       
@@ -253,7 +141,7 @@ public class ActivityService {
         	
         } catch (Exception e) {
             System.out.println(e.toString());
-            return buildError(e.toString());
+            return buildServiceUnavailable(e.toString());
         }
 
         //  Parsear el response
@@ -308,7 +196,7 @@ public class ActivityService {
         	
         } catch (Exception e) {
             System.out.println(e.toString());
-            return buildError(e.toString());
+            return buildServiceUnavailable(e.toString());
         }
 
         //  Parsear el response
@@ -364,7 +252,7 @@ public class ActivityService {
         	
         } catch (Exception e) {
             System.out.println(e.toString());
-            return buildError(e.toString());
+            return buildServiceUnavailable(e.toString());
         }
 
         //  Parsear el response
@@ -420,7 +308,7 @@ public class ActivityService {
 
         } catch (Exception e) {
             System.out.println(e.toString());
-            return buildError(e.toString());
+            return buildServiceUnavailable(e.toString());
         }
 
         response.setSuccess(success);
@@ -470,9 +358,208 @@ public class ActivityService {
 //
 //        } catch (Exception e) {
 //            System.out.println(e.toString());
-//            return buildError(e.toString());
+//            return buildServiceUnavailable(e.toString());
 //        }
 
+        return Response.ok().build();
+	}
+	
+
+
+	/*-------//TODO------*/
+	
+	@POST
+	@Path("deleteactivity/{id}") //TODO
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteActivity(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+//		// Init
+//		ActivityResponse response = new ActivityResponse();
+//		String username = getUsernameFromAuthToken(token);
+//		if (username.equals("")) {
+//			response.setSuccess(false);
+//			response.setReason("Usuario no logueado");
+//			return Response.ok()
+//					.header("Set-Cookie",
+//							"authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+//							.entity(response).build();
+//		}
+//
+//		ActividadStub api = new ActividadStub();
+//		ActividadStub.DestruirActividad destruirActividadRequest = new ActividadStub.DestruirActividad();
+//		ActividadStub.DestruirActividadResponse wsResponse = new ActividadStub.DestruirActividadResponse();
+//
+//		destruirActividadRequest.setUsername(username);
+//		destruirActividadRequest.setIdActividad(id);
+//
+//		boolean success = true;
+//		String message = "";
+//
+//		// Hacer el request
+//		try {
+//			wsResponse = api.destruirActividad(destruirActividadRequest);
+//		} catch (ActividadRemoteExceptionException e) {
+//			success = false;
+//			message = e.toString();
+//
+//		} catch (Exception e) {
+//			System.out.println(e.toString());
+//			return buildServiceUnavailable(e.toString());
+//		}
+//	
+//		long activityID =  wsResponse.get_return();
+//		
+//		response.setSuccess(success);
+//		
+//		if (success){
+//			response.setReason(Integer.toString((int)activityID));
+//		}else{
+//			response.setReason(message);
+//		}
+//
+//		return Response.ok().entity(response).build();
+		
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("addcoordinator/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addActivityCoordinator(EditCoordinatorRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("deletecoordinator/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteActivityCoordinator(EditCoordinatorRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+
+	@POST
+	@Path("getcoordinators/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityCoordinator(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("addparticipant/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addActivityParticipant(EditParticipantRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("deleteparticipant/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteActivityParticipant(EditParticipantRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("getparticipants/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityParticipants(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("getscopeactivities/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getScopeActivities(@PathParam("id") long scopeId, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("getactivityactivities/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityActivities(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("addgroup/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addActivityGroup(AddGroupRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("deletegroup/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addActivityGroup(DeleteGroupRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("getgroups/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityGroups(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	/*@POST
+	@Path("evaluate/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response evaluateActivity(AddNoteRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO: add "AddnoteRequest"
+        return Response.ok().build();
+	}*/
+	
+	@POST
+	@Path("getgrade/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityGrade(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
+        return Response.ok().build();
+	}
+	
+	@POST
+	@Path("getgrades/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getActivityGrades(@PathParam("id") long id, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//TODO
         return Response.ok().build();
 	}
 	
