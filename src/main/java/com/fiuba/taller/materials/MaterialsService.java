@@ -135,7 +135,7 @@ public class MaterialsService extends BaseService{
 
 		// Armar el request
 		Map<String, Object> params = new HashMap<String, Object>();
-		Map<String, Object> user = new HashMap<String, Object>();
+		Map<String, String> user = new HashMap<String, String>();
 		Map<String, String> resource = new HashMap<String, String>();
 		
 		resource.put("ambitoId", request.getAmbitoId().toString()); 
@@ -326,7 +326,7 @@ public class MaterialsService extends BaseService{
 
 		// Armar el request
 		Map<String, Object> params = new HashMap<String, Object>();
-		Map<String, Object> user = new HashMap<String, Object>();
+		Map<String, String> user = new HashMap<String, String>();
 		Map<String, String> resource = new HashMap<String, String>();
 		
 		resource.put("recursoId", request.getRecursoId().toString());
@@ -334,7 +334,7 @@ public class MaterialsService extends BaseService{
 		user.put("username", username);
 		
 		params.put("recurso", resource);
-		params.put("Usuario", user); //FIXME no hardcodear userId
+		params.put("Usuario", user);
 
 		System.out.println(materialsRequestBuilder(params));
 		resourceRequest.setParametro(materialsRequestBuilder(params));
