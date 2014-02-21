@@ -16,8 +16,8 @@ import org.xml.sax.SAXException;
 
 public class XmlHandler {
 
-	public  static final String TYPE_KEY = "tipo";
-	public  static final String ATTRIBUTES_KEY = "attributes";
+	public static final String TYPE_KEY = "tipo";
+	public static final String ATTRIBUTES_KEY = "attributes";
 	public static final String PARAMS_KEY = "parametro";
 
 	

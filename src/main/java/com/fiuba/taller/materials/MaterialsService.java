@@ -1,6 +1,25 @@
 package com.fiuba.taller.materials;
 
-import javax.ws.rs.ext.ExceptionMapper;
+import com.fiuba.taller.BaseService;
+import com.fiuba.taller.materials.MaterialsResource.ResourceTypes;
+import com.fiuba.taller.materials.requests.AddLinkRequest;
+import com.fiuba.taller.materials.requests.AddPollRequest;
+import com.fiuba.taller.materials.requests.GetResourceRequest;
+import com.fiuba.taller.materials.requests.GetResourcesListRequest;
+import com.fiuba.taller.materials.responses.MaterialsResponse;
+import com.fiuba.taller.materials.responses.MaterialsResponseFactory;
+import com.fiuba.taller.utils.XmlHandler;
+import static com.fiuba.taller.utils.XmlHandler.ATTRIBUTES_KEY;
+import static com.fiuba.taller.utils.XmlHandler.TYPE_KEY;
+import static com.fiuba.taller.utils.XmlHandler.PARAMS_KEY;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
+import wtp.materials.MaterialsImplServiceStub;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -10,54 +29,10 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-
-import com.fiuba.taller.BaseService;
-import com.fiuba.taller.materials.MaterialsResource.ResourceTypes;
-import com.fiuba.taller.materials.responses.GetResourcesListResponse;
-import com.fiuba.taller.materials.responses.MaterialsResponse;
-import com.fiuba.taller.materials.responses.MaterialsResponseFactory;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-
-import javax.ws.rs.Consumes;
-
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.*;
-import javax.ws.rs.core.Response.ResponseBuilder;
-import javax.ws.rs.*;
-
-import com.fiuba.taller.activity.requests.*;
-
-import com.fiuba.taller.materials.requests.GetResourceRequest;
-import com.fiuba.taller.materials.requests.GetResourcesListRequest;
-import com.fiuba.taller.service.SecurityResponse;
-import com.fiuba.taller.service.requests.RegisterUserRequest;
-import com.fiuba.taller.utils.XmlHandler;
-import com.sun.jersey.core.spi.factory.ResponseBuilderImpl;
-import com.fiuba.taller.materials.requests.AddLinkRequest;
-import com.fiuba.taller.materials.requests.AddPollRequest;
-import org.apache.axis2.AxisFault;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import wtp.activity.fiuba.taller.actividad.*;
-import wtp.materials.MaterialsImplServiceStub;
-import wtp.materials.MaterialsImplServiceStub.GetRecursos;
-import wtp.materials.MaterialsImplServiceStub.GetRecursosE;
-import wtp.loginapihelper.wtp.LoginAPIHelperStub;
 
 
 @Path("/materialsservice")
@@ -140,7 +115,7 @@ public class MaterialsService extends BaseService{
 
 		// root elements
 		Document doc = docBuilder.newDocument();
-		Element rootElement = doc.createElement(xmlHandler.PARAMS_KEY);
+		Element rootElement = doc.createElement(PARAMS_KEY);
 		doc.appendChild(rootElement);
 
 		xmlHandler.appendChildsFromMap(doc, rootElement, params);
@@ -196,13 +171,18 @@ public class MaterialsService extends BaseService{
 		// Armar el request
 		Map<String, Object> params = new HashMap<String, Object>();
 		Map<String, String> resource = new HashMap<String, String>();
-		
-		resource.put("ambitoId", request.getAmbitoId().toString()); 
-		
-		params.put("recurso", resource);
-		params.put("usuarioId", Integer.toString(00001)); //FIXME no hardcodear userId
+        Map<String, String> user = new HashMap<String, String>();
 
-		System.out.println(materialsRequestBuilder(params));
+		resource.put("ambitoId", request.getAmbitoId().toString());
+        user.put("username", username);
+
+        params.put("recurso", resource);
+        params.put("Usuario", user);
+
+
+        System.out.println(" \n "); System.out.println(materialsRequestBuilder(params)); System.out.println(" \n ");
+
+
 		resourceRequest.setParametros(materialsRequestBuilder(params));
 		requestEnvelope.setGetRecursos(resourceRequest);
 		
@@ -240,7 +220,6 @@ public class MaterialsService extends BaseService{
 			
 		}else{
 			response.setReason(xmlHandler.getFirstElementValue(responseElement, "reason"));
-			response.setAuthToken(token);
 		}
 		
 		
@@ -292,8 +271,9 @@ public class MaterialsService extends BaseService{
 		params.put("recurso", resource);
 		params.put("Usuario", user);
 
-		System.out.println(materialsRequestBuilder(params));
-		resourceRequest.setParametro(materialsRequestBuilder(params));
+        System.out.println(" \n "); System.out.println(materialsRequestBuilder(params)); System.out.println(" \n ");
+
+        resourceRequest.setParametro(materialsRequestBuilder(params));
 		requestEnvelope.setGetRecurso(resourceRequest);
 		
 //		// Hacer el request
@@ -309,9 +289,11 @@ public class MaterialsService extends BaseService{
 //
 //		// Parsear el response
 //		Document doc = xmlHandler.getDoc(wsResponse.getRecurso());
-		
+
+        String dummyInput = ((request.getTipo().toLowerCase().contains("link")) ? dummyLink : dummyEncuesta);
+        Document doc = xmlHandler.getDoc(dummyInput);
 //		Document doc = xmlHandler.getDoc(dummyLink);
-		Document doc = xmlHandler.getDoc(dummyEncuesta);
+		//Document doc = xmlHandler.getDoc(dummyEncuesta);
 				
 		Element responseElement = xmlHandler.getFirstElementWithTag(doc, "response");
 		Element successElement = xmlHandler.getFirstElementWithTag(responseElement, "success");
@@ -334,8 +316,6 @@ public class MaterialsService extends BaseService{
 			response = MaterialsResponseFactory.getResourceResponse(ResourceTypes.SIMPLE);
 			response.setSuccess(success);
 			response.setReason(xmlHandler.getFirstElementValue(responseElement, "reason"));
-			response.setAuthToken(token);
-
 		}
 		
 		return Response.ok().entity(response).build();
@@ -385,7 +365,8 @@ public class MaterialsService extends BaseService{
 		params.put("recurso", resource);
 		params.put("Usuario", user);
 
-		System.out.println(materialsRequestBuilder(params));
+        System.out.println(" \n "); System.out.println(materialsRequestBuilder(params)); System.out.println(" \n ");
+
 		resourceRequest.setParametro(materialsRequestBuilder(params));
 		requestEnvelope.setBorrarRecurso(resourceRequest);
 		
