@@ -77,7 +77,7 @@ public class ActivityService extends BaseService {
 		// Hacer el request
         try {
 		    wsResponse = api.crearActividadGrupal(crearActividadRequest);
-        } catch (ActividadRemoteExceptionException e) {
+        } catch (RemoteException e) {
         	success = false;
         	message = e.toString();
         	
@@ -136,7 +136,7 @@ public class ActivityService extends BaseService {
 		// Hacer el request
         try {
 		    wsResponse = api.crearActividadGrupalEvaluable(crearActividadRequest);
-        } catch (ActividadRemoteExceptionException e) {
+        } catch (RemoteException e) {
         	success = false;
         	message = e.toString();
         	
@@ -191,7 +191,7 @@ public class ActivityService extends BaseService {
 		// Hacer el request
         try {
 		    wsResponse = api.crearActividadIndividual(crearActividadRequest);
-        } catch (ActividadRemoteExceptionException e) {
+        } catch (RemoteException e) {
         	success = false;
         	message = e.toString();
         	
@@ -247,7 +247,7 @@ public class ActivityService extends BaseService {
 		// Hacer el request
         try {
 		    wsResponse = api.crearActividadIndividualEvaluable(crearActividadRequest);
-        } catch (ActividadRemoteExceptionException e) {
+        } catch (RemoteException e) {
         	success = false;
         	message = e.toString();
         	
@@ -274,7 +274,7 @@ public class ActivityService extends BaseService {
 	
 	@GET
 	@Path("getproperties/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getActivityProperties(@PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
@@ -303,7 +303,7 @@ public class ActivityService extends BaseService {
         // Hacer el request
         try {
             wsResponse = api.getPropiedades(getPropiedadesRequest);
-        } catch (ActividadRemoteExceptionException e) {
+        } catch (RemoteException e) {
             success = false;
             message = e.toString();
 
@@ -332,10 +332,12 @@ public class ActivityService extends BaseService {
         response.setSuccess(success);
 
         if (success) {
-            response.setReason("");
+            response.setReason(activityReturn);
+        } else {
+            response.setReason(message);
         }
 
-		return Response.ok().build();
+        return Response.ok().entity(response).build();
 	}
 	
 	@POST
@@ -360,7 +362,7 @@ public class ActivityService extends BaseService {
         ActividadStub.SetPropiedades editarActividadRequest = new ActividadStub.SetPropiedades();
 
         editarActividadRequest.setUsername(username);
-        editarActividadRequest.setPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
+        editarActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
 
         boolean success = true;
         String message = "";
@@ -369,7 +371,7 @@ public class ActivityService extends BaseService {
         try {
         	// No hay response. Consideramos exitoso el caso en que no tira excepcion y ya
             api.setPropiedades(editarActividadRequest);
-        } catch (ActividadRemoteExceptionException e) {
+        } catch (RemoteException e) {
             success = false;
             message = e.toString();
 
