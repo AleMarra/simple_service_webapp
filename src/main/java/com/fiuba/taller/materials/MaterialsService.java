@@ -416,17 +416,19 @@ public class MaterialsService extends BaseService{
 
 		MaterialsResponse response = MaterialsResponseFactory.getResourceResponse(ResourceTypes.SIMPLE);
 		response.setSuccess(success);
-		response.setAuthToken(token);
-
+		
 		if (success){
 			response.setReason("Recursos obtenidos exitosamente");
-
+			response.setAuthToken(token);
+			
 		}else{
 			response.setReason(xmlHandler.getFirstElementValue(responseElement, "reason"));
 		}
 		
 		return Response.ok().entity(response).build();
 	}
+	
+
 	
 	//GET ENCUESTA RESPONDIDA
 	//	<parametro>
