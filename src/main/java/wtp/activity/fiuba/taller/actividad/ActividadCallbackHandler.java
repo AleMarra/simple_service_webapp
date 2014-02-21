@@ -75,7 +75,20 @@
             public void receiveErrorgetGrupos(java.lang.Exception e) {
             }
                 
-               // No methods generated for meps other than in-out
+           /**
+            * auto generated Axis2 call back method for agregarParticipanteAGrupo method
+            * override this method for handling normal response from agregarParticipanteAGrupo operation
+            */
+           public void receiveResultagregarParticipanteAGrupo(
+                    ) {
+           }
+
+          /**
+           * auto generated Axis2 Error handler
+           * override this method for handling error response from agregarParticipanteAGrupo operation
+           */
+            public void receiveErroragregarParticipanteAGrupo(java.lang.Exception e) {
+            }
                 
            /**
             * auto generated Axis2 call back method for getActividadesDeAmbito method
@@ -156,7 +169,20 @@
             public void receiveErrorcrearActividadGrupalEvaluable(java.lang.Exception e) {
             }
                 
-               // No methods generated for meps other than in-out
+           /**
+            * auto generated Axis2 call back method for destruirActividad method
+            * override this method for handling normal response from destruirActividad operation
+            */
+           public void receiveResultdestruirActividad(
+                    ) {
+           }
+
+          /**
+           * auto generated Axis2 Error handler
+           * override this method for handling error response from destruirActividad operation
+           */
+            public void receiveErrordestruirActividad(java.lang.Exception e) {
+            }
                 
            /**
             * auto generated Axis2 call back method for getNotas method
@@ -191,6 +217,22 @@
             }
                 
            /**
+            * auto generated Axis2 call back method for getActividadesDeMiembro method
+            * override this method for handling normal response from getActividadesDeMiembro operation
+            */
+           public void receiveResultgetActividadesDeMiembro(
+                    ActividadStub.GetActividadesDeMiembroResponse result
+                        ) {
+           }
+
+          /**
+           * auto generated Axis2 Error handler
+           * override this method for handling error response from getActividadesDeMiembro operation
+           */
+            public void receiveErrorgetActividadesDeMiembro(java.lang.Exception e) {
+            }
+                
+           /**
             * auto generated Axis2 call back method for crearActividadGrupal method
             * override this method for handling normal response from crearActividadGrupal operation
             */
@@ -206,7 +248,20 @@
             public void receiveErrorcrearActividadGrupal(java.lang.Exception e) {
             }
                 
-               // No methods generated for meps other than in-out
+           /**
+            * auto generated Axis2 call back method for eliminarParticipanteAGrupo method
+            * override this method for handling normal response from eliminarParticipanteAGrupo operation
+            */
+           public void receiveResulteliminarParticipanteAGrupo(
+                    ) {
+           }
+
+          /**
+           * auto generated Axis2 Error handler
+           * override this method for handling error response from eliminarParticipanteAGrupo operation
+           */
+            public void receiveErroreliminarParticipanteAGrupo(java.lang.Exception e) {
+            }
                 
            /**
             * auto generated Axis2 call back method for evaluar method

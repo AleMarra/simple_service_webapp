@@ -17,6 +17,7 @@ import org.w3c.dom.Element;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Iterator;
 import com.fiuba.taller.BaseService;
@@ -385,58 +386,54 @@ public class ActivityService extends BaseService {
 	/*-------//TODO------*/
 	
 	@POST
-	@Path("deleteactivity/{id}") //TODO
+	@Path("deleteactivity/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteActivity(@PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
-//		// Init
-//		ActivityResponse response = new ActivityResponse();
-//		String username = getUsernameFromAuthToken(token);
-//		if (username.equals("")) {
-//			response.setSuccess(false);
-//			response.setReason("Usuario no logueado");
-//			return Response.ok()
-//					.header("Set-Cookie",
-//							"authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
-//							.entity(response).build();
-//		}
-//
-//		ActividadStub api = new ActividadStub();
-//		ActividadStub.DestruirActividad destruirActividadRequest = new ActividadStub.DestruirActividad();
-//		ActividadStub.DestruirActividadResponse wsResponse = new ActividadStub.DestruirActividadResponse();
-//
-//		destruirActividadRequest.setUsername(username);
-//		destruirActividadRequest.setIdActividad(id);
-//
-//		boolean success = true;
-//		String message = "";
-//
-//		// Hacer el request
-//		try {
-//			wsResponse = api.destruirActividad(destruirActividadRequest);
-//		} catch (ActividadRemoteExceptionException e) {
-//			success = false;
-//			message = e.toString();
-//
-//		} catch (Exception e) {
-//			System.out.println(e.toString());
-//			return buildServiceUnavailable(e.toString());
-//		}
-//	
-//		long activityID =  wsResponse.get_return();
-//		
-//		response.setSuccess(success);
-//		
-//		if (success){
-//			response.setReason(Integer.toString((int)activityID));
-//		}else{
-//			response.setReason(message);
-//		}
-//
-//		return Response.ok().entity(response).build();
+		// Init
+		ActivityResponse response = new ActivityResponse();
+		String username = getUsernameFromAuthToken(token);
+		if (username.equals("")) {
+			response.setSuccess(false);
+			response.setReason("Usuario no logueado");
+			return Response.ok()
+					.header("Set-Cookie",
+							"authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+							.entity(response).build();
+		}
+
+		ActividadStub api = new ActividadStub();
+		ActividadStub.DestruirActividad destruirActividadRequest = new ActividadStub.DestruirActividad();
+
+		destruirActividadRequest.setUsername(username);
+		destruirActividadRequest.setIdActividad(id);
+
+		boolean success = true;
+		String message = "";
+
+		// Hacer el request
+		try {
+			api.destruirActividad(destruirActividadRequest);
+		} catch (RemoteException e) {
+			success = false;
+			message = e.toString();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			return buildServiceUnavailable(e.toString());
+		}
+
+		response.setSuccess(success);
+
+		if (success){
+			response.setReason("ok");
+		}else{
+			response.setReason(message);
+		}
+
+		return Response.ok().entity(response).build();
 		
-		return Response.ok().build();
 	}
 	
 	@POST
