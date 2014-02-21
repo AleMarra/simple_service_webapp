@@ -1,12 +1,25 @@
 package com.fiuba.taller.activity;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
-import com.fiuba.taller.BaseService;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.HashMap;
+import java.util.Iterator;
+import com.fiuba.taller.BaseService;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,6 +29,11 @@ import javax.ws.rs.*;
 
 import com.fiuba.taller.activity.requests.*;
 
+import com.fiuba.taller.service.SecurityResponse;
+
+import org.apache.axis2.AxisFault;
+import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import wtp.activity.fiuba.taller.actividad.*;
@@ -293,6 +311,23 @@ public class ActivityService extends BaseService {
             return buildServiceUnavailable(e.toString());
         }
 
+        // TODO: Parsear el response
+    	String activityReturn = wsResponse.get_return();
+        
+    	
+    	/*
+    	<Actividad>
+			<Id>4928</Id>
+			<Nombre>Trabajo Practico</Nombre>
+			<Descripcion>Se lala.</Descripcion>
+			<Tipo>Grupal Evaluable</Tipo>
+			<FechaInicio>28/10/2013</FechaInicio>
+			<FechaFin>29/10/2013</FechaFin>
+			<GruposExclusivos>false</GruposExclusivos>
+			<Escala>Decimal</Escala>
+		</Actividad>
+    	*/
+    	
         response.setSuccess(success);
 
         if (success) {
@@ -308,43 +343,43 @@ public class ActivityService extends BaseService {
 	public Response setActivityProperties(EditActivityRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
-//        // Init
-//        ActivityResponse response = new ActivityResponse();
-//        String username = getUsernameFromAuthToken(token);
-//        if (username.equals("")) {
-//            response.setSuccess(false);
-//            response.setReason("Usuario no logueado");
-//            return Response.ok()
-//                    .header("Set-Cookie",
-//                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
-//                    .entity(response).build();
-//        }
-//
-//        ActividadStub api = new ActividadStub();
-//        ActividadStub.SetPropiedades editarActividadRequest = new ActividadStub.SetPropiedades();
-//        // cuál es la response de esto?!
-//        ActividadStub.SetPropiedadesResponse wsResponse = new ActividadStub.SetPropiedadesResponse();
-//
-//        editarActividadRequest.setUsername(username);
-//        editarActividadRequest.setPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
-//
-//        boolean success = true;
-//        String message = "";
-//
-//        // Hacer el request
-//        try {
-//            wsResponse = api.crearActividadIndividualEvaluable(editarActividadRequest);
-//        } catch (ActividadRemoteExceptionException e) {
-//            success = false;
-//            message = e.toString();
-//
-//        } catch (Exception e) {
-//            System.out.println(e.toString());
-//            return buildServiceUnavailable(e.toString());
-//        }
+        // Init
+        ActivityResponse response = new ActivityResponse();
+        String username = getUsernameFromAuthToken(token);
+        if (username.equals("")) {
+            response.setSuccess(false);
+            response.setReason("Usuario no logueado");
+            return Response.ok()
+                    .header("Set-Cookie",
+                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                    .entity(response).build();
+        }
+
+        ActividadStub api = new ActividadStub();
+        ActividadStub.SetPropiedades editarActividadRequest = new ActividadStub.SetPropiedades();
+
+        editarActividadRequest.setUsername(username);
+        editarActividadRequest.setPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
+
+        boolean success = true;
+        String message = "";
+
+        // Hacer el request
+        try {
+        	// No hay response. Consideramos exitoso el caso en que no tira excepcion y ya
+            api.setPropiedades(editarActividadRequest);
+        } catch (ActividadRemoteExceptionException e) {
+            success = false;
+            message = e.toString();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return buildServiceUnavailable(e.toString());
+        }
 
         return Response.ok().build();
 	}
+	
 
 
 	/*-------//TODO------*/

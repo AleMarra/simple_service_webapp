@@ -1,26 +1,25 @@
-package com.fiuba.taller.activity;
+package com.fiuba.taller.materials.responses;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "activity-response")
-public class ActivityResponse {
-	
-    private boolean success;
-    private String reason;
-    private String fullReason;
-    private String authToken;
+import org.w3c.dom.Element;
 
-    public ActivityResponse(){}
+public abstract class MaterialsResponse {
+
+    protected boolean success = false;
+    protected String reason = "";
+    protected String authToken = "";
+
+    public MaterialsResponse(){}
     
-    public ActivityResponse(boolean success, String reason) {
+    public MaterialsResponse(boolean success, String reason) {
         super();
         this.success= success;
         this.reason = reason;
         this.authToken = "";
     }
     
-    public ActivityResponse(boolean success, String reason, String authToken) {
+    public MaterialsResponse(boolean success, String reason, String authToken) {
         super();
         this.success= success;
         this.reason = reason;
@@ -56,21 +55,13 @@ public class ActivityResponse {
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
     }
-
-
-    @XmlElement(name = "fullReason")
-    public String getFullReason() {
-        return fullReason;
-    }
-
-    public void setFullReason(String fullReason) {
-        this.fullReason = fullReason;
-    }
-
-
+    
+    
     @Override 
     public String toString(){
-    	return String.format("ActivityResponse - Successful: %s ; Reason: %s ; AuthToken: %s",
+    	return String.format("MaterialsResponse - Successful: %s ; Reason: %s ; AuthToken: %s",
     					success, reason, authToken);
     }
+    
+    public abstract void setResourcesFromXML(Element resourcesRoot);
 }

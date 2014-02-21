@@ -10,7 +10,7 @@ package wtp.activity.fiuba.taller.actividad;
 
 public class ActividadRemoteExceptionException extends java.lang.Exception{
 
-    private static final long serialVersionUID = 1392610869045L;
+    private static final long serialVersionUID = 1387259925333L;
     
     private ActividadStub.ActividadRemoteException faultMessage;
 
