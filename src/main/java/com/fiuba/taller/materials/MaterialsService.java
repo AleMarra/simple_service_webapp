@@ -170,8 +170,8 @@ public class MaterialsService extends BaseService{
 
 		// Armar el request
 		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, String> user = new HashMap<String, String>();
 		Map<String, String> resource = new HashMap<String, String>();
-        Map<String, String> user = new HashMap<String, String>();
 
 		resource.put("ambitoId", request.getAmbitoId().toString());
         user.put("username", username);
@@ -181,7 +181,6 @@ public class MaterialsService extends BaseService{
 
 
         System.out.println(" \n "); System.out.println(materialsRequestBuilder(params)); System.out.println(" \n ");
-
 
 		resourceRequest.setParametros(materialsRequestBuilder(params));
 		requestEnvelope.setGetRecursos(resourceRequest);
@@ -258,6 +257,7 @@ public class MaterialsService extends BaseService{
 		MaterialsImplServiceStub.GetRecurso resourceRequest = new MaterialsImplServiceStub.GetRecurso();
 		MaterialsImplServiceStub.GetRecursoE requestEnvelope = new MaterialsImplServiceStub.GetRecursoE(); 
 		MaterialsImplServiceStub.GetRecursoResponse wsResponse= new MaterialsImplServiceStub.GetRecursoResponse();
+
 
 		// Armar el request
 		Map<String, Object> params = new HashMap<String, Object>();

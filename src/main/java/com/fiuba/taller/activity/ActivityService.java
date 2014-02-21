@@ -311,6 +311,23 @@ public class ActivityService extends BaseService {
             return buildServiceUnavailable(e.toString());
         }
 
+        // TODO: Parsear el response
+    	String activityReturn = wsResponse.get_return();
+        
+    	
+    	/*
+    	<Actividad>
+			<Id>4928</Id>
+			<Nombre>Trabajo Practico</Nombre>
+			<Descripcion>Se lala.</Descripcion>
+			<Tipo>Grupal Evaluable</Tipo>
+			<FechaInicio>28/10/2013</FechaInicio>
+			<FechaFin>29/10/2013</FechaFin>
+			<GruposExclusivos>false</GruposExclusivos>
+			<Escala>Decimal</Escala>
+		</Actividad>
+    	*/
+    	
         response.setSuccess(success);
 
         if (success) {
@@ -326,40 +343,39 @@ public class ActivityService extends BaseService {
 	public Response setActivityProperties(EditActivityRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
-//        // Init
-//        ActivityResponse response = new ActivityResponse();
-//        String username = getUsernameFromAuthToken(token);
-//        if (username.equals("")) {
-//            response.setSuccess(false);
-//            response.setReason("Usuario no logueado");
-//            return Response.ok()
-//                    .header("Set-Cookie",
-//                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
-//                    .entity(response).build();
-//        }
-//
-//        ActividadStub api = new ActividadStub();
-//        ActividadStub.SetPropiedades editarActividadRequest = new ActividadStub.SetPropiedades();
-//        // cuál es la response de esto?!
-//        ActividadStub.SetPropiedadesResponse wsResponse = new ActividadStub.SetPropiedadesResponse();
-//
-//        editarActividadRequest.setUsername(username);
-//        editarActividadRequest.setPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
-//
-//        boolean success = true;
-//        String message = "";
-//
-//        // Hacer el request
-//        try {
-//            wsResponse = api.crearActividadIndividualEvaluable(editarActividadRequest);
-//        } catch (ActividadRemoteExceptionException e) {
-//            success = false;
-//            message = e.toString();
-//
-//        } catch (Exception e) {
-//            System.out.println(e.toString());
-//            return buildServiceUnavailable(e.toString());
-//        }
+        // Init
+        ActivityResponse response = new ActivityResponse();
+        String username = getUsernameFromAuthToken(token);
+        if (username.equals("")) {
+            response.setSuccess(false);
+            response.setReason("Usuario no logueado");
+            return Response.ok()
+                    .header("Set-Cookie",
+                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                    .entity(response).build();
+        }
+
+        ActividadStub api = new ActividadStub();
+        ActividadStub.SetPropiedades editarActividadRequest = new ActividadStub.SetPropiedades();
+
+        editarActividadRequest.setUsername(username);
+        editarActividadRequest.setPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
+
+        boolean success = true;
+        String message = "";
+
+        // Hacer el request
+        try {
+        	// No hay response. Consideramos exitoso el caso en que no tira excepcion y ya
+            api.setPropiedades(editarActividadRequest);
+        } catch (ActividadRemoteExceptionException e) {
+            success = false;
+            message = e.toString();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return buildServiceUnavailable(e.toString());
+        }
 
         return Response.ok().build();
 	}
