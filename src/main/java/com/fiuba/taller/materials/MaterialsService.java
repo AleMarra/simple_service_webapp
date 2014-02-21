@@ -12,6 +12,8 @@ import com.fiuba.taller.utils.XmlHandler;
 import static com.fiuba.taller.utils.XmlHandler.ATTRIBUTES_KEY;
 import static com.fiuba.taller.utils.XmlHandler.TYPE_KEY;
 import static com.fiuba.taller.utils.XmlHandler.PARAMS_KEY;
+
+import org.apache.axis2.AxisFault;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
@@ -187,19 +189,19 @@ public class MaterialsService extends BaseService{
 		
 		
 		// Hacer el request
-//		try {
-//			wsResponse = api.getRecursos(requestEnvelope).getGetRecursosResponse();
-//			
-//		} catch (AxisFault error) {
-//			System.out.println(error.getReason());
-//			return buildServiceUnavailable("obtener recursos", error.getReason());
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
-//
+		try {
+			wsResponse = api.getRecursos(requestEnvelope).getGetRecursosResponse();
+
+		} catch (AxisFault error) {
+			System.out.println(error.getReason());
+			return buildServiceUnavailable("obtener recursos", error.getReason());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 //		// Parsear el response
-//		Document doc = xmlHandler.getDoc(wsResponse.getRecursos());
-		Document doc = getDoc(dummyRecursos);
+		Document doc = xmlHandler.getDoc(wsResponse.getRecursos());
+//		Document doc = getDoc(dummyRecursos);
 		
 		Element responseElement = xmlHandler.getFirstElementWithTag(doc, "response");
 
@@ -277,21 +279,21 @@ public class MaterialsService extends BaseService{
 		requestEnvelope.setGetRecurso(resourceRequest);
 		
 //		// Hacer el request
-//		try {
-//			wsResponse = api.getRecurso(requestEnvelope).getGetRecursoResponse();
-//			
-//		} catch (AxisFault error) {
-//			System.out.println(error.getReason());
-//			return buildServiceUnavailable("obtener recursos", error.getReason());
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
-//
-//		// Parsear el response
-//		Document doc = xmlHandler.getDoc(wsResponse.getRecurso());
+		try {
+			wsResponse = api.getRecurso(requestEnvelope).getGetRecursoResponse();
 
-        String dummyInput = ((request.getTipo().toLowerCase().contains("link")) ? dummyLink : dummyEncuesta);
-        Document doc = xmlHandler.getDoc(dummyInput);
+		} catch (AxisFault error) {
+			System.out.println(error.getReason());
+			return buildServiceUnavailable("obtener recursos", error.getReason());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+//		// Parsear el response
+		Document doc = xmlHandler.getDoc(wsResponse.getRecurso());
+
+//        String dummyInput = ((request.getTipo().toLowerCase().contains("link")) ? dummyLink : dummyEncuesta);
+//        Document doc = xmlHandler.getDoc(dummyInput);
 //		Document doc = xmlHandler.getDoc(dummyLink);
 		//Document doc = xmlHandler.getDoc(dummyEncuesta);
 				
@@ -371,19 +373,19 @@ public class MaterialsService extends BaseService{
 		requestEnvelope.setBorrarRecurso(resourceRequest);
 		
 //		// Hacer el request
-//		try {
-//			wsResponse = api.getRecurso(requestEnvelope).getGetRecursoResponse();
-//			
-//		} catch (AxisFault error) {
-//			System.out.println(error.getReason());
-//			return buildServiceUnavailable("obtener recursos", error.getReason());
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
-//
+		try {
+			wsResponse = api.borrarRecurso(requestEnvelope).getBorrarRecursoResponse();
+
+		} catch (AxisFault error) {
+			System.out.println(error.getReason());
+			return buildServiceUnavailable("obtener recursos", error.getReason());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 //		// Parsear el response
-//		Document doc = xmlHandler.getDoc(wsResponse.getRecurso());
-		Document doc = xmlHandler.getDoc(dummyOkResponse);
+		Document doc = xmlHandler.getDoc(wsResponse.getBorrado());
+//		Document doc = xmlHandler.getDoc(dummyOkResponse);
 
 		Element responseElement = xmlHandler.getFirstElementWithTag(doc, "response");
 		Element successElement = xmlHandler.getFirstElementWithTag(responseElement, "success");

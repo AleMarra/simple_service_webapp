@@ -331,7 +331,7 @@ public class ActivityService extends BaseService {
         response.setSuccess(success);
 
         if (success) {
-            response.setReason("lalalala");
+            response.setReason("");
         }
 
 		return Response.ok().build();
