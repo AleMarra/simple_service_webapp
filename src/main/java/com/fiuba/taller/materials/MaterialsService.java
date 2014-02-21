@@ -64,6 +64,66 @@ import wtp.loginapihelper.wtp.LoginAPIHelperStub;
 @Produces(MediaType.APPLICATION_JSON)
 public class MaterialsService extends BaseService{
 
+	public static final String dummyOkResponse = "<response>"+
+													"<success>true</success>"+
+												"</response>";
+															
+	public static final String dummyRecursos = "<response>" +
+            "<success>true</success>" +
+            "<recursos>" +
+                "<recurso>" +
+                    "<recursoId>11002</recursoId>" +
+                    "<tipo>Link</tipo>" +
+                    "<ambitoId>-1</ambitoId>" +
+                    "<descripcion>un link a google copado</descripcion>" +
+                "</recurso>" +
+                "<recurso>" +
+                    "<recursoId>11003</recursoId>" +
+                    "<tipo>Encuesta</tipo>" +
+                    "<ambitoId>-1</ambitoId>" +
+                    "<descripcion>una encuesta chica</descripcion>" +
+                "</recurso>" +
+                "<recurso>" +
+                    "<recursoId>11004</recursoId>" +
+                    "<tipo>Encuesta</tipo>" +
+                    "<ambitoId>-1</ambitoId>" +
+                    "<descripcion>una encuesta grande</descripcion>" +
+                "</recurso>" +
+            "</recursos>" +
+        "</response>";
+	
+	public static final String dummyLink = "<response>" +
+											"<success>true</success>" +
+											"<recurso>" +
+												"<recursoId>1002</recursoId>" +
+												"<tipo>Link</tipo>"+
+												"<ambitoId>-1</ambitoId>"+
+												"<descripcion>un link a google copado</descripcion>"+
+												"<link>www.google.com.ar</link>"+
+											"</recurso>"+
+										"</response>";
+	
+	public static final String dummyEncuesta = "<response>"+
+												"<success>true</success>"+
+												"<encuesta evaluada='true'>"+
+												"<recursoId>11004</recursoId>"+
+												"<tipo>Encuesta</tipo>"+
+												"<ambitoId>-1</ambitoId>"+
+												"<descripcion>una encuesta grande</descripcion>"+
+												"<preguntas>"+
+												"<preguntaConOpciones multiplesCorrectas='false' correctas='4' idPregunta='1' enunciado='de que color es el caballo blanco de san martin?'>"+
+												"<respuestas>rojo,verde,azul,blanco</respuestas>"+
+												"</preguntaConOpciones>"+
+												"<preguntaConOpciones multiplesCorrectas='true' correctas='1,8,11,12,13,7' idPregunta='2' enunciado='Un test unitario debe presentar las siguientes caractersticas'>"+
+												"<respuestas>Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente,Automatizable</respuestas>"+
+												"</preguntaConOpciones>"+
+												"<preguntaSinOpciones correcta='4' idPregunta='5' enunciado='cuantas patas tiene un gato?'/>"+
+												"</preguntas>"+
+												"</encuesta>"+
+											   "</response>";
+										
+	
+	
 	private static final XmlHandler xmlHandler = new XmlHandler();
 	
 	// El valor verdadero en String debería estar definido en algún archivo de cosas comunes, y en ese caso
@@ -162,30 +222,7 @@ public class MaterialsService extends BaseService{
 //
 //		// Parsear el response
 //		Document doc = xmlHandler.getDoc(wsResponse.getRecursos());
-		Document doc = getDoc("" +
-                "<response>" +
-                    "<success>true</success>" +
-                    "<recursos>" +
-                        "<recurso>" +
-                            "<recursoId>11002</recursoId>" +
-                            "<tipo>Link</tipo>" +
-                            "<ambitoId>-1</ambitoId>" +
-                            "<descripcion>un link a google copado</descripcion>" +
-                        "</recurso>" +
-                        "<recurso>" +
-                            "<recursoId>11003</recursoId>" +
-                            "<tipo>Encuesta</tipo>" +
-                            "<ambitoId>-1</ambitoId>" +
-                            "<descripcion>una encuesta chica</descripcion>" +
-                        "</recurso>" +
-                        "<recurso>" +
-                            "<recursoId>11004</recursoId>" +
-                            "<tipo>Encuesta</tipo>" +
-                            "<ambitoId>-1</ambitoId>" +
-                            "<descripcion>una encuesta grande</descripcion>" +
-                        "</recurso>" +
-                    "</recursos>" +
-                "</response>");
+		Document doc = getDoc(dummyRecursos);
 		
 		Element responseElement = xmlHandler.getFirstElementWithTag(doc, "response");
 
@@ -201,93 +238,15 @@ public class MaterialsService extends BaseService{
 		if (success){
 			response.setReason("Recursos obtenidos exitosamente");
 			response.setResourcesFromXML(xmlHandler.getFirstElementWithTag(responseElement, "recursos"));
+			response.setAuthToken(token);
 			
 		}else{
 			response.setReason(xmlHandler.getFirstElementValue(responseElement, "reason"));
+			response.setAuthToken(token);
 		}
 		
 		
 		return Response.ok().entity(response).build();
-		
-		/*
-				//        GetRecursosParams payload = new GetRecursosParams();
-				        MaterialsImplServiceStub.GetRecursos getRecursosRequest = new MaterialsImplServiceStub.GetRecursos();
-				        MaterialsImplServiceStub.GetRecursosE getRecursosERequest = new MaterialsImplServiceStub.GetRecursosE();
-				        MaterialsImplServiceStub.GetRecursosResponseE wsResponseE = new MaterialsImplServiceStub.GetRecursosResponseE();
-				        MaterialsImplServiceStub.GetRecursosResponse wsResponse = new MaterialsImplServiceStub.GetRecursosResponse();
-				
-				//        getRecursosRequest.setParametros(payload.toString());
-				        getRecursosRequest.setParametros("" +
-				                "<parametro>" +
-				                    "<recurso>" +
-				                        "<ambitoId>3</ambitoId>" +
-				                    "</recurso>" +
-				                    "<usuarioId>2</usuarioId>" +
-				                "</parametro>");
-				        getRecursosERequest.setGetRecursos(getRecursosRequest);
-				
-						boolean success = true;
-					    String message = "";
-					        
-				//		// Hacer el request
-				//        try {
-				//            // Las clases 'E' wrappean las excepciones controladas, como poner los parámetros mal
-				//            wsResponseE = api.getRecursos(getRecursosERequest);
-				//        } catch (AxisFault error) {
-				//            System.out.println(error.getReason());
-				//            return buildServiceUnavailable("obtener recursos", error.getReason());
-				//        } catch (Exception e) {
-				//            System.out.println(e.getMessage());
-				//        }
-				//        //  Parsear el response
-				//        wsResponse =  wsResponseE.getGetRecursosResponse();
-				
-				        // Parsear el response
-				//        Document doc = getDoc(wsResponse.getRecursos());
-				        Document doc = getDoc("" +
-				                "<response>" +
-				                    "<success>true</success>" +
-				                    "<recursos>" +
-				                        "<recurso>" +
-				                            "<recursoId>11002</recursoId>" +
-				                            "<tipo>Link</tipo>" +
-				                            "<ambitoId>-1</ambitoId>" +
-				                            "<descripcion>un link a google copado</descripcion>" +
-				                        "</recurso>" +
-				                        "<recurso>" +
-				                            "<recursoId>11003</recursoId>" +
-				                            "<tipo>Encuesta</tipo>" +
-				                            "<ambitoId>-1</ambitoId>" +
-				                            "<descripcion>una encuesta chica</descripcion>" +
-				                        "</recurso>" +
-				                        "<recurso>" +
-				                            "<recursoId>11004</recursoId>" +
-				                            "<tipo>Encuesta</tipo>" +
-				                            "<ambitoId>-1</ambitoId>" +
-				                            "<descripcion>una encuesta grande</descripcion>" +
-				                        "</recurso>" +
-				                    "</recursos>" +
-				                "</response>");
-				        Node node = getNode(doc, "response");
-				
-				        String successString = getFirstElementValue( node, "success");
-				
-				        if (successString == null) {
-				            return buildWrongXmlError("success");
-				        }
-				        success = successString.equals(TRUE_STRING);
-				        response.setSuccess(success);
-				
-				        if (success) {
-				            response.setResourcesFromXML((Element) getNode(doc, "recursos"));
-				        } else {
-				            response.setReason(getFirstElementValue(node, "reason"));
-				        }
-				
-						return Response.ok().entity(response).build();
-				
-					}
-	*/
 	}
 	
 	//GET RECURSO
@@ -328,11 +287,11 @@ public class MaterialsService extends BaseService{
 		Map<String, Object> params = new HashMap<String, Object>();
 		Map<String, String> user = new HashMap<String, String>();
 		Map<String, String> resource = new HashMap<String, String>();
-		
+
 		resource.put("recursoId", request.getRecursoId().toString());
 		resource.put("tipo", request.getTipo());
 		user.put("username", username);
-		
+
 		params.put("recurso", resource);
 		params.put("Usuario", user);
 
@@ -354,37 +313,8 @@ public class MaterialsService extends BaseService{
 //		// Parsear el response
 //		Document doc = xmlHandler.getDoc(wsResponse.getRecurso());
 		
-//		Document doc = xmlHandler.getDoc(
-//										"<response>" +
-//											"<success>true</success>" +
-//											"<recurso>" +
-//												"<recursoId>1002</recursoId>" +
-//												"<tipo>Link</tipo>"+
-//												"<ambitoId>-1</ambitoId>"+
-//												"<descripcion>un link a google copado</descripcion>"+
-//												"<link>www.google.com.ar</link>"+
-//											"</recurso>"+
-//										"</response>");
-		Document doc = xmlHandler.getDoc(
-				"<response>"+
-				"<success>true</success>"+
-				"<encuesta evaluada='true'>"+
-				"<recursoId>11004</recursoId>"+
-				"<tipo>Encuesta</tipo>"+
-				"<ambitoId>-1</ambitoId>"+
-				"<descripcion>una encuesta grande</descripcion>"+
-				"<preguntas>"+
-				"<preguntaConOpciones multiplesCorrectas='false' correctas='4' idPregunta='1' enunciado='de que color es el caballo blanco de san martin?'>"+
-				"<respuestas>rojo,verde,azul,blanco</respuestas>"+
-				"</preguntaConOpciones>"+
-				"<preguntaConOpciones multiplesCorrectas='true' correctas='1,8,11,12,13,7' idPregunta='2' enunciado='Un test unitario debe presentar las siguientes caractersticas'>"+
-				"<respuestas>Rapido,Moldeable,Configurable,Acoplable,Lento,Extensible,Repetible,Profesional,Maduro,Amplio,Simple,Independiente,Automatizable</respuestas>"+
-				"</preguntaConOpciones>"+
-				"<preguntaSinOpciones correcta='4' idPregunta='5' enunciado='cuantas patas tiene un gato?'/>"+
-				"</preguntas>"+
-				"</encuesta>"+
-				"</response>"
-				);
+//		Document doc = xmlHandler.getDoc(dummyLink);
+		Document doc = xmlHandler.getDoc(dummyEncuesta);
 				
 		Element responseElement = xmlHandler.getFirstElementWithTag(doc, "response");
 		Element successElement = xmlHandler.getFirstElementWithTag(responseElement, "success");
@@ -400,13 +330,16 @@ public class MaterialsService extends BaseService{
 			
 			response.setSuccess(success);
 			response.setReason("Recursos obtenidos exitosamente");
+			response.setAuthToken(token);
+
 			
 		}else{
 			response = MaterialsResponseFactory.getResourceResponse(ResourceTypes.SIMPLE);
 			response.setSuccess(success);
 			response.setReason(xmlHandler.getFirstElementValue(responseElement, "reason"));
+			response.setAuthToken(token);
+
 		}
-		
 		
 		return Response.ok().entity(response).build();
 	}
@@ -418,7 +351,83 @@ public class MaterialsService extends BaseService{
 	//	</recurso>
 	//	<usuarioId>INT idDelUsuario</usuarioId>
 	//	</parametro>
-	//
+	@POST
+	@Path("deleteresource")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteResource(DeleteResourceRequest request, @CookieParam("authToken") String token)
+			throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		System.out.println(request);
+
+		// Init
+		String username = getUsernameFromAuthToken(token);
+		if (username.equals("")) {
+			MaterialsResponse response = MaterialsResponseFactory.getResourceResponse(ResourceTypes.SIMPLE);
+			response.setSuccess(false);
+			response.setReason("Usuario no logueado");
+			return Response.ok()
+					.header("Set-Cookie",
+							"authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+							.entity(response).build();
+		}
+		
+		MaterialsImplServiceStub api = new MaterialsImplServiceStub();
+		MaterialsImplServiceStub.BorrarRecurso resourceRequest = new MaterialsImplServiceStub.BorrarRecurso();
+		MaterialsImplServiceStub.BorrarRecursoE requestEnvelope = new MaterialsImplServiceStub.BorrarRecursoE(); 
+		MaterialsImplServiceStub.BorrarRecursoResponse wsResponse= new MaterialsImplServiceStub.BorrarRecursoResponse();
+
+		// Armar el request
+		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, String> user = new HashMap<String, String>();
+		Map<String, String> resource = new HashMap<String, String>();
+
+		resource.put("recursoId", request.getRecursoId().toString());
+		resource.put("tipo", request.getTipo());
+		user.put("username", username);
+
+		params.put("recurso", resource);
+		params.put("Usuario", user);
+
+		System.out.println(materialsRequestBuilder(params));
+		resourceRequest.setParametro(materialsRequestBuilder(params));
+		requestEnvelope.setBorrarRecurso(resourceRequest);
+		
+//		// Hacer el request
+//		try {
+//			wsResponse = api.getRecurso(requestEnvelope).getGetRecursoResponse();
+//			
+//		} catch (AxisFault error) {
+//			System.out.println(error.getReason());
+//			return buildServiceUnavailable("obtener recursos", error.getReason());
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//
+//		// Parsear el response
+//		Document doc = xmlHandler.getDoc(wsResponse.getRecurso());
+		Document doc = xmlHandler.getDoc(dummyOkResponse);
+
+		Element responseElement = xmlHandler.getFirstElementWithTag(doc, "response");
+		Element successElement = xmlHandler.getFirstElementWithTag(responseElement, "success");
+		if (successElement == null) {
+			return buildWrongXmlError("success");
+		}
+		boolean success = successElement.getTextContent().equals(TRUE_STRING);
+
+		MaterialsResponse response = MaterialsResponseFactory.getResourceResponse(ResourceTypes.SIMPLE);
+		response.setSuccess(success);
+		response.setAuthToken(token);
+
+		if (success){
+			response.setReason("Recursos obtenidos exitosamente");
+
+		}else{
+			response.setReason(xmlHandler.getFirstElementValue(responseElement, "reason"));
+		}
+		
+		return Response.ok().entity(response).build();
+	}
+	
 	//GET ENCUESTA RESPONDIDA
 	//	<parametro>
 	//	<recurso>

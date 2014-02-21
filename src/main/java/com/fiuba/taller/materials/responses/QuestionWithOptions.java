@@ -15,6 +15,13 @@ public class QuestionWithOptions extends PollQuestion {
 	protected String correct;
 	protected String answers;
 	
+	public QuestionWithOptions(){}
+	
+	public QuestionWithOptions(Element resourcesRoot){
+		setFromXML(resourcesRoot);
+	}
+
+	
 	@XmlAttribute(name="multiplesCorrectas")
 	public Boolean getMultiplesCorrect() {
 		return multiplesCorrect;

@@ -10,6 +10,12 @@ public class QuestionWithoutOptions extends PollQuestion {
 
 	protected String correct;
 	
+	public QuestionWithoutOptions(){}
+	
+	public QuestionWithoutOptions(Element resourcesRoot){
+		setFromXML(resourcesRoot);
+	}
+	
 	@XmlAttribute(name="correcta")
 	public String getCorrect() {
 		return correct;
