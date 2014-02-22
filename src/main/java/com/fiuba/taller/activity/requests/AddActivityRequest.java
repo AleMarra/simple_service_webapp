@@ -84,8 +84,8 @@ public class AddActivityRequest {
         dataAsForm.param("usernameCoordinadorSuperior", usernameCoordinadorSuperior);
         dataAsForm.param("idAmbitoSuperior", Integer.toString(idAmbitoSuperior));
         dataAsForm.param("idActividadSuperior", Integer.toString(idActividadSuperior));
-        dataAsForm.param("fechaInicio", Long.toString(fechaInicio.getTime()));
-        dataAsForm.param("fechaFin", Long.toString(fechaFin.getTime()));
+        dataAsForm.param("fechaInicio", Long.toString(fechaInicio.getTime() / 1000));
+        dataAsForm.param("fechaFin", Long.toString(fechaFin.getTime() / 1000));
         dataAsForm.param("gruposExclusivos", Boolean.toString(gruposExclusivos));
         dataAsForm.param("escala", escala);
 
@@ -101,8 +101,8 @@ public class AddActivityRequest {
         dataAsMap.put("usernameCoordinadorSuperior", usernameCoordinadorSuperior);
         dataAsMap.put("idAmbitoSuperior", Integer.toString(idAmbitoSuperior));
         dataAsMap.put("idActividadSuperior", Integer.toString(idActividadSuperior));
-        dataAsMap.put("fechaInicio", Long.toString(fechaInicio.getTime()));
-        dataAsMap.put("fechaFin", Long.toString(fechaFin.getTime()));
+        dataAsMap.put("fechaInicio", Long.toString(fechaInicio.getTime() / 1000));
+        dataAsMap.put("fechaFin", Long.toString(fechaFin.getTime() / 1000));
         dataAsMap.put("gruposExclusivos", Boolean.toString(gruposExclusivos));
         dataAsMap.put("escala", escala);
 

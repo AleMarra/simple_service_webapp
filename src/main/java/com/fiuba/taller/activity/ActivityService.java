@@ -10,6 +10,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import com.fiuba.taller.activity.responses.GetPropertiesResponse;
+import com.fiuba.taller.utils.XmlHandler;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -43,6 +45,19 @@ import wtp.activity.fiuba.taller.actividad.*;
 @Path("/activityservice")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class ActivityService extends BaseService {
+    public static final String dummyActivityProperties =
+        "<Actividad>" +
+            "<Id>4928</Id>" +
+            "<Nombre>Trabajo Practico</Nombre>" +
+            "<Descripcion>Se lala.</Descripcion>" +
+            "<Tipo>Grupal Evaluable</Tipo>" +
+            "<FechaInicio>1382918400</FechaInicio>" +
+            "<FechaFin>1383004800</FechaFin>" +
+            "<GruposExclusivos>false</GruposExclusivos>" +
+            "<Escala>Decimal</Escala>" +
+        "</Actividad>";
+
+    private static final XmlHandler xmlHandler = new XmlHandler();
 
     // ------------------------------------------------ API METHODS ------------------------------------------------
 	@POST
@@ -274,12 +289,11 @@ public class ActivityService extends BaseService {
 	
 	@GET
 	@Path("getproperties/{id}")
-//	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getActivityProperties(@PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
         // Init
-        ActivityResponse response = new ActivityResponse();
+        GetPropertiesResponse response = new GetPropertiesResponse();
         String username = getUsernameFromAuthToken(token);
         if (username.equals("")) {
             response.setSuccess(false);
@@ -314,25 +328,16 @@ public class ActivityService extends BaseService {
 
         // TODO: Parsear el response
     	String activityReturn = wsResponse.get_return();
-        
-    	
-    	/*
-    	<Actividad>
-			<Id>4928</Id>
-			<Nombre>Trabajo Practico</Nombre>
-			<Descripcion>Se lala.</Descripcion>
-			<Tipo>Grupal Evaluable</Tipo>
-			<FechaInicio>28/10/2013</FechaInicio>
-			<FechaFin>29/10/2013</FechaFin>
-			<GruposExclusivos>false</GruposExclusivos>
-			<Escala>Decimal</Escala>
-		</Actividad>
-    	*/
-    	
+//    	String activityReturn = dummyActivityProperties;
+
+        Document doc = xmlHandler.getDoc(activityReturn);
+
+        Element responseElement = xmlHandler.getFirstElementWithTag(doc, "Actividad");
+
         response.setSuccess(success);
 
         if (success) {
-            response.setReason(activityReturn);
+            response.setActivityPropertiesFromXML(responseElement);
         } else {
             response.setReason(message);
         }

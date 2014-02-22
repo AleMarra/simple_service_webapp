@@ -73,8 +73,8 @@ public class EditActivityRequest {
         dataAsForm.param("usernameCoordinador", usernameCoordinador);
         dataAsForm.param("nombre", nombre);
         dataAsForm.param("descripcion", descripcion);
-        dataAsForm.param("fechaInicio", Long.toString(fechaInicio.getTime()));
-        dataAsForm.param("fechaFin", Long.toString(fechaFin.getTime()));
+        dataAsForm.param("fechaInicio", Long.toString(fechaInicio.getTime() / 1000));
+        dataAsForm.param("fechaFin", Long.toString(fechaFin.getTime() / 1000));
         dataAsForm.param("gruposExclusivos", Boolean.toString(gruposExclusivos));
 
         return dataAsForm;
@@ -87,8 +87,8 @@ public class EditActivityRequest {
         dataAsMap.put("usernameCoordinador", usernameCoordinador);
         dataAsMap.put("nombre", nombre);
         dataAsMap.put("descripcion", descripcion);
-        dataAsMap.put("fechaInicio", Long.toString(fechaInicio.getTime()));
-        dataAsMap.put("fechaFin", Long.toString(fechaFin.getTime()));
+        dataAsMap.put("fechaInicio", Long.toString(fechaInicio.getTime() / 1000));
+        dataAsMap.put("fechaFin", Long.toString(fechaFin.getTime() / 1000));
         dataAsMap.put("gruposExclusivos", Boolean.toString(gruposExclusivos));
 
         return dataAsMap;

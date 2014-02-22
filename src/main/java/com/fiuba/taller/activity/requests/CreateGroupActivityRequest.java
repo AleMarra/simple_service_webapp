@@ -74,8 +74,8 @@ public class CreateGroupActivityRequest {
         dataAsForm.param("descripcion", descripcion);
         dataAsForm.param("idAmbitoSuperior", Integer.toString(idAmbitoSuperior));
         dataAsForm.param("idActividadSuperior", Integer.toString(idActividadSuperior));
-        dataAsForm.param("fechaInicio", Long.toString(fechaInicio.getTime()));
-        dataAsForm.param("fechaFin", Long.toString(fechaFin.getTime()));
+        dataAsForm.param("fechaInicio", Long.toString(fechaInicio.getTime() / 1000));
+        dataAsForm.param("fechaFin", Long.toString(fechaFin.getTime() / 1000));
         dataAsForm.param("gruposExclusivos", Boolean.toString(gruposExclusivos));
 
         return dataAsForm;
@@ -89,8 +89,8 @@ public class CreateGroupActivityRequest {
         dataAsMap.put("IdAmbitoSuperior", Integer.toString(idAmbitoSuperior));
         dataAsMap.put("IdActividadSuperior", Integer.toString(idActividadSuperior));
         dataAsMap.put("Id", Integer.toString(Id));
-        dataAsMap.put("FechaInicio", Long.toString(fechaInicio.getTime()));
-        dataAsMap.put("FechaFin", Long.toString(fechaFin.getTime()));
+        dataAsMap.put("FechaInicio", Long.toString(fechaInicio.getTime() / 1000));
+        dataAsMap.put("FechaFin", Long.toString(fechaFin.getTime() / 1000));
         dataAsMap.put("GruposExclusivos", Boolean.toString(gruposExclusivos));
         dataAsMap.put("Tipo", "fghfghs");
 

@@ -27,7 +27,7 @@ capitalToHyphen = (str) -> str.replace(/[A-Z]/g, (char) -> "-#{char.toLowerCase(
 javaToString = (attr, type) ->
   switch type
    when "String" then "#{ attr }"
-   when "Date"   then "Long.toString(#{ attr }.getTime())"
+   when "Date"   then "Long.toString(#{ attr }.getTime() / 1000)"
    else "#{ type }.toString(#{ attr })"
 
 className         = "#{ capitalize requestName }Request"
