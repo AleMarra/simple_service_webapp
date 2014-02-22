@@ -128,8 +128,8 @@ public class ActivityService extends BaseService {
 		ActividadStub.CrearActividadGrupalEvaluableResponse wsResponse = new ActividadStub.CrearActividadGrupalEvaluableResponse();
 		
 		crearActividadRequest.setUsername(username);
-		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
-		
+        crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
+
 		boolean success = true;
 	    String message = "";
 	        

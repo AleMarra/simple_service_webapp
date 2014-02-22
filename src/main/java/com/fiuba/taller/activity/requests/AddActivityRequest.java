@@ -1,5 +1,8 @@
 package com.fiuba.taller.activity.requests;
 
+import com.fiuba.taller.utils.DateAdapter;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +10,7 @@ import javax.ws.rs.core.Form;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "add-activity-request")
 public class AddActivityRequest {
@@ -17,15 +21,17 @@ public class AddActivityRequest {
     private String usernameCoordinadorSuperior;
     private Integer idAmbitoSuperior;
     private Integer idActividadSuperior;
-    private String fechaInicio;
-    private String fechaFin;
+    @XmlJavaTypeAdapter(DateAdapter.class)
+    private Date fechaInicio;
+    @XmlJavaTypeAdapter(DateAdapter.class)
+    private Date fechaFin;
     private Boolean gruposExclusivos;
     private String escala;
 
 
     public AddActivityRequest(){}
 
-    public AddActivityRequest(Integer id, String nombre, String descripcion, String usernameCoordinadorSuperior, Integer idAmbitoSuperior, Integer idActividadSuperior, String fechaInicio, String fechaFin, Boolean gruposExclusivos, String escala)
+    public AddActivityRequest(Integer id, String nombre, String descripcion, String usernameCoordinadorSuperior, Integer idAmbitoSuperior, Integer idActividadSuperior, Date fechaInicio, Date fechaFin, Boolean gruposExclusivos, String escala)
     {
         super();
         this.setId(id);
@@ -78,8 +84,8 @@ public class AddActivityRequest {
         dataAsForm.param("usernameCoordinadorSuperior", usernameCoordinadorSuperior);
         dataAsForm.param("idAmbitoSuperior", Integer.toString(idAmbitoSuperior));
         dataAsForm.param("idActividadSuperior", Integer.toString(idActividadSuperior));
-        dataAsForm.param("fechaInicio", fechaInicio);
-        dataAsForm.param("fechaFin", fechaFin);
+        dataAsForm.param("fechaInicio", Long.toString(fechaInicio.getTime()));
+        dataAsForm.param("fechaFin", Long.toString(fechaFin.getTime()));
         dataAsForm.param("gruposExclusivos", Boolean.toString(gruposExclusivos));
         dataAsForm.param("escala", escala);
 
@@ -95,8 +101,8 @@ public class AddActivityRequest {
         dataAsMap.put("usernameCoordinadorSuperior", usernameCoordinadorSuperior);
         dataAsMap.put("idAmbitoSuperior", Integer.toString(idAmbitoSuperior));
         dataAsMap.put("idActividadSuperior", Integer.toString(idActividadSuperior));
-        dataAsMap.put("fechaInicio", fechaInicio);
-        dataAsMap.put("fechaFin", fechaFin);
+        dataAsMap.put("fechaInicio", Long.toString(fechaInicio.getTime()));
+        dataAsMap.put("fechaFin", Long.toString(fechaFin.getTime()));
         dataAsMap.put("gruposExclusivos", Boolean.toString(gruposExclusivos));
         dataAsMap.put("escala", escala);
 
@@ -152,19 +158,19 @@ public class AddActivityRequest {
         this.idActividadSuperior = idActividadSuperior;
     }
 	@XmlElement(name = "fechaInicio")
-    public String getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 	@XmlElement(name = "fechaFin")
-    public String getFechaFin() {
+    public Date getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(String fechaFin) {
+    public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
 	@XmlElement(name = "gruposExclusivos")

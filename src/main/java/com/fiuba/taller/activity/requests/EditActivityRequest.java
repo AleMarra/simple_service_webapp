@@ -1,5 +1,8 @@
 package com.fiuba.taller.activity.requests;
 
+import com.fiuba.taller.utils.DateAdapter;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +10,7 @@ import javax.ws.rs.core.Form;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "edit-activity-request")
 public class EditActivityRequest {
@@ -15,14 +19,16 @@ public class EditActivityRequest {
     private String usernameCoordinador;
     private String nombre;
     private String descripcion;
-    private String fechaInicio;
-    private String fechaFin;
+    @XmlJavaTypeAdapter(DateAdapter.class)
+    private Date fechaInicio;
+    @XmlJavaTypeAdapter(DateAdapter.class)
+    private Date fechaFin;
     private Boolean gruposExclusivos;
 
 
     public EditActivityRequest(){}
 
-    public EditActivityRequest(Integer id, String usernameCoordinador, String nombre, String descripcion, String fechaInicio, String fechaFin, Boolean gruposExclusivos)
+    public EditActivityRequest(Integer id, String usernameCoordinador, String nombre, String descripcion, Date fechaInicio, Date fechaFin, Boolean gruposExclusivos)
     {
         super();
         this.setId(id);
@@ -67,8 +73,8 @@ public class EditActivityRequest {
         dataAsForm.param("usernameCoordinador", usernameCoordinador);
         dataAsForm.param("nombre", nombre);
         dataAsForm.param("descripcion", descripcion);
-        dataAsForm.param("fechaInicio", fechaInicio);
-        dataAsForm.param("fechaFin", fechaFin);
+        dataAsForm.param("fechaInicio", Long.toString(fechaInicio.getTime()));
+        dataAsForm.param("fechaFin", Long.toString(fechaFin.getTime()));
         dataAsForm.param("gruposExclusivos", Boolean.toString(gruposExclusivos));
 
         return dataAsForm;
@@ -81,8 +87,8 @@ public class EditActivityRequest {
         dataAsMap.put("usernameCoordinador", usernameCoordinador);
         dataAsMap.put("nombre", nombre);
         dataAsMap.put("descripcion", descripcion);
-        dataAsMap.put("fechaInicio", fechaInicio);
-        dataAsMap.put("fechaFin", fechaFin);
+        dataAsMap.put("fechaInicio", Long.toString(fechaInicio.getTime()));
+        dataAsMap.put("fechaFin", Long.toString(fechaFin.getTime()));
         dataAsMap.put("gruposExclusivos", Boolean.toString(gruposExclusivos));
 
         return dataAsMap;
@@ -121,19 +127,19 @@ public class EditActivityRequest {
         this.descripcion = descripcion;
     }
 	@XmlElement(name = "fechaInicio")
-    public String getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 	@XmlElement(name = "fechaFin")
-    public String getFechaFin() {
+    public Date getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(String fechaFin) {
+    public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
 	@XmlElement(name = "gruposExclusivos")
