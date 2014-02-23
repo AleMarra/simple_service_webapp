@@ -1,46 +1,23 @@
 package com.fiuba.taller.activity;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
 import com.fiuba.taller.BaseResponse;
+import com.fiuba.taller.BaseService;
+import com.fiuba.taller.activity.requests.*;
 import com.fiuba.taller.activity.responses.GetPropertiesResponse;
 import com.fiuba.taller.utils.XmlHandler;
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
+import wtp.activity.fiuba.taller.actividad.ActividadStub;
 
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.rmi.RemoteException;
 import java.util.HashMap;
-import java.util.Iterator;
-import com.fiuba.taller.BaseService;
-
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.*;
-import javax.ws.rs.*;
-
-import com.fiuba.taller.activity.requests.*;
-
-import com.fiuba.taller.service.SecurityResponse;
-
-import org.apache.axis2.AxisFault;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import wtp.activity.fiuba.taller.actividad.*;
 
 
 @Path("/activityservice")
@@ -204,7 +181,7 @@ public class ActivityService extends BaseService {
 		ActividadStub.CrearActividadIndividualResponse wsResponse = new ActividadStub.CrearActividadIndividualResponse();
 		
 		crearActividadRequest.setUsername(username);
-		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad",(HashMap<String,String>)request.toMap()));
+		crearActividadRequest.setXmlPropiedades(makeXMLFromMap("Actividad", (HashMap<String, String>) request.toMap()));
 		
 		boolean success = true;
 	    String message = "";
@@ -452,36 +429,6 @@ public class ActivityService extends BaseService {
 		
 	}
 
-    /*-------TODO------*/
-	@POST
-	@Path("addcoordinator/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addActivityCoordinator(EditCoordinatorRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		//TODO
-        return Response.ok().build();
-	}
-	
-	@POST
-	@Path("deletecoordinator/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteActivityCoordinator(EditCoordinatorRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		//TODO
-        return Response.ok().build();
-	}
-
-	@POST
-	@Path("getcoordinators/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getActivityCoordinator(@PathParam("id") long id, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		//TODO
-        return Response.ok().build();
-	}
 	
 	@POST
 	@Path("addparticipant/{id}")
@@ -489,8 +436,47 @@ public class ActivityService extends BaseService {
 	public Response addActivityParticipant(EditParticipantRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
-		//TODO
-        return Response.ok().build();
+        // Init
+        BaseResponse response = new BaseResponse();
+        String username = getUsernameFromAuthToken(token);
+        if (username.equals("")) {
+            response.setSuccess(false);
+            response.setReason("Usuario no logueado");
+            return Response.ok()
+                    .header("Set-Cookie",
+                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                    .entity(response).build();
+        }
+
+        ActividadStub api = new ActividadStub();
+        ActividadStub.AgregarParticipante agregarParticipanteRequest = new ActividadStub.AgregarParticipante();
+
+        agregarParticipanteRequest.setUsername(username);
+        agregarParticipanteRequest.setIdActividad(id);
+        agregarParticipanteRequest.setUsernameNuevoParticipante(request.getUsernameParticipante());
+
+        boolean success = true;
+        String message = "";
+
+        // Hacer el request
+        try {
+            api.agregarParticipante(agregarParticipanteRequest);
+        } catch (RemoteException e) {
+            success = false;
+            message = e.toString();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return buildServiceUnavailable(e.toString());
+        }
+
+        response.setSuccess(success);
+
+        // if success then no reason is set
+        if (!success){
+            response.setReason(message);
+        }
+        return Response.ok().entity(response).build();
 	}
 	
 	@POST
@@ -499,8 +485,47 @@ public class ActivityService extends BaseService {
 	public Response deleteActivityParticipant(EditParticipantRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
-		//TODO
-        return Response.ok().build();
+        // Init
+        BaseResponse response = new BaseResponse();
+        String username = getUsernameFromAuthToken(token);
+        if (username.equals("")) {
+            response.setSuccess(false);
+            response.setReason("Usuario no logueado");
+            return Response.ok()
+                    .header("Set-Cookie",
+                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                    .entity(response).build();
+        }
+
+        ActividadStub api = new ActividadStub();
+        ActividadStub.EliminarParticipante eliminarParticipanteRequest = new ActividadStub.EliminarParticipante();
+
+        eliminarParticipanteRequest.setUsername(username);
+        eliminarParticipanteRequest.setIdActividad(id);
+        eliminarParticipanteRequest.setUsernameParticipanteAEliminar(request.getUsernameParticipante());
+
+        boolean success = true;
+        String message = "";
+
+        // Hacer el request
+        try {
+            api.eliminarParticipante(eliminarParticipanteRequest);
+        } catch (RemoteException e) {
+            success = false;
+            message = e.toString();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return buildServiceUnavailable(e.toString());
+        }
+
+        response.setSuccess(success);
+
+        // if success then no reason is set
+        if (!success){
+            response.setReason(message);
+        }
+        return Response.ok().entity(response).build();
 	}
 	
 	@POST
@@ -509,88 +534,49 @@ public class ActivityService extends BaseService {
 	public Response getActivityParticipants(@PathParam("id") long id, @CookieParam("authToken") String token)
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
-		//TODO
-        return Response.ok().build();
+
+        // Init
+        BaseResponse response = new BaseResponse();
+        String username = getUsernameFromAuthToken(token);
+        if (username.equals("")) {
+            response.setSuccess(false);
+            response.setReason("Usuario no logueado");
+            return Response.ok()
+                    .header("Set-Cookie",
+                            "authToken=deleted;Expires=Thu, 01-Jan-1970 00:00:01 GMT")
+                    .entity(response).build();
+        }
+
+        ActividadStub api = new ActividadStub();
+        ActividadStub.GetParticipantes participantesRequest = new ActividadStub.GetParticipantes();
+
+        participantesRequest.setUsername(username);
+        participantesRequest.setIdActividad(id);
+
+        boolean success = true;
+        String message = "";
+
+        // Hacer el request
+        try {
+            api.getParticipantes(participantesRequest);
+        } catch (RemoteException e) {
+            success = false;
+            message = e.toString();
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return buildServiceUnavailable(e.toString());
+        }
+
+        response.setSuccess(success);
+
+        // if success then no reason is set
+        if (!success){
+            response.setReason(message);
+        }
+        return Response.ok().entity(response).build();
 	}
 	
-	@POST
-	@Path("getscopeactivities/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getScopeActivities(@PathParam("id") long scopeId, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		//TODO
-        return Response.ok().build();
-	}
-	
-	@POST
-	@Path("getactivityactivities/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getActivityActivities(@PathParam("id") long id, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		//TODO
-        return Response.ok().build();
-	}
-	
-	@POST
-	@Path("addgroup/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addActivityGroup(AddGroupRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		//TODO
-		return Response.ok().build();
-	}
-	
-	@POST
-	@Path("deletegroup/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addActivityGroup(DeleteGroupRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		//TODO
-        return Response.ok().build();
-	}
-	
-	@POST
-	@Path("getgroups/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getActivityGroups(@PathParam("id") long id, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		//TODO
-        return Response.ok().build();
-	}
-	
-	/*@POST
-	@Path("evaluate/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response evaluateActivity(AddNoteRequest request, @PathParam("id") long id, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		//TODO: add "AddnoteRequest"
-        return Response.ok().build();
-	}*/
-	
-	@POST
-	@Path("getgrade/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getActivityGrade(@PathParam("id") long id, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		//TODO
-        return Response.ok().build();
-	}
-	
-	@POST
-	@Path("getgrades/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getActivityGrades(@PathParam("id") long id, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		//TODO
-        return Response.ok().build();
-	}
+
 	
 }

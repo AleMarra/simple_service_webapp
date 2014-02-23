@@ -2,15 +2,11 @@ package com.fiuba.taller.materials;
 
 import com.fiuba.taller.BaseService;
 import com.fiuba.taller.materials.MaterialsResource.ResourceTypes;
-import com.fiuba.taller.materials.requests.AddLinkRequest;
-import com.fiuba.taller.materials.requests.AddPollRequest;
-import com.fiuba.taller.materials.requests.GetResourceRequest;
-import com.fiuba.taller.materials.requests.GetResourcesListRequest;
+import com.fiuba.taller.materials.requests.*;
 import com.fiuba.taller.materials.responses.MaterialsResponse;
 import com.fiuba.taller.materials.responses.MaterialsResponseFactory;
 import com.fiuba.taller.utils.XmlHandler;
-import static com.fiuba.taller.utils.XmlHandler.ATTRIBUTES_KEY;
-import static com.fiuba.taller.utils.XmlHandler.TYPE_KEY;
+
 import static com.fiuba.taller.utils.XmlHandler.PARAMS_KEY;
 
 import org.apache.axis2.AxisFault;
@@ -46,29 +42,29 @@ public class MaterialsService extends BaseService{
 												"</response>";
 															
 	public static final String dummyRecursos = "<response>" +
-            "<success>true</success>" +
-            "<recursos>" +
-                "<recurso>" +
-                    "<recursoId>11002</recursoId>" +
-                    "<tipo>Link</tipo>" +
-                    "<ambitoId>-1</ambitoId>" +
-                    "<descripcion>un link a google copado</descripcion>" +
-                "</recurso>" +
-                "<recurso>" +
-                    "<recursoId>11003</recursoId>" +
-                    "<tipo>Encuesta</tipo>" +
-                    "<ambitoId>-1</ambitoId>" +
-                    "<descripcion>una encuesta chica</descripcion>" +
-                "</recurso>" +
-                "<recurso>" +
-                    "<recursoId>11004</recursoId>" +
-                    "<tipo>Encuesta</tipo>" +
-                    "<ambitoId>-1</ambitoId>" +
-                    "<descripcion>una encuesta grande</descripcion>" +
-                "</recurso>" +
-            "</recursos>" +
-        "</response>";
-	
+                                                "<success>true</success>" +
+                                                "<recursos>" +
+                                                    "<recurso>" +
+                                                        "<recursoId>11002</recursoId>" +
+                                                        "<tipo>Link</tipo>" +
+                                                        "<ambitoId>-1</ambitoId>" +
+                                                        "<descripcion>un link a google copado</descripcion>" +
+                                                    "</recurso>" +
+                                                    "<recurso>" +
+                                                        "<recursoId>11003</recursoId>" +
+                                                        "<tipo>Encuesta</tipo>" +
+                                                        "<ambitoId>-1</ambitoId>" +
+                                                        "<descripcion>una encuesta chica</descripcion>" +
+                                                    "</recurso>" +
+                                                    "<recurso>" +
+                                                        "<recursoId>11004</recursoId>" +
+                                                        "<tipo>Encuesta</tipo>" +
+                                                        "<ambitoId>-1</ambitoId>" +
+                                                        "<descripcion>una encuesta grande</descripcion>" +
+                                                    "</recurso>" +
+                                                "</recursos>" +
+                                            "</response>";
+
 	public static final String dummyLink = "<response>" +
 											"<success>true</success>" +
 											"<recurso>" +
@@ -136,14 +132,6 @@ public class MaterialsService extends BaseService{
 	// ------------------------------------------------ API METHODS ------------------------------------------------
 	// =============================================================================================================
 
-	//	GET RECURSOS
-	//	<parametro>
-	//	<recurso>
-	//	<ambitoId>INT idDelAmbiente</ambitoId>
-	//	</recurso>
-	//	<usuarioId>INT idDelUsuario</usuarioId>
-	//	</parametro>
-	//
 	@POST
 	@Path("getresourceslist")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -227,14 +215,6 @@ public class MaterialsService extends BaseService{
 		return Response.ok().entity(response).build();
 	}
 	
-	//GET RECURSO
-	//	<parametro>
-	//	<recurso>
-	//	<recursoId>INT idDelRecurso</recursoId>
-	//	<tipo>STRING tipo (ARCHIVO,LINK,ENCUESTA)</tipo>
-	//	</recurso>
-	//	</parametro>
-	//	
 	@POST
 	@Path("getresource")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -294,9 +274,7 @@ public class MaterialsService extends BaseService{
 
 //        String dummyInput = ((request.getTipo().toLowerCase().contains("link")) ? dummyLink : dummyEncuesta);
 //        Document doc = xmlHandler.getDoc(dummyInput);
-//		Document doc = xmlHandler.getDoc(dummyLink);
-		//Document doc = xmlHandler.getDoc(dummyEncuesta);
-				
+
 		Element responseElement = xmlHandler.getFirstElementWithTag(doc, "response");
 		Element successElement = xmlHandler.getFirstElementWithTag(responseElement, "success");
 		if (successElement == null) {
@@ -323,13 +301,6 @@ public class MaterialsService extends BaseService{
 		return Response.ok().entity(response).build();
 	}
 	
-	//BORRAR RECURSO
-	//	<parametro>
-	//	<recurso>
-	//	<recursoId>INT idDelRecurso</recursoId>
-	//	</recurso>
-	//	<usuarioId>INT idDelUsuario</usuarioId>
-	//	</parametro>
 	@POST
 	@Path("deleteresource")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -407,76 +378,5 @@ public class MaterialsService extends BaseService{
 		
 		return Response.ok().entity(response).build();
 	}
-	
-
-	
-	//GET ENCUESTA RESPONDIDA
-	//	<parametro>
-	//	<recurso>
-	//	<recursoId>INT idDelRecurso</recursoId>
-	//	</recurso>
-	//	<usuarioId>INT idDelUsuario</usuarioId>
-	//	</parametro>
-	//	
-	//AGREGAR ENCUESTA RESPONDIDA
-	//	<parametro>
-	//	<encuestaRespondida>
-	//	<usuarioId>5</usuarioId>
-	//	<recursoId>10</recursoId>
-	//	<preguntasRespondidas>
-	//	<preguntaRespondidaConOpciones respuestas="2,4"/>
-	//	<preguntaRespondidaSinOpciones respuesta="blanco"/>
-	//	<preguntaRespondidaConOpciones respuestas="3"/>
-	//	</preguntasRespondidas>
-	//	</encuestaRespondida>
-	//	</parametro>
-	//
-	//AGREGAR ARCHIVO
-	//	<parametro>
-	//	<archivo>
-	//	<tipo>Archivo</tipo>
-	//	<recursoId>14</recursoId>
-	//	<descripcion>una clase java</descripcion>
-	//	<tipo>class</tipo>
-	//	<nombre>Client</nombre>
-	//	</archivo>
-	//	<usuarioId>5</usuarioId>
-	//	</parametro>
-	//	
-	//AGREGAR RECURSO
-	//	<parametro>
-	//	<link>
-	//	<recursoId>1017</recursoId>
-	//	<ambitoId>-1</ambitoId>
-	//	<descripcion>alto link</descripcion>
-	//	<nombre>www.hola.com</nombre>
-	//	</link>
-	//	<usuarioId>5</usuarioId>
-	//	</parametro>
-
-	
-	@POST
-	@Path("addpoll")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addPoll(AddPollRequest request, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-	{
-		
-		return null;
-	
-	}
-	
-	@POST
-	@Path("addlink")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addLink(AddLinkRequest request, @CookieParam("authToken") String token)
-			throws ParserConfigurationException, SAXException, IOException, TransformerException
-
-	{
-		
-		return null;
-	
-	}
-	
 	
 }
