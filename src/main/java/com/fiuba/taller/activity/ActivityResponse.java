@@ -10,6 +10,7 @@ public class ActivityResponse {
     private String reason;
     private String fullReason;
     private String authToken;
+    private Long id;
 
     public ActivityResponse(){}
     
@@ -20,11 +21,12 @@ public class ActivityResponse {
         this.authToken = "";
     }
     
-    public ActivityResponse(boolean success, String reason, String authToken) {
+    public ActivityResponse(boolean success, String reason, String authToken, Long id) {
         super();
         this.success= success;
         this.reason = reason;
         this.authToken = authToken;
+        this.id = id;
     }
 
 
@@ -65,6 +67,16 @@ public class ActivityResponse {
 
     public void setFullReason(String fullReason) {
         this.fullReason = fullReason;
+    }
+
+
+    @XmlElement(name = "id")
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 

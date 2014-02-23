@@ -10,6 +10,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import com.fiuba.taller.BaseResponse;
 import com.fiuba.taller.activity.responses.GetPropertiesResponse;
 import com.fiuba.taller.utils.XmlHandler;
 import org.w3c.dom.Attr;
@@ -113,7 +114,7 @@ public class ActivityService extends BaseService {
 		response.setSuccess(success);
 		
 		if (success){
-			response.setReason(Integer.toString((int)activityID));
+			response.setId(activityID);
 		}else{
     		response.setReason(message);
 		}
@@ -171,7 +172,7 @@ public class ActivityService extends BaseService {
 		response.setSuccess(success);
 		
 		if (success){
-			response.setReason(Integer.toString((int)activityID));
+			response.setId(activityID);
 		}else{
     		response.setReason(message);
 		}
@@ -226,7 +227,7 @@ public class ActivityService extends BaseService {
 		response.setSuccess(success);
 		
 		if (success){
-			response.setReason(Integer.toString((int)activityID));
+			response.setId(activityID);
 		}else{
     		response.setReason(message);
 		}
@@ -282,7 +283,7 @@ public class ActivityService extends BaseService {
 		response.setSuccess(success);
 		
 		if (success){
-			response.setReason(Integer.toString((int)activityID));
+			response.setId(activityID);
 		}else{
     		response.setReason(message);
 		}
@@ -390,7 +391,14 @@ public class ActivityService extends BaseService {
             return buildServiceUnavailable(e.toString());
         }
 
-        return Response.ok().build();
+        response.setSuccess(success);
+
+        // if success then no reason is set
+        if (!success){
+            response.setReason(message);
+        }
+
+        return Response.ok().entity(response).build();
 	}
 	
 
@@ -402,7 +410,7 @@ public class ActivityService extends BaseService {
 			throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
 		// Init
-		ActivityResponse response = new ActivityResponse();
+		BaseResponse response = new BaseResponse();
 		String username = getUsernameFromAuthToken(token);
 		if (username.equals("")) {
 			response.setSuccess(false);
@@ -436,12 +444,10 @@ public class ActivityService extends BaseService {
 
 		response.setSuccess(success);
 
-		if (success){
-			response.setReason("ok");
-		}else{
-			response.setReason(message);
-		}
-
+        // if success then no reason is set
+        if (!success){
+            response.setReason(message);
+        }
 		return Response.ok().entity(response).build();
 		
 	}
