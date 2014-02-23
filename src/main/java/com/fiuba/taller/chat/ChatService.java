@@ -34,7 +34,7 @@ import wtp.MessagerStub.MensajeChat;
 import wtp.MessagerStub.Miembros;
 
 
-@Path("/")
+@Path("/chatservice")
 @Produces(MediaType.APPLICATION_JSON)
 public class ChatService {
 

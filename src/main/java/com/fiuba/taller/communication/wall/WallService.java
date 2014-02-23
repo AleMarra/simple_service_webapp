@@ -31,7 +31,7 @@ import com.fiuba.taller.service.SecurityResponse;
 
 import wtp.ServiceStub;
 
-@Path("/")
+@Path("/wallservice")
 @Produces(MediaType.APPLICATION_JSON)
 public class WallService {
 

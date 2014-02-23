@@ -32,7 +32,7 @@ import com.fiuba.taller.service.SecurityResponse;
 
 import wtp.ServiceStub;
 
-@Path("/")
+@Path("/newsservice")
 @Produces(MediaType.APPLICATION_JSON)
 public class NewsService {
 

@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://wtp" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://wtp" xmlns:intf="http://wtp" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://wtp" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="modificarFila">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element name="tabla" type="xsd:int"/>
+      <element name="fila" type="xsd:int"/>
+      <element maxOccurs="unbounded" name="valores_nuevos" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="modificarFilaResponse">
+    <complexType>
+     <sequence>
+      <element name="modificarFilaReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="eliminarFila">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element name="tabla" type="xsd:int"/>
+      <element name="fila" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="eliminarFilaResponse">
+    <complexType>
+     <sequence>
+      <element name="eliminarFilaReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="obtenerFilas">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element name="tabla" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="obtenerFilasResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="obtenerFilasReturn" type="impl:Fila"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Fila">
+    <sequence>
+     <element name="id" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="crearTabla">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="nombres" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="tipos" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="permisos" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="crearTablaResponse">
+    <complexType>
+     <sequence>
+      <element name="crearTablaReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="obtenerTabla">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element name="idTabla" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="obtenerTablaResponse">
+    <complexType>
+     <sequence>
+      <element name="obtenerTablaReturn" type="impl:Tabla"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Tabla">
+    <sequence/>
+   </complexType>
+   <element name="obtenerNombresColumnas">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element name="tabla" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="obtenerNombresColumnasResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="obtenerNombresColumnasReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="crearFila">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element name="tabla" type="xsd:int"/>
+      <element maxOccurs="unbounded" name="valores" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="crearFilaResponse">
+    <complexType>
+     <sequence>
+      <element name="crearFilaReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="modificarCampo">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element name="tabla" type="xsd:int"/>
+      <element name="campo" type="xsd:int"/>
+      <element name="nombre" type="xsd:string"/>
+      <element name="nuevoTipo" type="xsd:string"/>
+      <element name="permiteVacio" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="modificarCampoResponse">
+    <complexType>
+     <sequence>
+      <element name="modificarCampoReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="agregarCampo">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element name="tabla" type="xsd:int"/>
+      <element name="nombre" type="xsd:string"/>
+      <element name="tipo" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="agregarCampoResponse">
+    <complexType>
+     <sequence>
+      <element name="agregarCampoReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="eliminarCampo">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element name="tabla" type="xsd:int"/>
+      <element name="campo" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="eliminarCampoResponse">
+    <complexType>
+     <sequence>
+      <element name="eliminarCampoReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="obtenerTiposDeCampos">
+    <complexType/>
+   </element>
+   <element name="obtenerTiposDeCamposResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="obtenerTiposDeCamposReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="eliminarTabla">
+    <complexType>
+     <sequence>
+      <element name="usuario" type="xsd:string"/>
+      <element name="tabla" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="eliminarTablaResponse">
+    <complexType>
+     <sequence>
+      <element name="eliminarTablaReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="modificarCampoRequest">
+
+      <wsdl:part element="impl:modificarCampo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="modificarCampoResponse">
+
+      <wsdl:part element="impl:modificarCampoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="crearFilaResponse">
+
+      <wsdl:part element="impl:crearFilaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="obtenerTablaRequest">
+
+      <wsdl:part element="impl:obtenerTabla" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="eliminarTablaRequest">
+
+      <wsdl:part element="impl:eliminarTabla" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="eliminarFilaRequest">
+
+      <wsdl:part element="impl:eliminarFila" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="crearTablaRequest">
+
+      <wsdl:part element="impl:crearTabla" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="obtenerNombresColumnasResponse">
+
+      <wsdl:part element="impl:obtenerNombresColumnasResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="obtenerFilasResponse">
+
+      <wsdl:part element="impl:obtenerFilasResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="agregarCampoRequest">
+
+      <wsdl:part element="impl:agregarCampo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="obtenerFilasRequest">
+
+      <wsdl:part element="impl:obtenerFilas" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="crearFilaRequest">
+
+      <wsdl:part element="impl:crearFila" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="modificarFilaRequest">
+
+      <wsdl:part element="impl:modificarFila" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="obtenerNombresColumnasRequest">
+
+      <wsdl:part element="impl:obtenerNombresColumnas" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="obtenerTiposDeCamposRequest">
+
+      <wsdl:part element="impl:obtenerTiposDeCampos" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="eliminarCampoResponse">
+
+      <wsdl:part element="impl:eliminarCampoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="agregarCampoResponse">
+
+      <wsdl:part element="impl:agregarCampoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="crearTablaResponse">
+
+      <wsdl:part element="impl:crearTablaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="modificarFilaResponse">
+
+      <wsdl:part element="impl:modificarFilaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="eliminarFilaResponse">
+
+      <wsdl:part element="impl:eliminarFilaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="obtenerTablaResponse">
+
+      <wsdl:part element="impl:obtenerTablaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="eliminarTablaResponse">
+
+      <wsdl:part element="impl:eliminarTablaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="obtenerTiposDeCamposResponse">
+
+      <wsdl:part element="impl:obtenerTiposDeCamposResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="eliminarCampoRequest">
+
+      <wsdl:part element="impl:eliminarCampo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ServicioTabla">
+
+      <wsdl:operation name="modificarFila">
+
+         <wsdl:input message="impl:modificarFilaRequest" name="modificarFilaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:modificarFilaResponse" name="modificarFilaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="eliminarFila">
+
+         <wsdl:input message="impl:eliminarFilaRequest" name="eliminarFilaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:eliminarFilaResponse" name="eliminarFilaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="obtenerFilas">
+
+         <wsdl:input message="impl:obtenerFilasRequest" name="obtenerFilasRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:obtenerFilasResponse" name="obtenerFilasResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="crearTabla">
+
+         <wsdl:input message="impl:crearTablaRequest" name="crearTablaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:crearTablaResponse" name="crearTablaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="obtenerTabla">
+
+         <wsdl:input message="impl:obtenerTablaRequest" name="obtenerTablaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:obtenerTablaResponse" name="obtenerTablaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="obtenerNombresColumnas">
+
+         <wsdl:input message="impl:obtenerNombresColumnasRequest" name="obtenerNombresColumnasRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:obtenerNombresColumnasResponse" name="obtenerNombresColumnasResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="crearFila">
+
+         <wsdl:input message="impl:crearFilaRequest" name="crearFilaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:crearFilaResponse" name="crearFilaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="modificarCampo">
+
+         <wsdl:input message="impl:modificarCampoRequest" name="modificarCampoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:modificarCampoResponse" name="modificarCampoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="agregarCampo">
+
+         <wsdl:input message="impl:agregarCampoRequest" name="agregarCampoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:agregarCampoResponse" name="agregarCampoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="eliminarCampo">
+
+         <wsdl:input message="impl:eliminarCampoRequest" name="eliminarCampoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:eliminarCampoResponse" name="eliminarCampoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="obtenerTiposDeCampos">
+
+         <wsdl:input message="impl:obtenerTiposDeCamposRequest" name="obtenerTiposDeCamposRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:obtenerTiposDeCamposResponse" name="obtenerTiposDeCamposResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="eliminarTabla">
+
+         <wsdl:input message="impl:eliminarTablaRequest" name="eliminarTablaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:eliminarTablaResponse" name="eliminarTablaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ServicioTablaSoapBinding" type="impl:ServicioTabla">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="modificarFila">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="modificarFilaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="modificarFilaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="eliminarFila">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="eliminarFilaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="eliminarFilaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="obtenerFilas">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="obtenerFilasRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="obtenerFilasResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="crearTabla">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="crearTablaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="crearTablaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="obtenerTabla">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="obtenerTablaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="obtenerTablaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="obtenerNombresColumnas">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="obtenerNombresColumnasRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="obtenerNombresColumnasResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="crearFila">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="crearFilaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="crearFilaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="modificarCampo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="modificarCampoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="modificarCampoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="agregarCampo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="agregarCampoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="agregarCampoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="eliminarCampo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="eliminarCampoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="eliminarCampoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="obtenerTiposDeCampos">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="obtenerTiposDeCamposRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="obtenerTiposDeCamposResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="eliminarTabla">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="eliminarTablaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="eliminarTablaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ServicioTablaService">
+
+      <wsdl:port binding="impl:ServicioTablaSoapBinding" name="ServicioTabla">
+
+         <wsdlsoap:address location="http://localhost:8080/Tablas/services/ServicioTabla"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
