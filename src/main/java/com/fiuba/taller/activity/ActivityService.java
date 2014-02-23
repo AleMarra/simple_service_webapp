@@ -46,16 +46,21 @@ import wtp.activity.fiuba.taller.actividad.*;
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class ActivityService extends BaseService {
     public static final String dummyActivityProperties =
-        "<Actividad>" +
-            "<Id>4928</Id>" +
-            "<Nombre>Trabajo Practico</Nombre>" +
-            "<Descripcion>Se lala.</Descripcion>" +
-            "<Tipo>Grupal Evaluable</Tipo>" +
-            "<FechaInicio>1382918400</FechaInicio>" +
-            "<FechaFin>1383004800</FechaFin>" +
-            "<GruposExclusivos>false</GruposExclusivos>" +
-            "<Escala>Decimal</Escala>" +
-        "</Actividad>";
+        "<WS>" +
+            "<list>" +
+                "<Actividad>" +
+                    "<id>4928</id>" +
+                    "<actividadId>4928</actividadId>" +
+                    "<nombre>Trabajo Practico</nombre>" +
+                    "<descripcion>Se lala.</descripcion>" +
+                    "<tipo>Grupal Evaluable</tipo>" +
+                    "<fechaInicio>1382918400</fechaInicio>" +
+                    "<fechaFin>1383004800</fechaFin>" +
+                    "<gruposExclusivos>false</gruposExclusivos>" +
+                    "<tipoEscala>Decimal</tipoEscala>" +
+                "</Actividad>" +
+            "</list>" +
+        "</WS>";
 
     private static final XmlHandler xmlHandler = new XmlHandler();
 
@@ -326,18 +331,18 @@ public class ActivityService extends BaseService {
             return buildServiceUnavailable(e.toString());
         }
 
-        // TODO: Parsear el response
-    	String activityReturn = wsResponse.get_return();
-//    	String activityReturn = dummyActivityProperties;
-
-        Document doc = xmlHandler.getDoc(activityReturn);
-
-        Element responseElement = xmlHandler.getFirstElementWithTag(doc, "Actividad");
-
-        response.setSuccess(success);
-
         if (success) {
-            response.setActivityPropertiesFromXML(responseElement);
+            String activityReturn = wsResponse.get_return();
+//        	String activityReturn = dummyActivityProperties;
+
+            Document doc = xmlHandler.getDoc(activityReturn);
+
+            Element responseElement = xmlHandler.getFirstElementWithTag(doc, "WS");
+            Element listElement = xmlHandler.getFirstElementWithTag(responseElement, "list");
+
+            response.setSuccess(success);
+
+            response.setActivityPropertiesFromXML(xmlHandler.getFirstElementWithTag(listElement, "Actividad"));
         } else {
             response.setReason(message);
         }
@@ -390,8 +395,6 @@ public class ActivityService extends BaseService {
 	
 
 
-	/*-------//TODO------*/
-	
 	@POST
 	@Path("deleteactivity/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -442,7 +445,8 @@ public class ActivityService extends BaseService {
 		return Response.ok().entity(response).build();
 		
 	}
-	
+
+    /*-------TODO------*/
 	@POST
 	@Path("addcoordinator/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)

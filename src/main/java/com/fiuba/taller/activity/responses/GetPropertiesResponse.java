@@ -124,28 +124,35 @@ public class GetPropertiesResponse extends BaseResponse {
         this.resource = resource;
     }
 
-//    <Actividad>
-//        <Id>4928</Id>
-//        <Nombre>Trabajo Practico</Nombre>
-//        <Descripcion>Se lala.</Descripcion>
-//        <Tipo>Grupal Evaluable</Tipo>
-//        <FechaInicio>1382918400</FechaInicio>
-//        <FechaFin>1383004800</FechaFin>
-//        <GruposExclusivos>false</GruposExclusivos>
-//        <Escala>Decimal</Escala>
-//    </Actividad>
+//    "<WS>" +
+//        "<list>" +
+//            "<Actividad>" +
+//                "<id>4928</id>" +
+//                "<actividadId>4928</actividadId>" +
+//                "<nombre>Trabajo Practico</nombre>" +
+//                "<descripcion>Se lala.</descripcion>" +
+//                "<tipo>Grupal Evaluable</tipo>" +
+//                "<fechaInicio>1382918400</fechaInicio>" +
+//                "<fechaFin>1383004800</fechaFin>" +
+//                "<gruposExclusivos>false</gruposExclusivos>" +
+//                "<tipoEscala>Decimal</tipoEscala>" +
+//            "</Actividad>" +
+//        "</list>" +
+//    "</WS>";
     public void setActivityPropertiesFromXML(Element resourceRoot) {
 
         ActivityProperties resource = new ActivityProperties();
 
-        resource.setId(Integer.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "Id")));
-        resource.setNombre(xmlHandler.getFirstElementValue(resourceRoot, "Nombre"));
-        resource.setDescripcion(xmlHandler.getFirstElementValue(resourceRoot, "Descripcion"));
-        resource.setTipo(xmlHandler.getFirstElementValue(resourceRoot, "Tipo"));
-        resource.setFechaInicio(new Date(Long.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "FechaInicio")) * 1000));
-        resource.setFechaFin(new Date(Long.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "FechaFin")) * 1000));
-        resource.setGruposExclusivos(Boolean.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "GruposExclusivos")));
-        resource.setEscala(xmlHandler.getFirstElementValue(resourceRoot, "Escala"));
+        resource.setId(Integer.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "id")));
+        resource.setNombre(xmlHandler.getFirstElementValue(resourceRoot, "nombre"));
+        resource.setDescripcion(xmlHandler.getFirstElementValue(resourceRoot, "descripcion"));
+        resource.setTipo(xmlHandler.getFirstElementValue(resourceRoot, "tipo"));
+        resource.setFechaInicio(new Date(Long.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "fechaInicio")) * 1000));
+        if (Long.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "fechaFin")) != null)
+            resource.setFechaFin(new Date(Long.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "fechaFin")) * 1000));
+        if (Boolean.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "gruposExclusivos")) != null)
+            resource.setGruposExclusivos(Boolean.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "gruposExclusivos")));
+        resource.setEscala(xmlHandler.getFirstElementValue(resourceRoot, "tipoEscala"));
 
         this.resource = resource;
 
