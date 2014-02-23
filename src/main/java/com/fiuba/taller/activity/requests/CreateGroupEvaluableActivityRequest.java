@@ -24,12 +24,12 @@ public class CreateGroupEvaluableActivityRequest {
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaFin;
     private Boolean gruposExclusivos;
-    private Integer nota;
+    private String tipoEscala;
 
 
     public CreateGroupEvaluableActivityRequest(){}
 
-    public CreateGroupEvaluableActivityRequest(String nombre, String descripcion, Integer idAmbitoSuperior, Integer idActividadSuperior, Date fechaInicio, Date fechaFin, Boolean gruposExclusivos, Integer nota)
+    public CreateGroupEvaluableActivityRequest(String nombre, String descripcion, Integer idAmbitoSuperior, Integer idActividadSuperior, Date fechaInicio, Date fechaFin, Boolean gruposExclusivos, String tipoEscala)
     {
         super();
         this.setNombre(nombre);
@@ -39,7 +39,7 @@ public class CreateGroupEvaluableActivityRequest {
         this.setFechaInicio(fechaInicio);
         this.setFechaFin(fechaFin);
         this.setGruposExclusivos(gruposExclusivos);
-        this.setNota(nota);
+        this.setTipoEscala(tipoEscala);
 
     }
 
@@ -55,7 +55,7 @@ public class CreateGroupEvaluableActivityRequest {
         result += "fechaInicio" + k + fechaInicio + p;
         result += "fechaFin" + k + fechaFin + p;
         result += "gruposExclusivos" + k + gruposExclusivos + p;
-        result += "nota" + k + nota;
+        result += "tipoEscala" + k + tipoEscala;
 
         return result;
     }
@@ -79,7 +79,7 @@ public class CreateGroupEvaluableActivityRequest {
         dataAsForm.param("fechaInicio", Long.toString(fechaInicio.getTime() / 1000));
         dataAsForm.param("fechaFin", Long.toString(fechaFin.getTime() / 1000));
         dataAsForm.param("gruposExclusivos", Boolean.toString(gruposExclusivos));
-        dataAsForm.param("nota", Integer.toString(nota));
+        dataAsForm.param("tipoEscala", tipoEscala);
 
         return dataAsForm;
     }
@@ -94,7 +94,7 @@ public class CreateGroupEvaluableActivityRequest {
         dataAsMap.put("fechaInicio", Long.toString(fechaInicio.getTime() / 1000));
         dataAsMap.put("fechaFin", Long.toString(fechaFin.getTime() / 1000));
         dataAsMap.put("gruposExclusivos", Boolean.toString(gruposExclusivos));
-        dataAsMap.put("nota", Integer.toString(nota));
+        dataAsMap.put("tipoEscala", tipoEscala);
 
         return dataAsMap;
     }
@@ -156,13 +156,13 @@ public class CreateGroupEvaluableActivityRequest {
         this.gruposExclusivos = gruposExclusivos;
     }
     
-	@XmlElement(name = "nota")
-    public Integer getNota() {
-        return nota;
+	@XmlElement(name = "tipoEscala")
+    public String getTipoEscala() {
+        return tipoEscala;
     }
 
-    public void setNota(Integer nota) {
-        this.nota = nota;
+    public void setTipoEscala(String tipoEscala) {
+        this.tipoEscala = tipoEscala;
     }
 
 }

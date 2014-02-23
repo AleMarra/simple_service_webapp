@@ -25,7 +25,7 @@ public class GetPropertiesResponse extends BaseResponse {
         @XmlJavaTypeAdapter(DateAdapter.class)
         private Date fechaFin;
         private Boolean gruposExclusivos;
-        private String escala;
+        private String tipoEscala;
 
         public ActivityProperties() {}
 
@@ -92,13 +92,13 @@ public class GetPropertiesResponse extends BaseResponse {
             this.gruposExclusivos = gruposExclusivos;
         }
 
-        @XmlElement(name = "escala")
-        public String getEscala() {
-            return escala;
+        @XmlElement(name = "tipoEscala")
+        public String getTipoEscala() {
+            return tipoEscala;
         }
 
-        public void setEscala(String escala) {
-            this.escala = escala;
+        public void setTipoEscala(String tipoEscala) {
+            this.tipoEscala = tipoEscala;
         }
 
     }
@@ -152,7 +152,7 @@ public class GetPropertiesResponse extends BaseResponse {
             resource.setFechaFin(new Date(Long.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "fechaFin")) * 1000));
         if (Boolean.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "gruposExclusivos")) != null)
             resource.setGruposExclusivos(Boolean.valueOf(xmlHandler.getFirstElementValue(resourceRoot, "gruposExclusivos")));
-        resource.setEscala(xmlHandler.getFirstElementValue(resourceRoot, "tipoEscala"));
+        resource.setTipoEscala(xmlHandler.getFirstElementValue(resourceRoot, "tipoEscala"));
 
         this.resource = resource;
 

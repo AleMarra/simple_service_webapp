@@ -23,12 +23,12 @@ public class CreateIndividualEvaluableActivityRequest {
     private Date fechaInicio;
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaFin;
-    private Integer nota;
+    private String tipoEscala;
 
 
     public CreateIndividualEvaluableActivityRequest(){}
 
-    public CreateIndividualEvaluableActivityRequest(String nombre, String descripcion, Integer idAmbitoSuperior, Integer idActividadSuperior, Date fechaInicio, Date fechaFin, Integer nota)
+    public CreateIndividualEvaluableActivityRequest(String nombre, String descripcion, Integer idAmbitoSuperior, Integer idActividadSuperior, Date fechaInicio, Date fechaFin, String tipoEscala)
     {
         super();
         this.setNombre(nombre);
@@ -37,7 +37,7 @@ public class CreateIndividualEvaluableActivityRequest {
         this.setIdActividadSuperior(idActividadSuperior);
         this.setFechaInicio(fechaInicio);
         this.setFechaFin(fechaFin);
-        this.setNota(nota);
+        this.setTipoEscala(tipoEscala);
 
     }
 
@@ -52,7 +52,7 @@ public class CreateIndividualEvaluableActivityRequest {
         result += "idActividadSuperior" + k + idActividadSuperior + p;
         result += "fechaInicio" + k + fechaInicio + p;
         result += "fechaFin" + k + fechaFin + p;
-        result += "nota" + k + nota;
+        result += "tipoEscala" + k + tipoEscala;
 
         return result;
     }
@@ -75,7 +75,7 @@ public class CreateIndividualEvaluableActivityRequest {
         dataAsForm.param("idActividadSuperior", Integer.toString(idActividadSuperior));
         dataAsForm.param("fechaInicio", Long.toString(fechaInicio.getTime() / 1000));
         dataAsForm.param("fechaFin", Long.toString(fechaFin.getTime() / 1000));
-        dataAsForm.param("nota", Integer.toString(nota));
+        dataAsForm.param("tipoEscala", tipoEscala);
 
         return dataAsForm;
     }
@@ -89,7 +89,7 @@ public class CreateIndividualEvaluableActivityRequest {
         dataAsMap.put("idActividadSuperior", Integer.toString(idActividadSuperior));
         dataAsMap.put("fechaInicio", Long.toString(fechaInicio.getTime() / 1000));
         dataAsMap.put("fechaFin", Long.toString(fechaFin.getTime() / 1000));
-        dataAsMap.put("nota", Integer.toString(nota));
+        dataAsMap.put("tipoEscala", tipoEscala);
 
         return dataAsMap;
     }
@@ -142,14 +142,14 @@ public class CreateIndividualEvaluableActivityRequest {
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
-    
-	@XmlElement(name = "nota")
-    public Integer getNota() {
-        return nota;
+
+    @XmlElement(name = "tipoEscala")
+    public String getTipoEscala() {
+        return tipoEscala;
     }
 
-    public void setNota(Integer nota) {
-        this.nota = nota;
+    public void setTipoEscala(String tipoEscala) {
+        this.tipoEscala = tipoEscala;
     }
 
 }
